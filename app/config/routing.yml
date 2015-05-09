@@ -1,0 +1,7 @@
+po_platforme:
+    resource: "@POPlatformeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
