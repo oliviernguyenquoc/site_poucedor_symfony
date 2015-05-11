@@ -4,12 +4,14 @@
 
 namespace PO\PlatformeBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdvertController
+class AdvertController extends Controller
 {
     public function indexAction()
     {
-        return new Response("Hello World !");
+        $content = $this->get('templating')->render('POPlatformeBundle:Advert:index.html.twig');
+    	return new Response($content);
     }
 }
