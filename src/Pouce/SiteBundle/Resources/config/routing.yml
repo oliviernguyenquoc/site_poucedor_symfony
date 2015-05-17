@@ -1,3 +1,7 @@
 pouce_site_homepage:
     path:     /
     defaults: { _controller: PouceSiteBundle:Site:index }
+
+pouce_site_regles:
+    path:     /regles
+    defaults: { _controller: PouceSiteBundle:Site:regles }

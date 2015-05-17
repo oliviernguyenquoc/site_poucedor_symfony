@@ -10,6 +10,10 @@ class SiteController extends Controller
     {
         return $this->render('PouceSiteBundle:Site:index.html.twig');
     }
+    public function reglesAction()
+    {
+        return $this->render('PouceSiteBundle:Site:regles.html.twig');
+    }
     // public function menuAction($page)
     // {
     //     return $this->render('PouceSiteBundle:Site:index.html.twig');
