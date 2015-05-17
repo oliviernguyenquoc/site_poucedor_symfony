@@ -30,9 +30,25 @@ class SiteController extends Controller
     {
         return $this->render('PouceSiteBundle:Site:edition.html.twig');
     }
-        public function editionPrecedenteAction()
+    public function editionPrecedenteAction()
     {
         return $this->render('PouceSiteBundle:Site:editions_precedentes.html.twig');
+    }
+    public function liensAction()
+    {
+        return $this->render('PouceSiteBundle:Site:liens.html.twig');
+    }
+    public function organisateursAction()
+    {
+        return $this->render('PouceSiteBundle:Site:organisateurs.html.twig');
+    }
+    public function videosAction()
+    {
+        return $this->render('PouceSiteBundle:Site:videos.html.twig');
+    }
+    public function recordsAction()
+    {
+        return $this->render('PouceSiteBundle:Site:records.html.twig');
     }
     // public function menuAction($page)
     // {

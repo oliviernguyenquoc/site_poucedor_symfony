@@ -26,3 +26,18 @@ pouce_site_editions_precedente:
     path:     /editions_precedentes
     defaults: { _controller: PouceSiteBundle:Site:editionPrecedente }
 
+pouce_site_liens:
+    path:     /liens
+    defaults: { _controller: PouceSiteBundle:Site:liens }
+
+pouce_site_organisateurs:
+    path:     /organisateurs
+    defaults: { _controller: PouceSiteBundle:Site:organisateurs }
+
+pouce_site_videos:
+    path:     /videos
+    defaults: { _controller: PouceSiteBundle:Site:videos }
+
+pouce_site_records:
+    path:     /records
+    defaults: { _controller: PouceSiteBundle:Site:records }
