@@ -1,0 +1,75 @@
+{# app/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr"
+	  xmlns:fb="http://ogp.me/ns/fb#" >
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="favicon.png" />
+	<title>Pouce d'Or : Le site officiel !</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+	
+	<!-- Balise meta pour Google (textes ...) -->
+	<meta name="description" content="Le Pouce d'Or, c'est LE concours de stop des écoles d'ingénieurs, de commerce et d'éducation supérieurs. 
+	
+	Le but : Aller le plus loin possible et revenir en stop en 48h.
+	
+	Tu te sens l'âme d'aventurier : prends ton sac, trouve ton équipier et c'est partie !" />
+	
+	<!-- Balise meta pour une bonne apparition sur Facebook -->
+	<meta property= "og:title" content= "Pouce d'Or : Le site officiel !" />
+	<meta property= "og:description" content= "Le concours de stop des écoles d'ingénieurs, de commerce et d'éducation supérieurs. 
+	Le but : Aller le plus loin possible et revenir en stop en 48h." />
+	<meta property="og:image" content="http://www.poucedor.fr/images/poucelogositefb.jpg" />
+	<meta property="og:url" content="http://www.poucedor.fr" />
+	
+ 	<!--[if lt IE 9]>
+ 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
+  	
+  	<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/>
+	
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}"/>
+	<script type="text/javascript" src=" https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9y0Cs5Y1htYYU_o7wdrfFhC--_kt3BB8"></script>
+
+</head>
+
+<body>
+	
+    <!--start container-->
+    <div id="container">
+    
+    <!--start header-->
+    <header>
+
+    <!--start logo-->
+    <a href="index.php" id="logo"><img src="images/poucelogosite.png" width="343" height="110" alt="logo"/></a>    
+	<!--end logo-->
+	
+   <!--start menu-->
+
+   <div id="nav">
+	{# 	{{ render(controller("PouceSiteBundle:Pouce:menu", {'page':'inscription'})) }} #}
+	</div>
+
+    <!--end header-->
+	</header>
+		<div id="content" class="span9">
+			{% block body %}
+			{% endblock %} 
+		</div>
+		<div class="footer">
+			<!-- 
+				Site internet : Olivier : olivier.nguyen-quoc@eleves.ec-nantes.fr
+				WebMaster 2013-2014 : Olivier : olivier.nguyen-quoc@eleves.ec-nantes.fr				
+			-->
+			Le Pouce d'Or - <a href="organisateur.php">Page des organisateurs</a> - Contact : <a href="mailto:onguyenq@eleves.ec-nantes.fr?Subject=ContactSiteWeb">Organisateurs</a>
+		</div>
+		
+	</div>
+	<!--end container-->
+		
+	</body>
+</html>

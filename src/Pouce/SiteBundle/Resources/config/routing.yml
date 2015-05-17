@@ -1,0 +1,3 @@
+pouce_site_homepage:
+    path:     /
+    defaults: { _controller: PouceSiteBundle:Site:index }

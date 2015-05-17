@@ -1,3 +1,3 @@
-po_platforme:
-    resource: "@POPlatformeBundle/Resources/config/routing.yml"
+pouce_site:
+    resource: "@PouceSiteBundle/Resources/config/routing.yml"
     prefix:   /

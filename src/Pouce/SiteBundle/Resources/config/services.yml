@@ -1,0 +1,4 @@
+services:
+#    pouce_site.example:
+#        class: Pouce\SiteBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
