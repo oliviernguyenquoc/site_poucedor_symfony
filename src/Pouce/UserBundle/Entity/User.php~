@@ -1,0 +1,70 @@
+<?php
+// src/Pouce/UserBundle/Entity/User.php
+
+namespace Pouce\UserBundle\Entity;
+
+use Gedmo\Mapping\Annotation as Gedmo; // this will be like an alias for Gedmo extensions annotations
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints AS Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Entrez votre nom.")
+     */
+    protected $first_name;
+
+    /*
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Entrez votre prénom.")
+     */
+    protected $last_name;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Entrez votre sexe.")
+     */
+    protected $sex;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Entrez votre promotion.")
+     */
+    protected $promotion;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Entrez votre numéro de téléphone.")
+     */
+    protected $telephone;
+
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        //your code
+
+    }
+
+}

@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Pouce\SiteBundle\PouceSiteBundle(),
             new Pouce\UserBundle\PouceUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

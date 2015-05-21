@@ -1,4 +1,8 @@
 services:
+    pouce_user.registration.form.type:
+        class: Pouce\UserBundle\Form\Type\RegistrationFormType
+        tags:
+            - { name: form.type, alias: pouce_user_registration }
 #    pouce_user.example:
 #        class: Pouce\UserBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
