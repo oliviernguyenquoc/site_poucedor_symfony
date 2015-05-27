@@ -15,6 +15,12 @@ use Symfony\Component\Validator\Constraints AS Assert;
 class User extends BaseUser
 {
     /**
+     * @ORM\ManyToOne(targetEntity="Pouce\UserBundle\Entity\School")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $school;
+
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -206,5 +212,17 @@ class User extends BaseUser
     public function getCreated()
     {
         return $this->created;
+    }
+
+    public function setSchool(School $school)
+    {
+    $this->school = $school;
+
+    return $this;
+    }
+
+    public function getSchool()
+    {
+    return $this->school;
     }
 }

@@ -15,6 +15,12 @@ use Symfony\Component\Validator\Constraints AS Assert;
 class User extends BaseUser
 {
     /**
+     * @ORM\ManyToOne(targetEntity="Pouce\UserBundle\Entity\School")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $school;
+
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -59,12 +65,164 @@ class User extends BaseUser
      */
     private $created;
 
-    public function __construct()
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
     {
-        parent::__construct();
-
-        //your code
-
+        return $this->id;
     }
 
+    /**
+     * Set first_name
+     *
+     * @param string $firstName
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->first_name = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get first_name
+     *
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * Set last_name
+     *
+     * @param string $firstName
+     * @return User
+     */
+    public function setLastName($firstName)
+    {
+        $this->first_name = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get first_name
+     *
+     * @return string 
+     */
+    public function getLastName()
+    {
+        return $this->first_name;
+    }
+
+
+    /**
+     * Set sex
+     *
+     * @param string $sex
+     * @return User
+     */
+    public function setSex($sex)
+    {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
+    /**
+     * Get sex
+     *
+     * @return string 
+     */
+    public function getSex()
+    {
+        return $this->sex;
+    }
+
+    /**
+     * Set promotion
+     *
+     * @param string $promotion
+     * @return User
+     */
+    public function setPromotion($promotion)
+    {
+        $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    /**
+     * Get promotion
+     *
+     * @return string 
+     */
+    public function getPromotion()
+    {
+        return $this->promotion;
+    }
+
+    /**
+     * Set telephone
+     *
+     * @param string $telephone
+     * @return User
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * Get telephone
+     *
+     * @return string 
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return User
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    public function setSchool(School $school)
+    {
+    $this->school = $school;
+
+    return $this;
+    }
+
+    public function getSchool()
+    {
+    return $this->school;
+    }
 }

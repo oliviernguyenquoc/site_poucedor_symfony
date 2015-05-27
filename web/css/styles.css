@@ -572,17 +572,21 @@ nav ul a {
 	padding-right:5%;
 }
 
-.champ
-{
-	position:float;
-	float: right;
-	font-family: Calibri,"Times New Roman", Times, serif;
-	width:180px;
-}
-
 #checkbox {
 	margin-left:15%;
 	}
+
+form.fos_user_registration_register label {
+	display: inline-block;
+	width: 180px;
+}
+
+form.fos_user_registration_register input {
+{
+	position:inline-block;
+	font-family: Calibri,"Times New Roman", Times, serif;
+	width:180px;
+}
 
 legend
 {
