@@ -1,3 +1,11 @@
+pouce_contestant:
+    resource: "@PouceContestantBundle/Resources/config/routing.yml"
+    prefix:   /
+
+pouce_team:
+    resource: "@PouceTeamBundle/Resources/config/routing.yml"
+    prefix:   /
+
 pouce_site:
     resource: "@PouceSiteBundle/Resources/config/routing.yml"
     prefix:   /

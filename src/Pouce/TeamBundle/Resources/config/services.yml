@@ -1,0 +1,4 @@
+services:
+#    pouce_team.example:
+#        class: Pouce\TeamBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,3 @@
+pouce_contestant_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: PouceContestantBundle:Default:index }
