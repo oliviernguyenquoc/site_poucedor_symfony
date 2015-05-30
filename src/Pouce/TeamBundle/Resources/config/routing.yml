@@ -1,3 +1,7 @@
 pouce_team_homepage:
-    path:     /hello/{name}
+    path:     /
     defaults: { _controller: PouceTeamBundle:Default:index }
+
+pouce_team_add:
+    path:     /add
+    defaults: { _controller: PouceTeamBundle:Team:add }

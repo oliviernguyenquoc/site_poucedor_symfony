@@ -2,6 +2,7 @@
 
 namespace Pouce\TeamBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,6 +21,11 @@ class Team
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\User", cascade={"persist"})
+    */
+    private $users;
 
     /**
      * @var string
@@ -41,6 +47,22 @@ class Team
      * @ORM\Column(name="comment", type="text")
      */
     private $comment;
+
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
 
 
     /**

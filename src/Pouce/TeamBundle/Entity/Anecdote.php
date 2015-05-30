@@ -22,6 +22,12 @@ class Anecdote
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Team")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $team;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)

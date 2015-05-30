@@ -1,0 +1,23 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block body %}
+
+	<h3>Formulaire d'inscription</h3>
+
+	<div class="cadre1">
+		{{ form(userForm) }}
+	</div>
+
+	<div class="cadre2">
+		<p4>YEAH</p4>
+	</div>
+
+	<div class="cadre3">
+		{{ form(teamForm) }}
+	</div>
+
+{% endblock %}

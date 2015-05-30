@@ -22,6 +22,19 @@ class Result
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Pouce\SiteBundle\Entity\Edition")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $edition;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Team")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $team;
+
+
+    /**
      * @var string
      *
      * @ORM\Column(name="town", type="string", length=255)

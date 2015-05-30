@@ -4,7 +4,7 @@ pouce_contestant:
 
 pouce_team:
     resource: "@PouceTeamBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /team
 
 pouce_site:
     resource: "@PouceSiteBundle/Resources/config/routing.yml"

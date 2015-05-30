@@ -22,6 +22,11 @@ class Edition
     private $id;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\School", cascade={"persist"})
+     */
+    private $schools;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="year", type="integer")
