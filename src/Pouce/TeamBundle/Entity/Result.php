@@ -3,6 +3,7 @@
 namespace Pouce\TeamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Result
@@ -36,6 +37,8 @@ class Result
 
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      *
      * @ORM\Column(name="town", type="string", length=255)
      */
@@ -43,6 +46,8 @@ class Result
 
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      *
      * @ORM\Column(name="country", type="string", length=255)
      */
@@ -50,6 +55,7 @@ class Result
 
     /**
      * @var float
+     * @Assert\NotNull()
      *
      * @ORM\Column(name="distance", type="float")
      */

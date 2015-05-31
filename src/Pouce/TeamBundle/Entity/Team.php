@@ -4,6 +4,7 @@ namespace Pouce\TeamBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Team
@@ -29,6 +30,8 @@ class Team
 
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      *
      * @ORM\Column(name="teamName", type="string", length=255)
      */
@@ -36,6 +39,7 @@ class Team
 
     /**
      * @var string
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="targetDestination", type="string", length=255)
      */
@@ -43,6 +47,7 @@ class Team
 
     /**
      * @var string
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="comment", type="text")
      */

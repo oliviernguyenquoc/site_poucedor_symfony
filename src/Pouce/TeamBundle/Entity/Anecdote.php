@@ -3,6 +3,7 @@
 namespace Pouce\TeamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Anecdote
@@ -29,8 +30,11 @@ class Anecdote
 
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(min="3")
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=500)
      */
     private $name;
 

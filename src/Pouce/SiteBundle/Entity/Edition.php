@@ -3,6 +3,7 @@
 namespace Pouce\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Edition
@@ -28,6 +29,7 @@ class Edition
 
     /**
      * @var integer
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="year", type="integer")
      */
@@ -35,6 +37,8 @@ class Edition
 
     /**
      * @var integer
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      *
      * @ORM\Column(name="month", type="integer")
      */
@@ -42,6 +46,8 @@ class Edition
 
     /**
      * @var integer
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      *
      * @ORM\Column(name="day", type="integer")
      */
