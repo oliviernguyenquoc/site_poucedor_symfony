@@ -30,6 +30,7 @@ class Edition
     /**
      * @var integer
      * @Assert\NotBlank()
+     * @Assert\NotNull()
      *
      * @ORM\Column(name="year", type="integer")
      */

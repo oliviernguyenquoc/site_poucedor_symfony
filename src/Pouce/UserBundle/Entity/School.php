@@ -4,6 +4,7 @@ namespace Pouce\UserBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * School
@@ -24,6 +25,8 @@ class School
 
     /**
      * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
@@ -31,17 +34,11 @@ class School
 
     /**
      * @var string
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="sigle", type="string", length=10)
      */
     private $sigle;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="autoriseInscription", type="boolean")
-     */
-    private $autoriseInscription;
 
     /**
      * @var \DateTime $updated

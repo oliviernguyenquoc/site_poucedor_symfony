@@ -42,6 +42,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Entrez votre sexe.")
+     * @Assert\Choice({"homme", "femme"})
      */
     protected $sex;
 
