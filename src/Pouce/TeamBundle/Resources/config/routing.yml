@@ -4,4 +4,4 @@ pouce_team_homepage:
 
 pouce_team_add:
     path:     /add
-    defaults: { _controller: PouceTeamBundle:Team:add }
+    defaults: { _controller: PouceTeamBundle:Team:addTeam }

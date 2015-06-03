@@ -54,6 +54,14 @@ class Team
     private $comment;
 
     /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="finishRegister", type="boolean")
+     */
+    private $finishRegister;
+
+
+    /**
      * @var datetime $created
      *
      * @Gedmo\Timestampable(on="create")

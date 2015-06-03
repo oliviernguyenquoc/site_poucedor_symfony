@@ -17,6 +17,7 @@ class User extends BaseUser
     /**
      * @ORM\ManyToOne(targetEntity="Pouce\UserBundle\Entity\School")
      * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(nullable=true) // To DELETE AFTER TESTS !
      */
     private $school;
 
@@ -28,33 +29,33 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Entrez votre nom.")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Entrez votre prénom.", groups={"teamRegistration"})
      */
     protected $first_name;
 
     /*
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Entrez votre prénom.")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Entrez votre nom de famille.", groups={"teamRegistration"})
      */
     protected $last_name;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Entrez votre sexe.")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Entrez votre sexe.", groups={"teamRegistration"})
      * @Assert\Choice({"homme", "femme"})
      */
     protected $sex;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Entrez votre promotion.")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Entrez votre promotion.", groups={"teamRegistration"})
      */
     protected $promotion;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Entrez votre numéro de téléphone.")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Entrez votre numéro de téléphone.", groups={"teamRegistration"})
      */
     protected $telephone;
 
@@ -191,6 +192,16 @@ class User extends BaseUser
     {
         return $this->telephone;
     }
+
+    // A peut être utiliser en cas de bug
+    // public function setEmail($email)
+    // {
+    //     if (is_null($this->getUsername())) {
+    //         $this->setUsername(uniqid());
+    //     }
+
+    //     return parent::setEmail($email);
+    // }
 
     /**
      * Set created

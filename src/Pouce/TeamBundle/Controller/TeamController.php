@@ -8,37 +8,44 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TeamController extends Controller
 {
-	public function addAction(Request $request)
+	public function addTeamAction(Request $request)
   	{
-	    // On crée un objet Advert
-	    $team = new Team();
 
-	    // On crée le FormBuilder grâce au service form factory
-	    $formBuilder = $this->get('form.factory')->createBuilder('form', $team);
+  		$isUserUpdated = (null != $this->getUser()->getFirstName());
+  		//exit(\Doctrine\Common\Util\Debug::dump($isUserUpdated));
 
-	    // On ajoute les champs de l'entité que l'on veut à notre formulaire
-	    $formBuilder
-	    	->add('teamName', 'text', array(
-                'label'=> 'Nom de l\'équipe',
-                'required'    => true
-            ))
-            ->add('targetDestination' ,'text', array(
-                'label'=> 'Jusqu\'où pensez vous arrivez',
-                'required'    => true
-            ))
-            ->add('comment', 'textarea', array(
-	            'required'    => true,
-	            'label' => 'Un commentaire'
-            ));
-	    // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
+	  		if($isUserUpdated)
+	  		{
 
-	    // À partir du formBuilder, on génère le formulaire
-	    $form = $formBuilder->getForm();
+	  		//On récupère le User en cours
+	  		$user = $this->getUser();
 
-	    // On passe la méthode createView() du formulaire à la vue
-	    // afin qu'elle puisse afficher le formulaire toute seule
-	    return $this->render('PouceTeamBundle:Team:add.html.twig', array(
-	      'teamForm' => $form->createView(),
-	    ));
+		    // On crée un objet Advert
+		    $team = new Team();
+
+		    // On crée le FormBuilder grâce au service form factory
+		    $form = $this->get('form.factory')->create(new TeamType(), $team);
+
+		    if ($request->getMethod() == 'POST') {
+			    if ($form->handleRequest($request)->isValid()) {
+			      $em = $this->getDoctrine()->getManager();
+			      $em->persist($user);
+			      $em->flush();
+
+			      $request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
+
+			      return $this->redirect('PouceSiteBundle:Site:index.html.twig');
+			    }
+			}
+
+		    // On passe la méthode createView() du formulaire à la vue
+		    // afin qu'elle puisse afficher le formulaire toute seule
+		    return $this->render('PouceTeamBundle:Team:addTeamAndUpdateUser.html.twig', array(
+		      'teamForm' => $form->createView(),
+		    ));
+		}
+		else{
+			return $this->render('PouceSiteBundle:Site:index.html.twig');
+		}
 	 }
 }
