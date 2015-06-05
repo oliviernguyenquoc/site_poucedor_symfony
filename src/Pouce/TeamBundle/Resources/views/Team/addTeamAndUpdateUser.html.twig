@@ -8,16 +8,25 @@
 
 	<h3>Formulaire d'inscription</h3>
 
-	<div class="cadre1">
-		{{ form(userForm) }}
-	</div>
+	<form method="post" {{ form_enctype(teamForm) }}>
 
-	<div class="cadre2">
-		<p4>YEAH</p4>
-	</div>
+		{# Les erreurs générales du formulaire. #}
+		{{ form_errors(teamForm) }}
 
-	<div class="cadre3">
-		{{ form(teamForm) }}
-	</div>
+		<div class="cadre1">
+			<p4>YEAAAAH + Info user</p4>
+			{{ form_label(teamForm.users, "User") }}
+			{{ form_widget(teamForm.users) }}
+		</div>
+
+		<div class="cadre2">
+			<p4>YEAH</p4>
+		</div>
+
+		<div class="cadre3">
+			{{ form_rest(teamForm) }}
+		</div>
+		<input type="submit" class="btn btn-primary" /> 
+	</form>
 
 {% endblock %}

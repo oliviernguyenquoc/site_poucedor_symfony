@@ -14,7 +14,12 @@
 <h3>In progress</h3>
 <p>
 <ul>
-    <li>Register Page (Inscription)</li>
+    <li>Register Page (Inscription)
+      <ul>
+        <li>>Add fields(Update user and add other user) in add team pages</li>
+        <li>Save informations from forms (controller)</li>
+      </ul>
+    </li>
     <li>Identification Page </li>
 </ul>
 </p>

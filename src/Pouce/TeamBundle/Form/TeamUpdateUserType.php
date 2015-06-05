@@ -5,8 +5,9 @@ namespace Pouce\TeamBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Pouce\UserBundle\Form\UserType;
 
-class TeamType extends AbstractType
+class TeamUpdateUserType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,6 +16,11 @@ class TeamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('users', 'collection', array(
+                'type' => new  UserType(),
+                'allow_add' => true,
+                'allow_delete' => true
+            ))
             ->add('teamName', 'text', array(
                 'label'=> 'Nom de l\'équipe',
                 'required'    => true
@@ -45,6 +51,6 @@ class TeamType extends AbstractType
      */
     public function getName()
     {
-        return 'pouce_teambundle_team';
+        return 'pouce_teambundle_teamupdateuser';
     }
 }

@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 
  * @ORM\Table(name="school")
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Pouce\UserBundle\Entity\SchoolRepository")
  */
 class School
 {
@@ -42,7 +41,7 @@ class School
     private $sigle;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Pouce\SiteBundle\Entity\Edition", inversedBy="editions", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\Edition", inversedBy="editions", cascade={"persist"})
      */
     private $editions;
 
@@ -132,68 +131,5 @@ class School
     public function getAutoriseInscription()
     {
         return $this->autoriseInscription;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->editions = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set updated
-     *
-     * @param \DateTime $updated
-     * @return School
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-
-        return $this;
-    }
-
-    /**
-     * Get updated
-     *
-     * @return \DateTime 
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
-
-    /**
-     * Add editions
-     *
-     * @param \Pouce\SiteBundle\Entity\Edition $editions
-     * @return School
-     */
-    public function addEdition(\Pouce\SiteBundle\Entity\Edition $editions)
-    {
-        $this->editions[] = $editions;
-
-        return $this;
-    }
-
-    /**
-     * Remove editions
-     *
-     * @param \Pouce\SiteBundle\Entity\Edition $editions
-     */
-    public function removeEdition(\Pouce\SiteBundle\Entity\Edition $editions)
-    {
-        $this->editions->removeElement($editions);
-    }
-
-    /**
-     * Get editions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEditions()
-    {
-        return $this->editions;
     }
 }

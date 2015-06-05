@@ -2,7 +2,7 @@
 
 namespace Pouce\UserBundle\Controller;
 
-use Pouce\USerBundle\Entity\User;
+use Pouce\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class UserController extends Controller

@@ -5,6 +5,7 @@ namespace Pouce\TeamBundle\Entity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Team
@@ -76,6 +77,29 @@ class Team
      * @ORM\Column(type="datetime")
      */
     private $updated;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+
+    public function addUser(User $user)
+    {
+        // Ici, on utilise l'ArrayCollection vraiment comme un tableau
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    public function removeUser(User $user)
+    {
+        $this->categories->removeElement($user);
+    }
+
+    public function getUsers()
+    {
+        return $this->users;
+    }
 
 
     /**
