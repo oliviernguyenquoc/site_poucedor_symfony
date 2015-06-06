@@ -42,7 +42,7 @@ class School
     private $sigle;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Pouce\SiteBundle\Entity\Edition", inversedBy="editions", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Pouce\SiteBundle\Entity\Edition", inversedBy="editions")
      */
     private $editions;
 

@@ -16,8 +16,8 @@ class User extends BaseUser
 {
     /**
      * @ORM\ManyToOne(targetEntity="Pouce\UserBundle\Entity\School")
-     * @ORM\JoinColumn(nullable=false)
-     * @ORM\Column(nullable=true) // To DELETE AFTER TESTS !
+     * @ORM\JoinColumn(name="school_id", referencedColumnName="id", nullable=false)
+     *
      */
     private $school;
 

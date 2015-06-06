@@ -30,6 +30,11 @@ class Team
     private $users;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Pouce\SiteBundle\Entity\Edition", cascade={"persist"})
+    */
+    private $edition;
+
+    /**
      * @var string
      * @Assert\NotBlank()
      * @Assert\NotNull()

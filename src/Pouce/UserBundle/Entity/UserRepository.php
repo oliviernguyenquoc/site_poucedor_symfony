@@ -12,4 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+	// To get all the free, who do not have a team, contesters in the school (id)
+	// Warning : Not tested
+	public function getAllConstestersSchool($id,$year)
+	{
+		$qb = $this	-> createQueryBuilder('u')
+                    -> join('u.school','s')
+                    -> addSelect('s')
+                    -> where('s.id = :id')
+                     ->setParameter('id', $id)
+                    -> join('u.teams', 't')
+                    -> addSelect('t')
+                    -> where('u.teams = NULL')
+                    -> join();
+
+		return $qb ;					
+	}
 }

@@ -12,7 +12,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class SchoolRepository extends EntityRepository
 {
-	public function getAllSchoolParticipateName($year)
+	// To get all schools that participate to the competition on the year
+	public function getAllSchoolParticipate($year)
 	{
 		$qb = $this	-> createQueryBuilder('s')
                     -> join('s.editions','e')

@@ -25,7 +25,7 @@ class RegistrationFormType extends AbstractType
                 'property' => 'name',
                 'label' => 'Ecole/Université',
                 'query_builder' => function(\Pouce\UserBundle\Entity\SchoolRepository $er) use($year) {
-                    return $er-> getAllSchoolParticipateName($year);
+                    return $er-> getAllSchoolParticipate($year);
                 },
             ));
     }

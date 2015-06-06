@@ -23,7 +23,7 @@ class Edition
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\School", mappedBy="schools", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\School", mappedBy="schools")
      */
     private $schools;
 
