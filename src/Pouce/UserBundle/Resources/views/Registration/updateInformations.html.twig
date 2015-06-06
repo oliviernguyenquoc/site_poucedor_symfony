@@ -4,6 +4,11 @@
 {# Dans notre layout, il faut définir le block body #}
 {% block body %}
 	<h1>Complément d'informations</h1>
+    {% for flashMessage in app.session.flashbag.get('updateInformations') %}
+
+        {{ flashMessage }}
+
+    {% endfor %}
 
 
 	<blockquote style="margin-left:100px;">

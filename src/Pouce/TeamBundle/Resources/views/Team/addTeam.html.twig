@@ -1,0 +1,43 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block body %}
+
+	<h3>Formulaire d'inscription</h3>
+
+	<form method="post" {{ form_enctype(teamForm) }} action="{{ path('pouce_team_add')}}">
+
+		{# Les erreurs générales du formulaire. #}
+		{{ form_errors(teamForm) }}
+
+		<p>
+			Vérifiez bien vos informations. Ils nous permetterons de vous suivre pendante toute la durée du concours
+		</p>
+
+		<div class="cadre1">
+			<h4>Vos informations</h4>
+
+			<p>
+				Nom : {{ user.firstName }} {{ user.lastName }}<br/>
+				Sexe : {{ user.sex }}<br/>
+				Promotion : {{ user.promotion }}<br/>
+				Email : {{ user.email }}<br/>
+				Téléphone : {{ user.telephone }}
+			</p>
+		</div>
+
+		<div class="cadre2">
+			<h4>Sélection du co-équipier</h4>
+		</div>
+
+		<div class="cadre3">
+			{{ form_rest(teamForm) }}
+			{# Add checkbox #}
+			<input type="submit" class="btn btn-primary" /> 
+		</div>
+	</form>
+
+{% endblock %}

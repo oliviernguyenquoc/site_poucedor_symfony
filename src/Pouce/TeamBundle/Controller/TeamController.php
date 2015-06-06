@@ -24,23 +24,18 @@ class TeamController extends Controller
   			// On regarde si la deuxième partie de son profil est remplit
   			if(!$isUserUpdated)
 	  		{
-
 		  		$form = self::updateUser($request);
-
-			    // On passe la méthode createView() du formulaire à la vue
-			    // afin qu'elle puisse afficher le formulaire toute seule
-			    return $this->render('PouceTeamBundle:User:update.html.twig', array(
-			      'teamForm' => $form->createView(),
-			    ));
 			}
 			else{
 
 				$form = self::addFormTeamWithoutUpdateUser($request);
+				$user = $this->getUser();
 
 			    // On passe la méthode createView() du formulaire à la vue
 			    // afin qu'elle puisse afficher le formulaire toute seule
-			    return $this->render('PouceTeamBundle:Team:addTeamWithoutUpdateUser.html.twig', array(
+			    return $this->render('PouceTeamBundle:Team:addTeam.html.twig', array(
 			      'teamForm' => $form->createView(),
+			      'user' => $user,
 			    ));
 			}
   		}
@@ -49,37 +44,21 @@ class TeamController extends Controller
   			return $this->render('PouceTeamBundle:Team:hasATeam.html.twig');
   		}
   		
-	 }
+	}
 
-	 /*
-		Appel le formulaire de création de team 
-		avec le formulaire d'update d'user
-	 */
-	 private function updateUser(Request $request)
-	 {
-	 		//On récupère le User en cours
-	  		$user = $this->getUser();
+	/*
+	Appel le formulaire de création de team 
+	avec le formulaire d'update d'user
+	*/
+	private function updateUser(Request $request)
+	{
+		$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
 
-		    // On crée le FormBuilder grâce au service form factory
-		    $form = $this->get('form.factory')->create(new UserType(), $team);
+		return $this->redirect($this->generateUrl('pouce_user_addinformations'));
+	}
 
-		    if ($request->getMethod() == 'POST') {
-			    if ($form->handleRequest($request)->isValid()) {
-			      $em = $this->getDoctrine()->getManager();
-			      $em->persist($user);
-			      $em->flush();
-
-			      $request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
-
-			      return $this->redirect('PouceSiteBundle:Site:index.html.twig');
-			    }
-			}
-
-			return $form;
-	 }
-
-	 private function addFormTeamWithoutUpdateUser(Request $request)
-	 {
+	private function addFormTeamWithoutUpdateUser(Request $request)
+	{
  		// On crée un objet Advert
 	    $team = new Team();
 
@@ -98,5 +77,5 @@ class TeamController extends Controller
 		}
 
 		return $form;
-	 }
+	}
 }
