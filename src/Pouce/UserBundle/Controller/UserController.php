@@ -3,55 +3,53 @@
 namespace Pouce\UserBundle\Controller;
 
 use Pouce\UserBundle\Entity\User;
+use Pouce\UserBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
-	public function addInformationAction(Request $request)
+	public function addInformationsAction()
   	{
-	    // On crée un objet Advert
-	    $user = new User();
+  		$request = $this->getRequest();
+
+    	//On récupère le User en cours
+  		$user = $this->getUser();
 
 	    // On crée le FormBuilder grâce au service form factory
-	    $formBuilder = $this->get('form.factory')->createBuilder('form', $user);
+	    $form = $this->get('form.factory')->create(new UserType());
 
-	    // On ajoute les champs de l'entité que l'on veut à notre formulaire
-	    $formBuilder
-	    	->add('first_name', 'text', array(
-                'label'=> 'Prénom :',
-                'required'    => true
-            ))
-            ->add('last_name' ,'text', array(
-                'label'=> 'Nom :',
-                'required'    => true
-            ))
-            ->add('sex', 'choice', array(
-                'choices' => array(
-                    'M' => 'Masculin',
-                    'F' => 'Féminin'
-	            ),
-	            'required'    => true,
-	            'empty_value' => 'Choisissez votre sexe',
-	            'empty_data'  => null,
-	            'label' => 'Sexe :'
-            ))
-            ->add('promotion', 'text', array(
-                'label'=> 'Promotion :',
-                'required'    => true
-            ))
-            ->add('telephone', 'text', array(
-                'label'=> 'Numéro de téléphone :',
-                'required'    => true
-            ));
-	    // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
+	    if ($request->getMethod() == 'POST') {
+		    if ($form->handleRequest($request)->isValid()) {
+				$informations = $form->getData();
 
-	    // À partir du formBuilder, on génère le formulaire
-	    $form = $formBuilder->getForm();
+				$user->setFirstName($informations->getFirstName());
+				$user->setLastName($informations->getLastName());
+				$user->setSex($informations->getSex());
+				$user->setPromotion($informations->getPromotion());
+				$user->setTelephone($informations->getTelephone());			
+
+				$userManager = $this->container->get('fos_user.user_manager');
+				$userManager->updateUser($user);
+
+		        $request->getSession()->getFlashBag()->add('notice', 'Utilisateur mis à jour');
+
+				return $this->redirect($this->generateUrl('pouce_site_homepage'));
+			}
+		}
 
 	    // On passe la méthode createView() du formulaire à la vue
 	    // afin qu'elle puisse afficher le formulaire toute seule
-	    return $this->render('PouceTeamBundle:Team:add.html.twig', array(
-	      'userForm' => $form->createView(),
-	    ));
+	    return $this->render('PouceUserBundle:Registration:updateInformations.html.twig', array(
+			      'updateForm' => $form->createView(),
+			    ));
 	 }
+
+	public function getDefaultOptions()
+	{
+	    return array(
+	        'validation_groups' => array('updateRegistration')
+	    );
+	}
+
 }

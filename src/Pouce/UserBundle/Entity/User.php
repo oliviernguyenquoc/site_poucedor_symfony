@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints AS Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="user")
  */
 class User extends BaseUser
 {
@@ -30,32 +30,32 @@ class User extends BaseUser
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank(message="Entrez votre prénom.", groups={"teamRegistration"})
+     * @Assert\NotBlank(message="Entrez votre prénom.", groups={"updateRegistration"})
      */
     protected $first_name;
 
     /*
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank(message="Entrez votre nom de famille.", groups={"teamRegistration"})
+     * @Assert\NotBlank(message="Entrez votre nom de famille.", groups={"updateRegistration"})
      */
     protected $last_name;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank(message="Entrez votre sexe.", groups={"teamRegistration"})
-     * @Assert\Choice({"homme", "femme"})
+     * @Assert\NotBlank(message="Entrez votre sexe.", groups={"updateRegistration"})
+     * @Assert\Choice({"Homme", "Femme"})
      */
     protected $sex;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank(message="Entrez votre promotion.", groups={"teamRegistration"})
+     * @Assert\NotBlank(message="Entrez votre promotion.", groups={"updateRegistration"})
      */
     protected $promotion;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank(message="Entrez votre numéro de téléphone.", groups={"teamRegistration"})
+     * @Assert\NotBlank(message="Entrez votre numéro de téléphone.", groups={"updateRegistration"})
      */
     protected $telephone;
 
@@ -80,12 +80,12 @@ class User extends BaseUser
     /**
      * Set first_name
      *
-     * @param string $firstName
+     * @param string $first_name
      * @return User
      */
-    public function setFirstName($firstName)
+    public function setFirstName($first_name)
     {
-        $this->first_name = $firstName;
+        $this->first_name = $first_name;
 
         return $this;
     }
@@ -103,24 +103,24 @@ class User extends BaseUser
     /**
      * Set last_name
      *
-     * @param string $firstName
+     * @param string $last_name
      * @return User
      */
-    public function setLastName($firstName)
+    public function setLastName($last_name)
     {
-        $this->first_name = $firstName;
+        $this->last_name = $last_name;
 
         return $this;
     }
 
     /**
-     * Get first_name
+     * Get last_name
      *
      * @return string 
      */
     public function getLastName()
     {
-        return $this->first_name;
+        return $this->last_name;
     }
 
 

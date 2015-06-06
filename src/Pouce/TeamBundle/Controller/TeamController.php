@@ -5,7 +5,7 @@ namespace Pouce\TeamBundle\Controller;
 use Pouce\TeamBundle\Entity\Team;
 use Pouce\UserBundle\Entity\User;
 use Pouce\TeamBundle\Form\TeamType;
-use Pouce\TeamBundle\Form\TeamUpdateUserType;
+use Pouce\UserBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,11 +25,11 @@ class TeamController extends Controller
   			if(!$isUserUpdated)
 	  		{
 
-		  		$form = self::addFormTeamAndUpdateUser($request);
+		  		$form = self::updateUser($request);
 
 			    // On passe la méthode createView() du formulaire à la vue
 			    // afin qu'elle puisse afficher le formulaire toute seule
-			    return $this->render('PouceTeamBundle:Team:addTeamAndUpdateUser.html.twig', array(
+			    return $this->render('PouceTeamBundle:User:update.html.twig', array(
 			      'teamForm' => $form->createView(),
 			    ));
 			}
@@ -55,16 +55,13 @@ class TeamController extends Controller
 		Appel le formulaire de création de team 
 		avec le formulaire d'update d'user
 	 */
-	 private function addFormTeamAndUpdateUser(Request $request)
+	 private function updateUser(Request $request)
 	 {
 	 		//On récupère le User en cours
 	  		$user = $this->getUser();
 
-		    // On crée un objet Advert
-		    $team = new Team();
-
 		    // On crée le FormBuilder grâce au service form factory
-		    $form = $this->get('form.factory')->create(new TeamUpdateUserType(), $team);
+		    $form = $this->get('form.factory')->create(new UserType(), $team);
 
 		    if ($request->getMethod() == 'POST') {
 			    if ($form->handleRequest($request)->isValid()) {

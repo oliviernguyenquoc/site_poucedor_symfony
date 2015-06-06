@@ -1,0 +1,20 @@
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block body %}
+	<h1>Complément d'informations</h1>
+
+
+	<blockquote style="margin-left:100px;">
+		Remplis bien tous les champs pour pouvoir participer.
+	</blockquote>
+
+    <form method="POST" {{ form_enctype(updateForm) }} action="{{ path('pouce_user_addinformations')}}">
+        {{ form_errors(updateForm) }}
+        {{ form_widget(updateForm) }}
+        <div>
+            <input type="submit" class="btn btn-primary"  /> 
+        </div>
+    </form>
+{% endblock %}
