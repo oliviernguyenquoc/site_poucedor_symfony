@@ -1,0 +1,39 @@
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{% block site_body %}
+
+<h1>Le classement</h1>
+
+<h2>Le classement général</h2>
+
+<table>
+	<tr>
+	  <th>Classement</th>
+	  <th>Equipe</th> 
+	  <th>Prénoms</th>
+	  <th>Destination</th>
+	  <th>km</th>
+	  <th>Ville de départ</th>
+	</tr>
+
+	{% if teams {# isset #} %} // TO CHANGE
+		{% for team in teams  %}
+			<tr>
+				<td>{{team.rank}}</td>
+				<td>{{team.teamName}}</td>
+				<td>
+					{% for user in team.users %}
+						{{team.user.name}}
+					{% endfor %}
+				</td>
+				<td>{{team.town}}, {{team.country}}</td>
+				<td>{{team.distance}}</td>
+				<td>{{team.townDeparture}}, {{team.countryDeparture}}</td>
+			</tr>
+		{% endfor %}
+	{% endif %}
+</table>
+
+<h2>Le classement par école </h2>
+
+{% endblock %}
