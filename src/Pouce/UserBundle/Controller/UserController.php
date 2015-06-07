@@ -23,6 +23,8 @@ class UserController extends Controller
 		    if ($form->handleRequest($request)->isValid()) {
 				$informations = $form->getData();
 
+				//On récupère les informations du form et on update le User
+				//Méthode un peu spécial à cause de l'utilisation du bundle FOSUserBundle
 				$user->setFirstName($informations->getFirstName());
 				$user->setLastName($informations->getLastName());
 				$user->setSex($informations->getSex());

@@ -13,8 +13,10 @@ class TeamController extends Controller
 {
 	public function addTeamAction(Request $request)
   	{
-
+  		// Check if the user have completed all his informations like first_name, last_name, telephone number ...
   		$isUserUpdated = (null != $this->getUser()->getFirstName());
+
+  		//Check if the user have already a team for one of the next edition
   		$hasATeam = false;
   		//exit(\Doctrine\Common\Util\Debug::dump($isUserUpdated));
 
@@ -28,7 +30,7 @@ class TeamController extends Controller
 			}
 			else{
 
-				$form = self::addFormTeamWithoutUpdateUser($request);
+				$form = self::addFormTeam($request);
 				$user = $this->getUser();
 
 			    // On passe la méthode createView() du formulaire à la vue
@@ -47,8 +49,8 @@ class TeamController extends Controller
 	}
 
 	/*
-	Appel le formulaire de création de team 
-	avec le formulaire d'update d'user
+		Redirige le user vers le formulaire d'update d'user avec un message 
+		pour lui expliquer qu'il faut metttre à jour ses données s'il veut s'inscrire 
 	*/
 	private function updateUser(Request $request)
 	{
@@ -57,7 +59,10 @@ class TeamController extends Controller
 		return $this->redirect($this->generateUrl('pouce_user_addinformations'));
 	}
 
-	private function addFormTeamWithoutUpdateUser(Request $request)
+	/*
+		Creer le formulaire de création d'équipe
+	*/
+	private function addFormTeam(Request $request)
 	{
  		// On crée un objet Advert
 	    $team = new Team();

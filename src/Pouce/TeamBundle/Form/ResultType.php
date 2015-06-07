@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TeamType extends AbstractType
+class ResultType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,19 +15,18 @@ class TeamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('teamName', 'text', array(
-                'label'=> 'Nom de l\'équipe',
+            ->add('town', 'text', array(
+                'label'=> 'Ville d\'arrivée',
                 'required'    => true
             ))
-            ->add('targetDestination','text', array(
-                'label'=> 'Jusqu\'où pensez vous arrivez',
+            ->add('country','text', array(
+                'label'=> 'Ville d\'arrivée',
                 'required'    => true
-            ))
+        ))
+            // Add WYSIWYG editor
             ->add('comment', 'textarea', array(
-                'required'    => true,
                 'label' => 'Un commentaire'
             ))
-            //->add('users', 'collection', array('type' => new UserSelectionType(),))
         ;
     }
     
@@ -37,7 +36,7 @@ class TeamType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Pouce\TeamBundle\Entity\Team'
+            'data_class' => 'Pouce\TeamBundle\Entity\Result'
         ));
     }
 

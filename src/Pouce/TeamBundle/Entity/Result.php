@@ -55,7 +55,6 @@ class Result
 
     /**
      * @var float
-     * @Assert\NotNull()
      *
      * @ORM\Column(name="distance", type="float")
      */

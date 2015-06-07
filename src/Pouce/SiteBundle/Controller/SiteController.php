@@ -50,6 +50,7 @@ class SiteController extends Controller
     {
         return $this->render('PouceSiteBundle:Site:records.html.twig');
     }
+    // TODO : Create the menu
     // public function menuAction($page)
     // {
     //     return $this->render('PouceSiteBundle:Site:index.html.twig');
