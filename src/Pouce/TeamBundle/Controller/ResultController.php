@@ -57,24 +57,24 @@ class TeamController extends Controller
 	*/
 	private function createComment(Request $request)
 	{
- 	// 	// On crée un objet Advert
-	 //    $team = new Team();
+ 		// On crée un objet Advert
+	    $team = new Team();
 
-	 //    // On crée le FormBuilder grâce au service form factory
-	 //    $form = $this->get('form.factory')->create(new TeamType(), $team);
+	    // On crée le FormBuilder grâce au service form factory
+	    $form = $this->get('form.factory')->create(new TeamType(), $team);
 
-	 //    if ($request->getMethod() == 'POST') {
-		//     if ($form->handleRequest($request)->isValid()) {
-		//       $em = $this->getDoctrine()->getManager();
-		//       $em->flush();
+	    if ($request->getMethod() == 'POST') {
+		    if ($form->handleRequest($request)->isValid()) {
+		      $em = $this->getDoctrine()->getManager();
+		      $em->flush();
 
-		//       $request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
+		      $request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
 
-		//       return $this->redirect('PouceSiteBundle:Site:index.html.twig');
-		//     }
-		// }
+		      return $this->redirect('PouceSiteBundle:Site:index.html.twig');
+		    }
+		}
 
-		// return $form;
+		return $form;
 	}
 
 	/*
