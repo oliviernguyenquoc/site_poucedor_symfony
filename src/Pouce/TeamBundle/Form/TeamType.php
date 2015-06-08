@@ -14,6 +14,9 @@ class TeamType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $user = $this->getUser();
+        $school =$user->getSchool();
+
         $builder
             ->add('teamName', 'text', array(
                 'label'=> 'Nom de l\'équipe',
@@ -27,7 +30,13 @@ class TeamType extends AbstractType
                 'required'    => true,
                 'label' => 'Un commentaire'
             ))
-            //->add('users', 'collection', array('type' => new UserSelectionType(),))
+            ->add('users','entity', array(
+                'class'=>'PouceUserBundle:User',
+                'label' => 'Co-équipié',
+                'query_builder' => function(\Pouce\UserBundle\Entity\UserRepository $er) use($year) {
+                    return $er-> getAllUsersInSchool($school->getId(),date("Y",$user->getLastLogin());
+                },
+            ))
         ;
     }
     

@@ -72,12 +72,15 @@ class TeamController extends Controller
 
 	    if ($request->getMethod() == 'POST') {
 		    if ($form->handleRequest($request)->isValid()) {
-		      $em = $this->getDoctrine()->getManager();
-		      $em->flush();
+		    	$user->getUser();
+		    	$this->addUser($user); // A tester
 
-		      $request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
+				$em = $this->getDoctrine()->getManager();
+				$em->flush();
 
-		      return $this->redirect('PouceSiteBundle:Site:index.html.twig');
+				$request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
+
+				return $this->redirect('PouceSiteBundle:Site:index.html.twig');
 		    }
 		}
 
