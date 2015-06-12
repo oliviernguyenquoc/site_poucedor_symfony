@@ -8,10 +8,9 @@ use Pouce\SiteBundle\Entity\EditionRepository;
 
 class RankingController extends Controller
 {
-    //Show the "normal" ranking
-    public function showRanking()
+    public function rankingAction($idEdition)
     {
-        $teams=getAllTeamsInEdition(/*  getIdITheAdress  */);
+        $teams=getAllTeamsInEdition($idEdition);
         return $this->render('PouceSiteBundle:Site:ranking.html.twig', array(
           'teams' => $teams,
         ));
@@ -22,19 +21,20 @@ class RankingController extends Controller
         $rang=0;
         $rangAdd=0;
         $ancienneDistance=0;
-            while($team)
+        while($team)
+        {
+            if($team->getDistance()!=$ancienneDistance)
             {
-                if($team->getDistance()!=$ancienneDistance)
-                {
-                    $rang+=1;
-                    $rang+=$rangAdd;
-                    $rangAdd=0;
-                }
-                else
-                {
-                    $rangAdd+=1;
-                }
-                $ancienneDistance=$team->getDistance();
+                $rang+=1;
+                $rang+=$rangAdd;
+                $rangAdd=0;
             }
+            else
+            {
+                $rangAdd+=1;
+            }
+            $ancienneDistance=$team->getDistance();
+            }
+
     }
 }

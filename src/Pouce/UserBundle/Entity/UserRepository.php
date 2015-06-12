@@ -23,7 +23,7 @@ class UserRepository extends EntityRepository
                      ->setParameter('id', $id)
                     -> join('u.teams', 't')
                     -> addSelect('t')
-                    -> where('u.teams = NULL')
+                    -> where('u.teams IS NULL')
                     -> join();
 
 		return $qb ;					

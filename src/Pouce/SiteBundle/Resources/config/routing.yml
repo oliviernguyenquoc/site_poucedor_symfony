@@ -41,3 +41,8 @@ pouce_site_videos:
 pouce_site_records:
     path:     /records
     defaults: { _controller: PouceSiteBundle:Site:records }
+
+pouce_site_ranking:
+    path:     /ranking_{idEdition}
+    defaults: { _controller: PouceSiteBundle:Ranking:ranking, idEdition: 2015 }
+    # requirements:
