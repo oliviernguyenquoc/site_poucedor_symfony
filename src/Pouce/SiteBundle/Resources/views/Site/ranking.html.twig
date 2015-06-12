@@ -16,7 +16,7 @@
 	  <th>Ville de départ</th>
 	</tr>
 
-	{% if teams {# isset #} %} // TO CHANGE
+	{# if teams  isset  #} {# // TO CHANGE #}
 		{% for team in teams  %}
 			<tr>
 				<td>{{team.rank}}</td>
@@ -31,7 +31,7 @@
 				<td>{{team.townDeparture}}, {{team.countryDeparture}}</td>
 			</tr>
 		{% endfor %}
-	{% endif %}
+	{# endif #}
 </table>
 
 <h2>Le classement par école </h2>

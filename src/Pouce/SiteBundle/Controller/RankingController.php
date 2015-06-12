@@ -10,7 +10,12 @@ class RankingController extends Controller
 {
     public function rankingAction($idEdition)
     {
-        $teams=getAllTeamsInEdition($idEdition);
+        $repository = $this ->getDoctrine() 
+                            ->getManager()
+                            ->getRepository('PouceTeamBundle:Team');
+
+        $teams= $repository->getAllTeamsInEdition($idEdition);
+        
         return $this->render('PouceSiteBundle:Site:ranking.html.twig', array(
           'teams' => $teams,
         ));
