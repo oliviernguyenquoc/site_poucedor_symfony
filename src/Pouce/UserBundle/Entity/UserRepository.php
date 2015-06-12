@@ -20,13 +20,12 @@ class UserRepository extends EntityRepository
                     -> where('YEAR(u.last_login) = :userYear')
                      ->setParameter('userYear', $userYear)
                     -> join('u.school','s')
-                    -> where('s.id = :idSchool')
-                     ->setParameter('idSchool', $idSchool)
-                    -> leftJoin('u.teams', 't', 'ON', 'u.id=t.id')
+                    -> andWhere('s.id = :idSchool')
+                     -> setParameter('idSchool', $idSchool)
+                    -> leftJoin('u.teams', 't')
                     -> leftJoin('t.edition','e')
-                    -> where('e.year != :userYear2')
-                     ->setParameter('userYear2', $userYear) //Need to be modified
-                    ;
+                    -> andWhere('e.year != :userYear2')
+                     -> setParameter('userYear2', $userYear);
 		return $qb ;					
 	}
 }

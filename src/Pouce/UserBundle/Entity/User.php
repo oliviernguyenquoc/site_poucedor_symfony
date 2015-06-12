@@ -61,6 +61,11 @@ class User extends BaseUser
     protected $telephone;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Pouce\TeamBundle\Entity\Team", mappedBy="users")
+     */
+    private $teams;
+
+    /**
      * @var datetime $created
      *
      * @Gedmo\Timestampable(on="create")
@@ -268,5 +273,47 @@ class User extends BaseUser
     public function getSchool()
     {
     return $this->school;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add teams
+     *
+     * @param \Pouce\TeamBundle\Entity\Team $teams
+     * @return User
+     */
+    public function addTeam(\Pouce\TeamBundle\Entity\Team $teams)
+    {
+        $this->teams[] = $teams;
+        $teams->setUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param \Pouce\TeamBundle\Entity\Team $teams
+     */
+    public function removeTeam(\Pouce\TeamBundle\Entity\Team $teams)
+    {
+        $this->teams->removeElement($teams);
+        $teams->setUser(null);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 }

@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class TeamRepository extends EntityRepository
 {
+	public function getAllTeam()
+	{
+		$qb = $this -> createQueryBuilder('t')
+					-> join('t.users', 'u')
+					-> addSelect('u');
+	
+		return $qb;
+	}
 }
