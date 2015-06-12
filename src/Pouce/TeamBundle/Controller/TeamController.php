@@ -26,7 +26,7 @@ class TeamController extends Controller
   			// On regarde si la deuxième partie de son profil est remplit
   			if(!$isUserUpdated)
 	  		{
-		  		$form = self::updateUser($request);
+		  		return self::updateUser($request);
 			}
 			else{
 
@@ -45,7 +45,7 @@ class TeamController extends Controller
   		{
   			return $this->render('PouceTeamBundle:Team:hasATeam.html.twig');
   		}
-  		
+  		return $this->redirect('PouceSiteBundle:Site:index.html.twig');
 	}
 
 	/*
@@ -67,8 +67,13 @@ class TeamController extends Controller
  		// On crée un objet Advert
 	    $team = new Team();
 
+	    //Des variables pour le formType
+	    $user = $this->getUser();
+
+        $school =$user->getSchool();
+
 	    // On crée le FormBuilder grâce au service form factory
-	    $form = $this->get('form.factory')->create(new TeamType(), $team);
+	    $form = $this->get('form.factory')->create(new TeamType($school,$user), $team);
 
 	    if ($request->getMethod() == 'POST') {
 		    if ($form->handleRequest($request)->isValid()) {

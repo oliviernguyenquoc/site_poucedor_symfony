@@ -6,16 +6,31 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Pouce\UserBundle\Entity\User;
+use Pouce\UserBundle\Entity\School;
+
 class TeamType extends AbstractType
 {
+    private $schoolId, $userYear;
+
+    public function __construct( School $school, User $user)
+    {
+        $userYear=$user->getLastLogin()->format('Y');
+        $schoolId=$school->getId();
+
+        $this->schoolId = $schoolId;
+        $this->userYear = $userYear;
+    }
+
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user = $this->getUser();
-        $school =$user->getSchool();
+        $schoolId = $this->schoolId;
+        $userYear = $this->userYear;
 
         $builder
             ->add('teamName', 'text', array(
@@ -33,11 +48,10 @@ class TeamType extends AbstractType
             ->add('users','entity', array(
                 'class'=>'PouceUserBundle:User',
                 'label' => 'Co-équipié',
-                'query_builder' => function(\Pouce\UserBundle\Entity\UserRepository $er) use($year) {
-                    return $er-> getAllUsersInSchool($school->getId(),date("Y",$user->getLastLogin());
+                'query_builder' => function(\Pouce\UserBundle\Entity\UserRepository $er) use($schoolId,$userYear) {
+                    return $er-> getAllUsersInSchool($schoolId,$userYear);
                 },
-            ))
-        ;
+            ));
     }
     
     /**

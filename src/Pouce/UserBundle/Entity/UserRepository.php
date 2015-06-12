@@ -22,8 +22,8 @@ class UserRepository extends EntityRepository
                     -> join('u.school','s')
                     -> where('s.id = :idSchool')
                      ->setParameter('idSchool', $idSchool)
-                    -> leftjoin('u.teams', 't')
-                    -> join('t.edition','e')
+                    -> leftJoin('u.teams', 't', 'ON', 'u.id=t.id')
+                    -> leftJoin('t.edition','e')
                     -> where('e.year != :userYear2')
                      ->setParameter('userYear2', $userYear) //Need to be modified
                     ;
