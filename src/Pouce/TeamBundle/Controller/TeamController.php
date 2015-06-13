@@ -26,11 +26,38 @@ class TeamController extends Controller
   			// On regarde si la deuxième partie de son profil est remplit
   			if(!$isUserUpdated)
 	  		{
-		  		return self::updateUser($request);
+		  		$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
+
+				return $this->redirect($this->generateUrl('pouce_user_addinformations'));
 			}
 			else{
 
-				$form = self::addFormTeam($request);
+				// On crée un objet Team
+			    $team = new Team();
+
+			    //Des variables pour le formType
+			    $user = $this->getUser();
+
+		        $school =$user->getSchool();
+
+			    // On crée le FormBuilder grâce au service form factory
+			    $form = $this->get('form.factory')->create(new TeamType($school,$user), $team);
+
+			    if ($request->getMethod() == 'POST') {
+				    if ($form->handleRequest($request)->isValid()) {
+
+				    	$team->addUser($user); // A tester
+				    	$user->addTeam
+
+						$em = $this->getDoctrine()->getManager();
+						$em->flush();
+
+						$request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
+
+						return $this->redirect($this->generateUrl('pouce_site_homepage'));
+				    }
+				}
+
 				$user = $this->getUser();
 
 			    // On passe la méthode createView() du formulaire à la vue
@@ -48,47 +75,5 @@ class TeamController extends Controller
   		return $this->redirect('PouceSiteBundle:Site:index.html.twig');
 	}
 
-	/*
-		Redirige le user vers le formulaire d'update d'user avec un message 
-		pour lui expliquer qu'il faut metttre à jour ses données s'il veut s'inscrire 
-	*/
-	private function updateUser(Request $request)
-	{
-		$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
 
-		return $this->redirect($this->generateUrl('pouce_user_addinformations'));
-	}
-
-	/*
-		Creer le formulaire de création d'équipe
-	*/
-	private function addFormTeam(Request $request)
-	{
- 		// On crée un objet Advert
-	    $team = new Team();
-
-	    //Des variables pour le formType
-	    $user = $this->getUser();
-
-        $school =$user->getSchool();
-
-	    // On crée le FormBuilder grâce au service form factory
-	    $form = $this->get('form.factory')->create(new TeamType($school,$user), $team);
-
-	    if ($request->getMethod() == 'POST') {
-		    if ($form->handleRequest($request)->isValid()) {
-		    	$user->getUser();
-		    	$this->addUser($user); // A tester
-
-				$em = $this->getDoctrine()->getManager();
-				$em->flush();
-
-				$request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
-
-				return $this->redirect('PouceSiteBundle:Site:index.html.twig');
-		    }
-		}
-
-		return $form;
-	}
 }

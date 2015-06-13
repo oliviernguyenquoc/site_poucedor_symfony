@@ -25,7 +25,7 @@ class Team
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\User", inversedBy="teams", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\User", inversedBy="teams")
     */
     private $users;
 
@@ -88,7 +88,7 @@ class Team
         $this->users = new ArrayCollection();
     }
 
-    public function addUser(User $user)
+    public function addUser(\Pouce\UserBundle\Entity\User $user)
     {
         // Ici, on utilise l'ArrayCollection vraiment comme un tableau
         $this->users[] = $user;
@@ -96,7 +96,7 @@ class Team
         return $this;
     }
 
-    public function removeUser(User $user)
+    public function removeUser(\Pouce\UserBundle\Entity\User $user)
     {
         $this->categories->removeElement($user);
     }

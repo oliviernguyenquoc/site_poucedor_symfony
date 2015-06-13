@@ -279,7 +279,7 @@ class User extends BaseUser
      */
     public function __construct()
     {
-        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
     /**
@@ -291,7 +291,7 @@ class User extends BaseUser
     public function addTeam(\Pouce\TeamBundle\Entity\Team $teams)
     {
         $this->teams[] = $teams;
-        $teams->setUser($this);
+        $teams->addUser($this);
 
         return $this;
     }

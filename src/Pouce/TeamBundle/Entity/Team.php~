@@ -25,7 +25,7 @@ class Team
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\User", inversedBy="teams", cascade={"persist"})
     */
     private $users;
 
@@ -82,29 +82,6 @@ class Team
      * @ORM\Column(type="datetime")
      */
     private $updated;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
-
-    public function addUser(User $user)
-    {
-        // Ici, on utilise l'ArrayCollection vraiment comme un tableau
-        $this->users[] = $user;
-
-        return $this;
-    }
-
-    public function removeUser(User $user)
-    {
-        $this->categories->removeElement($user);
-    }
-
-    public function getUsers()
-    {
-        return $this->users;
-    }
 
 
     /**
@@ -184,5 +161,97 @@ class Team
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set finishRegister
+     *
+     * @param boolean $finishRegister
+     * @return Team
+     */
+    public function setFinishRegister($finishRegister)
+    {
+        $this->finishRegister = $finishRegister;
+
+        return $this;
+    }
+
+    /**
+     * Get finishRegister
+     *
+     * @return boolean 
+     */
+    public function getFinishRegister()
+    {
+        return $this->finishRegister;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Team
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Team
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set edition
+     *
+     * @param \Pouce\SiteBundle\Entity\Edition $edition
+     * @return Team
+     */
+    public function setEdition(\Pouce\SiteBundle\Entity\Edition $edition = null)
+    {
+        $this->edition = $edition;
+
+        return $this;
+    }
+
+    /**
+     * Get edition
+     *
+     * @return \Pouce\SiteBundle\Entity\Edition 
+     */
+    public function getEdition()
+    {
+        return $this->edition;
     }
 }

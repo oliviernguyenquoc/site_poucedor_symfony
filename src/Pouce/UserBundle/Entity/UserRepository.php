@@ -17,15 +17,18 @@ class UserRepository extends EntityRepository
 	public function getAllUSersInSchool($idSchool,$userYear)
 	{
 		$qb = $this	-> createQueryBuilder('u')
-                    -> where('YEAR(u.last_login) = :userYear')
+                    -> where('YEAR(u.lastLogin) = :userYear')
                      ->setParameter('userYear', $userYear)
                     -> join('u.school','s')
                     -> andWhere('s.id = :idSchool')
                      -> setParameter('idSchool', $idSchool)
                     -> leftJoin('u.teams', 't')
                     -> leftJoin('t.edition','e')
-                    -> andWhere('e.year != :userYear2')
-                     -> setParameter('userYear2', $userYear);
+                    // -> andWhere('e.year != :userYear2')
+                    //  -> setParameter('userYear2', $userYear)
+                    // Exclure le user courant
+                    // Exclure les users avec une équipe déja inscrite
+                     ;
 		return $qb ;					
 	}
 }
