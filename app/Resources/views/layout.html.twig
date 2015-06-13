@@ -30,25 +30,16 @@
   	
   	<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/>
 	
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/materialize.min.css') }}" media="screen,projection"/>
+
+	<!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<script type="text/javascript" src=" https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9y0Cs5Y1htYYU_o7wdrfFhC--_kt3BB8"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
 
 </head>
-
-<body>
-	
-    <!--start container-->
-    <div id="container">
-    
-    <!--start header-->
-    <header>
-
-    <!--start logo-->
-    <a href="index.php" id="logo"><img src={{ asset('images/poucelogosite.png') }} width="343" height="110" alt="logo"/></a>    
-	<!--end logo-->
-	
-   <!--start menu-->
+  <!--start menu-->
 
    <div id="nav">
 	{# 	{{ render(controller("PouceSiteBundle:Pouce:menu", {'page':'inscription'})) }} #}
