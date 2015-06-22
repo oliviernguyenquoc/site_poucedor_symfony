@@ -46,8 +46,7 @@ class TeamController extends Controller
 			    if ($request->getMethod() == 'POST') {
 				    if ($form->handleRequest($request)->isValid()) {
 
-				    	$team->addUser($user); // A tester
-				    	//$user->addTeam($team);
+				    	$team->addUser($user);
 				    	$team->setFinishRegister(false);
 
 						$em = $this->getDoctrine()->getManager();
