@@ -145,7 +145,6 @@ class School
      * Set updated
      *
      * @param \DateTime $updated
-     * @return School
      */
     public function setUpdated($updated)
     {

@@ -14,18 +14,21 @@ class UserRepository extends EntityRepository
 {
 	// To get all the free, who do not have a team, contesters in the school (id)
 	// Warning : Not tested
-	public function getAllConstestersSchool($id,$year)
+	public function getAllUSersInSchool($idSchool,$userYear)
 	{
 		$qb = $this	-> createQueryBuilder('u')
+                    -> where('YEAR(u.lastLogin) = :userYear')
+                     ->setParameter('userYear', $userYear)
                     -> join('u.school','s')
-                    -> addSelect('s')
-                    -> where('s.id = :id')
-                     ->setParameter('id', $id)
-                    -> join('u.teams', 't')
-                    -> addSelect('t')
-                    -> where('u.teams = NULL')
-                    -> join();
-
+                    -> andWhere('s.id = :idSchool')
+                     -> setParameter('idSchool', $idSchool)
+                    -> leftJoin('u.teams', 't')
+                    -> leftJoin('t.edition','e')
+                    // -> andWhere('e.year != :userYear2')
+                    //  -> setParameter('userYear2', $userYear)
+                    // Exclure le user courant
+                    // Exclure les users avec une équipe déja inscrite
+                     ;
 		return $qb ;					
 	}
 }
