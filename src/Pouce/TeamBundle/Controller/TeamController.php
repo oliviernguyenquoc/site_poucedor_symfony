@@ -47,9 +47,12 @@ class TeamController extends Controller
 				    if ($form->handleRequest($request)->isValid()) {
 
 				    	$team->addUser($user); // A tester
-				    	$user->addTeam
+				    	//$user->addTeam($team);
+				    	$team->setFinishRegister(false);
 
 						$em = $this->getDoctrine()->getManager();
+						$em->persist($team);
+				    	$em->merge($user);
 						$em->flush();
 
 						$request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');

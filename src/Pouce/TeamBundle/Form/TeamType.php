@@ -45,16 +45,16 @@ class TeamType extends AbstractType
                 'required'    => true,
                 'label' => 'Un commentaire'
             ))
-            // ->add('users','entity', array(
-            //     'class'=>'PouceUserBundle:User',
-            //     'label' => 'Co-équipié',
-            //     'property'=>'first_name',
-            //     'query_builder' => function(\Pouce\UserBundle\Entity\UserRepository $er) use($schoolId,$userYear) {
-            //         return $er-> getAllUsersInSchool($schoolId,$userYear);
-            //     },
-            //     'required'  => true,
-            //     "multiple" => true,
-            // ))
+            ->add('users','entity', array(
+                'class'=>'PouceUserBundle:User',
+                'label' => 'Co-équipié',
+                'property'=>'first_name',
+                'query_builder' => function(\Pouce\UserBundle\Entity\UserRepository $er) use($schoolId,$userYear) {
+                    return $er-> getAllUsersInSchool($schoolId,$userYear);
+                },
+                'required'  => true,
+                "multiple" => true,
+            ))
             ;
     }
     
