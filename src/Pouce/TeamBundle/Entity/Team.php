@@ -101,6 +101,24 @@ class Team
         $this->categories->removeElement($user);
     }
 
+    /**
+     * Set users
+     * @param \Doctrine\Common\Collections\Collection $users
+     *
+     * @return Post
+     */
+    public function setUsers($users)
+    {
+
+        if(!is_array($users))
+        {
+            $users = array($users);
+        }
+        $this->users = $users;
+
+        return $this;
+    }
+
     public function getUsers()
     {
         return $this->users;
