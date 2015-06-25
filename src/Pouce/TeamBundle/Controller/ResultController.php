@@ -8,7 +8,7 @@ use Pouce\TeamBundle\Form\ResultType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class TeamController extends Controller
+class ResultController extends Controller
 {
 	public function addResultAction(Request $request)
   	{
@@ -27,7 +27,7 @@ class TeamController extends Controller
 			*************************************************** */
 
 		  	$user=$this->getUser();
-		  	$repository = $this->getDoctrine()->getRepository('Pouce:UserBundle:User');
+		  	$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
 		  	$team=$repository->getLastTeam($user->getId());
 
 			// On crée le FormBuilder grâce au service form factory

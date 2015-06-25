@@ -28,7 +28,7 @@ class TeamRepository extends EntityRepository
         	-> andWhere('u.id = :idUser')
              -> setParameter('idUser', $idUser)
              -> orderBy('u.created','DESC')
-             -> first()
+             ->getFirstResult()
              ;
         return $qb ;    
     }

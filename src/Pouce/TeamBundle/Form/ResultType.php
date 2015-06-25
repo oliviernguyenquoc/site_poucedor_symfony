@@ -5,6 +5,7 @@ namespace Pouce\TeamBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\DataTransformer\IntegerToLocalizedStringTransformer;
 
 use Pouce\TeamBundle\Entity\Result;
 
@@ -26,11 +27,13 @@ class ResultType extends AbstractType
                 'required'    => true
             ))
             ->add('isValid', 'checkbox', array(
-                'required'    => true
+                'required'    => true,
+                'label'=> false
             ))
             ->add('lateness','number', array(
                 'precision' => 0,
-                'rounding_mode' => IntegerToLocalizedStringTransformer::ROUND_UP
+                'rounding_mode' => IntegerToLocalizedStringTransformer::ROUND_UP,
+                'label'=> false
             ))
             ;
     }
