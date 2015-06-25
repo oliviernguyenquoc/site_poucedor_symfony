@@ -53,7 +53,7 @@ class TeamType extends AbstractType
                     return $er-> getAllUsersInSchool($schoolId,$userYear);
                 },
                 'required'  => true,
-                "multiple" => true,
+                "multiple" => false,
             ))
             ;
     }
