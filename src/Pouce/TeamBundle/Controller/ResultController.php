@@ -32,18 +32,16 @@ class ResultController extends Controller
 			// On crée le FormBuilder grâce au service form factory
 		    $form = $this->get('form.factory')->create(new ResultType(), $result);
 
-		    if ($request->getMethod() == 'POST') {
-			    if ($form->handleRequest($request)->isValid()) {
+		    if ($form->handleRequest($request)->isValid()) {
 
-					$em = $this->getDoctrine()->getManager();
-					$result->setTeam($team);
-					$em->persist($result);
-					$em->flush();
+				$em = $this->getDoctrine()->getManager();
+				$result->setTeam($team);
+				$em->persist($result);
+				$em->flush();
 
-					$request->getSession()->getFlashBag()->add('notice', 'Résultat bien enregistrée.');
+				$request->getSession()->getFlashBag()->add('notice', 'Résultat bien enregistrée.');
 
-					return $this->redirect($this->generateUrl('pouce_site_homepage'));
-				}
+				return $this->redirect($this->generateUrl('pouce_site_homepage'));
 			}
 
 			$user = $this->getUser();

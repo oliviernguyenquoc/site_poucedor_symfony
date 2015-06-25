@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Team
  *
- * @ORM\Table()
+ * @ORM\Table(name="team")
  * @ORM\Entity(repositoryClass="Pouce\TeamBundle\Entity\TeamRepository")
  */
 class Team
