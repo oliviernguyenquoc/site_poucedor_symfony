@@ -27,7 +27,6 @@ class ResultType extends AbstractType
                 'required'    => true
             ))
             ->add('isValid', 'checkbox', array(
-                'required'    => true,
                 'label'=> false
             ))
             ->add('lateness','number', array(

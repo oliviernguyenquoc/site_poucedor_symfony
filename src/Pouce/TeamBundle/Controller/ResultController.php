@@ -17,8 +17,6 @@ class ResultController extends Controller
   		$haveAResult = false; // TODO : Need to be replaced by a request
   		$haveAComment = false; // TODO : Need to be replaced by a request
 
-  		//exit(\Doctrine\Common\Util\Debug::dump($isUserUpdated));
-
   		//On vérifie si la personne a déjà une équipe
   		if($hasATeam)
   		{
@@ -30,14 +28,16 @@ class ResultController extends Controller
 		  	$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
 		  	$team=$repository->getLastTeam($user->getId());
 
+		  	$result = new Result();
 			// On crée le FormBuilder grâce au service form factory
-		    $form = $this->get('form.factory')->create(new ResultType($team));
+		    $form = $this->get('form.factory')->create(new ResultType(), $result);
 
 		    if ($request->getMethod() == 'POST') {
 			    if ($form->handleRequest($request)->isValid()) {
 
 					$em = $this->getDoctrine()->getManager();
-
+					$result->setTeam($team);
+					$em->persist($result);
 					$em->flush();
 
 					$request->getSession()->getFlashBag()->add('notice', 'Résultat bien enregistrée.');
@@ -57,7 +57,7 @@ class ResultController extends Controller
   		else
   		{
   			$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
-
+			exit(\Doctrine\Common\Util\Debug::dump($result));
 			return $this->redirect($this->generateUrl('pouce_user_addinformations'));
   		}
   		
