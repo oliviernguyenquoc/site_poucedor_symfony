@@ -54,4 +54,25 @@ class UserController extends Controller
 	    );
 	}
 
+	public function showMainPage()
+	{
+		$user=$this->$getUser();
+		$isUserUpdated=checkUserAdditionnalInformations($user);
+
+		if(!$isUserUpdated){
+			//Gerer les espaces selon les profils de l'utilisateur en Symfony
+		}
+	}
+
+	public function checkUserAdditionnalInformations($user)
+	{
+		$isUserUpdated =	(null != $user->getFirstName()) &&
+							(null != $user->getLastName()) &&
+							(null != $user->getSex()) &&
+							(null != $user->getPromotion()) &&
+							(null != $user->getTelephone());
+
+		return $isUserUpdated;
+	}
+
 }

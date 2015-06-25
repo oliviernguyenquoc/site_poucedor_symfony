@@ -6,14 +6,32 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Pouce\UserBundle\Entity\User;
+use Pouce\UserBundle\Entity\School;
+
 class TeamType extends AbstractType
 {
+    private $schoolId, $userYear;
+
+    public function __construct( School $school, User $user)
+    {
+        $userYear=$user->getLastLogin()->format('Y');
+        $schoolId=$school->getId();
+
+        $this->schoolId = $schoolId;
+        $this->userYear = $userYear;
+    }
+
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $schoolId = $this->schoolId;
+        $userYear = $this->userYear;
+
         $builder
             ->add('teamName', 'text', array(
                 'label'=> 'Nom de l\'équipe',
@@ -27,8 +45,17 @@ class TeamType extends AbstractType
                 'required'    => true,
                 'label' => 'Un commentaire'
             ))
-            //->add('users', 'collection', array('type' => new UserSelectionType(),))
-        ;
+            ->add('users','entity', array(
+                'class'=>'PouceUserBundle:User',
+                'label' => 'Co-équipié',
+                'property'=>'first_name',
+                'query_builder' => function(\Pouce\UserBundle\Entity\UserRepository $er) use($schoolId,$userYear) {
+                    return $er-> getAllUsersInSchool($schoolId,$userYear);
+                },
+                'required'  => true,
+                "multiple" => true,
+            ))
+            ;
     }
     
     /**
