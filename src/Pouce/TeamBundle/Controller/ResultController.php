@@ -2,10 +2,9 @@
 
 namespace Pouce\TeamBundle\Controller;
 
-use Pouce\TeamBundle\Entity\Team;
+use Pouce\TeamBundle\Entity\Result;
 use Pouce\UserBundle\Entity\User;
-use Pouce\TeamBundle\Form\TeamType;
-use Pouce\UserBundle\Form\UserType;
+use Pouce\TeamBundle\Form\ResultType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,45 +22,56 @@ class TeamController extends Controller
   		//On vérifie si la personne a déjà une équipe
   		if($hasATeam)
   		{
-  			// On regarde si la deuxième partie de son profil est remplit
-  			if($haveAResult)
-	  		{
-		  		$form = self::createResult($request);
+			/* ***************************************************
+				Creer le formulaire de destination
+			*************************************************** */
+
+		  	$user=$this->getUser();
+		  	$repository = $this->getDoctrine()->getRepository('Pouce:UserBundle:User');
+		  	$team=$repository->getLastTeam($user->getId());
+
+			// On crée le FormBuilder grâce au service form factory
+		    $form = $this->get('form.factory')->create(new ResultType($team));
+
+		    if ($request->getMethod() == 'POST') {
+			    if ($form->handleRequest($request)->isValid()) {
+
+					$em = $this->getDoctrine()->getManager();
+
+					$em->flush();
+
+					$request->getSession()->getFlashBag()->add('notice', 'Résultat bien enregistrée.');
+
+					return $this->redirect($this->generateUrl('pouce_site_homepage'));
+				}
 			}
-			else if($haveAComment){
-				$form = self::createComment($request);
-			}
-			else {
-				self::showResult($request);
-			}
+
+			$user = $this->getUser();
+
+		    // On passe la méthode createView() du formulaire à la vue
+		    // afin qu'elle puisse afficher le formulaire toute seule
+		    return $this->render('PouceTeamBundle:Team:addResult.html.twig', array(
+		      'resultForm' => $form->createView(),
+		    ));
   		}
   		else
   		{
-  			return $this->render('PouceTeamBundle:Team:hasATeam.html.twig');
+  			$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
+
+			return $this->redirect($this->generateUrl('pouce_user_addinformations'));
   		}
   		
 	}
 
-	/*
-		Creer le formulaire de destination et de commentaire
-	*/
-	private function createResult(Request $request)
-	{
-		// $request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
-
-		// return $this->redirect($this->generateUrl('pouce_user_addinformations'));
-	}
 
 	/*
 		Creer le formulaire de commentaire sans la partie sur la destination (car déj)à remplit)
 	*/
-	private function createComment(Request $request)
+	public function createCommentAction(Request $request)
 	{
- 		// On crée un objet Advert
-	    $team = new Team();
 
 	    // On crée le FormBuilder grâce au service form factory
-	    $form = $this->get('form.factory')->create(new TeamType(), $team);
+	    $form = $this->get('form.factory')->create(new CommentType());
 
 	    if ($request->getMethod() == 'POST') {
 		    if ($form->handleRequest($request)->isValid()) {
@@ -70,7 +80,9 @@ class TeamController extends Controller
 
 		      $request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
 
-		      return $this->redirect('PouceSiteBundle:Site:index.html.twig');
+		      	    return $this->render('PouceTeamBundle:Team:addComment.html.twig', array(
+				      'resultForm' => $form->createView(),
+				    ));
 		    }
 		}
 
@@ -80,8 +92,9 @@ class TeamController extends Controller
 	/*
 		Affiche juste la partie destination et commentaires (car déjà tout deux remplit)
 	*/
-	private function showResult(Request $request)
+	public function showResultAction(Request $request)
 	{
-
-	}
+  	    return $this->render('PouceTeamBundle:Team:showResult.html.twig', array(
+	      'result' => $result,
+	    ));	}
 }
