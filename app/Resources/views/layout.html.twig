@@ -63,20 +63,22 @@
 		</nav>
 	</div>
 
-	<div id="content" class="span9">
+	<div class="container" id="content" class="span9">
 		{% block body %}
 		{% endblock %} 
 	</div>
 
-	<div class="footer-copyright">
-    	<div class="container">
-			<!-- 
-				Site internet : Olivier : olivier.nguyen-quoc@eleves.ec-nantes.fr
-				WebMaster 2013-2014 : Olivier : olivier.nguyen-quoc@eleves.ec-nantes.fr				
-			-->
-			Le Pouce d'Or - <a href="{{ path('pouce_site_organisateurs') }}">Page des organisateurs</a> - Contact : <a href="mailto:staff@poucedor.fr?Subject=ContactSiteWeb">Organisateurs</a>
-    	</div>
-    </div>
+	<footer>
+		<div class="footer-copyright">
+			<div class="container">
+				<!-- 
+					Site internet : Olivier : olivier.nguyen-quoc@eleves.ec-nantes.fr
+					WebMaster 2013-2014 : Olivier : olivier.nguyen-quoc@eleves.ec-nantes.fr				
+				-->
+				Le Pouce d'Or - <a href="{{ path('pouce_site_organisateurs') }}">Page des organisateurs</a> - Contact : <a href="mailto:staff@poucedor.fr?Subject=ContactSiteWeb">Organisateurs</a>
+			</div>
+		</div>
+    </footer>
 		
 	</body>
 </html>

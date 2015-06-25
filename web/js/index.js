@@ -21,4 +21,5 @@ $('#index-banner').scrollSpy();
 
 $( document ).ready(function(){
 	$('#navbar').css('position', 'absolute');
+	$('#content').removeClass("container");
 });
