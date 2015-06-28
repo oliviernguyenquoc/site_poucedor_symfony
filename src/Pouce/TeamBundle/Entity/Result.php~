@@ -35,9 +35,16 @@ class Result
     private $team;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="distance", type="float")
+     */
+    private $distance;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text", nullable=true)
+     * @ORM\Column(name="comment", type="text")
      */
     private $comment;
 
@@ -56,7 +63,7 @@ class Result
     private $isValid;
 
     /**
-     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Position", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Position")
      * @ORM\JoinColumn(nullable=false)
     */
     private $position;
@@ -70,6 +77,29 @@ class Result
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set distance
+     *
+     * @param float $distance
+     * @return Result
+     */
+    public function setDistance($distance)
+    {
+        $this->distance = $distance;
+
+        return $this;
+    }
+
+    /**
+     * Get distance
+     *
+     * @return float 
+     */
+    public function getDistance()
+    {
+        return $this->distance;
     }
 
     /**
@@ -185,28 +215,5 @@ class Result
     public function getTeam()
     {
         return $this->team;
-    }
-
-    /**
-     * Set position
-     *
-     * @param \Pouce\TeamBundle\Entity\Position $position
-     * @return Result
-     */
-    public function setPosition(\Pouce\TeamBundle\Entity\Position $position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * Get position
-     *
-     * @return \Pouce\TeamBundle\Entity\Position 
-     */
-    public function getPosition()
-    {
-        return $this->position;
     }
 }

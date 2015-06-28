@@ -35,6 +35,11 @@ class TeamRepository extends EntityRepository
 		$qb = $this -> getAllTeamsInEdition($idEdition)
 					-> where('s.id = :idEcole')
 					 ->setParameter('idEcole', $idEcole);
+	}public function getAllTeamsBySchool($idEdition, $idEcole)
+	{
+		$qb = $this -> getAllTeamsInEdition($idEdition)
+					-> where('s.id = :idEcole')
+					 ->setParameter('idEcole', $idEcole);
 	}
 
 	/*
@@ -44,4 +49,15 @@ class TeamRepository extends EntityRepository
 
 		Puis il faut gerer les redondances de classement 
 	*/
+
+	
+	public function getLastTeam($idUser)
+	{
+        $qb = $this -> createQueryBuilder('t')
+                    -> leftJoin('t.users','u', 'WITH', 'u.id = :idUser')
+                    -> setParameter('idUser', $idUser)
+                    -> orderBy('u.created','DESC')
+             ;
+        return $qb->getQuery()->getSingleResult() ;    
+	}
 }

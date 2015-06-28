@@ -48,6 +48,7 @@ class TeamController extends Controller
 
 				    	$team->addUser($user);
 				    	$team->setFinishRegister(false);
+				    	$team->setEdition($user->getEdition());
 
 						$em = $this->getDoctrine()->getManager();
 						$em->persist($team);

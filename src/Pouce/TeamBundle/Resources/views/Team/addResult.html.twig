@@ -1,0 +1,34 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block body %}
+
+	<h3>Rentre le résultat de ta course</h3>
+
+	<form method="post" {{ form_enctype(resultForm) }} action="{{ path('pouce_result_add')}}">
+
+		{# Les erreurs générales du formulaire. #}
+		{{ form_errors(resultForm) }}
+
+		<p>
+			Blablabla
+		</p>
+
+			<h4>Votre destination</h4>
+
+			<p>
+				Destination la plus loin atteinte : {{ form_row(resultForm.position.town) }}, {{ form_row(resultForm.position.country) }}
+				Avez-vous réussit à revenir en stop ? : {{ form_row(resultForm.isValid) }}
+				Êtes-vous arrivé à temps ? : <input type="checkbox">
+				De combien de temps étiez-vous en retard ? : {{ form_row(resultForm.lateness) }}
+			</p>
+
+		{{ form_rest(resultForm) }}
+
+		<input type="submit" class="btn btn-primary" /> 
+	</form>
+
+{% endblock %}

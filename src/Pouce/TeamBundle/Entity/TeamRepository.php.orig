@@ -12,7 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class TeamRepository extends EntityRepository
 {
-<<<<<<< HEAD
 	// To get all informations for the ranking
 	public function getAllTeamsInEdition($idEdition)
 	{
@@ -38,6 +37,7 @@ class TeamRepository extends EntityRepository
 					 ->setParameter('idEcole', $idEcole);
 	}
 
+<<<<<<< HEAD
 	/*
 		TODO : Dans la vue, il faut afficher chaque résultat de la requette
 		team par team. Puis appliquer un filtre, si l'on veut faire des classements
@@ -46,13 +46,14 @@ class TeamRepository extends EntityRepository
 		Puis il faut gerer les redondances de classement 
 	*/
 =======
-	public function getAllTeam()
-	{
-		$qb = $this -> createQueryBuilder('t')
-					-> join('t.users', 'u')
-					-> addSelect('u');
-	
-		return $qb;
-	}
->>>>>>> e1bc145341c143eb38769ef2fccf228677d2d440
+	public function getLastTeam($idUser)
+    {
+        $qb = $this -> createQueryBuilder('t')
+                    -> leftJoin('t.users','u', 'WITH', 'u.id = :idUser')
+                    -> setParameter('idUser', $idUser)
+                    -> orderBy('u.created','DESC')
+             ;
+        return $qb->getQuery()->getSingleResult() ;    
+    }
+>>>>>>> 736746ebcd2226eca7a59950ef70be6430ec373d
 }
