@@ -41,10 +41,6 @@ class ResultController extends Controller
 				$result->setEdition($team->getEdition());
 				$result->setTeam($team);
 
-
-				$em->persist($result);
-				//$em->flush();
-
 				// Ajout d'un point dans la base de données et liasion résultat <-> Point
     			$trajet = $this->container->get('pouce_team.trajet');
     			$town=$form->get('position')->get('town')->getData();
@@ -55,8 +51,12 @@ class ResultController extends Controller
 
 				//Calcule du trajet
     			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
-    			
-    			exit(\Doctrine\Common\Util\Debug::dump($distance));
+    			$result->getPosition()->setDistance($distance);
+
+    			//Enregistrement
+    			$em->persist($result);
+				$em->flush();
+
 
 				$request->getSession()->getFlashBag()->add('notice', 'Résultat bien enregistrée.');
 

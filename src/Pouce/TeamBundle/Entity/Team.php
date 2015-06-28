@@ -66,7 +66,6 @@ class Team
      */
     private $finishRegister;
 
-
     /**
      * @var datetime $created
      *
