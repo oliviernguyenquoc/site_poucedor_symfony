@@ -8,10 +8,12 @@
 
 	<h3>Raconte ton aventure</h3>
 
-	<form>
-	  <textarea class="js-st-instance"></textarea>
+	<form method="post" name="form" action="{{ path('pouce_comment_create')}}">
+	  <textarea name="aventureForm" id="form_name"class="js-st-instance"></textarea>
+	  <input type="submit" /> 
 	</form>
 
+	{# {{form(form)}} #}
 
 	<script>
 	  new SirTrevor.Editor({ el: $('.js-st-instance') });

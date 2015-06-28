@@ -2,6 +2,7 @@
 
 namespace Pouce\TeamBundle\Controller;
 
+use Pouce\TeamBundle\Entity\Anecdote;
 use Pouce\TeamBundle\Entity\Result;
 use Pouce\UserBundle\Entity\User;
 use Pouce\TeamBundle\Form\ResultType;
@@ -84,8 +85,31 @@ class ResultController extends Controller
 	*/
 	public function createCommentAction(Request $request)
 	{
+		$comment= new Anecdote();
 
-	    return $this->render('PouceTeamBundle:Team:createComment.html.twig');
+		// On crée le FormBuilder grâce au service form factory
+	    $formBuilder = $this->get('form.factory')->createBuilder('form', $comment);
+
+	    // On ajoute les champs de l'entité que l'on veut à notre formulaire
+	    $formBuilder
+	      ->add('name',   'textarea', array(
+	      		'attr'=> 	array(	'class'=>'js-st-instance',
+	      							'name'=>'aventureForm'      			
+	      					)
+	      	))
+	    ;
+	    // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
+
+	    // À partir du formBuilder, on génère le formulaire
+	    $form = $formBuilder->getForm();
+
+		if($request->getMethod() == 'POST'){
+			exit(\Doctrine\Common\Util\Debug::dump($_POST));
+			//$request->request->get('blocks', '{}'), true);
+		}
+	    return $this->render('PouceTeamBundle:Team:createComment.html.twig', array(
+	    	'form'=>$form->createView(),
+	    	));
 	}
 
 	/*
