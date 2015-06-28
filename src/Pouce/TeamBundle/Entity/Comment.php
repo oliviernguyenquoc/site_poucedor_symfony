@@ -7,12 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Anecdote
+ * Comment
  *
- * @ORM\Table(name="anecdote")
- * @ORM\Entity(repositoryClass="Pouce\TeamBundle\Entity\AnecdoteRepository")
+ * @ORM\Table(name="comment")
+ * @ORM\Entity(repositoryClass="Pouce\TeamBundle\Entity\CommentRepository")
  */
-class Anecdote
+class Comment
 {
     /**
      * @var integer
@@ -30,14 +30,11 @@ class Anecdote
     private $team;
 
     /**
-     * @var string
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
-     * @Assert\Length(min="3")
+     * @var json_array
      *
-     * @ORM\Column(name="name", type="string", length=500)
+     * @ORM\Column(name="block", type="json_array")
      */
-    private $name;
+    private $block;
 
     /**
      * @var datetime $created
@@ -67,33 +64,10 @@ class Anecdote
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Anecdote
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * Set created
      *
      * @param \DateTime $created
-     * @return Anecdote
+     * @return Comment
      */
     public function setCreated($created)
     {
@@ -116,7 +90,7 @@ class Anecdote
      * Set updated
      *
      * @param \DateTime $updated
-     * @return Anecdote
+     * @return Comment
      */
     public function setUpdated($updated)
     {
@@ -139,7 +113,7 @@ class Anecdote
      * Set team
      *
      * @param \Pouce\TeamBundle\Entity\Team $team
-     * @return Anecdote
+     * @return Comment
      */
     public function setTeam(\Pouce\TeamBundle\Entity\Team $team)
     {
@@ -156,5 +130,28 @@ class Anecdote
     public function getTeam()
     {
         return $this->team;
+    }
+
+    /**
+     * Set block
+     *
+     * @param array $block
+     * @return Comment
+     */
+    public function setBlock($block)
+    {
+        $this->block = $block;
+
+        return $this;
+    }
+
+    /**
+     * Get block
+     *
+     * @return array 
+     */
+    public function getBlock()
+    {
+        return $this->block;
     }
 }
