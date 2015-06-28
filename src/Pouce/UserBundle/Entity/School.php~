@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 
  * @ORM\Table(name="school")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Pouce\UserBundle\Entity\SchoolRepository")
  */
 class School
 {
@@ -41,7 +42,63 @@ class School
     private $sigle;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\Edition", inversedBy="editions", cascade={"persist"})
+     * @var string
+     *
+     * @ORM\Column(name="town", type="string", length=255)
+     */
+    private $town;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255)
+     */
+    private $country;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="region", type="string", length=255)
+     */
+    private $region;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adress", type="string", length=255)
+     */
+    private $adress;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="postalCode", type="integer")
+     */
+    private $postalCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telephone", type="string", length=255)
+     */
+    private $telephone;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longitude", type="float")
+     */
+    private $longitude;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="latitude", type="float")
+     */
+    private $latitude;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Pouce\SiteBundle\Entity\Edition", inversedBy="editions")
      */
     private $editions;
 
@@ -131,5 +188,159 @@ class School
     public function getAutoriseInscription()
     {
         return $this->autoriseInscription;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->editions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Add editions
+     *
+     * @param \Pouce\SiteBundle\Entity\Edition $editions
+     * @return School
+     */
+    public function addEdition(\Pouce\SiteBundle\Entity\Edition $editions)
+    {
+        $this->editions[] = $editions;
+
+        return $this;
+    }
+
+    /**
+     * Remove editions
+     *
+     * @param \Pouce\SiteBundle\Entity\Edition $editions
+     */
+    public function removeEdition(\Pouce\SiteBundle\Entity\Edition $editions)
+    {
+        $this->editions->removeElement($editions);
+    }
+
+    /**
+     * Get editions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEditions()
+    {
+        return $this->editions;
+    }
+
+    /**
+     * Set town
+     *
+     * @param string $town
+     * @return School
+     */
+    public function setTown($town)
+    {
+        $this->town = $town;
+
+        return $this;
+    }
+
+    /**
+     * Get town
+     *
+     * @return string 
+     */
+    public function getTown()
+    {
+        return $this->town;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     * @return School
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string 
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param float $longitude
+     * @return School
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return float 
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param float $latitude
+     * @return School
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return float 
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
     }
 }

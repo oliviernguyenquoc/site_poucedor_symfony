@@ -5,3 +5,15 @@ pouce_team_homepage:
 pouce_team_add:
     path:     /add
     defaults: { _controller: PouceTeamBundle:Team:addTeam }
+
+pouce_result_add:
+    path:   /result/add
+    defaults: { _controller: PouceTeamBundle:Result:addResult }
+
+pouce_result_show:
+    path:   /result/show
+    defaults: { _controller: PouceTeamBundle:Result:showResult }
+
+pouce_result_show:
+    path:   /result/createComment
+    defaults: { _controller: PouceTeamBundle:Result:createComment }

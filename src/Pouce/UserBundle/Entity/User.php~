@@ -10,13 +10,15 @@ use Symfony\Component\Validator\Constraints AS Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="Pouce\UserBundle\Entity\UserRepository")
  */
 class User extends BaseUser
 {
     /**
      * @ORM\ManyToOne(targetEntity="Pouce\UserBundle\Entity\School")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="school_id", referencedColumnName="id", nullable=false)
+     *
      */
     private $school;
 
@@ -28,34 +30,40 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Entrez votre nom.")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Entrez votre prénom.", groups={"updateRegistration"})
      */
     protected $first_name;
 
     /*
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Entrez votre prénom.")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Entrez votre nom de famille.", groups={"updateRegistration"})
      */
     protected $last_name;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Entrez votre sexe.")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Entrez votre sexe.", groups={"updateRegistration"})
+     * @Assert\Choice({"Homme", "Femme"})
      */
     protected $sex;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Entrez votre promotion.")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Entrez votre promotion.", groups={"updateRegistration"})
      */
     protected $promotion;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Entrez votre numéro de téléphone.")
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank(message="Entrez votre numéro de téléphone.", groups={"updateRegistration"})
      */
     protected $telephone;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Pouce\TeamBundle\Entity\Team", mappedBy="users")
+     */
+    private $teams;
 
     /**
      * @var datetime $created
@@ -64,6 +72,15 @@ class User extends BaseUser
      * @ORM\Column(type="datetime")
      */
     private $created;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
 
     /**
      * Get id
@@ -78,12 +95,12 @@ class User extends BaseUser
     /**
      * Set first_name
      *
-     * @param string $firstName
+     * @param string $first_name
      * @return User
      */
-    public function setFirstName($firstName)
+    public function setFirstName($first_name)
     {
-        $this->first_name = $firstName;
+        $this->first_name = $first_name;
 
         return $this;
     }
@@ -101,24 +118,24 @@ class User extends BaseUser
     /**
      * Set last_name
      *
-     * @param string $firstName
+     * @param string $last_name
      * @return User
      */
-    public function setLastName($firstName)
+    public function setLastName($last_name)
     {
-        $this->first_name = $firstName;
+        $this->last_name = $last_name;
 
         return $this;
     }
 
     /**
-     * Get first_name
+     * Get last_name
      *
      * @return string 
      */
     public function getLastName()
     {
-        return $this->first_name;
+        return $this->last_name;
     }
 
 
@@ -191,6 +208,16 @@ class User extends BaseUser
         return $this->telephone;
     }
 
+    // A peut être utiliser en cas de bug
+    // public function setEmail($email)
+    // {
+    //     if (is_null($this->getUsername())) {
+    //         $this->setUsername(uniqid());
+    //     }
+
+    //     return parent::setEmail($email);
+    // }
+
     /**
      * Set created
      *
@@ -212,6 +239,28 @@ class User extends BaseUser
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 
     public function setSchool(School $school)

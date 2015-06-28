@@ -15,7 +15,7 @@ class RegistrationFormType extends AbstractType
     {
         parent::buildForm($builder, $options);
 
-        $year=2015;
+        $year=2015; // TODO : Change to this year
         
         // add your custom field
         $builder

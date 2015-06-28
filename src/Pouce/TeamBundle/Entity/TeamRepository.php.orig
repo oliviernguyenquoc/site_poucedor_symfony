@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class TeamRepository extends EntityRepository
 {
+<<<<<<< HEAD
 	// To get all informations for the ranking
 	public function getAllTeamsInEdition($idEdition)
 	{
@@ -28,8 +29,8 @@ class TeamRepository extends EntityRepository
                     -> orderBy('r.distance','DESC');
 
 		return $qb ;					
-	}	
-	
+	}
+
 	public function getAllTeamsBySchool($idEdition, $idEcole)
 	{
 		$qb = $this -> getAllTeamsInEdition($idEdition)
@@ -44,15 +45,24 @@ class TeamRepository extends EntityRepository
 
 		Puis il faut gerer les redondances de classement 
 	*/
-	
-	public function getLastTeam($idUser)    
+=======
+	public function getAllTeam()
 	{
-	        $qb = $this -> createQueryBuilder('t')
-	                    -> leftJoin('t.users','u', 'WITH', 'u.id = :idUser')
-	                    -> setParameter('idUser', $idUser)
-	                    -> orderBy('u.created','DESC')
-	             ;
-	        return $qb->getQuery()->getSingleResult() ;    
-    	}
+		$qb = $this -> createQueryBuilder('t')
+					-> join('t.users', 'u')
+					-> addSelect('u');
+	
+		return $qb;
+	}
 
+	public function getLastTeam($idUser)
+    {
+        $qb = $this -> createQueryBuilder('t')
+                    -> leftJoin('t.users','u', 'WITH', 'u.id = :idUser')
+                    -> setParameter('idUser', $idUser)
+                    -> orderBy('u.created','DESC')
+             ;
+        return $qb->getQuery()->getSingleResult() ;    
+    }
+>>>>>>> 736746ebcd2226eca7a59950ef70be6430ec373d
 }

@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints AS Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="Pouce\UserBundle\Entity\UserRepository")
  */
 class User extends BaseUser
 {
@@ -60,12 +61,26 @@ class User extends BaseUser
     protected $telephone;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Pouce\TeamBundle\Entity\Team", mappedBy="users")
+     */
+    private $teams;
+
+    /**
      * @var datetime $created
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $created;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
 
     /**
      * Get id
@@ -226,6 +241,28 @@ class User extends BaseUser
         return $this->created;
     }
 
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
     public function setSchool(School $school)
     {
     $this->school = $school;
@@ -236,5 +273,47 @@ class User extends BaseUser
     public function getSchool()
     {
     return $this->school;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->teams = new ArrayCollection();
+    }
+
+    /**
+     * Add teams
+     *
+     * @param \Pouce\TeamBundle\Entity\Team $teams
+     * @return User
+     */
+    public function addTeam(\Pouce\TeamBundle\Entity\Team $teams)
+    {
+        $this->teams[] = $teams;
+        $teams->addUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param \Pouce\TeamBundle\Entity\Team $teams
+     */
+    public function removeTeam(\Pouce\TeamBundle\Entity\Team $teams)
+    {
+        $this->teams->removeElement($teams);
+        $teams->setUser(null);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 }

@@ -20,6 +20,16 @@ class UserRepository extends EntityRepository
                     -> where('YEAR(u.lastLogin) = :userYear')
                      ->setParameter('userYear', $userYear)
                     -> join('u.school','s')
+<<<<<<< HEAD
+                    -> addSelect('s')
+                    -> where('s.id = :id')
+                     ->setParameter('id', $id)
+                    -> join('u.teams', 't')
+                    -> addSelect('t')
+                    -> where('u.teams IS NULL')
+                    -> join();
+
+=======
                     -> andWhere('s.id = :idSchool')
                      -> setParameter('idSchool', $idSchool)
                     -> leftJoin('u.teams', 't')
@@ -29,6 +39,7 @@ class UserRepository extends EntityRepository
                     // Exclure le user courant
                     // Exclure les users avec une équipe déja inscrite
                      ;
+>>>>>>> 736746ebcd2226eca7a59950ef70be6430ec373d
 		return $qb ;					
 	}
 }
