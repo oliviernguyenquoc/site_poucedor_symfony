@@ -152,8 +152,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
-	exports.isEmpty = __webpack_require__(52);
-	exports.isFunction = __webpack_require__(53);
+	exports.isEmpty = __webpack_require__(53);
+	exports.isFunction = __webpack_require__(52);
 	exports.isObject = __webpack_require__(54);
 	exports.isString = __webpack_require__(55);
 	exports.isUndefined = __webpack_require__(56);
@@ -3939,8 +3939,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <http://lodash.com/license>
 	 */
+
+	/**
+	 * Checks if `value` is a function.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Objects
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if the `value` is a function, else `false`.
+	 * @example
+	 *
+	 * _.isFunction(_);
+	 * // => true
+	 */
+	function isFunction(value) {
+	  return typeof value == 'function';
+	}
+
+	module.exports = isFunction;
+
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
+	 * Build: `lodash modularize modern exports="npm" -o ./npm/`
+	 * Copyright 2012-2013 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.5.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <http://lodash.com/license>
+	 */
 	var forOwn = __webpack_require__(82),
-	    isFunction = __webpack_require__(53);
+	    isFunction = __webpack_require__(52);
 
 	/** `Object#toString` result shortcuts */
 	var argsClass = '[object Arguments]',
@@ -3994,39 +4027,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = isEmpty;
-
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
-	 * Build: `lodash modularize modern exports="npm" -o ./npm/`
-	 * Copyright 2012-2013 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.5.2 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <http://lodash.com/license>
-	 */
-
-	/**
-	 * Checks if `value` is a function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Objects
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if the `value` is a function, else `false`.
-	 * @example
-	 *
-	 * _.isFunction(_);
-	 * // => true
-	 */
-	function isFunction(value) {
-	  return typeof value == 'function';
-	}
-
-	module.exports = isFunction;
 
 
 /***/ },
@@ -4162,7 +4162,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <http://lodash.com/license>
 	 */
-	var isFunction = __webpack_require__(53);
+	var isFunction = __webpack_require__(52);
 
 	/**
 	 * Resolves the value of property `key` on `object`. If `key` is a function
@@ -13487,7 +13487,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <http://lodash.com/license>
 	 */
-	var htmlEscapes = __webpack_require__(150);
+	var htmlEscapes = __webpack_require__(149);
 
 	/**
 	 * Used by `escape` to convert characters to HTML entities.
@@ -13515,7 +13515,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <http://lodash.com/license>
 	 */
-	var htmlEscapes = __webpack_require__(149),
+	var htmlEscapes = __webpack_require__(150),
 	    keys = __webpack_require__(87);
 
 	/** Used to match HTML entities and HTML characters */
@@ -16133,7 +16133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	var baseBind = __webpack_require__(178),
 	    baseCreateWrapper = __webpack_require__(179),
-	    isFunction = __webpack_require__(53),
+	    isFunction = __webpack_require__(52),
 	    slice = __webpack_require__(170);
 
 	/**
