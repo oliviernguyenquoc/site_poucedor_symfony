@@ -85,23 +85,7 @@ class ResultController extends Controller
 	public function createCommentAction(Request $request)
 	{
 
-	    // On crée le FormBuilder grâce au service form factory
-	    $form = $this->get('form.factory')->create(new CommentType());
-
-	    if ($request->getMethod() == 'POST') {
-		    if ($form->handleRequest($request)->isValid()) {
-		      $em = $this->getDoctrine()->getManager();
-		      $em->flush();
-
-		      $request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
-
-		      	    return $this->render('PouceTeamBundle:Team:addComment.html.twig', array(
-				      'resultForm' => $form->createView(),
-				    ));
-		    }
-		}
-
-		return $form;
+	    return $this->render('PouceTeamBundle:Team:createComment.html.twig');
 	}
 
 	/*
