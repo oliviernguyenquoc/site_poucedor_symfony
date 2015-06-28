@@ -34,36 +34,10 @@ class Result
     */
     private $team;
 
-
-    /**
-     * @var string
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(name="town", type="string", length=255)
-     */
-    private $town;
-
-    /**
-     * @var string
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(name="country", type="string", length=255)
-     */
-    private $country;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="distance", type="float")
-     */
-    private $distance;
-
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
 
@@ -81,6 +55,12 @@ class Result
      */
     private $isValid;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Position", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $position;
+
 
     /**
      * Get id
@@ -90,75 +70,6 @@ class Result
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set town
-     *
-     * @param string $town
-     * @return Result
-     */
-    public function setTown($town)
-    {
-        $this->town = $town;
-
-        return $this;
-    }
-
-    /**
-     * Get town
-     *
-     * @return string 
-     */
-    public function getTown()
-    {
-        return $this->town;
-    }
-
-    /**
-     * Set country
-     *
-     * @param string $country
-     * @return Result
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return string 
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * Set distance
-     *
-     * @param float $distance
-     * @return Result
-     */
-    public function setDistance($distance)
-    {
-        $this->distance = $distance;
-
-        return $this;
-    }
-
-    /**
-     * Get distance
-     *
-     * @return float 
-     */
-    public function getDistance()
-    {
-        return $this->distance;
     }
 
     /**
@@ -274,5 +185,28 @@ class Result
     public function getTeam()
     {
         return $this->team;
+    }
+
+    /**
+     * Set position
+     *
+     * @param \Pouce\TeamBundle\Entity\Position $position
+     * @return Result
+     */
+    public function setPosition(\Pouce\TeamBundle\Entity\Position $position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return \Pouce\TeamBundle\Entity\Position 
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

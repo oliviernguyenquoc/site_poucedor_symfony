@@ -24,12 +24,10 @@ class TeamRepository extends EntityRepository
 	public function getLastTeam($idUser)
     {
         $qb = $this -> createQueryBuilder('t')
-        	-> leftJoin('t.users','u')
-        	-> andWhere('u.id = :idUser')
-             -> setParameter('idUser', $idUser)
-             -> orderBy('u.created','DESC')
-             ->getFirstResult()
+                    -> leftJoin('t.users','u', 'WITH', 'u.id = :idUser')
+                    -> setParameter('idUser', $idUser)
+                    -> orderBy('u.created','DESC')
              ;
-        return $qb ;    
+        return $qb->getQuery()->getSingleResult() ;    
     }
 }

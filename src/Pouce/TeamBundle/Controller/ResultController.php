@@ -36,15 +36,32 @@ class ResultController extends Controller
 
 				$em = $this->getDoctrine()->getManager();
 				$result->setTeam($team);
+				$result->getPosition()->setTeam($team);
+				$result->getPosition()->setEdition($team->getEdition());
+				$result->setEdition($team->getEdition());
+				$result->setTeam($team);
+
+
 				$em->persist($result);
-				$em->flush();
+				//$em->flush();
+
+				// Ajout d'un point dans la base de données et liasion résultat <-> Point
+    			$trajet = $this->container->get('pouce_team.trajet');
+    			$town=$form->get('position')->get('town')->getData();
+    			$country=$form->get('position')->get('country')->getData();
+    			$arrivee=$trajet->location($town,$country);
+    			$longArrivee=$arrivee[0]["lon"];
+    			$latArrivee=$arrivee[0]["lat"];
+
+				//Calcule du trajet
+    			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+    			
+    			exit(\Doctrine\Common\Util\Debug::dump($distance));
 
 				$request->getSession()->getFlashBag()->add('notice', 'Résultat bien enregistrée.');
 
 				return $this->redirect($this->generateUrl('pouce_site_homepage'));
 			}
-
-			$user = $this->getUser();
 
 		    // On passe la méthode createView() du formulaire à la vue
 		    // afin qu'elle puisse afficher le formulaire toute seule

@@ -7,9 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\DataTransformer\IntegerToLocalizedStringTransformer;
 
-use Pouce\TeamBundle\Entity\Result;
+use Pouce\TeamBundle\Entity\Position;
 
-class ResultType extends AbstractType
+class PositionType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,15 +18,13 @@ class ResultType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('position',      new PositionType())
-            ->add('isValid', 'checkbox', array(
-                'label'     => false,
-                'required'  => false
+            ->add('town', 'text', array(
+                'label'     => 'Ville',
+                'required'  => true
             ))
-            ->add('lateness','number', array(
-                'precision'     => 0,
-                'rounding_mode' => IntegerToLocalizedStringTransformer::ROUND_UP,
-                'label'         => false
+            ->add('country','text', array(
+                'label'     => 'Pays',
+                'required'  => true
             ))
             ;
     }
@@ -37,7 +35,7 @@ class ResultType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Pouce\TeamBundle\Entity\Result'
+            'data_class' => 'Pouce\TeamBundle\Entity\Position'
         ));
     }
 
@@ -46,6 +44,6 @@ class ResultType extends AbstractType
      */
     public function getName()
     {
-        return 'pouce_teambundle_result';
+        return 'pouce_teambundle_position';
     }
 }

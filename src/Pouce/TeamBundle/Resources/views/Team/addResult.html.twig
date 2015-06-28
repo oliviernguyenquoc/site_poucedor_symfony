@@ -8,7 +8,7 @@
 
 	<h3>Rentre le résultat de ta course</h3>
 
-	<form method="post" {{ form_enctype(resultForm) }} action="{{ path('pouce_team_add')}}">
+	<form method="post" {{ form_enctype(resultForm) }} action="{{ path('pouce_result_add')}}">
 
 		{# Les erreurs générales du formulaire. #}
 		{{ form_errors(resultForm) }}
@@ -20,7 +20,7 @@
 			<h4>Votre destination</h4>
 
 			<p>
-				Destination la plus loin atteinte : {{ form_row(resultForm.town) }}, {{ form_row(resultForm.country) }}
+				Destination la plus loin atteinte : {{ form_row(resultForm.position.town) }}, {{ form_row(resultForm.position.country) }}
 				Avez-vous réussit à revenir en stop ? : {{ form_row(resultForm.isValid) }}
 				Êtes-vous arrivé à temps ? : <input type="checkbox">
 				De combien de temps étiez-vous en retard ? : {{ form_row(resultForm.lateness) }}
