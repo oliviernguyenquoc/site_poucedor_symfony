@@ -10,6 +10,10 @@ pouce_result_add:
     path:   /result/add
     defaults: { _controller: PouceTeamBundle:Result:addResult }
 
+pouce_comment_create:
+    path:   /comment/create
+    defaults: { _controller: PouceTeamBundle:Result:createComment }
+
 pouce_result_show:
     path:   /result/show
     defaults: { _controller: PouceTeamBundle:Result:showResult }
