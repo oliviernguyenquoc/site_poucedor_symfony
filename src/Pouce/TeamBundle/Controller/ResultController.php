@@ -109,13 +109,13 @@ class ResultController extends Controller
 			$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
 			$team=$repository->getLastTeam($user->getId());
 			$comment->setTeam($team);
-			$comment->setBlock($_POST);
+			$comment->setBlock($_POST['aventureForm']);
 
 			//Enregistrement
-			$em->persist($comment);
-			$em->flush();
+			// $em->persist($comment);
+			// $em->flush();
 
-			exit(\Doctrine\Common\Util\Debug::dump($_POST));
+			exit(\Doctrine\Common\Util\Debug::dump($_POST['aventureForm']));
 		}
 	    return $this->render('PouceTeamBundle:Team:createComment.html.twig', array(
 	    	'form'=>$form->createView(),
