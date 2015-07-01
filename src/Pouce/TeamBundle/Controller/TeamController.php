@@ -5,6 +5,7 @@ namespace Pouce\TeamBundle\Controller;
 use Pouce\TeamBundle\Entity\Team;
 use Pouce\UserBundle\Entity\User;
 use Pouce\TeamBundle\Form\TeamType;
+use Pouce\TeamBundle\Form\TeamEditType;
 use Pouce\UserBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,5 +79,36 @@ class TeamController extends Controller
   		return $this->redirect('PouceSiteBundle:Site:index.html.twig');
 	}
 
+
+	public function editTeamAction($id, Request $request)
+  	{
+  		$em = $this->getDoctrine()->getEntityManager();
+  		$team = $em -> getRepository('PouceTeamBundle:Team')->find($id);
+
+  		//Des variables pour le formType
+	    $user = $this->getUser();
+
+        $school =$user->getSchool();
+
+  		$form = $this->get('form.factory')->create(new TeamEditType($school,$user), $team);
+
+  		// $form->setData($editTeam);
+
+  		if($request->getMethod() == 'POST') {
+  			$form->bind($request);
+
+  			if($form->isValid()){
+  				//On enregistre la team
+  				$em->persist($team);
+  				$em->flush();
+
+  				return $this->redirect($this->generateUrl('pouce_site_homepage'));
+  			}
+  		}
+  		return $this->render('PouceTeamBundle:Team:editTeam.html.twig', array(
+			      'teamForm' => $form->createView(),
+			      'id' => $id
+			    ));
+  	}
 
 }

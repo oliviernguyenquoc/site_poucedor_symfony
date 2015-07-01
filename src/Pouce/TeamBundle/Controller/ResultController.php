@@ -8,6 +8,8 @@ use Pouce\UserBundle\Entity\User;
 use Pouce\TeamBundle\Form\ResultType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+// Add a use statement to be able to use the class
+use Sioen\Converter;
 
 class ResultController extends Controller
 {
@@ -109,13 +111,15 @@ class ResultController extends Controller
 			$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
 			$team=$repository->getLastTeam($user->getId());
 			$comment->setTeam($team);
-			$comment->setBlock($_POST['aventureForm']);
+			$comment->setBlock($_FILES);
 
 			//Enregistrement
 			// $em->persist($comment);
 			// $em->flush();
 
-			exit(\Doctrine\Common\Util\Debug::dump($_POST['aventureForm']));
+			exit(\Doctrine\Common\Util\Debug::dump($request->isXmlHttpRequest()));
+
+			//exit(\Doctrine\Common\Util\Debug::dump($_POST['aventureForm']));
 		}
 	    return $this->render('PouceTeamBundle:Team:createComment.html.twig', array(
 	    	'form'=>$form->createView(),
@@ -125,9 +129,29 @@ class ResultController extends Controller
 	/*
 		Affiche juste la partie destination et commentaires (car déjà tout deux remplit)
 	*/
-	public function showResultAction(Request $request)
+	public function showResultAction($id)
 	{
+		$repositoryComment = $this
+		  ->getDoctrine()
+		  ->getManager()
+		  ->getRepository('PouceTeamBundle:Comment')
+		;
+
+		$repositoryResult = $this
+		  ->getDoctrine()
+		  ->getManager()
+		  ->getRepository('PouceTeamBundle:Result')
+		;
+
+		$comment = $repositoryComment->findOneByTeam($id);
+		$result = $repositoryResult->findOneByTeam($id);
+
+  	    // create a converter object and handle the input
+		$converter = new Converter();
+		$html = $converter->toHtml($comment->getBlock());
+
   	    return $this->render('PouceTeamBundle:Team:showResult.html.twig', array(
-	      'result' => $result,
+	      'html'	=> $html,
+	      'result' 	=> $result
 	    ));	}
 }

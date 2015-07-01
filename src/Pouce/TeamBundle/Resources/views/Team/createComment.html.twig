@@ -18,5 +18,25 @@
 	<script>
 	  new SirTrevor.Editor({ el: $('.js-st-instance') });
 	</script>
+	<script>
+	$(function() {
+		SirTrevor.DEBUG = true;
+		var form = $('#post-form');
+	 
+		new SirTrevor.Editor({
+			el: $('#st-content'),
+			blockTypes: [
+				"Text",
+				"Video",
+				"Image"
+			],
+			defaultType: "Text",
+		});
+	 
+		SirTrevor.setDefaults({
+			uploadUrl: "/upload"
+		});
+	});
+	</script>
 
 {% endblock %}
