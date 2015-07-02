@@ -12,23 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class TeamRepository extends EntityRepository
 {
-	public function getAllTeam()
-	{
-		$qb = $this -> createQueryBuilder('t')
-					-> join('t.users', 'u')
-					-> addSelect('u');
 	
-		return $qb;
-	}
+	public function getLastTeam($idUser)    
+	{
+	        $qb = $this -> createQueryBuilder('t')
+	                    -> leftJoin('t.users','u', 'WITH', 'u.id = :idUser')
+	                    -> setParameter('idUser', $idUser)
+	                    -> orderBy('u.created','DESC')
+                        ->setMaxResults(1)
+	             ;
+	        return $qb->getQuery()->getSingleResult() ;    
+    	}
 
-	public function getLastTeam($idUser)
-    {
-        $qb = $this -> createQueryBuilder('t')
-                    -> leftJoin('t.users','u', 'WITH', 'u.id = :idUser')
-                    -> setParameter('idUser', $idUser)
-                    -> orderBy('u.created','DESC')
-                    ->setMaxResults(1)
-             ;
-        return $qb->getQuery()->getSingleResult() ;    
-    }
 }
