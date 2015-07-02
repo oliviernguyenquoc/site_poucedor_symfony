@@ -281,6 +281,7 @@ class User extends BaseUser
      */
     public function __construct()
     {
+        parent::__construct();
         $this->teams = new ArrayCollection();
     }
 
