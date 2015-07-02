@@ -92,8 +92,6 @@ class TeamController extends Controller
 
   		$form = $this->get('form.factory')->create(new TeamEditType($school,$user), $team);
 
-  		// $form->setData($editTeam);
-
   		if($request->getMethod() == 'POST') {
   			$form->bind($request);
 

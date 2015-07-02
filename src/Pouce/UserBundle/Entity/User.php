@@ -6,7 +6,9 @@ namespace Pouce\UserBundle\Entity;
 use Gedmo\Mapping\Annotation as Gedmo; // this will be like an alias for Gedmo extensions annotations
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints AS Assert;
+
 
 /**
  * @ORM\Entity
