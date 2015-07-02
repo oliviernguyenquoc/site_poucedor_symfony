@@ -61,6 +61,12 @@ class Result
     */
     private $position;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="rank", type="integer")
+     */
+    private $rank;
 
     /**
      * Get id
@@ -208,5 +214,28 @@ class Result
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * Set rank
+     *
+     * @param integer $rank
+     * @return Result
+     */
+    public function setRank($rank)
+    {
+        $this->rank = $rank;
+
+        return $this;
+    }
+
+    /**
+     * Get rank
+     *
+     * @return integer 
+     */
+    public function getRank()
+    {
+        return $this->rank;
     }
 }

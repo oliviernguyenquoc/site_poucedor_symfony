@@ -15,20 +15,29 @@
 	  <th>km</th>
 	  <th>Ville de départ</th>
 	</tr>
-
-	{# if teams  isset  #} {# // TO CHANGE #}
-		{% for team in teams  %}
+	{# if results  isset  #} {# // TO CHANGE #}
+		{% for result in results  %}
 			<tr>
-				<td>{{team.rank}}</td>
-				<td>{{team.teamName}}</td>
+				<td>{{result.rank}}</td>
+				<td>{{result.team.teamName}}</td>
 				<td>
-					{% for user in team.users %}
-						{{team.user.name}}
+					{% for user in result.team.users %}
+						{# {{user.first_name}} {{user.last_name}} //PROTECTED VALUES #}
+						{% if loop.first %}
+							et
+						{% endif %}
 					{% endfor %}
 				</td>
-				<td>{{team.town}}, {{team.country}}</td>
-				<td>{{team.distance}}</td>
-				<td>{{team.townDeparture}}, {{team.countryDeparture}}</td>
+				<td>{{result.position.town}}, {{result.position.country}}</td>
+				<td>{{result.position.distance}} km</td>
+				<td>
+					{% for user in result.team.users %}
+						{% if loop.first %}
+							{{user.school.town}}, {{user.school.country}}
+						{% endif %}
+					{% endfor %}
+					
+				</td>
 			</tr>
 		{% endfor %}
 	{# endif #}

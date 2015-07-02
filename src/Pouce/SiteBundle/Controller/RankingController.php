@@ -12,23 +12,30 @@ class RankingController extends Controller
     {
         $repository = $this ->getDoctrine() 
                             ->getManager()
-                            ->getRepository('PouceTeamBundle:Team');
+                            ->getRepository('PouceTeamBundle:Result');
 
-        $teams= $repository->getAllTeamsInEdition($idEdition);
+        $results= $repository->getAllResultsInEdition((int)$idEdition);
+
+        self::rankingCalculus($results);
+
+        //exit(\Doctrine\Common\Util\Debug::dump($users));
         
         return $this->render('PouceSiteBundle:Site:ranking.html.twig', array(
-          'teams' => $teams,
+          'results' => $results,
         ));
     }
 
     //Recalcule toutes les rangs et stock les nouvelles valeurs dans la base de données 
-    private function rankingCalculus($teams){
+    private function rankingCalculus($results){
         $rang=0;
         $rangAdd=0;
         $ancienneDistance=0;
-        while($team)
+
+        $em = $this->getDoctrine()->getManager();
+
+        foreach($results as $result)
         {
-            if($team->getDistance()!=$ancienneDistance)
+            if($result->getPosition()->getDistance()!=$ancienneDistance)
             {
                 $rang+=1;
                 $rang+=$rangAdd;
@@ -38,8 +45,12 @@ class RankingController extends Controller
             {
                 $rangAdd+=1;
             }
-            $ancienneDistance=$team->getDistance();
-            }
+            $result->setRank($rang);
+            $em ->persist($result);
+            $ancienneDistance=$result->getPosition()->getDistance();
+        }
+
+        $em->flush();
 
     }
 }
