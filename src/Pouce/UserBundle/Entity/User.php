@@ -37,7 +37,7 @@ class User extends BaseUser
      */
     protected $first_name;
 
-    /*
+    /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank(message="Entrez votre nom de famille.", groups={"updateRegistration"})
      */

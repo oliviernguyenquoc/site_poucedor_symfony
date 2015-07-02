@@ -55,6 +55,8 @@ class ResultController extends Controller
 				//Calcule du trajet
     			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
     			$result->getPosition()->setDistance($distance);
+    			$result->getPosition()->setLongitude($longArrivee);
+    			$result->getPosition()->setLatitude($latArrivee);
 
     			//Enregistrement
     			$em->persist($result);

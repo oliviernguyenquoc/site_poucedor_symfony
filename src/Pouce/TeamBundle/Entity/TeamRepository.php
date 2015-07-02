@@ -27,6 +27,7 @@ class TeamRepository extends EntityRepository
                     -> leftJoin('t.users','u', 'WITH', 'u.id = :idUser')
                     -> setParameter('idUser', $idUser)
                     -> orderBy('u.created','DESC')
+                    ->setMaxResults(1)
              ;
         return $qb->getQuery()->getSingleResult() ;    
     }
