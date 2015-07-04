@@ -1,0 +1,29 @@
+{# src/Sdz/BlogBundle/Resources/views/Blog/index.html.twig #}
+
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{% block site_body %}
+
+
+	<div class="fotorama" 
+		data-allowfullscreen="true" 
+		data-nav="thumbs"
+		data-arrows="true"
+	    data-click="true"
+	    data-swipe="true"
+	    data-width="100%"
+     	data-ratio="800/600"
+     	data-maxwidth= "600">
+
+		{% for image in imageArray %}
+			<img src="{{ asset(image.url) }}">
+		{% endfor %}
+	</div>
+
+
+	<!-- fotorama.css & fotorama.js. -->
+<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
+
+
+{% endblock %}

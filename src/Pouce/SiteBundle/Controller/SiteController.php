@@ -50,6 +50,35 @@ class SiteController extends Controller
     {
         return $this->render('PouceSiteBundle:Site:records.html.twig');
     }
+    public function galeryAction($year)
+    {
+        $dir = $this->get('kernel')->getRootDir(). '/../web/photos/' . $year;
+        //$fulldir = "{$_SERVER['DOCUMENT_ROOT']}"."$dir";
+        $d = scandir($dir) or die('Failed opening directory for reading');
+
+        foreach ($d as $keyDirectory => $directory1) 
+        {
+            if(is_dir($dir . '/' . $directory1)) 
+            {
+                $directory2 = scandir($dir . '/' . $directory1);
+                foreach ($directory2 as $key => $imageName) 
+                {
+                    if(is_file($dir . '/' . $directory1 . '/' . $imageName) and $imageName[0] != '.')
+                    {
+                        $imageArray[] = array(
+                        "url" => 'photos/' . $year . '/' . $directory1 . '/' . $imageName
+                        );
+                    }
+                }
+            }
+        }
+            
+
+
+        return $this->render('PouceSiteBundle:Site:galery.html.twig', array(
+          'imageArray'    => $imageArray
+        ));
+    }
     // TODO : Create the menu
     // public function menuAction($page)
     // {

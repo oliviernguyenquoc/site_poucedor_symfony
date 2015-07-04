@@ -96,3 +96,9 @@ body {
 }
 	
 a.twitter-timeline{text-align: center}
+
+/***************************************************
+        Gallery
+***************************************************/
+
+.fotorama__wrap { margin: auto; }
