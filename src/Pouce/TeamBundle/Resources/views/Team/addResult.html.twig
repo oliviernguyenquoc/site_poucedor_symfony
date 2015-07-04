@@ -1,5 +1,7 @@
 {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
 
+{% form_theme resultForm 'PouceTeamBundle:Form:fields.html.twig' %}
+
 {# On étend notre layout #}
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
@@ -20,9 +22,25 @@
 			<h4>Votre destination</h4>
 
 			<p>
-				Destination la plus loin atteinte : {{ form_row(resultForm.position.town) }}, {{ form_row(resultForm.position.country) }}
-				Avez-vous réussit à revenir en stop ? : {{ form_row(resultForm.isValid) }}
-				Êtes-vous arrivé à temps ? : <input type="checkbox">
+				Destination la plus loin atteinte : {{ form_row(resultForm.position.town) }}, 
+				Pays :
+				{{ form_widget(resultForm.position.country) }}
+				Avez-vous réussit à revenir en stop ? : 
+				<div class="switch">
+					<label>
+				    	Non {{ form_widget(resultForm.isValid) }}
+				    	<span class="lever"></span>
+				    	Oui
+				    </label>
+				</div>
+				Êtes-vous arrivé à temps ? : 
+				<div class="switch">
+					<label>
+				    	Non <input type="checkbox"> {# {{ form_widget(resultForm.isValid) }} #}
+				    	<span class="lever"></span>
+				    	Oui
+				    </label>
+				</div>
 				De combien de temps étiez-vous en retard ? : {{ form_row(resultForm.lateness) }}
 			</p>
 
@@ -30,5 +48,11 @@
 
 		<input type="submit" class="btn btn-primary" /> 
 	</form>
+
+	<script>
+		$(document).ready(function() {
+	    	$('select').material_select();
+		});
+	</script>
 
 {% endblock %}
