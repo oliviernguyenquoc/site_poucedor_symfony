@@ -78,16 +78,34 @@
 		{% endblock %} 
 	</div>
 
-	<footer>
-		<div class="footer-copyright">
-			<div class="container">
-				<!-- 
-					Site internet : Olivier : olivier.nguyen-quoc@eleves.ec-nantes.fr
-					WebMaster 2013-2014 : Olivier : olivier.nguyen-quoc@eleves.ec-nantes.fr				
+	<footer class="page-footer">
+      	<div class="container">
+	        <div class="row">
+	          	<div class="col l6 s12">
+	            	<h5 class="white-text">Nous contacter</h5>
+	            	<p class="grey-text text-lighten-4">Vous pouvez nous contacter par mail ou sur notre page Facebook. Nous essayerons de vous répondre au plus vite.</p>
+	            	<p>Contact : <a href="mailto:staff@poucedor.fr?Subject=ContactSiteWeb">Organisateurs</a></p>
+	          	</div>
+	          	<div class="col l4 offset-l2 s12">
+	            	<h5 class="white-text">Liens utiles</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="{{ path('pouce_site_organisateurs') }}">Les organisateurs</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+	          	</div>
+	        </div>
+	    </div>
+	    <div class="footer-copyright">
+	        <div class="container">
+	        	<!-- 
+					Site internet : Olivier : olivier.nguyen-quoc@eleves.ec-nantes.fr			
 				-->
-				Le Pouce d'Or - <a href="{{ path('pouce_site_organisateurs') }}">Page des organisateurs</a> - Contact : <a href="mailto:staff@poucedor.fr?Subject=ContactSiteWeb">Organisateurs</a>
-			</div>
-		</div>
+		        © 2015 Le Pouce d'Or
+		        <a class="grey-text text-lighten-4 right" href="{{ path('pouce_site_organisateurs') }}">Page des organisateurs</a>
+	        </div>
+      	</div>
     </footer>
 		
 	</body>
