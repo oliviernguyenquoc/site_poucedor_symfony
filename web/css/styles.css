@@ -29,9 +29,14 @@ p {
   height: 100vh;
   color: #26a69a;
 }
-  .parallax-container .section {
-    width: 100%;
-  }
+
+.fp-tableCell {
+  display: block;
+}
+  
+.parallax-container .section {
+  width: 100%;
+}
 
 /*@media only screen and (max-width : 992px) {
   .parallax-container .section {
@@ -50,17 +55,10 @@ p {
 }
 */
 
-.icon-block {
-  padding: 0 15px;
-}
-
 footer.page-footer {
   margin: 0;
 }
 
-h1.header{
-  margin-top: 2em;
-}
 
 body {
   background-color: #ebeff2;
@@ -71,8 +69,10 @@ body {
         index
 ***************************************************/
 
+
 #content3blocks {
   height: 100vh;
+  width:90%;
   margin-top: 20px;
 }
 
