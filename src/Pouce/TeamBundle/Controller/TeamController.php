@@ -109,4 +109,14 @@ class TeamController extends Controller
 			    ));
   	}
 
+  	public function nextRaceAction()
+  	{
+  		return $this->render('PouceUserBundle:User:informationsRequest.html.twig');
+  	}
+
+  	public function previousRaceAction()
+  	{
+  		return $this->render('PouceUserBundle:User:informationsRequest.html.twig');
+  	}
+
 }

@@ -54,15 +54,34 @@ class UserController extends Controller
 	    );
 	}
 
-	public function showMainPage()
+	public function showMainPageAction()
 	{
-		$user=$this->$getUser();
-		$isUserUpdated=checkUserAdditionnalInformations($user);
+		$user=$this->getUser();
+		
+		return $this->render('PouceUserBundle:User:mainpage.html.twig', array(
+	    	'user' 	=> $user
+	    ));
 
-		if(!$isUserUpdated){
-			//Gerer les espaces selon les profils de l'utilisateur en Symfony
-		}
 	}
+
+	public function informationsAction()
+  	{
+  		$user=$this->getUser();
+  		$isUserUpdated= self::checkUserAdditionnalInformations($user);
+
+  		if($isUserUpdated)
+  		{
+  			return $this->render('PouceUserBundle:User:informationsUser.html.twig', array(
+		    	'user' 	=> $user
+		    ));
+  		}
+  		else
+  		{
+  			return $this->render('PouceUserBundle:User:informationsRequest.html.twig', array(
+		    	'user' 	=> $user
+		    ));
+  		}
+  	}
 
 	public function checkUserAdditionnalInformations($user)
 	{
