@@ -19,6 +19,7 @@
             <li>Identification Page</li>
             <li>Register Page (Inscription)</li>
             <li>Galery</li>
+            <li>Position form (Mobile optimization)</li>
         </ul>
     </p>
 
@@ -27,7 +28,8 @@
     <p>
         <ul>
             <li>Give your story form (import and save images blocks)</li>
-            <li>Edit forms</li> 
+            <li>Edit forms</li>
+            <li>User page</li>
         </ul>
     </p>
 
@@ -35,18 +37,20 @@
     
     <p>
         <ul>
-            <li>User page</li>
             <li>Menus</li>
-            <li>Position form (Mobile optimization)</li>
             <li>Admin pages</li>
             <li>Acceptation of groups</li> 
             <li>Process Improvements</li> 
         </ul>
     </p>
 
-    <h3>Licence</h3>
+    <h3>License</h3>
     <p>
-        This code have been created and own by Olivier NGUYEN QUOC.
+        This website have been created and is owned by Olivier NGUYEN QUOC.
+
+        No rights permission given including rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software without an authorisation of the owner.
+
+        All technologies used are under MIT license or BSD license.
     </p>
 </article>
 </div>
