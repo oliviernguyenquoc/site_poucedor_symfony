@@ -5,7 +5,9 @@ namespace Pouce\TeamBundle\Controller;
 use Pouce\TeamBundle\Entity\Comment;
 use Pouce\TeamBundle\Entity\Result;
 use Pouce\UserBundle\Entity\User;
+use Pouce\TeamBundle\Entity\Position;
 use Pouce\TeamBundle\Form\ResultType;
+use Pouce\TeamBundle\Form\PositionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 // Add a use statement to be able to use the class
@@ -42,11 +44,10 @@ class ResultController extends Controller
 				$result->getPosition()->setTeam($team);
 				$result->getPosition()->setEdition($team->getEdition());
 				$result->setEdition($team->getEdition());
-				$result->setTeam($team);
 
-				// Ajout d'un point dans la base de données et liasion résultat <-> Point
+				// Ajout d'un point dans la base de données et liaison résultat <-> Point
     			$trajet = $this->container->get('pouce_team.trajet');
-    			$town=$form->get('position')->get('town')->getData();
+    			$town=$form->get('position')->get('city')->getData();
     			$country=$form->get('position')->get('country')->getData();
     			$arrivee=$trajet->location($town,$country);
     			$longArrivee=$arrivee[0]["lon"];
@@ -155,5 +156,49 @@ class ResultController extends Controller
   	    return $this->render('PouceTeamBundle:Team:showResult.html.twig', array(
 	      'html'	=> $html,
 	      'result' 	=> $result
-	    ));	}
+	    ));	
+  	}
+
+  	public function addPositionAction(Request $request)
+  	{
+  		$user=$this->getUser();
+		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
+		$team=$repository->getLastTeam($user->getId());
+
+  		$position= new Position();
+
+		/// On crée le FormBuilder grâce au service form factory
+		$form = $this->get('form.factory')->create(new PositionType(), $position);
+
+		if ($form->handleRequest($request)->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+
+			$position->setTeam($team);
+			$position->setEdition($team->getEdition());
+
+			// Ajout d'un point dans la base de données et liaison résultat <-> Point
+			$trajet = $this->container->get('pouce_team.trajet');
+			$town=$form->get('city')->getData();
+			$country=$form->get('country')->getData();
+			$arrivee=$trajet->location($town,$country);
+			$longArrivee=$arrivee[0]["lon"];
+			$latArrivee=$arrivee[0]["lat"];
+
+			//Calcule du trajet
+			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+			$result->setDistance($distance);
+			$result->setLongitude($longArrivee);
+			$result->setLatitude($latArrivee);
+
+			//Enregistrement
+			$em->persist($comment);
+			$em->flush();
+
+			return $this->redirect($this->generateUrl('pouce_site_homepage'));
+		}
+	    return $this->render('PouceTeamBundle:Team:addPosition.html.twig', array(
+	    	'form'=>$form->createView(),
+	    	));
+  	}
+
 }

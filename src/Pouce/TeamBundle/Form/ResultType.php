@@ -17,15 +17,19 @@ class ResultType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        for($i=1;$i<=48;$i++)
+        { 
+            $choix[] = $i . ' h'; 
+        }
+        $choix[] = '> 48 h';
         $builder
             ->add('position',      new PositionType())
             ->add('isValid', 'checkbox', array(
                 'label'     => false,
                 'required'  => false
             ))
-            ->add('lateness','number', array(
-                'precision'     => 0,
-                'rounding_mode' => IntegerToLocalizedStringTransformer::ROUND_UP,
+            ->add('lateness','choice', array(
+                'choices'=> $choix,
                 'label'         => false
             ))
             ;

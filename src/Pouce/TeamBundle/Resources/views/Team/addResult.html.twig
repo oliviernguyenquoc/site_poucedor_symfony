@@ -1,7 +1,5 @@
 {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
 
-{% form_theme resultForm 'PouceTeamBundle:Form:fields.html.twig' %}
-
 {# On étend notre layout #}
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
@@ -22,7 +20,7 @@
 			<h4>Votre destination</h4>
 
 			<p>
-				Destination la plus loin atteinte : {{ form_row(resultForm.position.town) }}, 
+				Destination la plus loin atteinte : {{ form_row(resultForm.position.city) }}, 
 				Pays :
 				{{ form_widget(resultForm.position.country) }}
 				Avez-vous réussit à revenir en stop ? : 

@@ -18,6 +18,7 @@
             <li>Group mechanism</li>
             <li>Identification Page</li>
             <li>Register Page (Inscription)</li>
+            <li>Galery</li>
         </ul>
     </p>
 
@@ -35,7 +36,7 @@
     <p>
         <ul>
             <li>User page</li>
-            <li>Galery</li>
+            <li>Menus</li>
             <li>Position form (Mobile optimization)</li>
             <li>Admin pages</li>
             <li>Acceptation of groups</li> 

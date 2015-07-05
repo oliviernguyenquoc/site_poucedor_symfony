@@ -25,7 +25,7 @@ class PositionType extends AbstractType
                 'required'  => true,
                 'multiple' => false
             ))
-            ->add('town', 'text', array(
+            ->add('city', 'text', array(
                 'label'     => 'Ville',
                 'required'  => true
             ))

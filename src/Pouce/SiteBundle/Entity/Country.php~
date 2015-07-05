@@ -198,4 +198,27 @@ class Country
     {
         return $this->population;
     }
+
+    /**
+     * Set province
+     *
+     * @param string $province
+     * @return Country
+     */
+    public function setProvince($province)
+    {
+        $this->province = $province;
+
+        return $this;
+    }
+
+    /**
+     * Get province
+     *
+     * @return string 
+     */
+    public function getProvince()
+    {
+        return $this->province;
+    }
 }

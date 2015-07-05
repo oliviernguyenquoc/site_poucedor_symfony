@@ -1,0 +1,31 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block body %}
+
+	<h3>Enregistre ta position actuelle</h3>
+
+	<form method="post" {{ form_enctype(form) }} action="{{ path('pouce_position_add')}}">
+
+		{# Les erreurs générales du formulaire. #}
+		{{ form_errors(form) }}
+
+		<p>
+			Vérifiez bien vos informations. Ils nous permetterons de vous suivre pendante toute la durée du concours
+		</p>
+
+		{{ form_widget(form.country) }}
+		{{ form_widget(form.city) }}
+		<input type="submit" class="btn btn-primary" /> 
+	</form>
+
+	<script>
+		$(document).ready(function() {
+	    	$('select').material_select();
+		});
+	</script>
+
+{% endblock %}

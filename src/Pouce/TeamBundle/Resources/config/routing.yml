@@ -21,3 +21,7 @@ pouce_result_show:
 pouce_team_edit:
     path:   /edit/{id}
     defaults: { _controller: PouceTeamBundle:Team:editTeam }
+
+pouce_position_add:
+    path:   /position/add
+    defaults: { _controller: PouceTeamBundle:Result:addPosition }

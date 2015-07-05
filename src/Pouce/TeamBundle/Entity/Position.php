@@ -23,10 +23,19 @@ class Position
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Pouce\SiteBundle\Entity\City")
-     * @ORM\JoinColumn(nullable=false)
+     * @var string
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     *
+     * @ORM\Column(name="city", type="string", length=255)
     */
     private $city;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Pouce\SiteBundle\Entity\Country")
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $country;
 
     /**
      * @var float
@@ -46,6 +55,24 @@ class Position
      * @ORM\JoinColumn(nullable=false)
     */
     private $edition;
+
+    /**
+     * @var float
+     * @Assert\Range(min=-180)
+     * @Assert\Range(max=180)
+     *
+     * @ORM\Column(name="longitude", type="float", nullable=true)
+     */
+    private $longitude;
+
+    /**
+     * @var float
+     * @Assert\Range(min=-90)
+     * @Assert\Range(max=90)
+     *
+     * @ORM\Column(name="latitude", type="float", nullable=true)
+     */
+    private $latitude;
 
 
     /**
@@ -128,13 +155,14 @@ class Position
         return $this->edition;
     }
 
+
     /**
      * Set city
      *
-     * @param \Pouce\SiteBundle\Entity\City $city
+     * @param string $city
      * @return Position
      */
-    public function setCity(\Pouce\SiteBundle\Entity\City $city)
+    public function setCity($city)
     {
         $this->city = $city;
 
@@ -144,10 +172,79 @@ class Position
     /**
      * Get city
      *
-     * @return \Pouce\SiteBundle\Entity\City 
+     * @return string 
      */
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \Pouce\SiteBundle\Entity\Country $country
+     * @return Position
+     */
+    public function setCountry(\Pouce\SiteBundle\Entity\Country $country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \Pouce\SiteBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param float $longitude
+     * @return Position
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return float 
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param float $latitude
+     * @return Position
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return float 
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
     }
 }
