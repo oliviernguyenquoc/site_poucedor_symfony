@@ -2,7 +2,11 @@
 
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
-{% block site_body %}
+{% block stylesheets %}
+	<link href="{{ asset('css/index.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
 
 	<div id="fullpage">
 		<div id="index-banner" class="section parallax-container">

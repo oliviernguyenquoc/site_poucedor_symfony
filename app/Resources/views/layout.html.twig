@@ -51,6 +51,8 @@
 	<script src="{{ asset('js/materialize.min.js') }}"></script>
 	<script src="{{ asset('js/init.js') }}"></script>
 
+	{% block stylesheets %}{% endblock %}
+
 </head>
 	<body>
 	<div id="top" class="scrollspy">
@@ -73,10 +75,8 @@
 		</nav>
 	</div>
 
-	<div class="container" id="content" class="span9">
-		{% block body %}
-		{% endblock %} 
-	</div>
+	{% block body %}
+	{% endblock %} 
 
 	<footer class="page-footer">
       	<div class="container">

@@ -1,8 +1,4 @@
 $( document ).ready(function(){
-	$('#navbar').css('position', 'absolute');
-	$('#content').removeClass("container");
-	$('.section').css('padding-top','2.5em');
-	$('.header').css('margin-top','2em');
 	$('#fullpage').fullpage(
 	{
 		onLeave: function(index, nextIndex, direction){
