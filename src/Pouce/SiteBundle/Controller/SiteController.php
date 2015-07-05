@@ -50,6 +50,10 @@ class SiteController extends Controller
     {
         return $this->render('PouceSiteBundle:Site:records.html.twig');
     }
+    public function licenceAction()
+    {
+        return $this->render('PouceSiteBundle:Site:licence.html.twig');
+    }
     public function galeryAction($year)
     {
         $dir = $this->get('kernel')->getRootDir(). '/../web/photos/' . $year;

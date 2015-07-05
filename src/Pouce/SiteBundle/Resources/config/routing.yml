@@ -51,3 +51,7 @@ pouce_site_galery:
     path:     /galery/{year}
     defaults: { _controller: PouceSiteBundle:Site:galery, year: 2015 }
     # requirements:
+
+pouce_site_licence:
+    path:     /licence
+    defaults: { _controller: PouceSiteBundle:Site:licence }
