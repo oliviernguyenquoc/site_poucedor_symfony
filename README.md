@@ -43,5 +43,10 @@
             <li>Process Improvements</li> 
         </ul>
     </p>
+
+    <h3>Licence</h3>
+    <p>
+        This code have been created and own by Olivier NGUYEN QUOC.
+    </p>
 </article>
 </div>
