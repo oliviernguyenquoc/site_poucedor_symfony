@@ -1,4 +1,25 @@
+# src/Acme/MainBundle/Resources/config/services.yml
 services:
-#    pouce_site.example:
-#        class: Pouce\SiteBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    # le service de constructeur de menus. Peut servir à créer plusieurs menus
+    pouce_site.menu_builder:
+        class: Pouce\SiteBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+
+    # votre menu
+    pouce_site.menu.main:
+        class: Knp\Menu\MenuItem
+        factory_service: pouce_site.menu_builder # le service du constructeur vu juste au-dessus
+        factory_method: createMainMenu # la méthode appelée pour générer le menu
+        arguments: ["@request"]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: main } # L'alias est utilisé dans le template
+
+    pouce_site.menu.mobile:
+        class: Knp\Menu\MenuItem
+        factory_service: pouce_site.menu_builder # le service du constructeur vu juste au-dessus
+        factory_method: createMobileMenu # la méthode appelée pour générer le menu
+        arguments: ["@request"]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: mobile } # L'alias est utilisé dans le template
