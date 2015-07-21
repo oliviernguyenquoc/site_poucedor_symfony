@@ -64,41 +64,16 @@ body {
   background-color: #ebeff2;
 }
 
-
-/***************************************************
-        index
-***************************************************/
-
-
-#content3blocks {
-  height: 100vh;
-  width:90%;
-  margin-top: 20px;
-}
-
-.videoWrapper {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  padding-top: 25px;
-  height: 0;
-}
-.videoWrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-#top {
-  height: 1px;
-  position: absolute;
-}
-	
-a.twitter-timeline{text-align: center}
-
 /***************************************************
         Gallery
 ***************************************************/
 
 .fotorama__wrap { margin: auto; }
+
+/***************************************************
+        Organisateurs
+***************************************************/
+
+#nomOrganisateur{
+  margin-top: 0px;
+}

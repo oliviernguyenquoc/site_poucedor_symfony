@@ -3,11 +3,30 @@
 ***************************************************/
 
 
-#content3blocks {
+#block3parts {
   height: 100vh;
-  width:90%;
-  margin-top: 20px;
+  width: 90%;
+  margin-top: 2em;
 }
+
+#block2parts {
+  height: 100vh;
+  width: 90%;
+  margin-top: 2em;
+}
+
+#block {
+  height: 100vh;
+  width: 90%;
+  margin-top: 1em;
+}
+
+#blockFooter {
+  height: 200px !important;
+  width: 90%;
+  margin-top: 1em;
+}
+
 
 #top {
   height: 1px;

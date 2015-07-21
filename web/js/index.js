@@ -1,17 +1,22 @@
 $( document ).ready(function(){
 	$('#fullpage').fullpage(
 	{
-		onLeave: function(index, nextIndex, direction){
+		afterLoad: function(anchorLink, index){
 		    var leavingSlide = $(this);
 
-            if(index == 1 && direction == 'down'){
+            if(index != 1){
             	$("#navcolor").attr('class', 'white');
             }
-            if(index == 2 && direction == 'up'){
+            if(index == 1){
             	$("#navcolor").attr('class', 'transparent');
             }
         },
-        //Scrolling
+        
+        onLeave: function(index, nextIndex, direction){
+            if(index == 2 && direction=='up'){
+                $("#navcolor").attr('class', 'transparent');
+            }
+        },
 
         //Accessibility
         keyboardScrolling: true,

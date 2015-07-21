@@ -38,6 +38,7 @@
 	{# MaterializeCSS #}
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/materialize.min.css') }}" media="screen,projection"/>
   	<link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" media="screen,projection"/>
+  	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -81,7 +82,7 @@
 			    {{ knp_menu_render('main') }}
 			    {{ knp_menu_render('mobile') }}
 				{# 	{{ render(controller("PouceSiteBundle:Pouce:menu", {'page':'inscription'})) }} #}
-				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			</div>
 		</nav>
 	</div>
