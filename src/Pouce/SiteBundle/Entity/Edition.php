@@ -28,32 +28,23 @@ class Edition
     private $schools;
 
     /**
-     * @var integer
+     * @var date
      * @Assert\NotBlank()
      * @Assert\NotNull()
      *
-     * @ORM\Column(name="year", type="integer")
+     * @ORM\Column(name="dateOfEvent", type="date")
      */
-    private $year;
+    private $dateOfEvent;
 
     /**
-     * @var integer
+     * @var string
      * @Assert\NotBlank()
      * @Assert\NotNull()
+     * @Assert\Choice({"registering", "finished", "scheduled", "inProgress"})
      *
-     * @ORM\Column(name="month", type="integer")
+     * @ORM\Column(name="status", type="string", length=35)
      */
-    private $month;
-
-    /**
-     * @var integer
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(name="day", type="integer")
-     */
-    private $day;
-
+    private $status;
 
     /**
      * Get id
@@ -65,74 +56,7 @@ class Edition
         return $this->id;
     }
 
-    /**
-     * Set year
-     *
-     * @param integer $year
-     * @return Edition
-     */
-    public function setYear($year)
-    {
-        $this->year = $year;
 
-        return $this;
-    }
-
-    /**
-     * Get year
-     *
-     * @return integer 
-     */
-    public function getYear()
-    {
-        return $this->year;
-    }
-
-    /**
-     * Set month
-     *
-     * @param integer $month
-     * @return Edition
-     */
-    public function setMonth($month)
-    {
-        $this->month = $month;
-
-        return $this;
-    }
-
-    /**
-     * Get month
-     *
-     * @return integer 
-     */
-    public function getMonth()
-    {
-        return $this->month;
-    }
-
-    /**
-     * Set day
-     *
-     * @param integer $day
-     * @return Edition
-     */
-    public function setDay($day)
-    {
-        $this->day = $day;
-
-        return $this;
-    }
-
-    /**
-     * Get day
-     *
-     * @return integer 
-     */
-    public function getDay()
-    {
-        return $this->day;
-    }
     /**
      * Constructor
      */
@@ -173,5 +97,51 @@ class Edition
     public function getSchools()
     {
         return $this->schools;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Edition
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set dateOfEvent
+     *
+     * @param \DateTime $dateOfEvent
+     * @return Edition
+     */
+    public function setDateOfEvent($dateOfEvent)
+    {
+        $this->dateOfEvent = $dateOfEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOfEvent
+     *
+     * @return \DateTime 
+     */
+    public function getDateOfEvent()
+    {
+        return $this->dateOfEvent;
     }
 }

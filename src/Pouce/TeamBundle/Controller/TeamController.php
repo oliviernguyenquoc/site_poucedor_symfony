@@ -13,110 +13,172 @@ use Symfony\Component\HttpFoundation\Request;
 class TeamController extends Controller
 {
 	public function addTeamAction(Request $request)
-  	{
-  		// Check if the user have completed all his informations like first_name, last_name, telephone number ...
-  		$isUserUpdated = (null != $this->getUser()->getFirstName());
+	{
+		// Check if the user have completed all his informations like first_name, last_name, telephone number ...
+		$isUserUpdated = (null != $this->getUser()->getFirstName());
 
-  		//Check if the user have already a team for one of the next edition
-  		$hasATeam = false;
-  		//exit(\Doctrine\Common\Util\Debug::dump($isUserUpdated));
+		//Check if the user have already a team for one of the next edition
+		$hasATeam = false;
+		//exit(\Doctrine\Common\Util\Debug::dump($isUserUpdated));
 
-  		//On vérifie si la personne a déjà une équipe
-  		if(!$hasATeam)
-  		{
-  			// On regarde si la deuxième partie de son profil est remplit
-  			if(!$isUserUpdated)
-	  		{
-		  		$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
+		//On vérifie si la personne a déjà une équipe
+		if(!$hasATeam)
+		{
+			// On regarde si la deuxième partie de son profil est remplit
+			if(!$isUserUpdated)
+			{
+				$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
 
 				return $this->redirect($this->generateUrl('pouce_user_addinformations'));
 			}
 			else{
 
 				// On crée un objet Team
-			    $team = new Team();
+				$team = new Team();
 
-			    //Des variables pour le formType
-			    $user = $this->getUser();
+				//Des variables pour le formType
+				$user = $this->getUser();
 
-		        $school =$user->getSchool();
+				$school =$user->getSchool();
 
-			    // On crée le FormBuilder grâce au service form factory
-			    $form = $this->get('form.factory')->create(new TeamType($school,$user), $team);
+				// On crée le FormBuilder grâce au service form factory
+				$form = $this->get('form.factory')->create(new TeamType($school,$user), $team);
 
-			    if ($request->getMethod() == 'POST') {
-				    if ($form->handleRequest($request)->isValid()) {
+				if ($request->getMethod() == 'POST') {
+					if ($form->handleRequest($request)->isValid()) {
 
-				    	$team->addUser($user);
-				    	$team->setFinishRegister(false);
-				    	$team->setEdition($user->getEdition());
+						$team->addUser($user);
+						$team->setFinishRegister(false);
+						$team->setEdition($user->getEdition());
 
 						$em = $this->getDoctrine()->getManager();
 						$em->persist($team);
-				    	$em->merge($user);
+						$em->merge($user);
 						$em->flush();
 
 						$request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
 
 						return $this->redirect($this->generateUrl('pouce_site_homepage'));
-				    }
+					}
 				}
 
 				$user = $this->getUser();
 
-			    // On passe la méthode createView() du formulaire à la vue
-			    // afin qu'elle puisse afficher le formulaire toute seule
-			    return $this->render('PouceTeamBundle:Team:addTeam.html.twig', array(
-			      'teamForm' => $form->createView(),
-			      'user' => $user,
-			    ));
+				// On passe la méthode createView() du formulaire à la vue
+				// afin qu'elle puisse afficher le formulaire toute seule
+				return $this->render('PouceTeamBundle:Team:addTeam.html.twig', array(
+				  'teamForm' => $form->createView(),
+				  'user' => $user,
+				));
 			}
-  		}
-  		else
-  		{
-  			return $this->render('PouceTeamBundle:Team:hasATeam.html.twig');
-  		}
-  		return $this->redirect('PouceSiteBundle:Site:index.html.twig');
+		}
+		else
+		{
+			return $this->render('PouceTeamBundle:Team:hasATeam.html.twig');
+		}
+		return $this->redirect('PouceSiteBundle:Site:index.html.twig');
 	}
 
 
 	public function editTeamAction($id, Request $request)
-  	{
-  		$em = $this->getDoctrine()->getEntityManager();
-  		$team = $em -> getRepository('PouceTeamBundle:Team')->find($id);
+	{
+		$em = $this->getDoctrine()->getEntityManager();
+		$team = $em -> getRepository('PouceTeamBundle:Team')->find($id);
 
-  		//Des variables pour le formType
-	    $user = $this->getUser();
+		//Des variables pour le formType
+		$user = $this->getUser();
 
-        $school =$user->getSchool();
+		$school =$user->getSchool();
 
-  		$form = $this->get('form.factory')->create(new TeamEditType($school,$user), $team);
+		$form = $this->get('form.factory')->create(new TeamEditType($school,$user), $team);
 
-  		if($request->getMethod() == 'POST') {
-  			$form->bind($request);
+		if($request->getMethod() == 'POST') {
+			$form->bind($request);
 
-  			if($form->isValid()){
-  				//On enregistre la team
-  				$em->persist($team);
-  				$em->flush();
+			if($form->isValid()){
+				//On enregistre la team
+				$em->persist($team);
+				$em->flush();
 
-  				return $this->redirect($this->generateUrl('pouce_site_homepage'));
-  			}
-  		}
-  		return $this->render('PouceTeamBundle:Team:editTeam.html.twig', array(
-			      'teamForm' => $form->createView(),
-			      'id' => $id
-			    ));
-  	}
+				return $this->redirect($this->generateUrl('pouce_site_homepage'));
+			}
+		}
+		return $this->render('PouceTeamBundle:Team:editTeam.html.twig', array(
+				  'teamForm' => $form->createView(),
+				  'id' => $id
+				));
+	}
 
-  	public function nextRaceAction()
-  	{
-  		return $this->render('PouceUserBundle:User:informationsRequest.html.twig');
-  	}
+	public function adaptativeViewAction()
+	{
+		$user = $this->getUser();
 
-  	public function previousRaceAction()
-  	{
-  		return $this->render('PouceUserBundle:User:informationsRequest.html.twig');
-  	}
+		// On récupère le service
+    	$teamService = $this->container->get('pouce_team.team');
+
+		$isThereNextRace = $teamService->isThereNextRace($user);
+
+		// On regarde s'il existe une prochaine édition en cours d'inscrition ou juste prévu
+		if($isThereNextRace)
+		{
+			//On cherche la prochaine edition
+			$em = $this->getDoctrine()->getEntityManager();
+			$id = $em -> getRepository('PouceSiteBundle:Edition')->findNextEditionIdBySchool($user);
+			$edition = $em->getRepository('PouceSiteBundle:Edition')->findById($id);
+
+			$raceStatus=$edition->getStatus();
+
+			// On regarde si la prochaine est dans sa phase inscription
+			if($raceStatus="registering")
+			{
+				// On regarde si le user est inscrit dans une équipe à cette course
+				if($teamService->isRegisterToNextRaceOfItsSchool($user))
+				{
+					return $this->render('PouceUserBundle:User:TeamInformations.html.twig');
+				}
+				else
+				{
+					return $this->render('PouceUserBundle:User:linkToAddTeam.html.twig');
+				}
+			}
+			//La prochaine édition est prévu
+			else if($raceStatus="scheduled")
+			{
+				return $this->render('PouceUserBundle:User:messageAnouncementNextEdition.html.twig');
+			}
+		}
+		else
+		{
+			// Onn regarde si le user a participer a au moins 1 édition
+			if($teamService->isRegisterToPreviousRace($user))
+			{
+				//On 
+				$em = $this->getDoctrine()->getEntityManager();
+				$id = $em -> getRepository('PouceSiteBundle:Edition')->findLastRaceId();
+				$edition = $em->getRepository('PouceSiteBundle:Edition')->findById($id);
+
+				//L'édition est fini, on propose d'entrer ses résultats
+				if($raceStatus="finished")
+				{
+		  			return $this->render('PouceUserBundle:User:linkToResult.html.twig');
+				}
+				// Edition in progress. On propose d'entrer sa position
+				else
+				{
+					return $this->render('PouceUserBundle:User:linkToAddPosition.html.twig');
+				}
+			}
+			// Il n'y a pas de prochaine édition et le user n'a jamais participer. On lui demande de rester au courrant pour la prochaine édition
+			else
+			{
+				return $this->render('PouceUserBundle:User:messageWaitingNextRace.html.twig');
+			}
+		}
+	}
+
+	public function previousRaceAction()
+	{
+		return $this->render('PouceUserBundle:User:informationsRequest.html.twig');
+	}
 
 }

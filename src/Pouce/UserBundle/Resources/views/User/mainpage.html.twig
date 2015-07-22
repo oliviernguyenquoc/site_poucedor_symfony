@@ -10,15 +10,12 @@
         {{ flashMessage }}
     {% endfor %}
 
-    <h2>Vos informations</h2>
-
+    {# Affiche les informations de l'utilisateur #}
     {{ render(controller("PouceUserBundle:User:informations")) }}
 
-    <h2>Information sur la prochaine course</h2>
+    {# Affiche la nouvelle course ou les résultats ou un message pour attendre la prochaine course #}
+    {{ render(controller("PouceTeamBundle:Team:nextRaceOrResult")) }}
 
-    {{ render(controller("PouceTeamBundle:Team:nextRace")) }}
-
-    <h2>Information votre dernière course</h2>
 
     {{ render(controller("PouceTeamBundle:Team:previousRace")) }}
 

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Edition
  *
- * @ORM\Table()
+ * @ORM\Table(name="edition")
  * @ORM\Entity(repositoryClass="Pouce\SiteBundle\Entity\EditionRepository")
  */
 class Edition
@@ -23,37 +23,28 @@ class Edition
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\School", mappedBy="schools", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\School", mappedBy="schools")
      */
     private $schools;
 
     /**
-     * @var integer
+     * @var date
      * @Assert\NotBlank()
      * @Assert\NotNull()
      *
-     * @ORM\Column(name="year", type="integer")
+     * @ORM\Column(name="dateOfEvent", type="date")
      */
-    private $year;
+    private $dateOfEvent;
 
     /**
-     * @var integer
+     * @var string
      * @Assert\NotBlank()
      * @Assert\NotNull()
+     * @Assert\Choice({"Registering", "Finished", "Scheduled"})
      *
-     * @ORM\Column(name="month", type="integer")
+     * @ORM\Column(name="status", type="string", length=35)
      */
-    private $month;
-
-    /**
-     * @var integer
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(name="day", type="integer")
-     */
-    private $day;
-
+    private $status;
 
     /**
      * Get id
@@ -65,72 +56,69 @@ class Edition
         return $this->id;
     }
 
+
     /**
-     * Set year
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->schools = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add schools
      *
-     * @param integer $year
+     * @param \Pouce\UserBundle\Entity\School $schools
      * @return Edition
      */
-    public function setYear($year)
+    public function addSchool(\Pouce\UserBundle\Entity\School $schools)
     {
-        $this->year = $year;
+        $this->schools[] = $schools;
+        $schools->setEdition($this); //Ajout de la génération pour ne pas boucler à l'infinie (SdZ p.215)
+        return $this;
+    }
+
+    /**
+     * Remove schools
+     *
+     * @param \Pouce\UserBundle\Entity\School $schools
+     */
+    public function removeSchool(\Pouce\UserBundle\Entity\School $schools)
+    {
+        $this->schools->removeElement($schools);
+        $school->setEdition(null);
+    }
+
+    /**
+     * Get schools
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSchools()
+    {
+        return $this->schools;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Edition
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * Get year
+     * Get status
      *
-     * @return integer 
+     * @return string 
      */
-    public function getYear()
+    public function getStatus()
     {
-        return $this->year;
-    }
-
-    /**
-     * Set month
-     *
-     * @param integer $month
-     * @return Edition
-     */
-    public function setMonth($month)
-    {
-        $this->month = $month;
-
-        return $this;
-    }
-
-    /**
-     * Get month
-     *
-     * @return integer 
-     */
-    public function getMonth()
-    {
-        return $this->month;
-    }
-
-    /**
-     * Set day
-     *
-     * @param integer $day
-     * @return Edition
-     */
-    public function setDay($day)
-    {
-        $this->day = $day;
-
-        return $this;
-    }
-
-    /**
-     * Get day
-     *
-     * @return integer 
-     */
-    public function getDay()
-    {
-        return $this->day;
+        return $this->status;
     }
 }

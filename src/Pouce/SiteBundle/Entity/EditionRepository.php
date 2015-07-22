@@ -12,4 +12,35 @@ use Doctrine\ORM\EntityRepository;
  */
 class EditionRepository extends EntityRepository
 {
+	public function findNextEditionIdBySchool($user)
+	{
+		$date = new \DateTime('now');
+		$qb = $this	-> createQueryBuilder('e')
+					-> where('e.status != :status')
+                     ->setParameter('status', 'scheduled')
+                    -> andWhere('e.date > :today')
+                     ->setParameter('today', $date)
+                    -> join('e.schools','s')
+                    -> andWhere('s.name = :schoolName')
+                     ->setParameter('schoolName', $user->getSchool()->getName())
+                    -> orderBy('e.date','ASC')
+                    ->setMaxResults(1);
+
+		return $qb->getQuery()->getSingleResult() ;
+	}
+
+	public function findPreviousEditionIdBySchool($user)
+	{
+		$date = new \DateTime('now');
+		$qb = $this	-> createQueryBuilder('e')
+                    -> andWhere('e.date <= :today')
+                     ->setParameter('today', $date)
+                    -> join('e.schools','s')
+                    -> andWhere('s.name = :schoolName')
+                     ->setParameter('schoolName', $user->getSchool()->getName())
+                    -> orderBy('e.date','DESC')
+                    ->setMaxResults(1);
+
+		return $qb->getQuery()->getSingleResult() ;
+	}
 }
