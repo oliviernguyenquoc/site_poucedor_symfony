@@ -25,4 +25,20 @@ class TeamRepository extends EntityRepository
 	        return $qb->getQuery()->getSingleResult() ;    
     	}
 
+    /**
+	*	Retourne l'équipe du user qui concourra à la prochaine éidition
+    */
+    public function findNextRaceTeam($userId)
+    {
+
+    }
+
+    /**
+    * Retourne le coéquipier de la team du user
+    */
+    public function findOtherUserInTeam($userId)
+    {
+
+    }
+
 }

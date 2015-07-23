@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class EditionRepository extends EntityRepository
 {
-	public function findNextEditionIdBySchool($user)
+	public function findNextEditionBySchool($user)
 	{
 		$date = new \DateTime('now');
 		$qb = $this	-> createQueryBuilder('e')
@@ -29,7 +29,7 @@ class EditionRepository extends EntityRepository
 		return $qb->getQuery()->getSingleResult() ;
 	}
 
-	public function findPreviousEditionIdBySchool($user)
+	public function findPreviousEditionBySchool($user)
 	{
 		$date = new \DateTime('now');
 		$qb = $this	-> createQueryBuilder('e')

@@ -121,10 +121,9 @@ class TeamController extends Controller
 		// On regarde s'il existe une prochaine édition en cours d'inscrition ou juste prévu
 		if($isThereNextRace)
 		{
-			//On cherche la prochaine edition
+			// On cherche la prochaine edition
 			$em = $this->getDoctrine()->getEntityManager();
-			$id = $em -> getRepository('PouceSiteBundle:Edition')->findNextEditionIdBySchool($user);
-			$edition = $em->getRepository('PouceSiteBundle:Edition')->findById($id);
+			$edition = $em->getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user);
 
 			$raceStatus=$edition->getStatus();
 
@@ -134,7 +133,14 @@ class TeamController extends Controller
 				// On regarde si le user est inscrit dans une équipe à cette course
 				if($teamService->isRegisterToNextRaceOfItsSchool($user))
 				{
-					return $this->render('PouceUserBundle:User:TeamInformations.html.twig');
+					$nextRaceTeam = $em->getRepository('PouceTeamBundle:Team')->findNextRaceTeam($user->getId());
+					$user2 = $em->getRepository('PouceTeamBundle:Team')->findOtherUserInTeam($user->getId());
+					
+					return $this->render('PouceUserBundle:User:teamInformations.html.twig', array(
+						'user1' => $user,
+						'user2' => $user2, // Le coéquipier
+						'team' => $nextRaceTeam
+						));
 				}
 				else
 				{
@@ -144,7 +150,8 @@ class TeamController extends Controller
 			//La prochaine édition est prévu
 			else if($raceStatus="scheduled")
 			{
-				return $this->render('PouceUserBundle:User:messageAnouncementNextEdition.html.twig');
+				return $this->render('PouceUserBundle:User:messageAnouncementNextEdition.html.twig', array(
+					'edition' => $edition));
 			}
 		}
 		else
@@ -154,18 +161,20 @@ class TeamController extends Controller
 			{
 				//On 
 				$em = $this->getDoctrine()->getEntityManager();
-				$id = $em -> getRepository('PouceSiteBundle:Edition')->findLastRaceId();
-				$edition = $em->getRepository('PouceSiteBundle:Edition')->findById($id);
+				$edition = $em->getRepository('PouceSiteBundle:Edition')->findPreviousEditionBySchool($user);
 
 				//L'édition est fini, on propose d'entrer ses résultats
 				if($raceStatus="finished")
 				{
-		  			return $this->render('PouceUserBundle:User:linkToResult.html.twig');
+					// Donne le résultat et propose de le modifier si besoin. 
+					// S'il n'y a pas encore de résultat rentré, cela met un lien vers le formulaire d'ajout de résultat
+		  			return $this->render('PouceUserBundle:User:Result.html.twig');
 				}
 				// Edition in progress. On propose d'entrer sa position
 				else
 				{
-					return $this->render('PouceUserBundle:User:linkToAddPosition.html.twig');
+					// Donne la dernière position et propose d'en ajouter une
+					return $this->render('PouceUserBundle:User:Position.html.twig');
 				}
 			}
 			// Il n'y a pas de prochaine édition et le user n'a jamais participer. On lui demande de rester au courrant pour la prochaine édition
