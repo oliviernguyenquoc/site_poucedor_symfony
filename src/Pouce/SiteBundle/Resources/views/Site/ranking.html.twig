@@ -28,7 +28,7 @@
 						{% endif %}
 					{% endfor %}
 				</td>
-				<td>{{result.position.town}}, {{result.position.country}}</td>
+				<td>{{result.position.city.name}}, {{result.position.city.country.name}}</td>
 				<td>{{result.position.distance}} km</td>
 				<td>
 					{% for user in result.team.users %}
