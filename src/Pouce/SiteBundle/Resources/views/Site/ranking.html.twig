@@ -6,43 +6,48 @@
 
 <h2>Le classement général</h2>
 
-<table>
-	<tr>
-	  <th>Classement</th>
-	  <th>Equipe</th> 
-	  <th>Prénoms</th>
-	  <th>Destination</th>
-	  <th>km</th>
-	  <th>Ville de départ</th>
-	</tr>
+<ul class="collapsible popout" data-collapsible="accordion">
 	{# if results  isset  #} {# // TO CHANGE #}
-		{% for result in results  %}
-			<tr>
-				<td>{{result.rank}}</td>
-				<td>{{result.team.teamName}}</td>
-				<td>
-					{% for user in result.team.users %}
-						{# {{user.first_name}} {{user.last_name}} //PROTECTED VALUES #}
-						{% if loop.first %}
-							et
-						{% endif %}
-					{% endfor %}
-				</td>
-				<td>{{result.position.city.name}}, {{result.position.city.country.name}}</td>
-				<td>{{result.position.distance}} km</td>
-				<td>
-					{% for user in result.team.users %}
-						{% if loop.first %}
-							{{user.school.town}}, {{user.school.country}}
-						{% endif %}
-					{% endfor %}
-					
-				</td>
-			</tr>
-		{% endfor %}
-	{# endif #}
-</table>
+	{% for result in results  %}
+		<li>
+			<div class="collapsible-header">{{result.rank}} {{result.team.teamName}}</div>
+			<div class="collapsible-body">
+			<p>
+				<b> Composé de : </b>
+				{% for user in result.team.users %}
+					{{user.firstName}} {{user.lastName}} 
+					{% if loop.first %}
+						et
+					{% endif %}
+				{% endfor %}
+				<br/>
+				<b> Arrivé à : </b>
+				{{result.position.city.name}}, {{result.position.city.country.name}}</td>
+
+				<br/>
+				<b> Soit </b>
+				{{result.position.distance}} km
+				<b> depuis </b>
+				{% for user in result.team.users %}
+					{% if loop.first %}
+						{{user.school.town}}, {{user.school.country}}
+					{% endif %}
+				{% endfor %}
+			</p>
+			</div>
+		</li>
+	{% endfor %}
+	{# 	{% endif %} #}
+</ul>
 
 <h2>Le classement par école </h2>
+
+<script>
+  $(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : true
+    });
+  });
+</script>
 
 {% endblock %}
