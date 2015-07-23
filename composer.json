@@ -27,7 +27,10 @@
             "friendsofsymfony/user-bundle": "~2.0@dev",
             "stof/doctrine-extensions-bundle": "dev-master",
             "beberlei/DoctrineExtensions": "dev-master",
-            "woutersioen/sir-trevor-php": "dev-master"
+            "woutersioen/sir-trevor-php": "dev-master",
+            "knplabs/knp-menu": "dev-master",
+            "knplabs/knp-menu-bundle": "dev-master",
+            "coresphere/console-bundle": "dev-master"
             },
             "require-dev": {
                 "sensio/generator-bundle": "~2.3"

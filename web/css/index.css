@@ -1,0 +1,29 @@
+/***************************************************
+        index
+***************************************************/
+
+
+#content3blocks {
+  height: 100vh;
+  width:90%;
+  margin-top: 20px;
+}
+
+#top {
+  height: 1px;
+  position: absolute;
+}
+	
+a.twitter-timeline{text-align: center}
+
+#navbar{
+  position: absolute;
+}
+
+.section{
+  padding-top: 2.5em;
+}
+
+.header{
+  margin-top: 2em;
+}
