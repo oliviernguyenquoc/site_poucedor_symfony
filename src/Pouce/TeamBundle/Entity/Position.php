@@ -23,19 +23,10 @@ class Position
     private $id;
 
     /**
-     * @var string
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(name="city", type="string", length=255)
-    */
-    private $city;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Pouce\SiteBundle\Entity\Country")
+     * @ORM\ManyToOne(targetEntity="Pouce\SiteBundle\Entity\City")
      * @ORM\JoinColumn(nullable=false)
     */
-    private $country;
+    private $city;
 
     /**
      * @var float
@@ -177,29 +168,6 @@ class Position
     public function getCity()
     {
         return $this->city;
-    }
-
-    /**
-     * Set country
-     *
-     * @param \Pouce\SiteBundle\Entity\Country $country
-     * @return Position
-     */
-    public function setCountry(\Pouce\SiteBundle\Entity\Country $country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return \Pouce\SiteBundle\Entity\Country 
-     */
-    public function getCountry()
-    {
-        return $this->country;
     }
 
     /**
