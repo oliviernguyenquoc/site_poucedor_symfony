@@ -1,7 +1,10 @@
 <p>
-    Vous êtes arrivés jusque : {{result.position.city}}<br/>
-    Sexe : {{ user.sex }}<br/>
-    Promotion : {{ user.promotion }}<br/>
-    Email : {{ user.email }}<br/>
-    Téléphone : {{ user.telephone }}
+    Vous êtes arrivés jusque : {{result.position.city.name}}, {{result.position.city.country.name}}<br/>
+    {% if (result.position.lateness != 0) %}
+    	Vous êtes arrivée avec {{result.position.lateness}}h de retard
+    {% else %}
+    	Vous n'avez pas eu de retard
+    {% endif %}<br/>
+
+    {# TODO : showComment #}
 <p>

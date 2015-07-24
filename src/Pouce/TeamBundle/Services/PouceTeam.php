@@ -1,6 +1,4 @@
 <?php
-
-
 namespace Pouce\TeamBundle\Services;
 
 class PouceTeam
@@ -109,9 +107,37 @@ class PouceTeam
 		}
 		else
 		{
-			$answer=flase;
+			$answer=false;
 		}
 
+		return $answer;
+	}
+
+	/**
+	* Vérifie si la team a un result partiel ou non (si une distance est enregistré)
+	*
+	* @param Team $team
+	* @return bool
+	*/
+	public function isResultSet($team)
+	{
+		try
+		{
+			$result = $em -> getRepository('PouceSiteBundle:Edition')->getResult($team)
+		}
+		catch (\Doctrine\ORM\NoResultException $e) 
+		{
+			return false;
+		}
+
+		if($result->getPosition()==NULL)
+		{
+			$answer=false;
+		}
+		else
+		{
+			$answer=true;
+		}
 		return $answer;
 	}
 }

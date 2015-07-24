@@ -210,10 +210,10 @@ class ResultController extends Controller
 		$user=$this->getUser();
 		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
 		$team=$repository->getLastTeam($user->getId());
-		$result=$repository->getResult($team); // TODO
+		$result=$repository->getResult($team);
 
 		// On récupère le service
-		$resultService = $this->container->get('pouce_team.result'); // TODO
+		$resultService = $this->container->get('pouce_team.team');
 
 		if($resultService->isResultSet($team))
 		{

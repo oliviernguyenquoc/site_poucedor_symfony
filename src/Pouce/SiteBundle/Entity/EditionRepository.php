@@ -41,6 +41,6 @@ class EditionRepository extends EntityRepository
                     -> orderBy('e.date','DESC')
                     ->setMaxResults(1);
 
-		return $qb->getQuery()->getSingleResult() ;
+		return $qb->getQuery()->getSingleResult();
 	}
 }

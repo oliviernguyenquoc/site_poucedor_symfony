@@ -83,7 +83,7 @@ class TeamController extends Controller
 	public function editTeamAction($id, Request $request)
 	{
 		$em = $this->getDoctrine()->getEntityManager();
-		$team = $em -> getRepository('PouceTeamBundle:Team')->find($id);
+		$team = $em ->getRepository('PouceTeamBundle:Team')->find($id);
 
 		//Des variables pour le formType
 		$user = $this->getUser();
