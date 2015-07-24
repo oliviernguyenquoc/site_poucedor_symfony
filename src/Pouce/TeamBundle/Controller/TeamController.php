@@ -168,7 +168,7 @@ class TeamController extends Controller
 				{
 					// Donne le résultat et propose de le modifier si besoin. 
 					// S'il n'y a pas encore de résultat rentré, cela met un lien vers le formulaire d'ajout de résultat
-		  			return $this->render('PouceUserBundle:User:Result.html.twig');
+		  			return $this->render('PouceUserBundle:User:results.html.twig');
 				}
 				// Edition in progress. On propose d'entrer sa position
 				else

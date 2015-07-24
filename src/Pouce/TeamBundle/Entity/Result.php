@@ -29,8 +29,7 @@ class Result
     private $edition;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Team")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Team", cascade={"persist"})
     */
     private $team;
 
