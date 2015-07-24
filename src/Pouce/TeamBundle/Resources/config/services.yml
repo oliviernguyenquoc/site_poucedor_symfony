@@ -3,3 +3,4 @@ services:
         class: Pouce\TeamBundle\Services\PouceTrajet
     pouce_team.team:
         class: Pouce\TeamBundle\Services\PouceTeam
+        arguments: ["@doctrine.orm.entity_manager"]

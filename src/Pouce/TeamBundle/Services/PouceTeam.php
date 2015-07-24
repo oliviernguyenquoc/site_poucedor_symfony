@@ -24,7 +24,7 @@ class PouceTeam
 
 		try
 		{
-			$nextEditionId = $em -> getRepository('PouceSiteBundle:Edition')->findNextEditionIdBySchool($user->getSchool())
+			$nextEditionId = $em -> getRepository('PouceSiteBundle:Edition')->findNextEditionIdBySchool($user->getSchool());
 		}
 		catch (\Doctrine\ORM\NoResultException $e) 
 		{
@@ -68,7 +68,7 @@ class PouceTeam
 				return false;
 			}
 
-			$previousEditionId = $em -> getRepository('PouceSiteBundle:Edition')->findPreviousEditionIdBySchool($user->getSchool())
+			$previousEditionId = $em -> getRepository('PouceSiteBundle:Edition')->findPreviousEditionIdBySchool($user->getSchool());
 
 			if($team->getEdition()->getId() == $previousEditionId)
 			{
@@ -94,7 +94,7 @@ class PouceTeam
 		$em = $this->getDoctrine()->getEntityManager();
 		try
 		{
-			$nextEditionId = $em -> getRepository('PouceSiteBundle:Edition')->findNextEditionIdBySchool($user->getSchool())
+			$nextEditionId = $em -> getRepository('PouceSiteBundle:Edition')->findNextEditionIdBySchool($user->getSchool());
 		}
 		catch (\Doctrine\ORM\NoResultException $e) 
 		{
@@ -123,7 +123,7 @@ class PouceTeam
 	{
 		try
 		{
-			$result = $em -> getRepository('PouceSiteBundle:Edition')->getResult($team)
+			$result = $em -> getRepository('PouceSiteBundle:Edition')->getResult($team);
 		}
 		catch (\Doctrine\ORM\NoResultException $e) 
 		{
