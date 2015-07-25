@@ -29,7 +29,7 @@
         <ul>
             <li>Give your story form (import and save images blocks)</li>
             <li>Edit forms</li>
-            <li>User page</li>
+            <li>User page (just debugging)</li>
             <li>Menus</li>
         </ul>
     </p>
@@ -39,8 +39,9 @@
     <p>
         <ul>
             <li>Admin pages</li>
-            <li>Acceptation of groups</li> 
-            <li>Process Improvements</li> 
+            <li>City autocomplete in localisation form</li>
+            <li>Process Improvements</li>
+            <li>Console Bundle for only mode</li> 
         </ul>
     </p>
 
