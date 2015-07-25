@@ -21,6 +21,7 @@ $( document ).ready(function(){
         //Accessibility
         keyboardScrolling: true,
         scrollBar: true,
+        verticalCentered: true,
 
         //Design
         controlArrows: true,

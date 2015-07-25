@@ -4,37 +4,33 @@
 namespace Pouce\SiteBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
-class MenuBuilder
+class MenuBuilder extends ContainerAware
 {
-    private $factory;
-
-    /**
-     * @param FactoryInterface $factory
-     */
-    public function __construct(FactoryInterface $factory)
+    public function mainMenu(FactoryInterface $factory, array $options)
     {
-        $this->factory = $factory;
-    }
-
-    public function createMainMenu(Request $request)
-    {
-        $menu = $this->factory->createItem('root');
+        $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'right hide-on-med-and-down');
-        $menu->addChild('Home', array('route' => 'pouce_site_homepage'));
-        $menu->addChild('Regle', array('route' => 'pouce_site_regles'));
+        $menu->addChild('Le Pouce d\'Or')->setAttribute('dropdown', true);
+        $menu['Le Pouce d\'Or']->addChild('L\'association', array('uri' => '#'));
+        $menu['Le Pouce d\'Or']->addChild('Règles', array('uri' => '#'));
+        $menu->addChild('Edition 2015', array('route' => 'pouce_site_regles'));
+        $menu->addChild('Archives', array('route' => 'pouce_site_archives'));
+        $menu->addChild('Top 25', array('route' => 'pouce_site_records'));
 
         return $menu;
     }
 
-    public function createMobileMenu(Request $request)
+    public function mobileMenu(FactoryInterface $factory, array $options)
     {
-        $menu = $this->factory->createItem('root');
+        $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('id', 'nav-mobile');
         $menu->setChildrenAttribute('class', 'side-nav');
-        $menu->addChild('Home', array('route' => 'pouce_site_homepage'));
-        $menu->addChild('Regle', array('route' => 'pouce_site_regles'));
+        $menu->addChild('Le Pouce d\'Or', array('route' => 'pouce_site_homepage'));
+        $menu->addChild('Edition 2015', array('route' => 'pouce_site_regles'));
+        $menu->addChild('Archives', array('route' => 'pouce_site_archives'));
+        $menu->addChild('Top 25', array('route' => 'pouce_site_records'));
 
         return $menu;
     }
