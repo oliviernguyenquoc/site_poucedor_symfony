@@ -98,7 +98,7 @@ class School
     private $latitude;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Pouce\SiteBundle\Entity\Edition", inversedBy="editions")
+     * @ORM\ManyToMany(targetEntity="Pouce\SiteBundle\Entity\Edition", inversedBy="schools")
      */
     private $editions;
 

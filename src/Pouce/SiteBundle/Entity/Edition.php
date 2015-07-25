@@ -23,7 +23,7 @@ class Edition
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\School", mappedBy="schools")
+     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\School", mappedBy="editions")
      */
     private $schools;
 
@@ -144,4 +144,5 @@ class Edition
     {
         return $this->dateOfEvent;
     }
+
 }

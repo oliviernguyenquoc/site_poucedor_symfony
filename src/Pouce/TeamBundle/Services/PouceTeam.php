@@ -1,8 +1,17 @@
 <?php
 namespace Pouce\TeamBundle\Services;
 
+use Doctrine\ORM\EntityManager; 
+
 class PouceTeam
 {
+	protected $em;
+
+	public function __construct(EntityManager $entityManager)
+	{
+	    $this->em = $entityManager;
+	}
+
 	/**
 	* Vérifie si le user est inscrit à la prochaine édition du pouce d'or auquel son école est inscrite
 	*
@@ -11,11 +20,10 @@ class PouceTeam
 	*/
 	public function isRegisterToNextRaceOfItsSchool($user)
 	{
-		$em = $this->getDoctrine()->getEntityManager();
 
 		try
 		{
-			$team = $em -> getRepository('PouceTeamBundle:Team')->getLastTeam($user->getId());
+			$team = $this->em -> getRepository('PouceTeamBundle:Team')->getLastTeam($user->getId());
 		} 
 		catch (\Doctrine\ORM\NoResultException $e) 
 		{
@@ -24,14 +32,14 @@ class PouceTeam
 
 		try
 		{
-			$nextEditionId = $em -> getRepository('PouceSiteBundle:Edition')->findNextEditionIdBySchool($user->getSchool());
+			$nextEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user);
 		}
 		catch (\Doctrine\ORM\NoResultException $e) 
 		{
 			return false;
 		}
 
-		if($team->getEdition()->getId() == $nextEditionId)
+		if($team->getEdition()->getId() == $nextEdition->getId())
 		{
 			$answer = true;
 		}
@@ -51,9 +59,7 @@ class PouceTeam
 	*/
 	public function isRegisterToPreviousRace($user)
 	{
-		$em = $this->getDoctrine()->getEntityManager();
-
-		if(isRegisterToNextRaceOfItsSchool($user))
+		if(self::isRegisterToNextRaceOfItsSchool($user))
 		{
 			return false;
 		}
@@ -61,16 +67,16 @@ class PouceTeam
 		{
 			try
 			{
-				$team = $em -> getRepository('PouceTeamBundle:Team')->getLastTeam($user->getId());
+				$team = $this->em -> getRepository('PouceTeamBundle:Team')->getLastTeam($user->getId());
 			} 
 			catch (\Doctrine\ORM\NoResultException $e) 
 			{
 				return false;
 			}
 
-			$previousEditionId = $em -> getRepository('PouceSiteBundle:Edition')->findPreviousEditionIdBySchool($user->getSchool());
+			$previousEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findPreviousEditionBySchool($user);
 
-			if($team->getEdition()->getId() == $previousEditionId)
+			if($team->getEdition()->getId() == $previousEdition->getId())
 			{
 				$answer = true;
 			}
@@ -91,25 +97,17 @@ class PouceTeam
 	*/
 	public function isThereNextRace($user)
 	{
-		$em = $this->getDoctrine()->getEntityManager();
 		try
 		{
-			$nextEditionId = $em -> getRepository('PouceSiteBundle:Edition')->findNextEditionIdBySchool($user->getSchool());
+			$nextEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user);
 		}
 		catch (\Doctrine\ORM\NoResultException $e) 
 		{
 			return false;
 		}
-
-		if($nextEditionId!=NULL)
-		{
-			$answer=true;
-		}
-		else
-		{
-			$answer=false;
-		}
-
+		
+		$answer=true;
+		
 		return $answer;
 	}
 
@@ -123,7 +121,7 @@ class PouceTeam
 	{
 		try
 		{
-			$result = $em -> getRepository('PouceSiteBundle:Edition')->getResult($team);
+			$result = $this->em -> getRepository('PouceTeamBundle:Result')->getResult($team);
 		}
 		catch (\Doctrine\ORM\NoResultException $e) 
 		{
@@ -131,6 +129,34 @@ class PouceTeam
 		}
 
 		if($result->getPosition()==NULL)
+		{
+			$answer=false;
+		}
+		else
+		{
+			$answer=true;
+		}
+		return $answer;
+	}
+
+	/**
+	* Vérifie si la team a un result complet ou non (si un récit (ou "comment") est enregistré)
+	*
+	* @param Team $team
+	* @return bool
+	*/
+	public function isResultSetCompletely($team)
+	{
+		try
+		{
+			$result = $this->em -> getRepository('PouceTeamBundle:Result')->getResult($team);
+		}
+		catch (\Doctrine\ORM\NoResultException $e) 
+		{
+			return false;
+		}
+
+		if($result->getComment()==NULL)
 		{
 			$answer=false;
 		}

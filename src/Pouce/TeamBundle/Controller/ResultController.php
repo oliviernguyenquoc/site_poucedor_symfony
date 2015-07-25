@@ -209,8 +209,9 @@ class ResultController extends Controller
 	{
 		$user=$this->getUser();
 		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
+		$resultRepo = $this->getDoctrine()->getRepository('PouceTeamBundle:Result');
 		$team=$repository->getLastTeam($user->getId());
-		$result=$repository->getResult($team);
+		$result=$resultRepo->getResult($team);
 
 		// On récupère le service
 		$resultService = $this->container->get('pouce_team.team');

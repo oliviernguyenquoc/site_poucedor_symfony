@@ -52,7 +52,7 @@ class ResultRepository extends EntityRepository
 	{
 		$qb = $this	-> createQueryBuilder('r')
 					-> where('r.team = :idTeam')
-					 ->setParameter('idTeam', $team->getId);
+					 ->setParameter('idTeam', $team->getId());
 
 		return $qb->getQuery()->getSingleResult();
 	}
