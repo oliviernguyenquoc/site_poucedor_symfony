@@ -1,6 +1,6 @@
 services:
     pouce_team.trajet:
-        class: Pouce\TeamBundle\Trajet\PouceTrajet
-#    pouce_team.example:
-#        class: Pouce\TeamBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+        class: Pouce\TeamBundle\Services\PouceTrajet
+    pouce_team.team:
+        class: Pouce\TeamBundle\Services\PouceTeam
+        arguments: [@doctrine.orm.entity_manager]

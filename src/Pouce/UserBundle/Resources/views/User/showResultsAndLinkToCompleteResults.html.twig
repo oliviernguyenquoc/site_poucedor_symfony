@@ -1,0 +1,10 @@
+<p>
+    Vous êtes arrivés jusque : {{result.position.city.name}}, {{result.position.city.country.name}}<br/>
+    {% if (result.lateness != 0) %}
+    	Vous êtes arrivée avec {{result.lateness}}h de retard
+    {% else %}
+    	Vous n'avez pas eu de retard
+    {% endif %}<br/>
+
+    Fait nous un récit de vos aventures (Textex, photos, vidéos ...) : <a href="{{ path('pouce_result_add') }}">Ici</a>
+<p>

@@ -3,6 +3,7 @@
 namespace Pouce\SiteBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * EditionRepository
@@ -12,4 +13,35 @@ use Doctrine\ORM\EntityRepository;
  */
 class EditionRepository extends EntityRepository
 {
+	public function findNextEditionBySchool($user)
+	{
+        $now = new \DateTime();
+		$qb = $this	-> createQueryBuilder('e')
+					-> where('e.status != :status')
+                     ->setParameter('status', 'scheduled')
+                    -> andWhere('e.dateOfEvent > :today')
+                     ->setParameter('today', $now->format("Y-m-d"))
+                    -> join('e.schools','s')
+                    -> andWhere('s.name = :schoolName')
+                     ->setParameter('schoolName', $user->getSchool()->getName())
+                    -> orderBy('e.dateOfEvent','ASC')
+                    ->setMaxResults(1);
+
+		return $qb->getQuery()->getSingleResult() ;
+	}
+
+	public function findPreviousEditionBySchool($user)
+	{
+        $now = new \DateTime();
+		$qb = $this	-> createQueryBuilder('e')
+                    -> andWhere('e.dateOfEvent <= :today')
+                     ->setParameter('today', $now->format("Y-m-d"))
+                    -> join('e.schools','s')
+                    -> andWhere('s.name = :schoolName')
+                     ->setParameter('schoolName', $user->getSchool()->getName())
+                    -> orderBy('e.dateOfEvent','DESC')
+                    ->setMaxResults(1);
+
+		return $qb->getQuery()->getSingleResult();
+	}
 }

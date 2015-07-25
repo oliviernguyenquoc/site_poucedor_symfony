@@ -1,0 +1,23 @@
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block body %}
+
+	<h1>Page personnel</h1>
+
+    {% for flashMessage in app.session.flashbag.get('updateInformations') %}
+        {{ flashMessage }}
+    {% endfor %}
+
+    {# Affiche les informations de l'utilisateur #}
+    {{ render(controller("PouceUserBundle:User:informations")) }}
+
+    {# Affiche la nouvelle course ou les résultats ou un message pour attendre la prochaine course #}
+    {{ render(controller("PouceTeamBundle:Team:adaptativeView")) }}
+
+
+    {{ render(controller("PouceTeamBundle:Team:previousRace")) }}
+
+
+{% endblock %}

@@ -1,3 +1,7 @@
 pouce_user_addinformations:
     path:     /addInformations
     defaults: { _controller: PouceUserBundle:User:addInformations }
+
+pouce_user_mainpage:
+    path:     /mainpage
+    defaults: { _controller: PouceUserBundle:User:showMainPage }

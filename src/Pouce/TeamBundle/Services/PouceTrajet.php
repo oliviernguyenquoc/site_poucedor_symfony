@@ -1,6 +1,6 @@
 <?php
 
-namespace Pouce\TeamBundle\Trajet;
+namespace Pouce\TeamBundle\Services;
 
 class PouceTrajet
 {

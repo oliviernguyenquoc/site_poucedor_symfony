@@ -16,28 +16,28 @@ use Sioen\Converter;
 class ResultController extends Controller
 {
 	public function addResultAction(Request $request)
-  	{
+	{
 
-  		$hasATeam = true; // TODO : Need to be replaced by a request
-  		$haveAResult = false; // TODO : Need to be replaced by a request
-  		$haveAComment = false; // TODO : Need to be replaced by a request
+		$hasATeam = true; // TODO : Need to be replaced by a request
+		$haveAResult = false; // TODO : Need to be replaced by a request
+		$haveAComment = false; // TODO : Need to be replaced by a request
 
-  		//On vérifie si la personne a déjà une équipe
-  		if($hasATeam)
-  		{
+		//On vérifie si la personne a déjà une équipe
+		if($hasATeam)
+		{
 			/* ***************************************************
 				Creer le formulaire de destination
 			*************************************************** */
 
-		  	$user=$this->getUser();
-		  	$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-		  	$team=$repository->getLastTeam($user->getId());
+			$user=$this->getUser();
+			$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
+			$team=$repository->getLastTeam($user->getId());
 
-		  	$result = new Result();
+			$result = new Result();
 			// On crée le FormBuilder grâce au service form factory
-		    $form = $this->get('form.factory')->create(new ResultType(), $result);
+			$form = $this->get('form.factory')->create(new ResultType(), $result);
 
-		    if ($form->handleRequest($request)->isValid()) {
+			if ($form->handleRequest($request)->isValid()) {
 
 				$em = $this->getDoctrine()->getManager();
 				$result->setTeam($team);
@@ -46,21 +46,21 @@ class ResultController extends Controller
 				$result->setEdition($team->getEdition());
 
 				// Ajout d'un point dans la base de données et liaison résultat <-> Point
-    			$trajet = $this->container->get('pouce_team.trajet');
-    			$town=$form->get('position')->get('city')->getData();
-    			$country=$form->get('position')->get('country')->getData();
-    			$arrivee=$trajet->location($town,$country);
-    			$longArrivee=$arrivee[0]["lon"];
-    			$latArrivee=$arrivee[0]["lat"];
+				$trajet = $this->container->get('pouce_team.trajet');
+				$town=$form->get('position')->get('city')->getData();
+				$country=$form->get('position')->get('country')->getData();
+				$arrivee=$trajet->location($town,$country);
+				$longArrivee=$arrivee[0]["lon"];
+				$latArrivee=$arrivee[0]["lat"];
 
 				//Calcule du trajet
-    			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
-    			$result->getPosition()->setDistance($distance);
-    			$result->getPosition()->setLongitude($longArrivee);
-    			$result->getPosition()->setLatitude($latArrivee);
+				$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+				$result->getPosition()->setDistance($distance);
+				$result->getPosition()->setLongitude($longArrivee);
+				$result->getPosition()->setLatitude($latArrivee);
 
-    			//Enregistrement
-    			$em->persist($result);
+				//Enregistrement
+				$em->persist($result);
 				$em->flush();
 
 
@@ -69,19 +69,19 @@ class ResultController extends Controller
 				return $this->redirect($this->generateUrl('pouce_site_homepage'));
 			}
 
-		    // On passe la méthode createView() du formulaire à la vue
-		    // afin qu'elle puisse afficher le formulaire toute seule
-		    return $this->render('PouceTeamBundle:Team:addResult.html.twig', array(
-		      'resultForm' => $form->createView(),
-		    ));
-  		}
-  		else
-  		{
-  			$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
+			// On passe la méthode createView() du formulaire à la vue
+			// afin qu'elle puisse afficher le formulaire toute seule
+			return $this->render('PouceTeamBundle:Team:addResult.html.twig', array(
+			  'resultForm' => $form->createView(),
+			));
+		}
+		else
+		{
+			$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
 			exit(\Doctrine\Common\Util\Debug::dump($result));
 			return $this->redirect($this->generateUrl('pouce_user_addinformations'));
-  		}
-  		
+		}
+		
 	}
 
 
@@ -93,20 +93,20 @@ class ResultController extends Controller
 		$comment= new Comment();
 
 		// On crée le FormBuilder grâce au service form factory
-	    $formBuilder = $this->get('form.factory')->createBuilder('form', $comment);
+		$formBuilder = $this->get('form.factory')->createBuilder('form', $comment);
 
-	    // On ajoute les champs de l'entité que l'on veut à notre formulaire
-	    $formBuilder
-	      ->add('block',   'textarea', array(
-	      		'attr'=> 	array(	'class'=>'js-st-instance',
-	      							'name'=>'aventureForm'      			
-	      					)
-	      	))
-	    ;
-	    // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
+		// On ajoute les champs de l'entité que l'on veut à notre formulaire
+		$formBuilder
+		  ->add('block',   'textarea', array(
+				'attr'=> 	array(	'class'=>'js-st-instance',
+									'name'=>'aventureForm'      			
+							)
+			))
+		;
+		// Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
 
-	    // À partir du formBuilder, on génère le formulaire
-	    $form = $formBuilder->getForm();
+		// À partir du formBuilder, on génère le formulaire
+		$form = $formBuilder->getForm();
 
 		if($request->getMethod() == 'POST'){
 			$em = $this->getDoctrine()->getManager();
@@ -124,9 +124,9 @@ class ResultController extends Controller
 
 			//exit(\Doctrine\Common\Util\Debug::dump($_POST['aventureForm']));
 		}
-	    return $this->render('PouceTeamBundle:Team:createComment.html.twig', array(
-	    	'form'=>$form->createView(),
-	    	));
+		return $this->render('PouceTeamBundle:Team:createComment.html.twig', array(
+			'form'=>$form->createView(),
+			));
 	}
 
 	/*
@@ -149,23 +149,23 @@ class ResultController extends Controller
 		$comment = $repositoryComment->findOneByTeam($id);
 		$result = $repositoryResult->findOneByTeam($id);
 
-  	    // create a converter object and handle the input
+		// create a converter object and handle the input
 		$converter = new Converter();
 		$html = $converter->toHtml($comment->getBlock());
 
-  	    return $this->render('PouceTeamBundle:Team:showResult.html.twig', array(
-	      'html'	=> $html,
-	      'result' 	=> $result
-	    ));	
-  	}
+		return $this->render('PouceTeamBundle:Team:showResult.html.twig', array(
+		  'html'	=> $html,
+		  'result' 	=> $result
+		));	
+	}
 
-  	public function addPositionAction(Request $request)
-  	{
-  		$user=$this->getUser();
+	public function addPositionAction(Request $request)
+	{
+		$user=$this->getUser();
 		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
 		$team=$repository->getLastTeam($user->getId());
 
-  		$position= new Position();
+		$position= new Position();
 
 		/// On crée le FormBuilder grâce au service form factory
 		$form = $this->get('form.factory')->create(new PositionType(), $position);
@@ -196,9 +196,47 @@ class ResultController extends Controller
 
 			return $this->redirect($this->generateUrl('pouce_site_homepage'));
 		}
-	    return $this->render('PouceTeamBundle:Team:addPosition.html.twig', array(
-	    	'form'=>$form->createView(),
-	    	));
-  	}
+		return $this->render('PouceTeamBundle:Team:addPosition.html.twig', array(
+			'form'=>$form->createView(),
+			));
+	}
+
+	/**
+	*	Donne le résultat et propose de le modifier si besoin. 
+	*	S'il n'y a pas encore de résultat rentré, cela met un lien vers le formulaire d'ajout de résultat
+	*/
+	public function mainPageResultsAction()
+	{
+		$user=$this->getUser();
+		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
+		$resultRepo = $this->getDoctrine()->getRepository('PouceTeamBundle:Result');
+		$team=$repository->getLastTeam($user->getId());
+		$result=$resultRepo->getResult($team);
+
+		// On récupère le service
+		$resultService = $this->container->get('pouce_team.team');
+
+		if($resultService->isResultSet($team))
+		{
+			if($resultService->isResultSetCompletely($team))
+			{
+				return $this->render('PouceUserBundle:User:showResults.html.twig', array(
+					'team'		=> $team,
+					'result'	=> $result
+				));
+			}
+			else
+			{
+				return $this->render('PouceUserBundle:User:showResultsAndLinkToCompleteResults.html.twig', array(
+					'team'		=> $team,
+					'result'	=> $result
+				));
+			}
+		}
+		else
+		{
+			return $this->render('PouceUserBundle:User:linkToAddResults.html.twig');
+		}
+	}
 
 }

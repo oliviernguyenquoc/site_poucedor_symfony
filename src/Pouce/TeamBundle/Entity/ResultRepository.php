@@ -28,9 +28,10 @@ class ResultRepository extends EntityRepository
                     -> addSelect('p')
                     -> orderBy('p.distance','DESC');
 
-		return $qb->getQuery()->getResult() ;					
+		return $qb->getQuery()->getResult();
 	}	
 	
+	// TODO : FINIR
 	public function getAllTeamsBySchool($idEdition, $idEcole)
 	{
 		$qb = $this -> getAllResultsInEdition($idEdition)
@@ -45,4 +46,14 @@ class ResultRepository extends EntityRepository
 
 		Puis il faut gerer les redondances de classement 
 	*/
+
+	// Récupère le résult d'une team
+	public function getResult($team)
+	{
+		$qb = $this	-> createQueryBuilder('r')
+					-> where('r.team = :idTeam')
+					 ->setParameter('idTeam', $team->getId());
+
+		return $qb->getQuery()->getSingleResult();
+	}
 }
