@@ -43,17 +43,14 @@
         {%- else %}
             {%- set classes = classes|merge(['dropdown']) %}
         {%- endif %}
-        {%- set childrenClasses = childrenClasses|merge(['dropdown-content']) %}
-        {# Added by Olivier #}
-        {%- set childrenId = childrenId|merge(['dropdown1']) %}    
+        {%- set childrenClasses = childrenClasses|merge(['dropdown-content']) %}   
     {%- endif %}
 
 {# putting classes together #}
     {%- if classes is not empty %}
         {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
     {%- endif %}
-    {%- set listAttributes = item.childrenAttributes|merge({'class': childrenClasses|join(' '),'id': childrenId|join(' ') }) %}
-    {# Added by Olivier #}
+    {%- set listAttributes = item.childrenAttributes|merge({'class': childrenClasses|join(' ')}) %}
 
 {# displaying the item #}
     <li{{ macros.attributes(attributes) }}>
@@ -87,7 +84,6 @@
     {%- set classes = classes|merge(['dropdown-button']) %}
     {%- set attributes = item.linkAttributes %}
     {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
-    {%- set attributes = attributes|merge({'data-activates': 'dropdown1'}) %}
     <a href="#"{{ macros.attributes(attributes) }}>{{ block('label') }}{% if item.level <= 1 %} <i class="material-icons right">arrow_drop_down</i>{% endif %}</a>
 {% endblock %}
 
