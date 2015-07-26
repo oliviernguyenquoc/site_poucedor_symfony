@@ -1,9 +1,22 @@
-{# src/Sdz/BlogBundle/Resources/views/Blog/index.html.twig #}
-
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
 {% block stylesheets %}
 	<link href="{{ asset('css/index.css') }}" type="text/css" rel="stylesheet" />
+
+	{# Full Page JS #}
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fullPage.css') }}" />
+{% endblock %}
+
+{% block javascript %}
+	{# Full Page JS #}
+	<script src="{{ asset('js/jquery.slimscroll.min.js') }}"></script>
+	<script src="{{ asset('js/jquery.fullPage.min.js') }}"></script>
+
+	<script src="{{ asset('js/index.js') }}"> </script>
+
+	{# Réseau sociaux #}
+	<script src="{{ asset('js/facebook.js') }}"> </script>
+	<script src="{{ asset('js/twitter.js') }}"> </script>
 {% endblock %}
 
 {% block body %}
@@ -124,12 +137,16 @@
 			</div>
 		</div>
 
-		<div class="section row" id="blockFooter">
-			<div class="col s12">
-				<div class="center intro">
-					<h1>Les écoles participantes et les sponsorts</h1>
+		<div class="section row">
+			<div id="blockFooter">
+				<div class="col s12">
+					<div class="center intro">
+						<h1>Les écoles participantes et les sponsorts</h1>
+					</div>
 				</div>
 			</div>
+
+			{{ include("::footer.html.twig") }}
 		</div>
 	</div>
 

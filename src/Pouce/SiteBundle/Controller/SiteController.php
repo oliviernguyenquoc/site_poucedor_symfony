@@ -54,9 +54,9 @@ class SiteController extends Controller
     {
         return $this->render('PouceSiteBundle:Site:licence.html.twig');
     }
-    public function galeryAction($year)
+    public function galeryAction($idEdition)
     {
-        $dir = $this->get('kernel')->getRootDir(). '/../web/photos/' . $year;
+        $dir = $this->get('kernel')->getRootDir(). '/../web/photos/' . $idEdition;
         //$fulldir = "{$_SERVER['DOCUMENT_ROOT']}"."$dir";
         $d = scandir($dir) or die('Failed opening directory for reading');
 
@@ -70,7 +70,7 @@ class SiteController extends Controller
                     if(is_file($dir . '/' . $directory1 . '/' . $imageName) and $imageName[0] != '.')
                     {
                         $imageArray[] = array(
-                        "url" => 'photos/' . $year . '/' . $directory1 . '/' . $imageName
+                        "url" => 'photos/' . $idEdition . '/' . $directory1 . '/' . $imageName
                         );
                     }
                 }

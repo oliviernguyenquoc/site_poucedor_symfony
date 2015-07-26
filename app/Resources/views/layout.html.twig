@@ -27,13 +27,6 @@
  	<!--[if lt IE 9]>
  	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   	<![endif]-->
-	
-	{# Sir-trevor #}
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/sir-trevor.css') }}"/>
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/sir-trevor-icons.css') }}"/>
-	
-	{# Full Page JS #}
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fullPage.css') }}" />
 
 	{# MaterializeCSS #}
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/materialize.min.css') }}" media="screen,projection"/>
@@ -45,22 +38,13 @@
 
 	{% block stylesheets %}{% endblock %}
 
-	{# Sir-trevor #}
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script src="{{ asset('js/underscore.js') }}"></script>
-	<script src="{{ asset('js/eventable.js') }}"></script>
-	<script src="{{ asset('js/sir-trevor.js') }}"></script>
-
-	{# Full Page JS #}
-	<script src="{{ asset('js/jquery.fullPage.min.js') }}"></script>
+	<script src="{{ asset('js/jquery.min.js') }}"></script>
 
 	{# MaterializeCSS #}
 	<script src="{{ asset('js/materialize.min.js') }}"></script>
 	<script src="{{ asset('js/init.js') }}"></script>
-	
-	<script src="{{ asset('js/index.js') }}"> </script>
-	<script src="{{ asset('js/facebook.js') }}"> </script>
-	<script src="{{ asset('js/twitter.js') }}"> </script>
+
+	{% block javascript %}{% endblock %}
 
 </head>
 	<body>
@@ -71,13 +55,6 @@
 		<nav class="white" id="navcolor" role="navigation">
 		    <div class="nav-wrapper container">
 		    	<a id="logo-container" href="{{ path('pouce_site_homepage') }}" class="brand-logo"><img src="{{ asset('images/poucelogosite.png')}}" width="172" height="55" style="margin-top : 2px"alt="logo"/></a>
-		    	{# <ul class="right hide-on-med-and-down">
-			    	<li><a href="#">Navbar Link</a></li>
-			    </ul>
-
-			    <ul id="nav-mobile" class="side-nav">
-			        <li><a href="#">Navbar Link</a></li>
-			    </ul> #}
 
 			    {{ knp_menu_render('PouceSiteBundle:MenuBuilder:mainMenu',{'template': 'PouceSiteBundle:Menu:knp_menu.html.twig'}) }}
 			    {{ knp_menu_render('PouceSiteBundle:MenuBuilder:mobileMenu') }}

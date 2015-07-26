@@ -48,8 +48,8 @@ pouce_site_ranking:
     # requirements:
 
 pouce_site_galery:
-    path:     /galery/{year}
-    defaults: { _controller: PouceSiteBundle:Site:galery, year: 2015 }
+    path:     /galery/{idEdition}
+    defaults: { _controller: PouceSiteBundle:Site:galery, idEdition: 1 }
     # requirements:
 
 pouce_site_licence:

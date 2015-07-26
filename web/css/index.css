@@ -7,24 +7,32 @@
   height: 100vh;
   width: 90%;
   margin-top: 2em;
+  padding-top: 2.5em;
 }
 
 #block2parts {
   height: 100vh;
   width: 90%;
   margin-top: 2em;
+  padding-top: 2.5em;
 }
 
 #block {
   height: 100vh;
   width: 90%;
   margin-top: 1em;
+  padding-top: 2.5em;
 }
 
 #blockFooter {
-  height: 200px !important;
+  height: 100vh !important;
   width: 90%;
   margin-top: 1em;
+  padding-top: 2.5em;
+}
+
+#index-banner{
+  padding-top: 0em;
 }
 
 
@@ -37,10 +45,6 @@ a.twitter-timeline{text-align: center}
 
 #navbar{
   position: absolute;
-}
-
-.section{
-  padding-top: 2.5em;
 }
 
 .header{

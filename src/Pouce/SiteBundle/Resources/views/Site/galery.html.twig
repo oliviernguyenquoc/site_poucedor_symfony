@@ -1,6 +1,17 @@
-{# src/Sdz/BlogBundle/Resources/views/Blog/index.html.twig #}
-
 {% extends "PouceSiteBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+	{# Sir-trevor #}
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/sir-trevor.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/sir-trevor-icons.css') }}"/>
+{% endblock %}
+
+{% block javascript %}
+	{# Sir-trevor #}
+	<script src="{{ asset('js/underscore.js') }}"></script>
+	<script src="{{ asset('js/eventable.js') }}"></script>
+	<script src="{{ asset('js/sir-trevor.js') }}"></script>
+{% endblock %}
 
 {% block site_body %}
 

@@ -23,6 +23,8 @@ $( document ).ready(function(){
         scrollBar: true,
         verticalCentered: true,
 
+        scrollOverflow: true,
+
         //Design
         controlArrows: true,
         navigation: true,
@@ -34,7 +36,7 @@ $( document ).ready(function(){
         sectionSelector: '.section',
         slideSelector: '.slide',
 
-        responsiveWidth: 800,
+        // responsiveWidth: 800,
     });
 });
 
