@@ -41,7 +41,7 @@
             <li>Admin pages</li>
             <li>City autocomplete in localisation form</li>
             <li>Process Improvements</li>
-            <li>Console Bundle for only mode</li> 
+            <li>Console Bundle for only mode</li>
         </ul>
     </p>
 

@@ -1,153 +1,142 @@
-{% extends "PouceSiteBundle::layout.html.twig" %}
+{% extends "PouceSiteBundle::layout.html.twig" %} 
 
 {% block stylesheets %}
-	<link href="{{ asset('css/index.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('css/index.css') }}" type="text/css" rel="stylesheet" /> {# Full Page JS #}
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fullPage.css') }}" /> 
+{% endblock %} 
 
-	{# Full Page JS #}
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fullPage.css') }}" />
-{% endblock %}
-
-{% block javascript %}
+{% block javascript %} 
 	{# Full Page JS #}
 	<script src="{{ asset('js/jquery.slimscroll.min.js') }}"></script>
 	<script src="{{ asset('js/jquery.fullPage.min.js') }}"></script>
-
-	<script src="{{ asset('js/index.js') }}"> </script>
+	<script src="{{ asset('js/index.js') }}"></script>
 
 	{# Réseau sociaux #}
-	<script src="{{ asset('js/facebook.js') }}"> </script>
-	<script src="{{ asset('js/twitter.js') }}"> </script>
-{% endblock %}
+	<script src="{{ asset('js/facebook.js') }}"></script>
+	<script src="{{ asset('js/twitter.js') }}"></script>
+{% endblock %} 
 
 {% block body %}
 
 	<div id="fullpage">
-		<div id="index-banner" class="section parallax-container">
-		    <div class="no-pad-bot">
-		      <div class="container">
-		        <h1 class="header center teal-text text-darken-2">Le Pouce d'Or</h1>
-		        <div class="row center">
-		          <h5 class="header col s12 text-darken-2">“Le plus important, ce n'est pas d'aller loin mais de vivre une aventure extraordinaire“</h5>
-		        </div>
-		        <div class="row center">
-		          <a href="{{ path('pouce_site_homepage') }}" id="download-button" class="btn-large waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">S'inscrire</a>
-		          {# <a href="{{ path('pouce_site_homepage') }}" id="download-button" class="btn-large waves-effect waves-light teal lighten-1" alt="J'inscrit mon école / Université au Pouce d'Or 2014">Inscrire son école</a> #}
-		        </div>
-		        <br><br>
-
-		      </div>
-		    </div>
-		    <div class="parallax"><img src="{{ asset('images/8869967957540.jpg') }}" alt="Unsplashed background img 2"></div>
-		</div>
-
-		<div class="section row" id="block3parts">
+	    <div id="index-banner" class="section parallax-container">
+	        <div class="no-pad-bot">
+	            <div class="container">
+	                <h1 class="header center teal-text text-darken-2">Le Pouce d'Or</h1>
+	                <div class="row center">
+	                    <h5 class="header col s12 text-darken-2">“Le plus important, ce n'est pas d'aller loin mais de vivre une aventure extraordinaire“</h5>
+	                </div>
+	                <div class="row center">
+	                    <a href="{{ path('pouce_site_homepage') }}" id="download-button" class="btn-large waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">S'inscrire</a> {# <a href="{{ path('pouce_site_homepage') }}" id="download-button" class="btn-large waves-effect waves-light teal lighten-1" alt="J'inscrit mon école / Université au Pouce d'Or 2014">Inscrire son école</a> #}
+	                </div>
+	                <br>
+	                <br>
+	            </div>
+	        </div>
+	        <div class="parallax"><img src="{{ asset('images/8869967957540.jpg') }}" alt="Unsplashed background img 2"></div>
+	    </div>
+	    <div class="section row" id="block3parts">
 	        <div class="col s12 m4">
-	        	<div class="icon-block">
-		            <h2 class="center brown-text"><i class="medium material-icons">format_list_numbered</i></h2>
-					<h4 class="center">Les conseils et recommandations</h4>
-					<p class="light">
-						Un voyage en stop se prépare, spécialement si c’est un long trajet. Vous trouverez dans cette rubrique nos conseils pour bien préparer votre voyage. <br/> <br/>
-						Vous partez pour un week-end entier, vous allez donc avoir besoin d’un minimum d’affaires. Nous vous conseillons...
-					</p>
-					<a href="{{ path('pouce_site_conseils') }}"><span class="read_more">En lire plus...</span></a>
-				</div>
+	            <div class="icon-block">
+	                <h2 class="center brown-text"><i class="medium material-icons">format_list_numbered</i></h2>
+	                <h4 class="center">Les conseils et recommandations</h4>
+	                <p class="light">
+	                    Un voyage en stop se prépare, spécialement si c’est un long trajet. Vous trouverez dans cette rubrique nos conseils pour bien préparer votre voyage.
+	                    <br/>
+	                    <br/> Vous partez pour un week-end entier, vous allez donc avoir besoin d’un minimum d’affaires. Nous vous conseillons...
+	                </p>
+	                <a href="{{ path('pouce_site_conseils') }}"><span class="read_more">En lire plus...</span></a>
+	            </div>
 	        </div>
-			
-
-			
-			<div class="col s12 m4">
-	          	<div class="icon-block">
-		            <h2 class="center brown-text"><i class="medium material-icons">time_to_leave</i></h2>
-					<h4 class="center">Edition 2015</h4>
-					<br/>
-					<p class="light">
-						<b>Lundi 21 septembre</b> : Ouverture des inscriptions en ligne : <a href="inscription.php">Inscription</a><br/><br/>
-						<b>Jeudi 01 octobre à 23h59</b> : Fermeture des inscriptions en ligne<br/><br/>
-						<b>Samedi 03 octobre à 8h20</b> : Rendez-vous au point de rencontre pour les derniers points de sécurité et la distribution des ...
-					</p>
-					<a href="{{ path('pouce_site_edition') }}"><span class="read_more">En lire plus...</span></a>
-				</div>
+	        <div class="col s12 m4">
+	            <div class="icon-block">
+	                <h2 class="center brown-text"><i class="medium material-icons">time_to_leave</i></h2>
+	                <h4 class="center">Edition 2015</h4>
+	                <br/>
+	                <p class="light">
+	                    <b>Lundi 21 septembre</b> : Ouverture des inscriptions en ligne : <a href="inscription.php">Inscription</a>
+	                    <br/>
+	                    <br/>
+	                    <b>Jeudi 01 octobre à 23h59</b> : Fermeture des inscriptions en ligne
+	                    <br/>
+	                    <br/>
+	                    <b>Samedi 03 octobre à 8h20</b> : Rendez-vous au point de rencontre pour les derniers points de sécurité et la distribution des ...
+	                </p>
+	                <a href="{{ path('pouce_site_edition') }}"><span class="read_more">En lire plus...</span></a>
+	            </div>
 	        </div>
-
-
-			
-			<div class="col s12 m4">
-				<div class="icon-block">
-					<h2 class="center brown-text"><i class="medium material-icons">archive</i></h2>
-					<h4 class="center">Les archives</h4>
-					<br/>
-					<p class="light">
-						Tu es ici dans le vatican du Pouce d'Or.<br/> <br/>
-						Ici repose en paix, sur un serveur dont la localisation m'est inconnue, la mémoire des vétérans du Pouce d'Or qui sont aujourd'hui des gens très serieux (ou pas)  
-						mais qui gardent en eux le souvenir d'un week-end démentiel passé à silloner les routes d'Europe ...
-					</p>
-					<a href="{{ path('pouce_site_archives') }}"><span class="read_more">En lire plus...</span></a>
-	          	</div>
-	        </div>	
-		</div>
-
-		<div class="section row" id="block">
-	      	<div class="col s12 center">
-				<h3>Le Pouce d'Or, qu'est ce que c'est ?</h3>
-				<br/>
-				<p class="left-align light">
-					Un week end de voyage, de rencontres, d'aventures, de galères, de folies...<br/>
-					En gros une compétition de stop (et oui ça existe), mais où le but n'est pas tant de gagner mais de découvrir ou faire découvrir l'autostop tout en se créant un paquet de souvenirs.<br/>
-				</p>
-			</div>
-				
-			<div class="col s12 m6">
-				<div id="video" class="video-container" >
-					<iframe style="border:0;" width="630" height="354" src="//www.youtube.com/embed/B7eyLsYzlHc" allowfullscreen></iframe>
-				</div>
-			</div>
-			
-			<div class="left-align light  col s12 m6">
-				Pour citer le Prez 2009 :<br/>
-				<i>"J'espère que les pouceux de cette édition le resteront : Oui le Pouce d'Or est un week end de galère, d'échec, un concours d'école un peu débile. <br/>Mais c'est aussi et surtout une action sociale à petit niveau pour réinsérer un truc que la société commence à oublier : donner des coups de pouce à son voisin. Pendant ce week-end les pouceux ont appris que ca existait encore, j'espère donc qu'ils passeront le relais dans la vie de tous les jours. Ils ont même initiés des chochos à cette pratique, qui sait peut-être cela les encouragera à continuer à filer des ptits coups de pouce?
-				Vive le Pouce, Vive la societé, Vivons tous ensemble dans les champs".</i><br/><br/>
-			</div>
-
-			<div class="col s12 center">
-				<p>
-					N'attends pas le <span style="text-decoration: underline;">12 Octobre</span>, sors toi le pouce !
-				</p>
-			</div>
-	  	</div>
-
-		<div class="section row" id="block2parts">
-
-			<div class="col s12 m9">
-				<h4 class="center">Les écoles participantes et les sponsorts</h4>
-
-
-			</div>
-
-			<div class="col s12 m3">
-				<h4 class="center">Réseaux</h4>
-
-				<div align="center" >
-					<a class="twitter-timeline" width="90%" height="400" href="https://twitter.com/search?q=%23poucedor" data-widget-id="384379510562365440">Tweets concernant "#poucedor"</a>
-				</div>
-
-				<div align="center" >
-					<div id="fb-root"></div>
-					<div class="fb-page" data-href="https://www.facebook.com/poucedor" data-small-header="false" data-width="90%" data-hide-cover="false" data-show-facepile="false" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/poucedor"><a href="https://www.facebook.com/poucedor">Pouce d&#039;Or</a></blockquote></div></div>
-				</div>
-			</div>
-		</div>
-
-		<div class="section row">
-			<div id="blockFooter">
-				<div class="col s12">
-					<div class="center intro">
-						<h1>Les écoles participantes et les sponsorts</h1>
-					</div>
-				</div>
-			</div>
-
-			{{ include("::footer.html.twig") }}
-		</div>
+	        <div class="col s12 m4">
+	            <div class="icon-block">
+	                <h2 class="center brown-text"><i class="medium material-icons">archive</i></h2>
+	                <h4 class="center">Les archives</h4>
+	                <br/>
+	                <p class="light">
+	                    Tu es ici dans le vatican du Pouce d'Or.
+	                    <br/>
+	                    <br/> Ici repose en paix, sur un serveur dont la localisation m'est inconnue, la mémoire des vétérans du Pouce d'Or qui sont aujourd'hui des gens très serieux (ou pas) mais qui gardent en eux le souvenir d'un week-end démentiel passé à silloner les routes d'Europe ...
+	                </p>
+	                <a href="{{ path('pouce_site_archives') }}"><span class="read_more">En lire plus...</span></a>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="section row" id="block">
+	        <div class="col s12 center">
+	            <h3>Le Pouce d'Or, qu'est ce que c'est ?</h3>
+	            <br/>
+	            <p class="left-align light">
+	                Un week end de voyage, de rencontres, d'aventures, de galères, de folies...
+	                <br/> En gros une compétition de stop (et oui ça existe), mais où le but n'est pas tant de gagner mais de découvrir ou faire découvrir l'autostop tout en se créant un paquet de souvenirs.
+	                <br/>
+	            </p>
+	        </div>
+	        <div class="col s12 m6">
+	            <div id="video" class="video-container">
+	                <iframe style="border:0;" width="630" height="354" src="//www.youtube.com/embed/B7eyLsYzlHc" allowfullscreen></iframe>
+	            </div>
+	        </div>
+	        <div class="left-align light  col s12 m6">
+	            Pour citer le Prez 2009 :
+	            <br/>
+	            <i>"J'espère que les pouceux de cette édition le resteront : Oui le Pouce d'Or est un week end de galère, d'échec, un concours d'école un peu débile. <br/>Mais c'est aussi et surtout une action sociale à petit niveau pour réinsérer un truc que la société commence à oublier : donner des coups de pouce à son voisin. Pendant ce week-end les pouceux ont appris que ca existait encore, j'espère donc qu'ils passeront le relais dans la vie de tous les jours. Ils ont même initiés des chochos à cette pratique, qui sait peut-être cela les encouragera à continuer à filer des ptits coups de pouce?
+					Vive le Pouce, Vive la societé, Vivons tous ensemble dans les champs".</i>
+	            <br/>
+	            <br/>
+	        </div>
+	        <div class="col s12 center">
+	            <p>
+	                N'attends pas le <span style="text-decoration: underline;">12 Octobre</span>, sors toi le pouce !
+	            </p>
+	        </div>
+	    </div>
+	    <div class="section row" id="block2parts">
+	        <div class="col s12 m9">
+	            <h4 class="center">Les écoles participantes et les sponsorts</h4>
+	        </div>
+	        <div class="col s12 m3">
+	            <h4 class="center">Réseaux</h4>
+	            <div align="center">
+	                <a class="twitter-timeline" width="90%" height="400" href="https://twitter.com/search?q=%23poucedor" data-widget-id="384379510562365440">Tweets concernant "#poucedor"</a>
+	            </div>
+	            <div align="center">
+	                <div id="fb-root"></div>
+	                <div class="fb-page" data-href="https://www.facebook.com/poucedor" data-small-header="false" data-width="90%" data-hide-cover="false" data-show-facepile="false" data-show-posts="false">
+	                    <div class="fb-xfbml-parse-ignore">
+	                        <blockquote cite="https://www.facebook.com/poucedor"><a href="https://www.facebook.com/poucedor">Pouce d&#039;Or</a></blockquote>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="section row">
+	        <div id="blockFooter">
+	            <div class="col s12">
+	                <div class="center intro">
+	                    <h1>Les écoles participantes et les sponsorts</h1>
+	                </div>
+	            </div>
+	        </div>
+	        {{ include("::footer.html.twig") }}
+	    </div>
 	</div>
-
+	
 {% endblock %}

@@ -17,30 +17,30 @@
 			Blablabla
 		</p>
 
-			<h4>Votre destination</h4>
+		<h4>Votre destination</h4>
 
-			<p>
-				Destination la plus loin atteinte : {{ form_row(resultForm.position.city) }}, 
-				Pays :
-				{{ form_widget(resultForm.position.country) }}
-				Avez-vous réussit à revenir en stop ? : 
-				<div class="switch">
-					<label>
-				    	Non {{ form_widget(resultForm.isValid) }}
-				    	<span class="lever"></span>
-				    	Oui
-				    </label>
-				</div>
-				Êtes-vous arrivé à temps ? : 
-				<div class="switch">
-					<label>
-				    	Non <input type="checkbox"> {# {{ form_widget(resultForm.isValid) }} #}
-				    	<span class="lever"></span>
-				    	Oui
-				    </label>
-				</div>
-				De combien de temps étiez-vous en retard ? : {{ form_row(resultForm.lateness) }}
-			</p>
+		<p>
+			Destination la plus loin atteinte : {{ form_row(resultForm.position.city) }}, 
+			Pays :
+			{{ form_widget(resultForm.position.country) }}
+			Avez-vous réussit à revenir en stop ? : 
+			<div class="switch">
+				<label>
+					Non {{ form_widget(resultForm.isValid) }}
+					<span class="lever"></span>
+					Oui
+				</label>
+			</div>
+			Êtes-vous arrivé à temps ? : 
+			<div class="switch">
+				<label>
+					Non <input type="checkbox"> {# {{ form_widget(resultForm.isValid) }} #}
+					<span class="lever"></span>
+					Oui
+				</label>
+			</div>
+			De combien de temps étiez-vous en retard ? : {{ form_row(resultForm.lateness) }}
+		</p>
 
 		{{ form_rest(resultForm) }}
 
@@ -49,7 +49,7 @@
 
 	<script>
 		$(document).ready(function() {
-	    	$('select').material_select();
+			$('select').material_select();
 		});
 	</script>
 
