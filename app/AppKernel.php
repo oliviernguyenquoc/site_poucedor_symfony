@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Pouce\TeamBundle\PouceTeamBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new PUGX\AutocompleterBundle\PUGXAutocompleterBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

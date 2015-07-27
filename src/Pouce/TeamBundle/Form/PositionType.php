@@ -18,15 +18,15 @@ class PositionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country','entity', array(
-                'class'     => 'PouceSiteBundle:Country',
-                'property'  => 'name', 
-                'label'     => 'Pays',
-                'required'  => true,
-                'multiple' => false
-            ))
-            ->add('city', 'text', array(
-                'label'     => 'Ville',
+            // ->add('country','entity', array(
+            //     'class'     => 'PouceSiteBundle:Country',
+            //     'property'  => 'name', 
+            //     'label'     => 'Pays',
+            //     'required'  => true,
+            //     'multiple' => false
+            // ))
+            ->add('city', 'autocomplete', array(
+                'class' => 'PouceSiteBundle:City',
                 'required'  => true
             ))
             

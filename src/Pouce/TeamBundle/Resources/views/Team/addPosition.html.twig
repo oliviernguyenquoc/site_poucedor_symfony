@@ -3,6 +3,13 @@
 {# On étend notre layout #}
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
+{% block javascript %} 
+	{# Full Page JS #}
+	<script src="{{ asset('js/jquery-ui.js') }}"></script>
+	<script src="{{ asset('js/autocompleter-jqueryui.js') }}"></script>
+	<script src="{{ asset('js/position.js') }}"></script>
+{% endblock %} 
+
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
 
@@ -17,8 +24,18 @@
 			Vérifiez bien vos informations. Ils nous permetterons de vous suivre pendante toute la durée du concours
 		</p>
 
-		{{ form_widget(form.country) }}
-		{{ form_widget(form.city) }}
+		{# {{ form_widget(form.country) }} #}
+
+		{# {{ form_widget(form.city) }} #}
+		{# Autocomplete part #}
+		<div class="dropdown-button" data-activates="ui-id-1">
+			<div id='city'></div>
+		</div>
+{# 		[{% for city in results -%}
+		    {{ {id: city.id, label: city.name, value: city.name}|json_encode|raw }}
+		    {%- if not loop.last %},{% endif -%}
+		{%- endfor %}] #}
+
 		<input type="submit" class="btn btn-primary" /> 
 	</form>
 

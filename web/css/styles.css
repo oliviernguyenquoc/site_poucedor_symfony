@@ -141,4 +141,17 @@ body {
 .menuArchive figure:focus figcaption {  
   height: 10.8em;  
   background: rgba(0,0,0,0.8);  
-}  
+}
+
+/***************************************************
+          POSITIONS
+***************************************************/
+
+
+ul.ui-autocomplete li {
+  font-size: 1.2rem;
+  color: #26a69a;
+  display: block;
+  padding: 1rem 1rem;
+}
+

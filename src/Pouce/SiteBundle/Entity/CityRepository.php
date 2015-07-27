@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class CityRepository extends EntityRepository
 {
+	public function findLikeName($cityName)
+	{
+		$qb = $this	-> createQueryBuilder('c')
+					-> where('c.name LIKE :cityName')
+					-> setParameter('cityName', '%'.$cityName.'%')
+			;
+
+		return $qb->getQuery()->getResult() ;
+	}
+
 }

@@ -28,3 +28,11 @@ fos_user_change_password:
 pouce_user:
     resource: "@PouceUserBundle/Resources/config/routing.yml"
     prefix:   /user
+
+city_search:
+    path:   /city_search
+    defaults: { _controller: PouceTeamBundle:Result:searchCity}
+
+city_get:
+    path:   /city_get/{id}
+    defaults: { _controller: PouceTeamBundle:Result:getCity }

@@ -30,7 +30,8 @@
             "woutersioen/sir-trevor-php": "dev-master",
             "knplabs/knp-menu": "dev-master",
             "knplabs/knp-menu-bundle": "dev-master",
-            "coresphere/console-bundle": "dev-master"
+            "coresphere/console-bundle": "dev-master",
+        "pugx/autocompleter-bundle": "^1.2"
             },
             "require-dev": {
                 "sensio/generator-bundle": "~2.3"

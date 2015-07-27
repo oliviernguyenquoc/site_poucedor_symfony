@@ -10,6 +10,7 @@ use Pouce\TeamBundle\Form\ResultType;
 use Pouce\TeamBundle\Form\PositionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 // Add a use statement to be able to use the class
 use Sioen\Converter;
 
@@ -200,6 +201,31 @@ class ResultController extends Controller
 			'form'=>$form->createView(),
 			));
 	}
+
+	public function searchCityAction(Request $request)
+    {
+        $q = $request->get('term');
+        $em = $this->getDoctrine()->getManager();
+        $cities = $em->getRepository('PouceSiteBundle:City')->findLikeName($q);
+		$results = array();
+	    foreach ($cities as $city) {
+	        $results[] = array(
+	            'id' => $city->getId(),
+	            'name' => $city->getName(),
+	            'label' => sprintf("%s", $city->getName())
+	        );
+	    }
+
+    	return new JsonResponse($results);
+    }
+
+    public function getCityAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $city = $em->getRepository('PouceSiteBundle:City')->find($id);
+
+        return new Response($city->getName());
+    }
 
 	/**
 	*	Donne le résultat et propose de le modifier si besoin. 
