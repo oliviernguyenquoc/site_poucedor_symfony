@@ -36,3 +36,7 @@ city_search:
 city_get:
     path:   /city_get/{id}
     defaults: { _controller: PouceTeamBundle:Result:getCity }
+
+country_get:
+    path:   /country_get/{cityName}
+    defaults: { _controller: PouceTeamBundle:Result:getCountry }

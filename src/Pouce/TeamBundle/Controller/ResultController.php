@@ -11,6 +11,7 @@ use Pouce\TeamBundle\Form\PositionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 // Add a use statement to be able to use the class
 use Sioen\Converter;
 
@@ -161,10 +162,10 @@ class ResultController extends Controller
 	}
 
 	public function addPositionAction(Request $request)
-	{
-		$user=$this->getUser();
+	{ 
+		$user = $this->getUser();
 		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-		$team=$repository->getLastTeam($user->getId());
+		$team = $repository->getLastTeam($user->getId());
 
 		$position= new Position();
 
@@ -198,7 +199,7 @@ class ResultController extends Controller
 			return $this->redirect($this->generateUrl('pouce_site_homepage'));
 		}
 		return $this->render('PouceTeamBundle:Team:addPosition.html.twig', array(
-			'form'=>$form->createView(),
+			'form'=>$form->createView()
 			));
 	}
 
@@ -225,6 +226,14 @@ class ResultController extends Controller
         $city = $em->getRepository('PouceSiteBundle:City')->find($id);
 
         return new Response($city->getName());
+    }
+
+    public function getCountryAction($cityName)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $city = $em->getRepository('PouceSiteBundle:City')->findOneByName($cityName);
+
+        return new Response($city->getCountry()->getName());
     }
 
 	/**
