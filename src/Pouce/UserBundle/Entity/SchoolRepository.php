@@ -18,7 +18,7 @@ class SchoolRepository extends EntityRepository
 		$qb = $this	-> createQueryBuilder('s')
                     -> join('s.editions','e')
                     -> addSelect('e')
-                    -> where('e.year = :year')
+                    -> where('YEAR(e.dateOfEvent) = :year')
                      ->setParameter('year', $year);
 
 		return $qb ;					

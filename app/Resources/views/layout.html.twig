@@ -50,6 +50,7 @@
 	<body>
 	<div id="top" class="scrollspy">
 	</div>
+
   	<!--start menu-->
   	<div id="navbar" class="navbar-fixed scrollspy">
 		<nav class="white" id="navcolor" role="navigation">
@@ -64,8 +65,10 @@
 		</nav>
 	</div>
 
-	{% block body %}
-	{% endblock %} 
+	<div id="core-content">
+		{% block body %}
+		{% endblock %}
+	</div>
 
 	<footer class="page-footer">
       	<div class="container">

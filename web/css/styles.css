@@ -16,7 +16,7 @@ nav .brand-logo {
 }
 
 p {
-  line-height: 2rem;
+  line-height: 1.8;
 }
 
 .button-collapse {
@@ -29,14 +29,29 @@ p {
   height: 100vh;
   color: #26a69a;
 }
-
-.fp-tableCell {
-  display: block;
-}
   
 .parallax-container .section {
   width: 100%;
 }
+
+footer.page-footer {
+  margin: 0;
+}
+
+
+body {
+  background-color: #fcfcfc;
+}
+
+.bullet li{
+  list-style-type: disc;
+  margin-left:15px;
+}
+
+#core-content {
+  min-height: 92vh;
+}
+
 
 /*@media only screen and (max-width : 992px) {
   .parallax-container .section {
@@ -54,21 +69,6 @@ p {
   }
 }
 */
-
-footer.page-footer {
-  margin: 0;
-}
-
-
-body {
-  background-color: #fcfcfc;
-}
-
-.bullet li{
-  list-style-type: disc;
-  margin-left:15px;
-}
-
 
 /***************************************************
         Gallery

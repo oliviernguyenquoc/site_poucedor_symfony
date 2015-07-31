@@ -55,3 +55,7 @@ pouce_site_galery:
 pouce_site_licence:
     path:     /licence
     defaults: { _controller: PouceSiteBundle:Site:licence }
+
+pouce_site_inscription_ecole:
+    path:     /inscriptionEcole
+    defaults: { _controller: PouceSiteBundle:Site:inscriptionEcole }

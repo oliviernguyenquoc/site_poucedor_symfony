@@ -20,10 +20,11 @@ $( document ).ready(function(){
 
         //Accessibility
         keyboardScrolling: true,
-        scrollBar: true,
+        scrollBar: false,
         verticalCentered: true,
 
         scrollOverflow: true,
+
 
         //Design
         controlArrows: true,

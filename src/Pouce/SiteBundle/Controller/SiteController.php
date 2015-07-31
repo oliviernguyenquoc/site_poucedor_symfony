@@ -54,6 +54,10 @@ class SiteController extends Controller
     {
         return $this->render('PouceSiteBundle:Site:licence.html.twig');
     }
+    public function inscriptionEcoleAction()
+    {
+        return $this->render('PouceSiteBundle:Site:inscriptionEcole.html.twig');
+    }
     public function galeryAction($idEdition)
     {
         $dir = $this->get('kernel')->getRootDir(). '/../web/photos/' . $idEdition;

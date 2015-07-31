@@ -18,8 +18,8 @@ class MenuBuilder extends ContainerAware
         $menu['Le Pouce d\'Or']->addChild('Conseils et recommandations', array('route' => 'pouce_site_conseils'));
         $menu['Le Pouce d\'Or']->addChild('Liens', array('route' => 'pouce_site_liens'));
         $menu->addChild('Edition 2015')->setAttribute('dropdown', true)->setLinkAttribute('data-activates', 'dropdown2')->setChildrenAttribute('id', 'dropdown2');
-        $menu['Edition 2015']->addChild('S\'incrire', array('uri' => '#'));
-        $menu['Edition 2015']->addChild('Inscrire son école', array('uri' => '#'));
+        $menu['Edition 2015']->addChild('S\'incrire', array('route' => 'fos_user_registration_register'));
+        $menu['Edition 2015']->addChild('Inscrire son école', array('route' => 'pouce_site_inscription_ecole'));
         $menu['Edition 2015']->addChild('Listes des inscrits', array('uri' => '#'));
         $menu['Edition 2015']->addChild('Edition 2015', array('route' => 'pouce_site_edition'));
         $menu->addChild('Archives', array('route' => 'pouce_site_archives'));
@@ -37,8 +37,8 @@ class MenuBuilder extends ContainerAware
         $menu->addChild('Règles', array('route' => 'pouce_site_regles'));
         $menu->addChild('Conseils et recommandations', array('route' => 'pouce_site_conseils'));
         $menu->addChild('Liens', array('route' => 'pouce_site_liens'));
-        $menu->addChild('S\'incrire', array('uri' => '#'));
-        $menu->addChild('Inscrire son école', array('uri' => '#'));
+        $menu->addChild('S\'incrire', array('route' => 'fos_user_registration_register'));
+        $menu->addChild('Inscrire son école', array('route' => 'pouce_site_inscription_ecole'));
         $menu->addChild('Listes des inscrits', array('uri' => '#'));
         $menu->addChild('Edition 2015', array('route' => 'pouce_site_edition'));
         $menu->addChild('Archives', array('route' => 'pouce_site_archives'));
