@@ -2,71 +2,76 @@
 
 {% block site_body %}
 
-    <h1>Archives</h1>
+<h1>Archives</h1>
 
-    <div class="section" id="regles">
-        <p>
-            Tu es ici dans le vatican du Pouce d'Or.
-            <br>
-            <br> Ici repose en paix, sur un serveur dont la localisation m'est inconnue, la mémoire des vétérans du Pouce d'Or qui sont aujourd'hui des gens très serieux (ou pas). mais qui gardent en eux le souvenir d'un week-end démentiel passé à silloner les routes d'Europe, ou de France, ou de la Loire-Atlantique.
-        </p>
-    </div>
-    
-    <div class="menuArchive section row">
-        <div class="col s12 m4">
-            <ul>
-                <li>
-                    <figure tabindex="0">
-                        <div id="TitreImage">
-                            Éditions précédentes
-                        </div>
-                        <a href="{{path('pouce_site_editions_precedente')}}"><img class="responsive-img" alt="Editions précédentes" src="{{asset('images/essaie2.jpg')}}" width="300px"></a>
-                        <a href="{{path('pouce_site_editions_precedente')}}"></a>
-                        <figcaption>
-                            <p>
-                                Le pouce d'or existe depuis très longtemps. Mais toute trace écrite, l'histoire donc, ne débute qu'en 2003.
-                            </p>
-                        </figcaption>
-                    </figure>
-                </li>
-            </ul>
-        </div>
-        <div class="col s12 m4">
-            <ul>
-                <li>
-                    <figure tabindex="0">
-                        <div id="TitreImage2">
-                            Photos
-                        </div>
-                        <a href="{{path('pouce_site_galery')}}"><img class="responsive-img" alt="Photos" src="{{asset('images/IconePhoto.jpg')}}" width="300px"></a>
-                        <a href="{{path('pouce_site_galery')}}"></a>
-                        <figcaption>
-                            <p>
-                                Toutes les photos envoyées aux organisateurs.
-                            </p>
-                        </figcaption>
-                    </figure>
-                </li>
-            </ul>
-        </div>
-        <div class="col s12 m4">
-            <ul>
-                <li>
-                    <figure tabindex="0">
-                        <div id="TitreImage3">
-                            Vidéos
-                        </div>
-                        <a href="{{path('pouce_site_videos')}}"><img class="responsive-img" alt="Videos" src="{{asset('images/video.jpg')}}" width="300px"></a>
-                        <a href="{{path('pouce_site_videos')}}"></a>
-                        <figcaption>
-                            <p>
-                                Toutes les vidéos faites pour la promotion du Pouce d'Or.
-                            </p>
-                        </figcaption>
-                    </figure>
-                </li>
-            </ul>
+<div class="section" id="regles">
+    <p>
+        Tu es ici dans le vatican du Pouce d'Or.
+        <br>
+        <br> Ici repose en paix, sur un serveur dont la localisation m'est inconnue, la mémoire des vétérans du Pouce d'Or qui sont aujourd'hui des gens très serieux (ou pas). mais qui gardent en eux le souvenir d'un week-end démentiel passé à silloner les routes d'Europe, ou de France, ou de la Loire-Atlantique.
+    </p>
+</div>
+
+<div class="section row">
+    <div class="col s12 m4">
+        <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" alt="Editions précédentes" src="{{asset('images/essaie2.jpg')}}" >
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Éditions précédentes</span>
+                <p>
+                    <a href="{{path('pouce_site_editions_precedente')}}">C'est par ici !</a>
+                </p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Éditions précédentes</span>
+                <p>
+                    Le pouce d'or existe depuis très longtemps. Mais toute trace écrite, l'histoire donc, ne débute qu'en 2003.
+                </p>
+            </div>
         </div>
     </div>
+
+    <div class="col s12 m4">
+        <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" alt="Editions précédentes" src="{{asset('images/IconePhoto.jpg')}}" >
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Photos</span>
+                <p>
+                    <a href="{{path('pouce_site_galery')}}">C'est par ici !</a>
+                </p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Photos</span>
+                <p>
+                    Toutes les photos envoyées aux organisateurs.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m4">
+        <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" alt="Editions précédentes" src="{{asset('images/video.jpg')}}" >
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Vidéos</span>
+                <p>
+                    <a href="{{path('pouce_site_videos')}}">C'est par ici !</a>
+                </p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Vidéos</span>
+                <p>
+                    Toutes les vidéos faites pour la promotion du Pouce d'Or.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
