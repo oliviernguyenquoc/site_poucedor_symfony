@@ -1,16 +1,33 @@
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
 {% block stylesheets %}
+
+	{% stylesheets filter='cssrewrite, ?yui_css'
+  		'css/sir-trevor.css'
+  		'css/sir-trevor-icons.css' %}
+  		  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+	{% endstylesheets %}
+
 	{# Sir-trevor #}
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/sir-trevor.css') }}"/>
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/sir-trevor-icons.css') }}"/>
+	{# <link rel="stylesheet" type="text/css" href="{{ asset('css/sir-trevor.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/sir-trevor-icons.css') }}"/> #}
+
 {% endblock %}
 
 {% block javascript %}
+
+	{% javascripts filter='?yui_js'
+		'js/underscore.js'
+		'js/eventable.js'
+		'js/sir-trevor.js' %}
+		<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+
 	{# Sir-trevor #}
-	<script src="{{ asset('js/underscore.js') }}"></script>
+	{# <script src="{{ asset('js/underscore.js') }}"></script>
 	<script src="{{ asset('js/eventable.js') }}"></script>
-	<script src="{{ asset('js/sir-trevor.js') }}"></script>
+	<script src="{{ asset('js/sir-trevor.js') }}"></script> #}
+	
 {% endblock %}
 
 {% block site_body %}

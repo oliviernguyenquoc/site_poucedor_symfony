@@ -3,11 +3,20 @@
 {# On étend notre layout #}
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
-{% block javascript %} 
+{% block javascript %}
+
+	{% javascripts filter='?yui_js'
+		'js/jquery-ui.js'
+		'js/autocompleter-jqueryui.js'
+		'js/position.js' %}
+		<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+
 	{# Full Page JS #}
-	<script src="{{ asset('js/jquery-ui.js') }}"></script>
+	{# <script src="{{ asset('js/jquery-ui.js') }}"></script>
 	<script src="{{ asset('js/autocompleter-jqueryui.js') }}"></script>
-	<script src="{{ asset('js/position.js') }}"></script>
+	<script src="{{ asset('js/position.js') }}"></script> #}
+
 {% endblock %} 
 
 {# Dans notre layout, il faut définir le block body #}
