@@ -28,6 +28,7 @@ class MenuBuilder extends ContainerAware
         return $menu;
     }
 
+    // Not used anymore
     public function mobileMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root');

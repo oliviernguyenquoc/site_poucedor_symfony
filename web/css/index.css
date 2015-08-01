@@ -54,3 +54,7 @@ a.twitter-timeline{text-align: center}
 .fp-tableCell {
   display: block !important;
 }
+
+.slimScrollDiv{
+  min-height: 100vh;
+}

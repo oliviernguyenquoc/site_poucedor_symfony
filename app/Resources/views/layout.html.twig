@@ -58,9 +58,14 @@
 		    	<a id="logo-container" href="{{ path('pouce_site_homepage') }}" class="brand-logo"><img src="{{ asset('images/poucelogosite.png')}}" width="172" height="55" style="margin-top : 2px"alt="logo"/></a>
 
 			    {{ knp_menu_render('PouceSiteBundle:MenuBuilder:mainMenu',{'template': 'PouceSiteBundle:Menu:knp_menu.html.twig'}) }}
-			    {{ knp_menu_render('PouceSiteBundle:MenuBuilder:mobileMenu') }}
+
+			    <div class="container">
+			    	<a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a>
+			    </div>
+
+			    {{ include("::nav_mobile.html.twig") }}
+				{# {{ knp_menu_render('PouceSiteBundle:MenuBuilder:mobileMenu') }} #}
 				{# 	{{ render(controller("PouceSiteBundle:Pouce:menu", {'page':'inscription'})) }} #}
-				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			</div>
 		</nav>
 	</div>

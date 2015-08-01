@@ -23,7 +23,7 @@ class RegistrationFormType extends AbstractType
             ->add('school', 'entity', array(
                 'class' => 'PouceUserBundle:School',
                 'property' => 'name',
-                'label' => 'Ecole/Université',
+                'label' => 'Ecole/Université :',
                 'query_builder' => function(\Pouce\UserBundle\Entity\SchoolRepository $er) use($year) {
                     return $er-> getAllSchoolParticipate($year);
                 },
