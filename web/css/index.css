@@ -41,7 +41,15 @@
   position: absolute;
 }
 	
-a.twitter-timeline{text-align: center}
+a.twitter-timeline{
+  text-align: center;
+
+}
+
+iframe[id^='twitter-widget-']{ 
+  width: 90% !important;
+  height: 55vh;
+}
 
 #navbar{
   position: absolute;
@@ -57,4 +65,14 @@ a.twitter-timeline{text-align: center}
 
 .slimScrollDiv{
   min-height: 100vh;
+}
+
+#FAB{
+  position: absolute;
+  top: 88vh;
+  z-index: 100;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
 }

@@ -39,6 +39,27 @@ $( document ).ready(function(){
 
         // responsiveWidth: 800,
     });
+
+    var wi = $(window).width();  
+ 
+    $(window).resize(function() {
+        var wi = $(window).width();
+ 
+        if (wi <= 800)
+        {
+            $("#FAB").hide();        
+        } else
+        {
+            $("#FAB").show();   
+        }
+     });  
+});
+
+
+
+//adding the action to the button
+$(document).on('click', '#FAB', function(){
+  $.fn.fullpage.moveSectionDown();
 });
 
 $('#index-banner').on('scrollSpy:enter', function() {
