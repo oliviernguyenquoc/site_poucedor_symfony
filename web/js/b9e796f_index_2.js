@@ -23,7 +23,7 @@ $( document ).ready(function(){
         scrollBar: false,
         verticalCentered: true,
 
-        scrollOverflow: true,
+        responsiveWidth : 600,
 
 
         //Design

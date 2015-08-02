@@ -102,21 +102,13 @@
       	</div>
     </footer>
 
-    {# app/Resources/views/layout.html.twig #}
-
 	{% javascripts filter='?yui_js'
-		'js/jquery.min.js'
+		'js/jquery-1.11.1.min.js'
 		'js/materialize.min.js'
 		'js/init.js'
 		'js/google_analytics.js' %}
 		<script src="{{ asset_url }}"></script>
 	{% endjavascripts %}
-
-    {# <script src="{{ asset('js/jquery.min.js') }}"></script> #}
-
-	{# MaterializeCSS #}
-	{# <script src="{{ asset('js/materialize.min.js') }}"></script>
-	<script src="{{ asset('js/init.js') }}"></script> #}
 
 	{% block javascript %}{% endblock %}
 

@@ -3,6 +3,28 @@
 {# On étend notre layout #}
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+
+	{% stylesheets filter='cssrewrite, ?yui_css'
+  		'css/sir-trevor.css'
+  		'css/sir-trevor-icons.css' %}
+  		  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+	{% endstylesheets %}
+
+{% endblock %}
+	
+
+{% block javascript %}
+
+	{% javascripts filter='?yui_js'
+		'js/underscore.js'
+		'js/eventable.js'
+		'js/sir-trevor.min.js' %}
+		<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+	
+{% endblock %}
+
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
 

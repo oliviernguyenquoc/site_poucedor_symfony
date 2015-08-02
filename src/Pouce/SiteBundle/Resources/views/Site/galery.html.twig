@@ -1,32 +1,15 @@
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
 {% block stylesheets %}
-
-	{% stylesheets filter='cssrewrite, ?yui_css'
-  		'css/sir-trevor.css'
-  		'css/sir-trevor-icons.css' %}
-  		  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-	{% endstylesheets %}
-
-	{# Sir-trevor #}
-	{# <link rel="stylesheet" type="text/css" href="{{ asset('css/sir-trevor.css') }}"/>
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/sir-trevor-icons.css') }}"/> #}
+	
+	<!-- fotorama.css & fotorama.js. -->
+	<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
 
 {% endblock %}
 
 {% block javascript %}
 
-	{% javascripts filter='?yui_js'
-		'js/underscore.js'
-		'js/eventable.js'
-		'js/sir-trevor.js' %}
-		<script src="{{ asset_url }}"></script>
-	{% endjavascripts %}
-
-	{# Sir-trevor #}
-	{# <script src="{{ asset('js/underscore.js') }}"></script>
-	<script src="{{ asset('js/eventable.js') }}"></script>
-	<script src="{{ asset('js/sir-trevor.js') }}"></script> #}
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 	
 {% endblock %}
 
@@ -34,7 +17,7 @@
 
 
 	<div class="fotorama" 
-		data-allowfullscreen="true" 
+		data-allowfullscreen="true"
 		data-nav="thumbs"
 		data-arrows="true"
 	    data-click="true"
@@ -47,11 +30,6 @@
 			<img src="{{ asset(image.url) }}">
 		{% endfor %}
 	</div>
-
-
-	<!-- fotorama.css & fotorama.js. -->
-<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 
 
 {% endblock %}

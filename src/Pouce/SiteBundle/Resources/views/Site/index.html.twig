@@ -8,31 +8,17 @@
   		  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 	{% endstylesheets %}
 
-	{# <link href="{{ asset('css/index.css') }}" type="text/css" rel="stylesheet" />  #}
-	{# Full Page JS #}
-	{# <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fullPage.css') }}" /> #}
-
 {% endblock %} 
 
 {% block javascript %}
 	
 	{% javascripts filter='?yui_js'
-		'js/jquery.slimscroll.min.js'
 		'js/jquery.fullPage.min.js'
 		'js/index.js' 
 		'js/facebook.js' 
 		'js/twitter.js' %}
 		<script src="{{ asset_url }}"></script>
 	{% endjavascripts %}
-
-	{# Full Page JS #}
-	{# <script src="{{ asset('js/jquery.slimscroll.min.js') }}"></script>
-	<script src="{{ asset('js/jquery.fullPage.min.js') }}"></script>
-	<script src="{{ asset('js/index.js') }}"></script> #}
-
-	{# Réseau sociaux #}
-	{# <script src="{{ asset('js/facebook.js') }}"></script>
-	<script src="{{ asset('js/twitter.js') }}"></script> #}
 
 {% endblock %} 
 
@@ -155,7 +141,6 @@
 	                </div>
 	            </div>
 	        </div>
-	        {{ include("::footer.html.twig") }}
 	    </div>
 	</div>
 	
