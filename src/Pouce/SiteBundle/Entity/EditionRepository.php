@@ -17,8 +17,6 @@ class EditionRepository extends EntityRepository
 	{
         $now = new \DateTime();
 		$qb = $this	-> createQueryBuilder('e')
-					-> where('e.status != :status')
-                     ->setParameter('status', 'scheduled')
                     -> andWhere('e.dateOfEvent > :today')
                      ->setParameter('today', $now->format("Y-m-d"))
                     -> join('e.schools','s')
@@ -26,8 +24,9 @@ class EditionRepository extends EntityRepository
                      ->setParameter('schoolName', $user->getSchool()->getName())
                     -> orderBy('e.dateOfEvent','ASC')
                     ->setMaxResults(1);
-
-		return $qb->getQuery()->getSingleResult() ;
+                    
+        // DO NOT put "->getSingleResult()" here (because NoResultExeption cached somewhere else)
+		return $qb->getQuery();
 	}
 
 	public function findPreviousEditionBySchool($user)
@@ -42,6 +41,7 @@ class EditionRepository extends EntityRepository
                     -> orderBy('e.dateOfEvent','DESC')
                     ->setMaxResults(1);
 
+        // DO NOT put "->getSingleResult()" here (because NoResultExeption cached somewhere else)
 		return $qb->getQuery()->getSingleResult();
 	}
 }

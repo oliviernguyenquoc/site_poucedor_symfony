@@ -33,7 +33,7 @@ class ResultController extends Controller
 
 			$user=$this->getUser();
 			$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-			$team=$repository->getLastTeam($user->getId());
+			$team=$repository->getLastTeam($user->getId())->getSingleResult();
 
 			$result = new Result();
 			// On crée le FormBuilder grâce au service form factory
@@ -114,7 +114,7 @@ class ResultController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$user=$this->getUser();
 			$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-			$team=$repository->getLastTeam($user->getId());
+			$team=$repository->getLastTeam($user->getId())->getSingleResult();
 			$comment->setTeam($team);
 			$comment->setBlock($_FILES);
 
@@ -165,7 +165,7 @@ class ResultController extends Controller
 	{ 
 		$user = $this->getUser();
 		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-		$team = $repository->getLastTeam($user->getId());
+		$team = $repository->getLastTeam($user->getId())->getSingleResult();
 
 		$position= new Position();
 
@@ -245,8 +245,8 @@ class ResultController extends Controller
 		$user=$this->getUser();
 		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
 		$resultRepo = $this->getDoctrine()->getRepository('PouceTeamBundle:Result');
-		$team=$repository->getLastTeam($user->getId());
-		$result=$resultRepo->getResult($team);
+		$team=$repository->getLastTeam($user->getId())->getSingleResult();
+		$result=$resultRepo->getResultTeam($team)->getSingleResult();
 
 		// On récupère le service
 		$resultService = $this->container->get('pouce_team.team');

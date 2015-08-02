@@ -1,7 +1,8 @@
 <?php
 namespace Pouce\TeamBundle\Services;
 
-use Doctrine\ORM\EntityManager; 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NoResultException;
 
 class PouceTeam
 {
@@ -23,18 +24,18 @@ class PouceTeam
 
 		try
 		{
-			$team = $this->em -> getRepository('PouceTeamBundle:Team')->getLastTeam($user->getId());
+			$team = $this->em -> getRepository('PouceTeamBundle:Team')->getLastTeam($user->getId())->getSingleResult();
 		} 
-		catch (\Doctrine\ORM\NoResultException $e) 
+		catch (NoResultException $e) 
 		{
 			return false;
 		}
 
 		try
 		{
-			$nextEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user);
+			$nextEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user)->getSingleResult();
 		}
-		catch (\Doctrine\ORM\NoResultException $e) 
+		catch (NoResultException $e) 
 		{
 			return false;
 		}
@@ -67,9 +68,9 @@ class PouceTeam
 		{
 			try
 			{
-				$team = $this->em -> getRepository('PouceTeamBundle:Team')->getLastTeam($user->getId());
+				$team = $this->em -> getRepository('PouceTeamBundle:Team')->getLastTeam($user->getId())->getSingleResult();
 			} 
-			catch (\Doctrine\ORM\NoResultException $e) 
+			catch (NoResultException $e) 
 			{
 				return false;
 			}
@@ -97,12 +98,14 @@ class PouceTeam
 	*/
 	public function isThereNextRace($user)
 	{
+		$nextEditionQuery = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user);
 		try
 		{
-			$nextEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user);
+			$nextEdition=$nextEditionQuery->getSingleResult();
 		}
-		catch (\Doctrine\ORM\NoResultException $e) 
+		catch(NoResultException $e) 
 		{
+
 			return false;
 		}
 		
@@ -121,9 +124,9 @@ class PouceTeam
 	{
 		try
 		{
-			$result = $this->em -> getRepository('PouceTeamBundle:Result')->getResult($team);
+			$result = $this->em -> getRepository('PouceTeamBundle:Result')->getResultTeam($team)->getSingleResult();
 		}
-		catch (\Doctrine\ORM\NoResultException $e) 
+		catch (NoResultException $e) 
 		{
 			return false;
 		}
@@ -149,9 +152,9 @@ class PouceTeam
 	{
 		try
 		{
-			$result = $this->em -> getRepository('PouceTeamBundle:Result')->getResult($team);
+			$result = $this->em -> getRepository('PouceTeamBundle:Result')->getResultTeam($team)->getSingleResult();
 		}
-		catch (\Doctrine\ORM\NoResultException $e) 
+		catch (NoResultException $e) 
 		{
 			return false;
 		}

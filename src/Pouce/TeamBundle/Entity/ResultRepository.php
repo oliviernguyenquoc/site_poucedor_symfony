@@ -48,12 +48,12 @@ class ResultRepository extends EntityRepository
 	*/
 
 	// Récupère le résult d'une team
-	public function getResult($team)
+	public function getResultTeam($team)
 	{
 		$qb = $this	-> createQueryBuilder('r')
 					-> where('r.team = :idTeam')
 					 ->setParameter('idTeam', $team->getId());
 
-		return $qb->getQuery()->getSingleResult();
+		return $qb->getQuery();
 	}
 }

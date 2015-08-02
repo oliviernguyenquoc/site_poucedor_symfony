@@ -19,7 +19,6 @@ class TeamController extends Controller
 
 		//Check if the user have already a team for one of the next edition
 		$hasATeam = false;
-		//exit(\Doctrine\Common\Util\Debug::dump($isUserUpdated));
 
 		//On vérifie si la personne a déjà une équipe
 		if(!$hasATeam)
@@ -123,18 +122,19 @@ class TeamController extends Controller
 		{
 			// On cherche la prochaine edition
 			$em = $this->getDoctrine()->getEntityManager();
-			$edition = $em->getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user);
+			$edition = $em->getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user)->getSingleResult();
 
 			$raceStatus=$edition->getStatus();
 
 			// On regarde si la prochaine est dans sa phase inscription
-			if($raceStatus="registering")
+			if($raceStatus=="registering")
 			{
 				// On regarde si le user est inscrit dans une équipe à cette course
 				if($teamService->isRegisterToNextRaceOfItsSchool($user))
-				{
+				{					
 					$nextRaceTeam = $em->getRepository('PouceTeamBundle:Team')->findNextRaceTeam($user->getId());
-					$user2 = $em->getRepository('PouceTeamBundle:Team')->findOtherUserInTeam($user->getId());
+
+					$user2 = $em->getRepository('PouceUserBundle:User')->findOtherUserInTeam($user);
 					
 					return $this->render('PouceUserBundle:User:teamInformations.html.twig', array(
 						'user1' => $user,
@@ -148,7 +148,7 @@ class TeamController extends Controller
 				}
 			}
 			//La prochaine édition est prévu
-			else if($raceStatus="scheduled")
+			else if($raceStatus=="scheduled")
 			{
 				return $this->render('PouceUserBundle:User:messageAnouncementNextEdition.html.twig', array(
 					'edition' => $edition));
@@ -164,7 +164,7 @@ class TeamController extends Controller
 				$edition = $em->getRepository('PouceSiteBundle:Edition')->findPreviousEditionBySchool($user);
 
 				//L'édition est fini, on propose d'entrer ses résultats
-				if($raceStatus="finished")
+				if($raceStatus=="finished")
 				{
 					// Donne le résultat et propose de le modifier si besoin. 
 					// S'il n'y a pas encore de résultat rentré, cela met un lien vers le formulaire d'ajout de résultat

@@ -31,4 +31,21 @@ class UserRepository extends EntityRepository
                      ;
 		return $qb ;					
 	}
+
+    /**
+    * Retourne le coéquipier de la team du user
+    */
+    public function findOtherUserInTeam($userId)
+    {
+        $qb = $this -> createQueryBuilder('u')
+                    -> where('u.id != :id')
+                     -> setParameter('id',$userId)
+                    -> Join('u.teams', 't')
+                    -> Join('t.users','user')
+                    -> andWhere('user.id != :userId')
+                     -> setParameter('userId', $userId)
+                    ->setMaxResults(1)
+        ;
+            return $qb->getQuery()->getSingleResult() ;  
+    }
 }
