@@ -88,59 +88,28 @@ body {
           ARCHIVES
 ***************************************************/
 
-.menuArchive {  
-  margin-left: auto;
+.archivesBlock{
+  width: 80%;
   margin-right: auto;
-  width:1000px;
-}  
-.menuArchive li {  
-  display: inline-block;  
-  width: 300px;  
-  margin: 0 10px;  
-  padding: 5px;  
-}  
-.menuArchive figure {  
-  position: relative;  
-  display: inline-block;  
-  width: 300px;
-  height:185px;    
-  margin: 0;  
-  text-align: center;  
-  overflow: hidden;
-}  
-.menuArchive figure #TitreImage {
-  width:300px;
-  height:28px;
-  float:top;
-  background:black;
-  color:white;
-  font-size: 1.2em;
+  margin-left: auto;
 }
-.menuArchive figure:hover #TitreImage{
-  background:#00CCFF;;
-}
-.menuArchive figcaption {  
-  position: absolute;
-  left: 0; bottom: -1em;  
-  width: 300px;  
-  height: 2em;  
-  line-height: 1.5em;  
-  text-align: center;  
-  color: #fff;  
-  background: rgba(0,0,0,2);  
-  overflow: hidden;  
-  /*préparation de la transition*/  
-  transition: all 0.3s;
-}  
-.menuArchive figcaption p {  
-  padding: 30px;
-}
-.menuArchive figcaption span { display: block; }  
 
-.menuArchive figure:hover figcaption,  
-.menuArchive figure:focus figcaption {  
-  height: 10.8em;  
-  background: rgba(0,0,0,0.8);  
+.archivesBlock .textIntro{
+  width: 80%;
+}
+
+.archives{
+  text-align: center;
+}
+
+.archives h3{
+  font-size: 1.6em; 
+  color: #818485;
+}
+
+.archives p{
+  color: #818485; 
+  font-weight: 300;
 }
 
 /***************************************************

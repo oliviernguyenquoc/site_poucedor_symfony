@@ -5,28 +5,28 @@
 
 #block3parts {
   height: 100vh;
-  width: 90%;
+  width: 80%;
   margin-top: 2em;
   padding-top: 2.5em;
 }
 
 #block2parts {
   height: 100vh;
-  width: 90%;
+  width: 80%;
   margin-top: 2em;
   padding-top: 2.5em;
 }
 
 #block {
   height: 100vh;
-  width: 90%;
+  width: 80%;
   margin-top: 1em;
   padding-top: 2.5em;
 }
 
 #blockFooter {
   height: 100vh !important;
-  width: 90%;
+  width: 80%;
   margin-top: 1em;
   padding-top: 2.5em;
 }
