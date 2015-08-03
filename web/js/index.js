@@ -23,7 +23,7 @@ $( document ).ready(function(){
         scrollBar: false,
         verticalCentered: true,
 
-        responsiveWidth : 600,
+        responsiveWidth : 800,
 
 
         //Design
@@ -40,7 +40,11 @@ $( document ).ready(function(){
         // responsiveWidth: 800,
     });
 
-    var wi = $(window).width();  
+    var wi = $(window).width();
+    if (wi <= 800)
+    {
+        $("#FAB").hide();        
+    };
  
     $(window).resize(function() {
         var wi = $(window).width();

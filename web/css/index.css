@@ -76,3 +76,8 @@ iframe[id^='twitter-widget-']{
   margin-left:auto;
   margin-right:auto;
 }
+
+h4{
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
