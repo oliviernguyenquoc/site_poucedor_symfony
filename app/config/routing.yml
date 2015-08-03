@@ -13,6 +13,10 @@ fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
     prefix: /profile
 
+register:
+    pattern: /register/
+    defaults: { _controller: PouceUserBundle:Registration:register }
+
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
     prefix: /register
