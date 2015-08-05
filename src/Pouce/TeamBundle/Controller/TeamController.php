@@ -4,6 +4,8 @@ namespace Pouce\TeamBundle\Controller;
 
 use Pouce\TeamBundle\Entity\Team;
 use Pouce\UserBundle\Entity\User;
+use Pouce\TeamBundle\Entity\Position;
+use Pouce\TeamBundle\Form\PositionType;
 use Pouce\TeamBundle\Form\TeamType;
 use Pouce\TeamBundle\Form\TeamEditType;
 use Pouce\UserBundle\Form\UserType;
@@ -153,15 +155,21 @@ class TeamController extends Controller
 				return $this->render('PouceUserBundle:User:messageAnouncementNextEdition.html.twig', array(
 					'edition' => $edition));
 			}
+			else
+			{
+				throw new Exception("Error : Race status not handled", 1);
+			}
 		}
 		else
 		{
-			// Onn regarde si le user a participer a au moins 1 édition
+			// On regarde si le user a participer a au moins 1 édition
 			if($teamService->isRegisterToPreviousRace($user))
 			{
 				//On 
 				$em = $this->getDoctrine()->getEntityManager();
 				$edition = $em->getRepository('PouceSiteBundle:Edition')->findPreviousEditionBySchool($user);
+
+				$raceStatus=$edition->getStatus();
 
 				//L'édition est fini, on propose d'entrer ses résultats
 				if($raceStatus=="finished")
@@ -171,10 +179,25 @@ class TeamController extends Controller
 		  			return $this->render('PouceUserBundle:User:results.html.twig');
 				}
 				// Edition in progress. On propose d'entrer sa position
+				if($raceStatus=="in progress")
+				{
+					$user = $this->getUser();
+					$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
+					$team = $repository->getLastTeam($user->getId())->getSingleResult();
+
+					$position= new Position();
+
+					// On crée le FormBuilder grâce au service form factory
+					$form = $this->get('form.factory')->create(new PositionType(), $position);
+
+					// Donne la dernière position et propose d'en ajouter une
+					return $this->render('PouceTeamBundle:Team:addPositionBlock.html.twig', array(
+						'form'=>$form->createView()
+						));
+				}
 				else
 				{
-					// Donne la dernière position et propose d'en ajouter une
-					return $this->render('PouceUserBundle:User:Position.html.twig');
+					throw new Exception("Error : Race status not handled", 1);
 				}
 			}
 			// Il n'y a pas de prochaine édition et le user n'a jamais participer. On lui demande de rester au courrant pour la prochaine édition
