@@ -113,7 +113,7 @@ class UserController extends Controller
 
 		foreach($userArray as $key=>$user)
 		{
-			$userIdArray[$key][0]=$user->getId();
+			$userIdArray[$key][0]=$userArray[$key];
 			$userIdArray[$key][1]=null;
 		}
 
