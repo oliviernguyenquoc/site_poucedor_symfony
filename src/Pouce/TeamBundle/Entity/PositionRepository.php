@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class PositionRepository extends EntityRepository
 {
+
+    public function findLastPosition($teamId)
+    {
+        $qb = $this -> createQueryBuilder('p')
+                    -> join('p.team','t')
+                    -> where('t.id = :teamId')
+                     -> setParameter('teamId', $teamId)
+                    -> orderBy('p.created','DESC')
+                    -> setMaxResults(1)
+                     ;
+
+        return $qb->getQuery();
+    }
 }

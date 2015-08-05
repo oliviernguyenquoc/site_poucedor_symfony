@@ -6,6 +6,7 @@ use Pouce\UserBundle\Entity\User;
 use Pouce\UserBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\NoResultException;
 
 class UserController extends Controller
 {
@@ -104,23 +105,34 @@ class UserController extends Controller
 		$repositoryUser = $repository->getRepository('PouceUserBundle:User');
 		$repositoryEdition = $repository->getRepository('PouceSiteBundle:Edition');
 		$repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
+		$repositoryPosition = $repository->getRepository('PouceTeamBundle:Position');
 
 		$editionId=$repositoryEdition->findCurrentEditionBySchool($schoolId)->getId();
 
 		$userArray=$repositoryUser->findAllUsersBySchool($schoolId,$editionId);
 
-		$userIdArray = array();
-
-		foreach($userArray as $user)
+		foreach($userArray as $key=>$user)
 		{
-			$userIdArray[]=$user->getId();
+			$userIdArray[$key][0]=$user->getId();
+			$userIdArray[$key][1]=null;
 		}
 
 		$teamArray=$repositoryTeam->findAllTeamsByEditionByUsers($userArray,$editionId);
 
+		foreach($teamArray as $key=>$team)
+		{
+			try
+			{
+				$userIdArray[$key][1]=$repositoryPosition->findLastPosition($team->getId())->getSingleResult();
+			}
+			catch(NoResultException $e)
+			{
+				$userIdArray[$key][1]=null;
+			}
+		}
 
         return $this->render('PouceUserBundle:Organisation:checkParticipants.html.twig', array(
-        		'teams'	=> $teamArray
+        		'teams'	=> $userIdArray
         	));
     }
 

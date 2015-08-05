@@ -2,6 +2,7 @@
 
 namespace Pouce\TeamBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -36,7 +37,7 @@ class Position
     private $distance;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Team", inversedBy="positions")
+     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Team")
      * @ORM\JoinColumn(nullable=false)
     */
     private $team;
@@ -64,6 +65,22 @@ class Position
      * @ORM\Column(name="latitude", type="float", nullable=true)
      */
     private $latitude;
+
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
 
 
     /**
