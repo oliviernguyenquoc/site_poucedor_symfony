@@ -94,4 +94,34 @@ class UserController extends Controller
 		return $isUserUpdated;
 	}
 
+	public function organisationPageAction()
+    {
+        $user=$this->getUser();
+        $schoolId=$user->getSchool()->getId();
+
+        $repository = $this->getDoctrine()->getManager();
+			
+		$repositoryUser = $repository->getRepository('PouceUserBundle:User');
+		$repositoryEdition = $repository->getRepository('PouceSiteBundle:Edition');
+		$repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
+
+		$editionId=$repositoryEdition->findCurrentEditionBySchool($schoolId)->getId();
+
+		$userArray=$repositoryUser->findAllUsersBySchool($schoolId,$editionId);
+
+		$userIdArray = array();
+
+		foreach($userArray as $user)
+		{
+			$userIdArray[]=$user->getId();
+		}
+
+		$teamArray=$repositoryTeam->findAllTeamsByEditionByUsers($userArray,$editionId);
+
+
+        return $this->render('PouceUserBundle:Organisation:checkParticipants.html.twig', array(
+        		'teams'	=> $teamArray
+        	));
+    }
+
 }

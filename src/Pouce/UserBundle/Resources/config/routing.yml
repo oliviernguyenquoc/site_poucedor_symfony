@@ -5,3 +5,7 @@ pouce_user_addinformations:
 pouce_user_mainpage:
     path:     /mainpage
     defaults: { _controller: PouceUserBundle:User:showMainPage }
+
+pouce_user_checkParticipants:
+    path:     /allmyusers
+    defaults: { _controller: PouceUserBundle:User:organisationPage }

@@ -1,0 +1,12 @@
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	{% for team in teams %}
+		<li>{{ team.teamName }}</li>
+	{% endfor %}
+
+
+{% endblock %}
