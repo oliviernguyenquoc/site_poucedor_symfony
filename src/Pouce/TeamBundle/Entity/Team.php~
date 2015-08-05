@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Team
  *
- * @ORM\Table()
+ * @ORM\Table(name="team")
  * @ORM\Entity(repositoryClass="Pouce\TeamBundle\Entity\TeamRepository")
  */
 class Team
@@ -25,7 +25,7 @@ class Team
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\User", inversedBy="teams", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Pouce\UserBundle\Entity\User", inversedBy="teams")
     */
     private $users;
 
@@ -66,6 +66,11 @@ class Team
      */
     private $finishRegister;
 
+    /**
+     * 
+     * @ORM\OneToMany(targetEntity="Pouce\TeamBundle\Entity\Position", mappedBy="team")
+     */
+    private $positions;
 
     /**
      * @var datetime $created
@@ -82,6 +87,48 @@ class Team
      * @ORM\Column(type="datetime")
      */
     private $updated;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->positions = new ArrayCollection();
+    }
+
+    public function addUser(\Pouce\UserBundle\Entity\User $user)
+    {
+        // Ici, on utilise l'ArrayCollection vraiment comme un tableau
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    public function removeUser(\Pouce\UserBundle\Entity\User $user)
+    {
+        $this->categories->removeElement($user);
+    }
+
+    /**
+     * Set users
+     * @param \Doctrine\Common\Collections\Collection $users
+     *
+     * @return Post
+     */
+    public function setUsers($users)
+    {
+
+        if(!is_array($users))
+        {
+            $users = array($users);
+        }
+        $this->users = $users;
+
+        return $this;
+    }
+
+    public function getUsers()
+    {
+        return $this->users;
+    }
 
 
     /**
@@ -253,5 +300,24 @@ class Team
     public function getEdition()
     {
         return $this->edition;
+    }
+
+    public function addPosition(Position $position)
+    {
+        $this->positions[] = $position;
+
+        $position->setTeam($this);
+
+        return $this;
+    }
+
+    public function removePosition(Position $position)
+    {
+        $this->positions->removeElement($position);
+    }
+
+    public function getPositions()
+    {
+        return $this->positions;
     }
 }

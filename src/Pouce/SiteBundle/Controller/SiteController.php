@@ -87,14 +87,4 @@ class SiteController extends Controller
           'imageArray'    => $imageArray
         ));
     }
-    // TODO : Create the menu
-    // public function menuAction($page)
-    // {
-    //     return $this->render('PouceSiteBundle:Site:index.html.twig');
-    // }
-
-//     public function getOptions()
-//     {
-
-//     }
 }

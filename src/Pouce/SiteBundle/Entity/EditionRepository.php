@@ -44,4 +44,20 @@ class EditionRepository extends EntityRepository
         // DO NOT put "->getSingleResult()" here (because NoResultExeption cached somewhere else)
 		return $qb->getQuery()->getSingleResult();
 	}
+
+    public function findCurrentEditionBySchool($schoolId)
+    {
+        $now = new \DateTime();
+        $qb = $this -> createQueryBuilder('e')
+                    -> where('e.dateOfEvent <= :today')
+                     ->setParameter('today', $now->format("Y-m-d"))
+                    -> andWhere('e.dateOfEvent >= :fourDaysAgo')
+                      ->setParameter('fourDaysAgo', $now->modify('-4 day')->format("Y-m-d"))
+                    -> join('e.schools','s')
+                    -> andWhere('s.id = :schoolId')
+                     ->setParameter('schoolId', $schoolId)
+                    -> orderBy('e.dateOfEvent','DESC');
+
+        return $qb->getQuery()->getSingleResult();
+    }
 }

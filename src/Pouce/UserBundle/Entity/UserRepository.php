@@ -32,6 +32,21 @@ class UserRepository extends EntityRepository
 		return $qb ;					
 	}
 
+    //Get all users of a school who are register to edition
+    public function findAllUsersBySchool($idSchool,$editionId)
+    {
+        $qb = $this -> createQueryBuilder('u')
+                    -> join('u.school','s')
+                    -> where('s.id = :idSchool')
+                     -> setParameter('idSchool', $idSchool)
+                    -> join('s.editions','e')
+                    -> andWhere('e.id = :editionId')
+                     -> setParameter('editionId',$editionId)
+                     ;
+
+        return $qb->getQuery()->getResult() ;
+    }
+
     /**
     * Retourne le coéquipier de la team du user
     */

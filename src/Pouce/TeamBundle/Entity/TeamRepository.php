@@ -42,4 +42,20 @@ class TeamRepository extends EntityRepository
         return $qb->getQuery()->getSingleResult() ;   
     }
 
+    public function findAllTeamsByEditionByUsers($userIdArray,$editionId)
+    {
+        $qb = $this -> createQueryBuilder('t')
+            -> join('t.users','u')
+            ->addSelect('u')
+            -> where('u.id IN (:userIdArray)')
+             -> setParameter('userIdArray', $userIdArray)
+            -> join('t.edition','e')
+            -> andWhere('e.id = :editionId')
+             ->setParameter('editionId', $editionId)
+            ->distinct()
+            ;
+
+        return $qb->getQuery()->getResult() ; 
+    }
+
 }
