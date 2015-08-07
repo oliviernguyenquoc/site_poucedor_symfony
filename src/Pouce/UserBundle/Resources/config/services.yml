@@ -7,6 +7,8 @@ services:
         class: Pouce\UserBundle\EventListener\UserRegistrationListener
         tags:
             - { name: kernel.event_subscriber }
+    pouce_user.user:
+        class: Pouce\UserBundle\Services\PouceUser
 #    pouce_user.example:
 #        class: Pouce\UserBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]

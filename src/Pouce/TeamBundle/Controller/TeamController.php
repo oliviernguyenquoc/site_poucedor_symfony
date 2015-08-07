@@ -116,8 +116,12 @@ class TeamController extends Controller
 
 		// On récupère le service
     	$teamService = $this->container->get('pouce_team.team');
-
-		$isThereNextRace = $teamService->isThereNextRace($user);
+    	$isThereNextRace = $teamService->isThereNextRace($user);
+		
+		//Import User Controller logic
+		// On récupère le service
+    	$userService = $this->container->get('pouce_user.user');
+		$isUserUpdated = $userService->checkUserAdditionnalInformations($user);
 
 		// On regarde s'il existe une prochaine édition en cours d'inscrition ou juste prévu
 		if($isThereNextRace)
