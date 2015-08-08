@@ -1,245 +1,253 @@
 {% extends "PouceSiteBundle::layout.html.twig" %} {% block site_body %}
-<div id="conseils">
-    <h2 id="carte">Les écoles qui participent cette année</h2>
-    <!--A refaire sous forme de base de donnée-->
-    <img class="responsive-img" id="carteecoles" src="{{ asset('images/Carte_pouce_2013.png') }}" class="float" alt="carte ecoles 2013" title="Carte des écoles particpants au Pouce d'Or 2013" />
-    <br/>
+
+<h2 id="carte">Les écoles qui participent cette année</h2>
+<!--A refaire sous forme de base de donnée-->
+
+<img class="responsive-img" id="carteecoles" src="{{ asset('images/Carte_pouce_2013.png') }}" class="float" alt="carte ecoles 2013" title="Carte des écoles particpants au Pouce d'Or 2013" />
+
+<p>
     <b>Cette année encore, plusieurs écoles nous ont rejoint !</b> :
-    <br> Pour cette année, 15 écoles participent à l'aventure :
-    <br/>
-    <br/>
-    <ul class="collapsible" data-collapsible="accordion">
-        <li>
-            <div class="collapsible-header">Centrale Nantes</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateurs :</u>
-                    <br/>
-                    <b>Alexandre Raguénès</b>
-                    <br/>alexandre.raguenes@eleves.ec-nantes.fr
-                    <br/>
-                    <b>Olivier Nguyen Quoc</b>
-                    <br/>olivier.nguyen-quoc@eleves.ec-nantes.fr
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Centrale Lille</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateurs :</u>
-                    <br/>
-                    <b>Maxime Fleury</b>
-                    <br/>fleurymaxime666@gmail.com
-                    <br/>
-                    <b>Pierre Delannoy</b>
-                    <br/>pierre.delannoy.13@centraliens-lille.org
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Centrale Paris</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateur :</u>
-                    <br/>
-                    <b>Gabriel Rogosic</b>
-                    <br/>gabriel.rogosic@student.ecp.fr
-                    <br/>
-                    <br/>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Centrale Lyon</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateur :</u>
-                    <br/>
-                    <b>Maxime Guillemont</b>
-                    <br/>maxime.guillement@ecl2015.ec-lyon.fr
-                    <br/>
-                    <br/>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Centrale Marseille</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateur :</u>
-                    <br/>
-                    <b>Tom Meallant</b>
-                    <br/>tom.meallant@centrale-marseille.fr
-                    <br/>
-                    <br/>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">HEI</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateur :</u>
-                    <br/>
-                    <b>David Treca</b>
-                    <br/>david.treca@hei.fr
-                    <br/>
-                    <br/>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">ILLIS</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateur :</u>
-                    <br/>
-                    <b>Lucie Walle</b>
-                    <br/>walle@hotmail.fr
-                    <br/>
-                    <br/>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">ITEM</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateurs :</u>
-                    <br/>
-                    <b>Maxime Fleury</b>
-                    <br/>fleurymaxime666@gmail.com
-                    <br/>
-                    <b>Pierre Delannoy</b>
-                    <br/>pierre.delannoy.13@centraliens-lille.org
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Mines de St Etienne</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateur :</u>
-                    <br/>
-                    <b>Rémi Bonnel</b>
-                    <br/>remi.bonnel@etu.emse.fr
-                    <br/>
-                    <br/>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Science Po Lille</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateur :</u>
-                    <br/>
-                    <b>Sylvain Capet</b>
-                    <br/>sylvain.capet@gmail.com
-                    <br/>
-                    <br/>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Supélec</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateur :</u>
-                    <br/>
-                    <b>Ghada Ben Hassine</b>
-                    <br/>ghada.benhassine@supelec.fr
-                    <br/>
-                    <br/>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Supaéro</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateur :</u>
-                    <br/>
-                    <b>Charlotte Dietrich</b>
-                    <br/>charlotte.dietrich@supaero.isae.fr
-                    <br/>
-                    <br/>
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Oniris</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateurs :</u>
-                    <br/>
-                    <b>Noémie Nguyen</b>
-                    <br/>noemie.nguyen@oniris-nantes.fr
-                    <br/>
-                    <b>Arnaud Gernigon</b>
-                    <br/>arnaud.gernigon@oniris-nantes.fr
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Université de Lille 1</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateurs :</u>
-                    <br/>
-                    <b>Sylvain Capet</b>
-                    <br/>sylvain.capet@gmail.com
-                    <br/>
-                    <b>Sébastien Delannoy</b>
-                    <br/>sebastiendelannoy@hotmail.fr
-                </p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">Université de Lille 2</div>
-            <div class="collapsible-body">
-                <p>
-                    <u>Organisateur :</u>
-                    <br/>
-                    <b>Lucie Walle</b>
-                    <br/>walle@hotmail.fr
-                    <br/>
-                    <br/>
-                </p>
-            </div>
-        </li>
-    </ul>
-    <br/>
-    <h2 id="dates">Les Dates à ne pas rater</h2>
-    <br/>
-    <b>Lundi 21 septembre</b> : Ouverture des inscriptions en ligne : <a href="inscription.php">Inscription</a>
-    <br/>
-    <br/>
-    <b>Jeudi 01 octobre 23h59</b> : Fermeture des inscriptions en ligne
-    <br/>
-    <br/>
-    <b>Samedi 03 octobre 8h20</b> : Rendez-vous au point de rencontre pour les derniers points de sécurité et la distribution des gilets jaunes (si votre école bénéficie du partenariat avec IceGeoAlert). On en profite pour sortir son plus beau sourire pour les photos d'avant départ
-    <br/>
-    <br/>
-    <b>Samedi 03 octobre 9h</b> : Départ pour l'aventure
-    <br/>
-    <br/>
-    <b>Samedi 03 octobre 19h27</b> : Tu envoies un message à ta maman pour la rassurer et par la même occasion à quelqu'un à Nantes
-    <br/>
-    <br/>
-    <b>Dimanche 04 octobre 13h12</b> : Tu renvoies un message à ta maman et à Nantes
-    <br/>
-    <br/>
-    <b>Lundi 05 octobre 8h</b> : Début des Amphi donc fin du Pouce d'Or. Alors comment c'était?
-    <br/>
-    <br/>
-    <b>Mercredi 07 octobre 15h</b> : Si tu arrives maintenant c'est que tu t'es perdu en route ou que tu es allé en Pologne
-    <br/>
-    <br/>
-    <b>Semaine du 07-11 octobre</b> : Tu parles du Pouce d'Or avec tous tes potes et tu fais partager tes experiences
-    <br/>
-    <br/>
-    <br/>
-</div>
+</p>
+
+<p>
+    La liste définitive n’est pas encore prête, vous pourrez la retrouver dès le 21 septembre, avec le début des inscriptions en ligne.
+</p>
+
+{# <p>
+    Pour cette année, 15 écoles participent à l'aventure :
+</p>
+<ul class="collapsible" data-collapsible="accordion">
+    <li>
+        <div class="collapsible-header">Centrale Nantes</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateurs :</u>
+                <br/>
+                <b>Alexandre Raguénès</b>
+                <br/>alexandre.raguenes@eleves.ec-nantes.fr
+                <br/>
+                <b>Olivier Nguyen Quoc</b>
+                <br/>olivier.nguyen-quoc@eleves.ec-nantes.fr
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Centrale Lille</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateurs :</u>
+                <br/>
+                <b>Maxime Fleury</b>
+                <br/>fleurymaxime666@gmail.com
+                <br/>
+                <b>Pierre Delannoy</b>
+                <br/>pierre.delannoy.13@centraliens-lille.org
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Centrale Paris</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateur :</u>
+                <br/>
+                <b>Gabriel Rogosic</b>
+                <br/>gabriel.rogosic@student.ecp.fr
+                <br/>
+                <br/>
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Centrale Lyon</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateur :</u>
+                <br/>
+                <b>Maxime Guillemont</b>
+                <br/>maxime.guillement@ecl2015.ec-lyon.fr
+                <br/>
+                <br/>
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Centrale Marseille</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateur :</u>
+                <br/>
+                <b>Tom Meallant</b>
+                <br/>tom.meallant@centrale-marseille.fr
+                <br/>
+                <br/>
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">HEI</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateur :</u>
+                <br/>
+                <b>David Treca</b>
+                <br/>david.treca@hei.fr
+                <br/>
+                <br/>
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">ILLIS</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateur :</u>
+                <br/>
+                <b>Lucie Walle</b>
+                <br/>walle@hotmail.fr
+                <br/>
+                <br/>
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">ITEM</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateurs :</u>
+                <br/>
+                <b>Maxime Fleury</b>
+                <br/>fleurymaxime666@gmail.com
+                <br/>
+                <b>Pierre Delannoy</b>
+                <br/>pierre.delannoy.13@centraliens-lille.org
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Mines de St Etienne</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateur :</u>
+                <br/>
+                <b>Rémi Bonnel</b>
+                <br/>remi.bonnel@etu.emse.fr
+                <br/>
+                <br/>
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Science Po Lille</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateur :</u>
+                <br/>
+                <b>Sylvain Capet</b>
+                <br/>sylvain.capet@gmail.com
+                <br/>
+                <br/>
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Supélec</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateur :</u>
+                <br/>
+                <b>Ghada Ben Hassine</b>
+                <br/>ghada.benhassine@supelec.fr
+                <br/>
+                <br/>
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Supaéro</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateur :</u>
+                <br/>
+                <b>Charlotte Dietrich</b>
+                <br/>charlotte.dietrich@supaero.isae.fr
+                <br/>
+                <br/>
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Oniris</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateurs :</u>
+                <br/>
+                <b>Noémie Nguyen</b>
+                <br/>noemie.nguyen@oniris-nantes.fr
+                <br/>
+                <b>Arnaud Gernigon</b>
+                <br/>arnaud.gernigon@oniris-nantes.fr
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Université de Lille 1</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateurs :</u>
+                <br/>
+                <b>Sylvain Capet</b>
+                <br/>sylvain.capet@gmail.com
+                <br/>
+                <b>Sébastien Delannoy</b>
+                <br/>sebastiendelannoy@hotmail.fr
+            </p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Université de Lille 2</div>
+        <div class="collapsible-body">
+            <p>
+                <u>Organisateur :</u>
+                <br/>
+                <b>Lucie Walle</b>
+                <br/>walle@hotmail.fr
+                <br/>
+                <br/>
+            </p>
+        </div>
+    </li>
+</ul> #}
+
+<h2 id="dates">Les Dates à ne pas rater</h2>
+
+<p>
+    <b>Lundi 21 septembre : </b>Ouverture des inscriptions en ligne : {# <a href="#">Inscription</a> #}
+</p>
+<p>
+    <b>Jeudi 01 octobre 23h59 : </b>Fermeture des inscriptions en ligne
+</p>
+<p>
+    <b>Samedi 03 octobre 8h20 : </b>Rendez-vous au point de rencontre pour les derniers points de sécurité et la distribution des gilets jaunes (si votre école bénéficie du partenariat avec IceGeoAlert). On en profite pour sortir son plus beau sourire pour les photos d'avant départ.
+</p>
+<p>
+    <b>Samedi 03 octobre 9h : </b>Départ pour l'aventure
+</p>
+<p>
+    <b>Samedi 03 octobre 19h27 : </b>Vous envoyez un message à vos mamans pour les rassurer et, par la même occasion, à quelqu'un à de votre gentil staff Pouce d’Or.
+</p>
+<p>
+    <b>Dimanche 04 octobre 13h12 : </b>Vous renvoyez un message à vos mamans et à votre staff.
+</p>
+<p>
+    <b>Lundi 05 octobre 8h : </b>Début des Amphis, donc fin du Pouce d'Or. Alors comment c’était ?
+</p>
+<p>
+    <b>Mercredi 07 octobre 15h : </b>Si vous arrivez maintenant, c'est que vous vous êtes perdus en route ou que vous êtes allés en Pologne.
+</p>
+<p>
+    <b>Semaine du 07-11 octobre : </b>Vous parlez du Pouce d'Or avec tous vos potes et vous partagez vos expériences.
+</p>
+
+
 {% endblock %}
