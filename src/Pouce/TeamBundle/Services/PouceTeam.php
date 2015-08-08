@@ -4,7 +4,7 @@ namespace Pouce\TeamBundle\Services;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
 use Pouce\UserBundle\Entity\User;
-use Pouce\TeamBundle\Entity\Team
+use Pouce\TeamBundle\Entity\Team;
 
 class PouceTeam
 {
