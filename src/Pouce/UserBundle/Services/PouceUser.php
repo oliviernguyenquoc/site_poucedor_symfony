@@ -11,7 +11,7 @@ class PouceUser
 	* @param User $user
 	* @return bool
 	*/
-	public function checkUserAdditionnalInformations($user)
+	public function checkUserAdditionnalInformations(User $user)
 	{
 		$isUserUpdated =	(null !== $user->getFirstName()) &&
 							(null !== $user->getLastName()) &&

@@ -48,13 +48,6 @@ class UserController extends Controller
 			    ));
 	 }
 
-	public function getDefaultOptions()
-	{
-	    return array(
-	        'validation_groups' => array('updateRegistration')
-	    );
-	}
-
 	public function showMainPageAction()
 	{
 		$user=$this->getUser();

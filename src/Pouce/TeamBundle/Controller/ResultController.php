@@ -80,7 +80,6 @@ class ResultController extends Controller
 		else
 		{
 			$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
-			exit(\Doctrine\Common\Util\Debug::dump($result));
 			return $this->redirect($this->generateUrl('pouce_user_addinformations'));
 		}
 		
@@ -122,9 +121,7 @@ class ResultController extends Controller
 			// $em->persist($comment);
 			// $em->flush();
 
-			exit(\Doctrine\Common\Util\Debug::dump($request->isXmlHttpRequest()));
 
-			//exit(\Doctrine\Common\Util\Debug::dump($_POST['aventureForm']));
 		}
 		return $this->render('PouceTeamBundle:Team:createComment.html.twig', array(
 			'form'=>$form->createView(),
