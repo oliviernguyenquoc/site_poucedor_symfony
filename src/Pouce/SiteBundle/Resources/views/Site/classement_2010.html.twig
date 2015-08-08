@@ -1,0 +1,359 @@
+{% extends "PouceSiteBundle::layout.html.twig" %} 
+
+{% block site_body %}
+
+<h1>Edition 2010</h1>
+
+<img src="{{asset('images/Carte2010_petite.jpg')}}" class="responsive-img" alt="MAP" />
+
+<h3>Responsable: Annaëlle</h3>
+
+<p>
+    <b><u>Particularité :</u></b> Une participation encore plus incroyable (56 binômes)!
+    <br/> De nombreux échecs (11% d'abandons)... Mais un nouveau record : Copenhague (1576km)!
+    <br/> Les limites à l'Est ont encore été repoussées : un binôme est allé jusqu'à Budapest (1863km)! avec un retard de 40h...
+    <br/> 10 binômes rentrés en train...
+    <br/>
+    <br/> Distances à l'aide de Mappy - trajets le plus court
+</p>
+
+<div class="section">
+    <table class="hoverable centered">
+        <thead>
+            <tr>
+                <th>Classement</th>
+                <th>Town</th>
+                <th>Team</th>
+                <th>Kms</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Copenhague <img src="{{asset('images/pays/dan.jpg')}}" alt="Danemark" border="0"> </td>
+                <td>Kristell & Felix</td>
+                <td>1576</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Florence <img src="{{asset('images/pays/ita.png')}}" alt="Italie" border="0"></td>
+                <td>Cédric & Rozenn</td>
+                <td>1409</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Hambourg <img src="{{asset('images/pays/ger.png')}}" alt="Allemagne" border="0"></td>
+                <td>Marie & Antoine</td>
+                <td>1278</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Munich <img src="{{asset('images/pays/ger.png')}}" alt="Allemagne" border="0"></td>
+                <td>Farah & Marc</td>
+                <td>1211</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Munich <img src="{{asset('images/pays/ger.png')}}" alt="Allemagne" border="0"></td>
+                <td>Aurélie & Michael</td>
+                <td>1211</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Singen <img src="{{asset('images/pays/ger.png')}}" alt="Allemagne" border="0"></td>
+                <td>Alain & LoÔc</td>
+                <td>1041</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Salamanque <img src="{{asset('images/pays/esp.png')}}" alt="Espagne" border="0"></td>
+                <td>Marine & Pierre-Olivier</td>
+                <td>1011</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Morgex <img src="{{asset('images/pays/ita.png')}}" alt="Italie" border="0"></td>
+                <td>Michel & FranÁois</td>
+                <td>896</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Amsterdam <img src="{{asset('images/pays/ned.png')}}" alt="Pays-Bas" border="0"></td>
+                <td>Florent & JB</td>
+                <td>882</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Amsterdam <img src="{{asset('images/pays/ned.png')}}" alt="Pays-Bas" border="0"></td>
+                <td>Lin & Gérard</td>
+                <td>882</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Rotterdam <img src="{{asset('images/pays/ned.png')}}" alt="Pays-Bas" border="0"></td>
+                <td>Coralie & Tommy</td>
+                <td>833</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Rotterdam <img src="{{asset('images/pays/ned.png')}}" alt="Pays-Bas" border="0"></td>
+                <td>Céline & Florent</td>
+                <td>833</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Rotterdam <img src="{{asset('images/pays/ned.png')}}" alt="Pays-Bas" border="0"></td>
+                <td>Marine & BenoÓt</td>
+                <td>833</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>La Jonquera <img src="{{asset('images/pays/esp.png')}}" alt="Espagne" border="0"></td>
+                <td>Hugo & Thomas</td>
+                <td>825</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Maastricht <img src="{{asset('images/pays/ned.png')}}" alt="Pays-Bas" border="0"></td>
+                <td>Hugo & Thomas</td>
+                <td>779</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>Breda <img src="{{asset('images/pays/ned.png')}}" alt="Pays-Bas" border="0"></td>
+                <td>Diane & Maxime</td>
+                <td>775</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>Luxembourg <img src="{{asset('images/pays/lux.png')}}" alt="Luxembourg" border="0"></td>
+                <td>Marion & Stéphane</td>
+                <td>749</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>Luxembourg <img src="{{asset('images/pays/lux.png')}}" alt="Luxembourg" border="0"></td>
+                <td>Maxime & Adrien</td>
+                <td>749</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>BesanÁon <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Aline & Alexis</td>
+                <td>740</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>Anvers <img src="{{asset('images/pays/bel.jpg')}}" alt="Belgique" border="0"></td>
+                <td>Camille & Clément</td>
+                <td>725</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>Metz <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Amandine & Thomas</td>
+                <td>708</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>Metz <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Joan & Marc</td>
+                <td>708</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>D¸sseldorf <img src="{{asset('images/pays/ger.png')}}" alt="Allemagne" border="0"></td>
+                <td>Noémie & Paul</td>
+                <td>880-200=680</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>Bruxelles <img src="{{asset('images/pays/bel.jpg')}}" alt="Belgique" border="0"></td>
+                <td>Marie & Pierre</td>
+                <td>675</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>Bruxelles <img src="{{asset('images/pays/bel.jpg')}}" alt="Belgique" border="0"></td>
+                <td>Florent & Maxime</td>
+                <td>675</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>Bruxelles <img src="{{asset('images/pays/bel.jpg')}}" alt="Belgique" border="0"></td>
+                <td>Victor & Benjamin</td>
+                <td>675</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>Bruxelles <img src="{{asset('images/pays/bel.jpg')}}" alt="Belgique" border="0"></td>
+                <td>Charlotte & Gautier</td>
+                <td>675</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>Bruxelles <img src="{{asset('images/pays/bel.jpg')}}" alt="Belgique" border="0"></td>
+                <td>Maxime & Julien</td>
+                <td>675</td>
+            </tr>
+            <tr>
+                <td>29</td>
+                <td>Menin <img src="{{asset('images/pays/bel.jpg')}}" alt="Belgique" border="0"> </td>
+                <td>Marianne & Pierre</td>
+                <td>667</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>De panne <img src="{{asset('images/pays/bel.jpg')}}" alt="Belgique" border="0"></td>
+                <td>Margaux & Vincent</td>
+                <td>662</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>De panne <img src="{{asset('images/pays/bel.jpg')}}" alt="Belgique" border="0"></td>
+                <td>Constance & Adrian</td>
+                <td>662</td>
+            </tr>
+            <tr>
+                <td>32</td>
+                <td>Dunkerque <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"> </td>
+                <td>Ariane & Vladimir</td>
+                <td>643</td>
+            </tr>
+            <tr>
+                <td>33</td>
+                <td>Lille <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Chloé & Florian</td>
+                <td>604</td>
+            </tr>
+            <tr>
+                <td>33</td>
+                <td>Lille <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Morgane & Jing</td>
+                <td>604</td>
+            </tr>
+            <tr>
+                <td>33</td>
+                <td>Lille <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Guillaume & Olivier</td>
+                <td>604</td>
+            </tr>
+            <tr>
+                <td>36</td>
+                <td>San Sebastian <img src="{{asset('images/pays/esp.png')}}" alt="Espagne" border="0"></td>
+                <td>Cécile & Florent</td>
+                <td>588</td>
+            </tr>
+            <tr>
+                <td>37</td>
+                <td>Auxerre <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"> </td>
+                <td>Lucas & Pierre-Luc</td>
+                <td>495</td>
+            </tr>
+            <tr>
+                <td>38</td>
+                <td>CompiËgne <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"> </td>
+                <td>Anne & Alexis</td>
+                <td>464</td>
+            </tr>
+            <tr>
+                <td>39</td>
+                <td>Barcelone <img src="{{asset('images/pays/esp.png')}}" alt="Espagne" border="0"></td>
+                <td>Pierre & Baptiste</td>
+                <td>960-500=460</td>
+            </tr>
+            <tr>
+                <td>40</td>
+                <td>Paris <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Sam & Guillaume</td>
+                <td>383</td>
+            </tr>
+            <tr>
+                <td>40</td>
+                <td>Paris <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Pierre & Jean-Baptiste</td>
+                <td>383</td>
+            </tr>
+            <tr>
+                <td>42</td>
+                <td>Rouen <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Boris & Bastien</td>
+                <td>376</td>
+            </tr>
+            <tr>
+                <td>43</td>
+                <td>Le Mans <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Clémence & Luc</td>
+                <td>185</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Budapest <img src="{{asset('images/pays/hon.jpg')}}" alt="Hongrie" border="0"></td>
+                <td>Blanca & Valentin</td>
+                <td>1863-4000=-2137</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Stuttgart <img src="{{asset('images/pays/ger.png')}}" alt="Allemagne" border="0"></td>
+                <td>Sara & Boris</td>
+                <td>Eliminés : Train</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Mainz <img src="{{asset('images/pays/ger.png')}}" alt="Allemagne" border="0"></td>
+                <td>Agathe & Jordane</td>
+                <td>Eliminés : Train</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Amsterdam <img src="{{asset('images/pays/ned.png')}}" alt="Pays Bas" border="0"></td>
+                <td>Antonin & David</td>
+                <td>Eliminés : Train</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Strasbourg <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Mathieu & Baptiste</td>
+                <td>Eliminés : Train</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Nancy <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"> </td>
+                <td>Ellyn & Florent</td>
+                <td>Eliminés : A pris sa voiture</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Lille <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Guillerma & Thibault</td>
+                <td>Eliminés : Train</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>San Sebastian <img src="{{asset('images/pays/esp.png')}}" alt="Espagne" border="0"></td>
+                <td>Alexandre & Eric</td>
+                <td>Eliminés : Train</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Rouen <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Clément & Sylvainb</td>
+                <td>Eliminés : Train</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Rouen <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Isabelle & Rudy</td>
+                <td>Eliminés : Train</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>Bruges <img src="{{asset('images/pays/fra.png')}}" alt="France" border="0"></td>
+                <td>Théo & Julien</td>
+                <td>Eliminés : Train</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
