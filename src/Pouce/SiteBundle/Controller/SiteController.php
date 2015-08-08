@@ -9,8 +9,8 @@ class SiteController extends Controller
     public function galeryAction($idEdition)
     {
         $dir = $this->get('kernel')->getRootDir(). '/../web/photos/' . $idEdition;
-        //$fulldir = "{$_SERVER['DOCUMENT_ROOT']}"."$dir";
-        $d = scandir($dir) or die('Failed opening directory for reading');
+
+        $d = scandir($dir);
 
         foreach ($d as $keyDirectory => $directory1) 
         {
