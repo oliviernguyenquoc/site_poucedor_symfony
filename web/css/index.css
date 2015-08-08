@@ -26,9 +26,7 @@
 
 #blockFooter {
   height: 100vh !important;
-  width: 80%;
-  margin-top: 1em;
-  padding-top: 2.5em;
+  width: 100%;
 }
 
 #index-banner{
