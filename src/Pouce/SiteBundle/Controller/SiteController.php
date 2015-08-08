@@ -35,6 +35,6 @@ class SiteController extends Controller
     }
     public function classementAction($annee)
     {
-        return $this->render('PouceSiteBundle:Site:classement_'.$annee.'.html.twig');
+        return $this->render('PouceSiteBundle:Site:classement'.$annee.'.html.twig');
     }
 }

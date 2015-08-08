@@ -19,7 +19,7 @@ class PouceTeam
 	* @param User $user
 	* @return bool
 	*/
-	public function isRegisterToNextRaceOfItsSchool($user)
+	public function isRegisterToNextRaceOfItsSchool(User $user)
 	{
 
 		try
@@ -58,7 +58,7 @@ class PouceTeam
 	* @param User $user
 	* @return bool
 	*/
-	public function isRegisterToPreviousRace($user)
+	public function isRegisterToPreviousRace(User $user)
 	{
 		if(self::isRegisterToNextRaceOfItsSchool($user))
 		{
@@ -96,7 +96,7 @@ class PouceTeam
 	* @param User $user
 	* @return bool
 	*/
-	public function isThereNextRace($user)
+	public function isThereNextRace(User $user)
 	{
 		$nextEditionQuery = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user);
 		try
@@ -120,7 +120,7 @@ class PouceTeam
 	* @param Team $team
 	* @return bool
 	*/
-	public function isResultSet($team)
+	public function isResultSet(Team $team)
 	{
 		try
 		{
@@ -148,7 +148,7 @@ class PouceTeam
 	* @param Team $team
 	* @return bool
 	*/
-	public function isResultSetCompletely($team)
+	public function isResultSetCompletely(Team $team)
 	{
 		try
 		{

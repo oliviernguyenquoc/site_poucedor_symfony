@@ -17,7 +17,7 @@ class TeamController extends Controller
 	public function addTeamAction(Request $request)
 	{
 		// Check if the user have completed all his informations like first_name, last_name, telephone number ...
-		$isUserUpdated = (null != $this->getUser()->getFirstName());
+		$isUserUpdated = (null !== $this->getUser()->getFirstName());
 
 		//Check if the user have already a team for one of the next edition
 		$hasATeam = false;

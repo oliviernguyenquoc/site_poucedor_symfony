@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "6f4a04e8c96d687085f54b857708255ccf22a3ba"
+                "reference": "2d1b8bd7087ada868408f14a38d9cd88e126bec8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/6f4a04e8c96d687085f54b857708255ccf22a3ba",
-                "reference": "6f4a04e8c96d687085f54b857708255ccf22a3ba",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/2d1b8bd7087ada868408f14a38d9cd88e126bec8",
+                "reference": "2d1b8bd7087ada868408f14a38d9cd88e126bec8",
                 "shasum": ""
             },
             "require": {
@@ -66,7 +66,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2015-04-09 09:13:26"
+            "time": "2015-08-06 13:16:43"
         },
         {
             "name": "behat/transliterator",
@@ -720,16 +720,15 @@
         {
             "name": "doctrine/doctrine-fixtures-bundle",
             "version": "dev-master",
-            "target-dir": "Doctrine/Bundle/FixturesBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "c5ff0542772102ddd4e2fbe173e9ad40ad67c22f"
+                "reference": "817c2d233fde0fe85cb7e4d25d43fbfcd028aef8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/c5ff0542772102ddd4e2fbe173e9ad40ad67c22f",
-                "reference": "c5ff0542772102ddd4e2fbe173e9ad40ad67c22f",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/817c2d233fde0fe85cb7e4d25d43fbfcd028aef8",
+                "reference": "817c2d233fde0fe85cb7e4d25d43fbfcd028aef8",
                 "shasum": ""
             },
             "require": {
@@ -745,8 +744,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Bundle\\FixturesBundle": ""
+                "psr-4": {
+                    "Doctrine\\Bundle\\FixturesBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -773,7 +772,7 @@
                 "Fixture",
                 "persistence"
             ],
-            "time": "2015-01-19 02:21:37"
+            "time": "2015-08-04 22:43:14"
         },
         {
             "name": "doctrine/inflector",
@@ -975,12 +974,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "5d7017d35f73cdb74e069f9d607cd0448d305078"
+                "reference": "c2e68acfb2b5786cd455fd9ae3b6d7f255f12646"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/5d7017d35f73cdb74e069f9d607cd0448d305078",
-                "reference": "5d7017d35f73cdb74e069f9d607cd0448d305078",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/c2e68acfb2b5786cd455fd9ae3b6d7f255f12646",
+                "reference": "c2e68acfb2b5786cd455fd9ae3b6d7f255f12646",
                 "shasum": ""
             },
             "require": {
@@ -1034,7 +1033,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2015-07-31 13:22:19"
+            "time": "2015-08-03 00:52:58"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1668,22 +1667,22 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.30",
+            "version": "v3.0.31",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "f1758b30096202aeede61f79a1dffd69da091517"
+                "reference": "3a900814bd57bf20f9453ae81ff8772bc95d7fff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/f1758b30096202aeede61f79a1dffd69da091517",
-                "reference": "f1758b30096202aeede61f79a1dffd69da091517",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/3a900814bd57bf20f9453ae81ff8772bc95d7fff",
+                "reference": "3a900814bd57bf20f9453ae81ff8772bc95d7fff",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "sensiolabs/security-checker": "~2.0",
+                "sensiolabs/security-checker": "~3.0",
                 "symfony/class-loader": "~2.2",
                 "symfony/framework-bundle": "~2.3",
                 "symfony/process": "~2.2"
@@ -1724,20 +1723,20 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-06-05 22:32:22"
+            "time": "2015-08-03 10:07:12"
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.9",
+            "version": "v3.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "0616fd568da051adc19ca63006cc808531ba2da4"
+                "reference": "18fc2063c4d6569cdca47a39fbac32342eb65f3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/0616fd568da051adc19ca63006cc808531ba2da4",
-                "reference": "0616fd568da051adc19ca63006cc808531ba2da4",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/18fc2063c4d6569cdca47a39fbac32342eb65f3c",
+                "reference": "18fc2063c4d6569cdca47a39fbac32342eb65f3c",
                 "shasum": ""
             },
             "require": {
@@ -1779,24 +1778,23 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2015-06-05 13:59:21"
+            "time": "2015-08-03 11:59:27"
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v2.0.5",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "2c2a71f1c77d9765c12638c4724d9ca23658a810"
+                "reference": "8d32035cfe692efb3dddd0d828f8261280ec9006"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/2c2a71f1c77d9765c12638c4724d9ca23658a810",
-                "reference": "2c2a71f1c77d9765c12638c4724d9ca23658a810",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/8d32035cfe692efb3dddd0d828f8261280ec9006",
+                "reference": "8d32035cfe692efb3dddd0d828f8261280ec9006",
                 "shasum": ""
             },
             "require": {
-                "ext-curl": "*",
                 "symfony/console": "~2.0"
             },
             "bin": [
@@ -1805,7 +1803,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -1824,7 +1822,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2015-05-28 14:22:40"
+            "time": "2015-08-03 10:03:32"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -2244,12 +2242,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig-extensions.git",
-                "reference": "9ddf0c07dcfdb15817bbff7b02dd5f20079e16f2"
+                "reference": "5cc242ef3f4423dc8eb5eb19e04c23ea103ac70a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/9ddf0c07dcfdb15817bbff7b02dd5f20079e16f2",
-                "reference": "9ddf0c07dcfdb15817bbff7b02dd5f20079e16f2",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/5cc242ef3f4423dc8eb5eb19e04c23ea103ac70a",
+                "reference": "5cc242ef3f4423dc8eb5eb19e04c23ea103ac70a",
                 "shasum": ""
             },
             "require": {
@@ -2288,7 +2286,7 @@
                 "i18n",
                 "text"
             ],
-            "time": "2015-07-31 06:42:39"
+            "time": "2015-08-04 10:17:43"
         },
         {
             "name": "twig/twig",

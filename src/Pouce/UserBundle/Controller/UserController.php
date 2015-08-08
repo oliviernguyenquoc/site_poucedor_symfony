@@ -68,7 +68,8 @@ class UserController extends Controller
 	public function informationsAction()
   	{
   		$user=$this->getUser();
-  		$isUserUpdated= self::checkUserAdditionnalInformations($user);
+  		$userService = $this->container->get('pouce_user.user');
+		$isUserUpdated = $userService->checkUserAdditionnalInformations($user);
 
   		if($isUserUpdated)
   		{
@@ -83,17 +84,6 @@ class UserController extends Controller
 		    ));
   		}
   	}
-
-	public function checkUserAdditionnalInformations($user)
-	{
-		$isUserUpdated =	(null != $user->getFirstName()) &&
-							(null != $user->getLastName()) &&
-							(null != $user->getSex()) &&
-							(null != $user->getPromotion()) &&
-							(null != $user->getTelephone());
-
-		return $isUserUpdated;
-	}
 
 	public function organisationPageAction()
     {
