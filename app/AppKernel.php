@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Pouce\TeamBundle\PouceTeamBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new PUGX\AutocompleterBundle\PUGXAutocompleterBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

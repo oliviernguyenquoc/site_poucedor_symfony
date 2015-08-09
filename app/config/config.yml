@@ -93,3 +93,23 @@ fos_user:
     registration:
         form:
             type: pouce_user_registration #Le custom form que l'on va utiliser
+
+# Uploader Bundle Configuration
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+    mappings:
+        profil_images:
+            uri_prefix:         /images/profil
+            upload_destination: %kernel.root_dir%/../web/images/profil
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+
+        recits_images:
+            uri_prefix:         /images/recits
+            upload_destination: %kernel.root_dir%/../web/images/recits
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
