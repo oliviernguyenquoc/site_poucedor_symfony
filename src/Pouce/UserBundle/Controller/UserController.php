@@ -7,6 +7,7 @@ use Pouce\UserBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\NoResultException;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -117,6 +118,27 @@ class UserController extends Controller
         return $this->render('PouceUserBundle:Organisation:checkParticipants.html.twig', array(
         		'teams'	=> $userIdArray
         	));
+    }
+
+    public function uploadImageProfilAction(Request $request)
+    {
+    	$user=$this->getUser();
+    	$id=$user->getId();
+    	$data = $request->files->get("uploadfile");
+
+    	$user->setImageFile($data);
+
+    	$userManager = $this->container->get('fos_user.user_manager');
+		$userManager -> updateUser($user);
+
+    	// if ($form->handleRequest($request)->isValid()) {
+
+		// $user->setImageName($name);
+
+		// $uploadfile = $request->request->get('uploadfile');
+
+    	return new Response(json_encode(array('success' => true, 'file' => $user->getImageName())));
+
     }
 
 }

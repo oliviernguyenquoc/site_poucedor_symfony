@@ -9,3 +9,15 @@ pouce_user_mainpage:
 pouce_user_checkParticipants:
     path:     /allmyusers
     defaults: { _controller: PouceUserBundle:User:organisationPage }
+
+pouce_user_uploadImageProfil:
+    path:     /uploadImageProfil
+    defaults: { _controller: PouceUserBundle:User:uploadImageProfil}
+    requirements:
+        _method:  POST
+
+pouce_user_editUserPage:
+    path:     /editUserPage
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceUserBundle:User:editUserPage.html.twig'
