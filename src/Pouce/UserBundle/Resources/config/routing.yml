@@ -4,7 +4,9 @@ pouce_user_addinformations:
 
 pouce_user_mainpage:
     path:     /mainpage
-    defaults: { _controller: PouceUserBundle:User:showMainPage }
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceUserBundle:User:mainpage.html.twig'
 
 pouce_user_checkParticipants:
     path:     /allmyusers

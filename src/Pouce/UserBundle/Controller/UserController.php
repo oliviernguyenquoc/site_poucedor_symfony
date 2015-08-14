@@ -49,16 +49,6 @@ class UserController extends Controller
 			    ));
 	 }
 
-	public function showMainPageAction()
-	{
-		$user=$this->getUser();
-		
-		return $this->render('PouceUserBundle:User:mainpage.html.twig', array(
-	    	'user' 	=> $user
-	    ));
-
-	}
-
 	public function informationsAction()
   	{
   		$user=$this->getUser();
