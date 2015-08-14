@@ -29,8 +29,16 @@
 	</div>
 
 	<div class="row">
+    	<div class="col s12 m6 offset-m3">
+    		<div class="center-align">
+				<img class="responsive-img materialboxed" src="{{ asset('images/illustration_photos/3.png') }}">
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<h3 class="center">Règles du jeu </h3>
     	<div class="col s12 m6">
-	        <h3 class="center">Règles du jeu </h3>
 	        <p>
 	            Les règles du jeu sont simples.
 	        </p>
@@ -40,11 +48,14 @@
 	        <p>
 	            La distance parcourue est mesurée grâce à un GPS en choisissant l’itinéraire « au plus court » après avoir renseigné le lieu de départ et le lieu d’arrivée.
 	        </p>
+	    </div>
 	    <div class="col s12 m6">
+	    	<img class="responsive-img materialboxed" src="{{ asset('images/illustration_photos/4.png') }}">
 	    </div>
 	</div>
 	<div class="row">
 		<div class="col s12 m6">
+			<img class="responsive-img materialboxed" src="{{ asset('images/illustration_photos/5.png') }}">
 	    </div>
     	<div class="col s12 m6">
 	        <p>
@@ -61,8 +72,10 @@
 
 	<div class="row">
 		<h3 class="center">REGLES DE SECURITE </h3>
-    
+
+		<img class="responsive-img materialboxed" src="{{ asset('images/illustration_photos/6.png') }}">
     </div>
+
 	<div class="row">
     	<div class="col s12 m12">
 		    <p>
@@ -81,4 +94,13 @@
 		</div>
 	</div>
 
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+	<script>
+		$(document).ready(function(){
+		    $('.materialboxed').materialbox();
+		  });
+	</script>
 {% endblock %}
