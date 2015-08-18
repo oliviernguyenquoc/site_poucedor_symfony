@@ -33,6 +33,9 @@
   padding-top: 0em;
 }
 
+.parallax{
+  overflow: hidden;
+}
 
 #top {
   height: 1px;
@@ -64,6 +67,8 @@ iframe[id^='twitter-widget-']{
 .slimScrollDiv{
   min-height: 100vh;
 }
+
+
 
 #FAB{
   position: absolute;

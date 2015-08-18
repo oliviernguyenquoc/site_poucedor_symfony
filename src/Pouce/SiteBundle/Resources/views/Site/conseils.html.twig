@@ -213,3 +213,8 @@ Un voyage en stop se prépare, spécialement si c’est un long trajet. Vous tro
           });
     </script>
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/conseils.css') }}" media="screen" />
+{% endblock %}
