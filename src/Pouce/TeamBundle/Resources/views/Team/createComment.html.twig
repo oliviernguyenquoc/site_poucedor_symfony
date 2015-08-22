@@ -22,24 +22,12 @@
 		'js/sir-trevor.min.js' %}
 		<script src="{{ asset_url }}"></script>
 	{% endjavascripts %}
-	
-{% endblock %}
-
-{# Dans notre layout, il faut définir le block body #}
-{% block site_body %}
-
-	<h3>Raconte ton aventure</h3>
-
-	<form method="post" name="form" action="{{ path('pouce_comment_create')}}">
-	  <textarea name="aventureForm" id="form_name"class="js-st-instance"></textarea>
-	  <input type="submit" /> 
-	</form>
-
-	{# {{form(form)}} #}
 
 	<script>
 	  new SirTrevor.Editor({ el: $('.js-st-instance') });
 	</script>
+
+	{# A vérifier : Semble ne pas fonctionner correctement (ne prend pas en compte les différents type de blocs) #}
 	<script>
 	$(function() {
 		SirTrevor.DEBUG = true;
@@ -60,5 +48,19 @@
 		});
 	});
 	</script>
+	
+{% endblock %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	<h3>Raconte ton aventure</h3>
+
+	<form method="post" name="form" action="{{ path('pouce_comment_create')}}">
+	  <textarea name="aventureForm" id="form_name"class="js-st-instance"></textarea>
+	  <input type="submit" /> 
+	</form>
+
+	{# {{form(form)}} #}
 
 {% endblock %}

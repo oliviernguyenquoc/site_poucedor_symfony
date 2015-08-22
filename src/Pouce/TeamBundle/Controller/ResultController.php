@@ -117,6 +117,8 @@ class ResultController extends Controller
 			$comment->setTeam($team);
 			$comment->setBlock($_FILES);
 
+			exit(\Doctrine\Common\Util\Debug::dump($request->request));
+
 			//Enregistrement
 			// $em->persist($comment);
 			// $em->flush();
