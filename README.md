@@ -20,6 +20,11 @@
             <li>Register Page (Inscription)</li>
             <li>Galery</li>
             <li>Position form (Mobile optimization)</li>
+            <li>Menus</li>
+            <li>City autocomplete in localisation form</li>
+            <li>Console Bundle for only dev mode</li>
+            <li>Add avatar photo</li>
+            <li>Deal with editions ...</li>
         </ul>
     </p>
 
@@ -29,8 +34,8 @@
         <ul>
             <li>Give your story form (import and save images blocks)</li>
             <li>Edit forms</li>
-            <li>User page (just debugging)</li>
-            <li>Menus</li>
+            <li>User page (just debugging and add some minor features)</li>
+            <li>Admin pages</li>
         </ul>
     </p>
 
@@ -38,10 +43,7 @@
     
     <p>
         <ul>
-            <li>Admin pages</li>
-            <li>City autocomplete in localisation form</li>
             <li>Process Improvements</li>
-            <li>Console Bundle for only mode</li>
         </ul>
     </p>
 
