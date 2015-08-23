@@ -10,5 +10,5 @@
 /vendor/
 /web/bundles/
 /web/photos/
-/web/images/recits
+/web/images/recits/
 importMySQL.sql
