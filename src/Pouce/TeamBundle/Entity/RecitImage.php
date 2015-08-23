@@ -5,30 +5,43 @@ namespace Pouce\TeamBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * RecitImage
  *
- * @ORM\Table()
+ * @ORM\Table(name="recitImage")
  * @ORM\Entity(repositoryClass="Pouce\TeamBundle\Entity\RecitImageRepository")
+ * @Vich\Uploadable
  */
 class RecitImage
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Assert\File(
+     *     maxSize="1M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
+     * @Vich\UploadableField(mapping="recits_images", fileNameProperty="imageName")
+     * 
+     * @var File
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -38,28 +51,18 @@ class RecitImage
     private $imageName;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
-     * 
-     * @var File
-     */
-    private $imageFile;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Comment")
-     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=false)
-     *
-     */
-    private $comment;
-
-    
-    /**
      * @ORM\Column(type="datetime")
      *
      * @var \DateTime
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Comment")
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=true)
+     *
+     */
+    private $comment;
 
 
     /**
@@ -76,7 +79,7 @@ class RecitImage
      * Set title
      *
      * @param string $title
-     * @return RecitImage
+     * @return string
      */
     public function setTitle($title)
     {
@@ -95,21 +98,6 @@ class RecitImage
         return $this->title;
     }
 
-    /**
-     * @param string $imageName
-     */
-    public function setImageName($imageName)
-    {
-        $this->imageName = $imageName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageName()
-    {
-        return $this->imageName;
-    }
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -138,6 +126,23 @@ class RecitImage
     {
         return $this->imageFile;
     }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
 
     /**
      * Set comment

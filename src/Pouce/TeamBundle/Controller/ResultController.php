@@ -6,6 +6,7 @@ use Pouce\TeamBundle\Entity\Comment;
 use Pouce\TeamBundle\Entity\Result;
 use Pouce\UserBundle\Entity\User;
 use Pouce\TeamBundle\Entity\Position;
+use Pouce\TeamBundle\Entity\RecitImage;
 use Pouce\TeamBundle\Form\ResultType;
 use Pouce\TeamBundle\Form\PositionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -115,19 +116,54 @@ class ResultController extends Controller
 			$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
 			$team=$repository->getLastTeam($user->getId())->getSingleResult();
 			$comment->setTeam($team);
-			$comment->setBlock($_FILES);
-
-			exit(\Doctrine\Common\Util\Debug::dump($request->request));
+			$comment->setBlock($request->request->get("aventureForm"));
 
 			//Enregistrement
-			// $em->persist($comment);
-			// $em->flush();
+			$em->persist($comment);
+			$em->flush();
 
 
 		}
 		return $this->render('PouceTeamBundle:Team:createComment.html.twig', array(
 			'form'=>$form->createView(),
 			));
+	}
+
+	/*
+		Gere l'upload de photo en AJAX dans le formulaire de commentaire
+	*/
+	public function uploadPhotoAction(Request $request)
+	{
+		$user = $this->getUser();
+		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
+		$team = $repository->getLastTeam($user->getId())->getSingleResult();
+
+		$em = $this->getDoctrine()->getManager();
+
+		$image = new RecitImage();
+
+		//exit(\Doctrine\Common\Util\Debug::dump($request->files->get("attachment")["file"]));
+
+		$image->setImageFile($request->files->get("attachment")["file"]);
+
+		$em->persist($image);
+		$em->flush();
+
+		//$imageSaved = $this->getDoctrine()->getRepository('PouceTeamBundle:RecitImage')->findOneByImageName($request->get("attachment")['uid']);
+
+		$helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+		$path = $helper->asset($image, 'imageFile');
+
+        $response = json_encode(array(
+            'file' => array(
+            	'url' => $path
+            )
+	    ));
+
+
+    	return new JsonResponse($response);
+
+		//return new Response(exit(\Doctrine\Common\Util\Debug::dump($response)));
 	}
 
 	/*

@@ -121,12 +121,6 @@ class UserController extends Controller
     	$userManager = $this->container->get('fos_user.user_manager');
 		$userManager -> updateUser($user);
 
-    	// if ($form->handleRequest($request)->isValid()) {
-
-		// $user->setImageName($name);
-
-		// $uploadfile = $request->request->get('uploadfile');
-
     	return new Response(json_encode(array('success' => true, 'file' => $user->getImageName())));
 
     }

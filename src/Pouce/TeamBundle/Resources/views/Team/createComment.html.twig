@@ -23,28 +23,31 @@
 		<script src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 
-	<script>
-	  new SirTrevor.Editor({ el: $('.js-st-instance') });
-	</script>
 
-	{# A vérifier : Semble ne pas fonctionner correctement (ne prend pas en compte les différents type de blocs) #}
+	{# TODO : Add Image upload and tweet blocks #}
 	<script>
 	$(function() {
 		SirTrevor.DEBUG = true;
 		var form = $('#post-form');
 	 
 		new SirTrevor.Editor({
-			el: $('#st-content'),
+			el: $('.js-st-instance'),
 			blockTypes: [
+				"Heading",
 				"Text",
-				"Video",
-				"Image"
+				"List",
+				"Quote",
+				"Image",
+				"Video"
 			],
-			defaultType: "Text",
+			blockTypeLimits: {
+				"Image": 5
+			},
+			required: ["Text"],
 		});
 	 
 		SirTrevor.setDefaults({
-			uploadUrl: "/upload"
+			uploadUrl: "{{ path('pouce_comment_photo_upload') }}"
 		});
 	});
 	</script>
@@ -57,8 +60,19 @@
 	<h3>Raconte ton aventure</h3>
 
 	<form method="post" name="form" action="{{ path('pouce_comment_create')}}">
-	  <textarea name="aventureForm" id="form_name"class="js-st-instance"></textarea>
-	  <input type="submit" /> 
+		<textarea name="aventureForm" id="form_name"class="js-st-instance">
+	  	{"data":[
+	  		{
+	  			"type":"heading","data":{"text":"Titre de l'aventure","isHtml":true}
+	  		},
+	  		{
+	  			"type":"text","data":{"text":"Bonjour, Ceci est **l'éditeur d'aventure du Pouce d'Or**.\n Ajoutez des nouveaux blocks pour mettre du texte, des titres, des photos (maximum 5)... \n"}
+	  		}
+	  	]}
+		</textarea>
+		<button class="btn waves-effect waves-light" type="submit">Valider
+	    	<i class="material-icons right">send</i>
+		</button>
 	</form>
 
 	{# {{form(form)}} #}

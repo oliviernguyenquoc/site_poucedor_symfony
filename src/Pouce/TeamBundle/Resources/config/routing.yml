@@ -10,6 +10,12 @@ pouce_comment_create:
     path:   /comment/create
     defaults: { _controller: PouceTeamBundle:Result:createComment }
 
+pouce_comment_photo_upload:
+    path:   /comment/uploadPhoto
+    defaults: { _controller: PouceTeamBundle:Result:uploadPhoto }
+    requirements:
+        _method: POST
+
 pouce_result_show:
     path:   /result/{id}
     defaults: { _controller: PouceTeamBundle:Result:showResult }

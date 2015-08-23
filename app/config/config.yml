@@ -92,7 +92,7 @@ fos_user:
     user_class:    Pouce\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
     registration:
         form:
-            type: pouce_user_registration #Le custom form que l'on va utiliser
+            type:  pouce_user_registration #Le custom form que l'on va utiliser
 
 # Uploader Bundle Configuration
 vich_uploader:
@@ -102,15 +102,13 @@ vich_uploader:
             uri_prefix:         /images/profil
             upload_destination: %kernel.root_dir%/../web/images/profil
             namer:              vich_uploader.namer_uniqid
-
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
-
         recits_images:
             uri_prefix:         /images/recits
             upload_destination: %kernel.root_dir%/../web/images/recits
-
+            namer:              vich_uploader.namer_uniqid
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
