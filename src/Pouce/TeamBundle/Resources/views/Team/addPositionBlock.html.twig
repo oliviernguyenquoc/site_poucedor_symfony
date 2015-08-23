@@ -9,20 +9,21 @@
 		Vérifiez bien vos informations. Ils nous permetterons de vous suivre pendante toute la durée du concours
 	</p>
 
-	{# {{ form_widget(form.country) }} #}
-
-	{# {{ form_widget(form.city) }} #}
 	{# Autocomplete part #}
-	<div class="dropdown-button" data-activates="ui-id-1">
-		<div id='city'></div>
-	</div>
-	<select disabled id="pays">
-	    <option value="1" disabled selected>Pays</option>
-  	</select>
-{# 		[{% for city in results -%}
-	    {{ {id: city.id, label: city.name, value: city.name}|json_encode|raw }}
-	    {%- if not loop.last %},{% endif -%}
-	{%- endfor %}] #}
+	<div class="row">
 
+		<div class="col s12 m6">
+			<div class="dropdown-button" data-activates="ui-id-1">
+				<div id='city'></div>
+			</div>
+		</div>
+
+		<div class="col s12 m6">
+			<select disabled id="pays">
+			    <option value="1" disabled selected>Pays</option>
+		  	</select>
+		  </div>
+
+  	</div>
 	<input type="submit" class="btn btn-primary" /> 
 </form>

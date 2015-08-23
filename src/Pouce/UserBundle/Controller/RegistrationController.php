@@ -15,6 +15,9 @@ use FOS\UserBundle\Controller\RegistrationController as BaseController;
 
 class RegistrationController extends BaseController
 {
+    /**
+    *   Ré-écriture de la fonction register du FOSUserBundle pour pouvoir ajouter l'envoie d'une notification pushbullet
+    */
     public function registerAction(Request $request)
     {
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */

@@ -33,7 +33,22 @@ class UserType extends AbstractType
                 'empty_data'  => null,
                 'label' => 'Sexe :'
             ))
-            ->add('promotion', 'text', array(
+            ->add('promotion', 'choice', array(
+                'choices' => array(
+                    "Licence 1"                                            => "Bac +1", 
+                    "Licence 2"                                            => "Bac +2", 
+                    "Licence 3"                                            => "Bac +3", 
+                    "Master 1"                                             => "Bac +4", 
+                    "Master 2"                                             => "Bac +4", 
+                    "Mastère spécialisé"                                   => "Bac +6",
+                    "Doctorant"                                            => "Doctorant",
+                    "1ère année de prépa"                                  => "Bac +1",
+                    "2ème année de prépa (3/2)"                            => "Bac +2",
+                    "3ème année de prépa (5/2)"                            => "Bac +3",
+                    "1ère année d'école (cycle ingénieur/manageur)"        => "Bac +3",
+                    "2ème année d'école (cycle ingénieur/manageur)"        => "Bac +4",
+                    "3ème année d'école (cycle ingénieur/manageur)"        => "Bac +5"
+                ),
                 'label'=> 'Promotion :',
                 'required'    => true
             ))

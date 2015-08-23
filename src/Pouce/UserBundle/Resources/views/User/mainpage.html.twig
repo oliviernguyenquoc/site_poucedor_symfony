@@ -2,7 +2,7 @@
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
 {# Dans notre layout, il faut définir le block body #}
-{% block body %}
+{% block site_body %}
 
 	<h1>Page personnel</h1>
 
@@ -32,16 +32,4 @@
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    <script>
-        $(document).ready(function() {
-            $('select').material_select();
-        });
-    </script>
-
-    //Test
-
-    {# Full Page JS #}
-    {# <script src="{{ asset('js/jquery-ui.js') }}"></script>
-    <script src="{{ asset('js/autocompleter-jqueryui.js') }}"></script>
-    <script src="{{ asset('js/position.js') }}"></script> #}
 {% endblock %}

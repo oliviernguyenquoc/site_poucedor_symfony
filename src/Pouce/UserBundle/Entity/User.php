@@ -49,6 +49,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank(message="Entrez votre promotion.", groups={"updateRegistration"})
+     * @Assert\Choice({"Bac +1 (L1)", "Bac +2 (L2)", "Bac +3 (L3 / 1ère année)", "Bac +4 (M1 / 2ème année)", "Bac +5 (M2 / 3ème année)", "Mastère spécialisé", "Doctorant"})
      */
     protected $promotion;
 

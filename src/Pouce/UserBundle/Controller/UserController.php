@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
+	/**
+	*	Page qui demande à l'utilisateur de complèter son profil
+	*/
 	public function addInformationsAction()
   	{
   		$request = $this->getRequest();
@@ -69,6 +72,9 @@ class UserController extends Controller
   		}
   	}
 
+  	/**
+  	*	Gère la page d'administration des chefs pouceux (page récapitulative de leurs équipes ...)
+  	*/
 	public function organisationPageAction()
     {
         $user=$this->getUser();
@@ -110,6 +116,9 @@ class UserController extends Controller
         	));
     }
 
+    /**
+	*	Gère l'upload de l'image de profil d'user
+    */
     public function uploadImageProfilAction(Request $request)
     {
     	$user=$this->getUser();

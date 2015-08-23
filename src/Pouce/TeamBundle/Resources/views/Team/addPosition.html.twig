@@ -12,17 +12,13 @@
 		<script src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 
-	{# Full Page JS #}
-	{# <script src="{{ asset('js/jquery-ui.js') }}"></script>
-	<script src="{{ asset('js/autocompleter-jqueryui.js') }}"></script>
-	<script src="{{ asset('js/position.js') }}"></script> #}
-
 {% endblock %} 
 
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
 
 	<h3>Enregistre ta position actuelle</h3>
+
 
 	<form method="post" {{ form_enctype(form) }} action="{{ path('pouce_position_add')}}">
 
@@ -33,28 +29,23 @@
 			Vérifiez bien vos informations. Ils nous permetterons de vous suivre pendante toute la durée du concours
 		</p>
 
-		{# {{ form_widget(form.country) }} #}
+		<div class="row">
 
-		{# {{ form_widget(form.city) }} #}
-		{# Autocomplete part #}
-		<div class="dropdown-button" data-activates="ui-id-1">
-			<div id='city'></div>
-		</div>
-		<select disabled id="pays">
-		    <option value="1" disabled selected>Pays</option>
-	  	</select>
-{# 		[{% for city in results -%}
-		    {{ {id: city.id, label: city.name, value: city.name}|json_encode|raw }}
-		    {%- if not loop.last %},{% endif -%}
-		{%- endfor %}] #}
+			<div class="col s12 m6">
+				<div class="dropdown-button" data-activates="ui-id-1">
+					<div id='city'></div>
+				</div>
+			</div>
+
+			<div class="col s12 m6">
+				<select disabled id="pays">
+				    <option value="1" disabled selected>Pays</option>
+			  	</select>
+			 </div>
+
+	  	</div>
 
 		<input type="submit" class="btn btn-primary" /> 
 	</form>
-
-	<script>
-		$(document).ready(function() {
-	    	$('select').material_select();
-		});
-	</script>
 
 {% endblock %}

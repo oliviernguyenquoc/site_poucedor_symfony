@@ -18,6 +18,9 @@ use Sioen\Converter;
 
 class ResultController extends Controller
 {
+	/**
+	*	Ajoute un résultat (Une position, une équipe, une édition, un rang...)
+	*/
 	public function addResultAction(Request $request)
 	{
 
@@ -50,11 +53,13 @@ class ResultController extends Controller
 
 				// Ajout d'un point dans la base de données et liaison résultat <-> Point
 				$trajet = $this->container->get('pouce_team.trajet');
-				$town=$form->get('position')->get('city')->getData();
-				$country=$form->get('position')->get('country')->getData();
-				$arrivee=$trajet->location($town,$country);
-				$longArrivee=$arrivee[0]["lon"];
-				$latArrivee=$arrivee[0]["lat"];
+				$town = $form->get('position')->get('city')->getData();
+				$repositoryCity = $this->getDoctrine()->getRepository('PouceSiteBundle:City');
+				$country = $repositoryCity->findOneByName($town)->getCountry()->getName();
+
+				$arrivee = $trajet->location($town,$country);
+				$longArrivee = $arrivee[0]["lon"];
+				$latArrivee = $arrivee[0]["lat"];
 
 				//Calcule du trajet
 				$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
@@ -92,7 +97,7 @@ class ResultController extends Controller
 	*/
 	public function createCommentAction(Request $request)
 	{
-		$comment= new Comment();
+		$comment = new Comment();
 
 		// On crée le FormBuilder grâce au service form factory
 		$formBuilder = $this->get('form.factory')->createBuilder('form', $comment);
@@ -112,9 +117,9 @@ class ResultController extends Controller
 
 		if($request->getMethod() == 'POST'){
 			$em = $this->getDoctrine()->getManager();
-			$user=$this->getUser();
+			$user = $this->getUser();
 			$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-			$team=$repository->getLastTeam($user->getId())->getSingleResult();
+			$team = $repository->getLastTeam($user->getId())->getSingleResult();
 			$comment->setTeam($team);
 			$comment->setBlock($request->request->get("aventureForm"));
 
