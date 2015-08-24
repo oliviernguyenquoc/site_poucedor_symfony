@@ -1,4 +1,4 @@
-{% extends "PouceSiteBundle::layout.html.twig" %} 
+{% extends "PouceSiteBundle::layout.html.twig" %}
 
 {% block stylesheets %}
 
@@ -8,19 +8,19 @@
   		  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 	{% endstylesheets %}
 
-{% endblock %} 
+{% endblock %}
 
 {% block javascript %}
-	
+
 	{% javascripts filter='?yui_js'
 		'js/jquery.fullPage.min.js'
-		'js/index.js' 
-		'js/facebook.js' 
+		'js/index.js'
+		'js/facebook.js'
 		'js/twitter.js' %}
 		<script src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 
-{% endblock %} 
+{% endblock %}
 
 {% block body %}
 
@@ -50,7 +50,7 @@
 	                    <br/>
 	                    <br/> Vous partez pour un week-end entier, vous allez donc avoir besoin d’un minimum d’affaires. Nous vous conseillons...
 	                </p>
-	                <a href="{{ path('pouce_site_conseils') }}"><span class="read_more">En lire plus...</span></a>
+	                <a href="{{ path('pouce_site_conseils') }}"><span class="read_more">En savoir plus...</span></a>
 	            </div>
 	        </div>
 	        <div class="col s12 m4">
@@ -67,7 +67,7 @@
 	                    <br/>
 	                    <b>Samedi 03 octobre à 8h20</b> : Rendez-vous au point de rencontre pour les derniers points de sécurité et la distribution des ...
 	                </p>
-	                <a href="{{ path('pouce_site_edition') }}"><span class="read_more">En lire plus...</span></a>
+	                <a href="{{ path('pouce_site_edition') }}"><span class="read_more">En savoir plus...</span></a>
 	            </div>
 	        </div>
 	        <div class="col s12 m4">
@@ -80,7 +80,7 @@
 	                    <br/>
 	                    <br/> Ici repose en paix, sur un serveur dont la localisation m'est inconnue, la mémoire des vétérans du Pouce d'Or qui sont aujourd'hui des gens très serieux (ou pas) mais qui gardent en eux le souvenir d'un week-end démentiel passé à silloner les routes d'Europe ...
 	                </p>
-	                <a href="{{ path('pouce_site_archives') }}"><span class="read_more">En lire plus...</span></a>
+	                <a href="{{ path('pouce_site_archives') }}"><span class="read_more">En savoir plus...</span></a>
 	            </div>
 	        </div>
 	    </div>
@@ -182,5 +182,5 @@
 	        </div>
 	    </div>
 	</div>
-	
+
 {% endblock %}
