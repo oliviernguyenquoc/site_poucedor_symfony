@@ -159,8 +159,9 @@ class UserController extends Controller
 			}
 		}
 		return $this->render('PouceUserBundle:User:editUser.html.twig', array(
-				  'form' => $form->createView(),
-				  'id' => $id
+				  'form' 			=> $form->createView(),
+				  'photoFileName' 	=> $user->getImageName(),
+				  'id' 				=> $id
 				));
 	}
 

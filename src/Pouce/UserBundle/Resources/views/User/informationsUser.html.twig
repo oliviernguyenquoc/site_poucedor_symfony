@@ -12,5 +12,6 @@
 		    Email : {{ user.email }}<br/>
 		    Téléphone : {{ user.telephone }}
 		</p>
+		<a href="{{ path('pouce_user_edit', {'id': user.id}) }}">Editer</a>
 	</div>
 </div>
