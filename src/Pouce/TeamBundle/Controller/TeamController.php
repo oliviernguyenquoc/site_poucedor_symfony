@@ -80,7 +80,9 @@ class TeamController extends Controller
 		return $this->redirect('PouceSiteBundle:Site:index.html.twig');
 	}
 
-
+	/**
+	*	Pour modifier les informations d'une équipe
+	*/
 	public function editTeamAction($id, Request $request)
 	{
 		$em = $this->getDoctrine()->getEntityManager();

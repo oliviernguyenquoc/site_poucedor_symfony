@@ -1,0 +1,123 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	<h3>Formulaire d'inscription (Edition du formulaire)</h3>
+
+	<div class="row">
+    <div class="col s12 m2">
+        <div id="picBox">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 m4">
+        <button id="uploadBtn" class="btn btn-large btn-primary">Choose File</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 m4">
+        <div id="progressOuter" class="progress progress-striped active" style="display:none;">
+            <div id="progressBar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-10">
+        <div id="msgBox">
+        </div>
+    </div>
+</div>
+
+	<form method="post" {{ form_enctype(form) }} action="{{ path('pouce_user_edit', {'id' : id })}}">
+
+		{# Les erreurs générales du formulaire. #}
+		{{ form_errors(form) }}
+
+		<p>
+			Vérifiez bien vos informations.
+		</p>
+
+		<div>
+			{{ form_rest(form) }}
+			{# Add checkbox #}
+			<input type="submit" class="btn btn-primary" /> 
+		</div>
+	</form>
+
+
+{% endblock %}
+
+
+{% block javascript %}
+      {{ parent() }}
+
+
+<script src="{{ asset('js/SimpleAjaxUploader.min.js') }}"></script>
+
+<script>
+function escapeTags( str ) {
+  return String( str )
+           .replace( /&/g, '&amp;' )
+           .replace( /"/g, '&quot;' )
+           .replace( /'/g, '&#39;' )
+           .replace( /</g, '&lt;' )
+           .replace( />/g, '&gt;' );
+}
+window.onload = function() {
+  var btn = document.getElementById('uploadBtn'),
+      progressBar = document.getElementById('progressBar'),
+      progressOuter = document.getElementById('progressOuter'),
+      msgBox = document.getElementById('msgBox');
+      picBox = document.getElementById('picBox');
+  var uploader = new ss.SimpleUpload({
+        button: btn,
+        url: '{{ path("pouce_user_uploadImageProfil") }}',
+        name: 'uploadfile',
+        hoverClass: 'hover',
+        focusClass: 'focus',
+        responseType: 'json',
+        multipart: true,
+        startXHR: function() {
+            progressOuter.style.display = 'block'; // make progress bar visible
+            this.setProgressBar( progressBar );
+        },
+        onSubmit: function() {
+            msgBox.innerHTML = ''; // empty the message box
+            picBox.innerHTML = ''; // empty the picture box
+            btn.innerHTML = 'Téléchargement...'; // change button text to "Uploading..."
+          },
+        onComplete: function( filename, response ) {
+            btn.innerHTML = 'Choose Another File';
+            progressOuter.style.display = 'none'; // hide progress bar when upload is completed
+            if ( !response ) {
+                msgBox.innerHTML = 'Impossible de télécharger le fichier';
+                return;
+            }
+            if ( response.success === true ) {
+                msgBox.innerHTML = '<strong>' + escapeTags( filename ) + '</strong>' + ' Téléchargement réussie';
+                var urlImage = '{{ asset("images/profil/file")}}';
+                urlImage = urlImage.replace("file", response.file);
+                picBox.innerHTML = '<img class="circle responsive-img" src="'+urlImage+'">';
+            } else {
+                if ( response.msg )  {
+                    msgBox.innerHTML = escapeTags( response.msg );
+                } else {
+                    msgBox.innerHTML = 'Une erreur s\'est produite et le téléchargement a échoué';
+                }
+            }
+          },
+        onError: function() {
+            progressOuter.style.display = 'none';
+            msgBox.innerHTML = 'Impossible de télécharger le fichier';
+          }
+    });
+};
+</script>
+
+{% endblock %}

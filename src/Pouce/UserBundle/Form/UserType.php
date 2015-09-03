@@ -5,6 +5,7 @@ namespace Pouce\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 
 class UserType extends AbstractType
 {
@@ -34,20 +35,9 @@ class UserType extends AbstractType
                 'label' => 'Sexe :'
             ))
             ->add('promotion', 'choice', array(
-                'choices' => array(
-                    "Licence 1"                                            => "Bac +1", 
-                    "Licence 2"                                            => "Bac +2", 
-                    "Licence 3"                                            => "Bac +3", 
-                    "Master 1"                                             => "Bac +4", 
-                    "Master 2"                                             => "Bac +4", 
-                    "Mastère spécialisé"                                   => "Bac +6",
-                    "Doctorant"                                            => "Doctorant",
-                    "1ère année de prépa"                                  => "Bac +1",
-                    "2ème année de prépa (3/2)"                            => "Bac +2",
-                    "3ème année de prépa (5/2)"                            => "Bac +3",
-                    "1ère année d'école (cycle ingénieur/manageur)"        => "Bac +3",
-                    "2ème année d'école (cycle ingénieur/manageur)"        => "Bac +4",
-                    "3ème année d'école (cycle ingénieur/manageur)"        => "Bac +5"
+                'choice_list' => new ChoiceList(
+                    array("Bac +1"      , "Bac +2"      , "Bac +3"      , "Bac +4"  , "Bac +5"  , "Bac +6"              , "Doctorant", "Bac +1"             , "Bac +2"                      , "Bac +3"                      , "Bac +3"                                          , "Bac +4"                                          , "Bac +5"                                          ),  
+                    array("Licence 1"   , "Licence 2"   , "Licence 3"   , "Master 1", "Master 2", "Mastère spécialisé"  , "Doctorant", "1ère année de prépa", "2ème année de prépa (3/2)"   , "3ème année de prépa (5/2)"   , "1ère année d'école (cycle ingénieur/manageur)"   , "2ème année d'école (cycle ingénieur/manageur)"   , "3ème année d'école (cycle ingénieur/manageur)"   )
                 ),
                 'label'=> 'Promotion :',
                 'required'    => true

@@ -18,8 +18,6 @@ pouce_user_uploadImageProfil:
     requirements:
         _method:  POST
 
-pouce_user_editUserPage:
-    path:     /editUserPage
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template: 'PouceUserBundle:User:editUserPage.html.twig'
+pouce_user_edit:
+    path:     /edit/{id}
+    defaults: { _controller: PouceUserBundle:User:editUser }

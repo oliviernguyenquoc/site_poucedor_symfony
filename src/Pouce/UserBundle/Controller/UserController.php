@@ -4,6 +4,7 @@ namespace Pouce\UserBundle\Controller;
 
 use Pouce\UserBundle\Entity\User;
 use Pouce\UserBundle\Form\UserType;
+use Pouce\UserBundle\Form\UserEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\NoResultException;
@@ -133,5 +134,34 @@ class UserController extends Controller
     	return new Response(json_encode(array('success' => true, 'file' => $user->getImageName())));
 
     }
+
+   	/**
+	*	Pour modifier les informations d'un user
+	*/
+    public function editUserAction($id, Request $request)
+	{
+		$em = $this->getDoctrine()->getEntityManager();
+
+		$user=$team = $em ->getRepository('PouceUserBundle:User')->find($id);
+
+
+		$form = $this->get('form.factory')->create(new UserEditType(), $user);
+
+		if($request->getMethod() == 'POST') {
+			$form->bind($request);
+
+			if($form->isValid()){
+				//On enregistre la team
+				$userManager = $this->container->get('fos_user.user_manager');
+				$userManager -> updateUser($user);
+
+				return $this->redirect($this->generateUrl('pouce_site_homepage'));
+			}
+		}
+		return $this->render('PouceUserBundle:User:editUser.html.twig', array(
+				  'form' => $form->createView(),
+				  'id' => $id
+				));
+	}
 
 }
