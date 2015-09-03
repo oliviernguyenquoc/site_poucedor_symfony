@@ -46,6 +46,8 @@ class RegistrationController extends BaseController
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
+            $user->setImageName('default.png');
+
             $userManager->updateUser($user);
 
             /*******************************************************
@@ -53,9 +55,6 @@ class RegistrationController extends BaseController
             ********************************************************/
 
 			$message="Email : ".$user->getEmail()." \n"."Ecole : ".$user->getSchool()->getName()."\n"."Id : ".$user->getId();
-
-
-			//exit(\Doctrine\Common\Util\Debug::dump($user->getSchool()->getName()));
 
 			$curl = curl_init('https://api.pushbullet.com/v2/pushes');
 

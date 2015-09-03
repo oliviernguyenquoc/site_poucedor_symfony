@@ -1,7 +1,16 @@
-<p>
-    Nom : {{ user.firstName }} {{ user.lastName }}<br/>
-    Sexe : {{ user.sex }}<br/>
-    Promotion : {{ user.promotion }}<br/>
-    Email : {{ user.email }}<br/>
-    Téléphone : {{ user.telephone }}
-<p>
+<div class="row">
+    <div class="col s12 m3 center-on-small-only">
+        <div class="image-container">
+			<img class="circle responsive-img" src="{{ asset('images/profil/' ~ user.imageName ~ '') }}">
+		</div>
+    </div>
+    <div class="col s12 m9">
+        <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+        <p>
+		    Sexe : {{ user.sex }}<br/>
+		    Promotion : {{ user.promotion }}<br/>
+		    Email : {{ user.email }}<br/>
+		    Téléphone : {{ user.telephone }}
+		</p>
+	</div>
+</div>

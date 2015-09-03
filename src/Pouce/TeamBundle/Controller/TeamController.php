@@ -110,6 +110,11 @@ class TeamController extends Controller
 				));
 	}
 
+	/**
+	*	Le but de cette focntion est de proposer de s'inscrire à la prochaine course si il y a, 
+	*	d'afficher l'équipe dans lequel il est inscrit 
+	*	ou de proposer de rentrer une position si une édition est en cours dans laquelle le user est inscrit.
+	*/
 	public function adaptativeViewAction()
 	{
 		$user = $this->getUser();
@@ -166,43 +171,31 @@ class TeamController extends Controller
 		}
 		else
 		{
-			// On regarde si le user a participer a au moins 1 édition
-			if($teamService->isRegisterToPreviousRace($user))
+			//On récupère le statut de la course (In progress, registering ...)
+			$em = $this->getDoctrine()->getEntityManager();
+			$edition = $em->getRepository('PouceSiteBundle:Edition')->findPreviousEditionBySchool($user);
+
+			$raceStatus=$edition->getStatus();
+
+
+			// On regarde si le user a participer a au moins 1 édition et que cette édition est en train de se dérouller
+			if(($teamService->isRegisterToPreviousRace($user)) && $raceStatus=="in progress")
 			{
-				//On 
-				$em = $this->getDoctrine()->getEntityManager();
-				$edition = $em->getRepository('PouceSiteBundle:Edition')->findPreviousEditionBySchool($user);
-
-				$raceStatus=$edition->getStatus();
-
-				//L'édition est fini, on propose d'entrer ses résultats
-				if($raceStatus=="finished")
-				{
-					// Donne le résultat et propose de le modifier si besoin. 
-					// S'il n'y a pas encore de résultat rentré, cela met un lien vers le formulaire d'ajout de résultat
-		  			return $this->render('PouceUserBundle:User:results.html.twig');
-				}
 				// Edition in progress. On propose d'entrer sa position
-				if($raceStatus=="in progress")
-				{
-					$user = $this->getUser();
-					$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-					$team = $repository->getLastTeam($user->getId())->getSingleResult();
 
-					$position= new Position();
+				$user = $this->getUser();
+				$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
+				$team = $repository->getLastTeam($user->getId())->getSingleResult();
 
-					// On crée le FormBuilder grâce au service form factory
-					$form = $this->get('form.factory')->create(new PositionType(), $position);
+				$position= new Position();
 
-					// Donne la dernière position et propose d'en ajouter une
-					return $this->render('PouceTeamBundle:Team:addPositionBlock.html.twig', array(
-						'form'=>$form->createView()
-						));
-				}
-				else
-				{
-					throw new Exception("Error : Race status not handled", 1);
-				}
+				// On crée le FormBuilder grâce au service form factory
+				$form = $this->get('form.factory')->create(new PositionType(), $position);
+
+				// Donne la dernière position et propose d'en ajouter une
+				return $this->render('PouceTeamBundle:Team:addPositionBlock.html.twig', array(
+					'form'=>$form->createView()
+					));
 			}
 			// Il n'y a pas de prochaine édition et le user n'a jamais participer. On lui demande de rester au courrant pour la prochaine édition
 			else

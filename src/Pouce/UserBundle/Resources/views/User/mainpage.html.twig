@@ -6,15 +6,31 @@
 
 	<h1>Page personnel</h1>
 
-    {% for flashMessage in app.session.flashbag.get('updateInformations') %}
-        {{ flashMessage }}
-    {% endfor %}
+    <div class="row">
 
-    {# Affiche les informations de l'utilisateur #}
-    {{ render(controller("PouceUserBundle:User:informations")) }}
+        {% for flashMessage in app.session.flashbag.get('updateInformations') %}
+            {{ flashMessage }}
+        {% endfor %}
 
-    {# Affiche la nouvelle course ou les résultats ou un message pour attendre la prochaine course #}
-    {{ render(controller("PouceTeamBundle:Team:adaptativeView")) }}
+        {# Affiche les informations de l'utilisateur #}
+        {{ render(controller("PouceUserBundle:User:informations")) }}
+
+    </div>
+
+    <div class="row">
+        <div class="col s12 m6">
+
+            {# Affiche la nouvelle course ou les résultats ou un message pour attendre la prochaine course #}
+            {{ render(controller("PouceTeamBundle:Team:adaptativeView")) }}
+
+        </div>
+        
+        <div class="col s12 m6">
+
+            <h3>Résultats des courses précédentes</h3>
+
+        </div>
+    </div>
 
     {# TODO  #}
     {# {{ render(controller("PouceTeamBundle:Team:previousRace")) }} #}
