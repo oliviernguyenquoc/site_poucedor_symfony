@@ -122,8 +122,8 @@ class UserController extends Controller
     */
     public function uploadImageProfilAction(Request $request)
     {
-    	$user=$this->getUser();
-    	$id=$user->getId();
+    	$user = $this->getUser();
+    	$id = $user->getId();
     	$data = $request->files->get("uploadfile");
 
     	$user->setImageFile($data);
@@ -131,9 +131,44 @@ class UserController extends Controller
     	$userManager = $this->container->get('fos_user.user_manager');
 		$userManager -> updateUser($user);
 
+		// $data = $user->getImageFile();
+
+		// $img = $this->crop($data);
+		// exit(\Doctrine\Common\Util\Debug::dump($img));
+
+		// $user->setImageFile($img);
+
+		// $userManager -> updateUser($user);
+
     	return new Response(json_encode(array('success' => true, 'file' => $user->getImageName())));
 
     }
+
+    // Crop to have a sqare image (not working : problem with type)
+   	private function crop($img)
+	{
+		$cx = $img->getWidth();
+		$cy = $img->getHeight();
+		if($cx>$cy)
+		{
+			$widthImage = $cy;
+			$heightImage = $cy;
+			$x = ($cx - $cy)/2;
+			$y = 0;
+		}
+		else if($cx<$cy)
+		{
+			$widthImage = $cx;
+			$heightImage = $cx;
+			$x = 0;
+			$y = ($cy - $cx)/2;
+		}
+		if($cx != $cy)
+		{
+			$img=imagecrop($img, array($x, $y, $widthImage, $heightImage));
+		}
+		return $img;
+	}
 
    	/**
 	*	Pour modifier les informations d'un user

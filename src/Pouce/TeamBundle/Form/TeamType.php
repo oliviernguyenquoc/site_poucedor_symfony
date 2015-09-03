@@ -48,7 +48,7 @@ class TeamType extends AbstractType
             ->add('users','entity', array(
                 'class'=>'PouceUserBundle:User',
                 'label' => 'Co-équipié',
-                'property'=>'first_name',
+                'property'=>'completeName',
                 'query_builder' => function(\Pouce\UserBundle\Entity\UserRepository $er) use($schoolId,$userYear) {
                     return $er-> getAllUsersInSchool($schoolId,$userYear);
                 },

@@ -322,6 +322,10 @@ class User extends BaseUser
         $this->teams = new ArrayCollection();
     }
 
+    public function getCompleteName() {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
     /**
      * Add teams
      *

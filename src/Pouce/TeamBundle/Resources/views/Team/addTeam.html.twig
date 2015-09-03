@@ -24,13 +24,22 @@
 		<div class="cadre1">
 			<h4>Vos informations</h4>
 
-			<p>
-				Nom : {{ user.firstName }} {{ user.lastName }}<br/>
-				Sexe : {{ user.sex }}<br/>
-				Promotion : {{ user.promotion }}<br/>
-				Email : {{ user.email }}<br/>
-				Téléphone : {{ user.telephone }}
-			</p>
+			<div class="row">
+			    <div class="col s12 m3 center-on-small-only">
+			        <div class="image-container">
+						<img class="circle responsive-img" src="{{ asset('images/profil/' ~ user.imageName ~ '') }}">
+					</div>
+			    </div>
+			    <div class="col s12 m9">
+			        <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+			        <p>
+					    Sexe : {{ user.sex }}<br/>
+					    Promotion : {{ user.promotion }}<br/>
+					    Email : {{ user.email }}<br/>
+					    Téléphone : {{ user.telephone }}
+					</p>
+				</div>
+			</div>
 		</div>
 
 		<div class="cadre2">
@@ -38,11 +47,12 @@
 		</div>
 
 		<div class="cadre3">
-			{{ form_widget(teamForm.teamName) }}
-			{{ form_widget(teamForm.targetDestination) }}
+			{{ form_row(teamForm.teamName) }}
+			{{ form_row(teamForm.targetDestination) }}
 			<div class="input-field">
-				{{ form_widget(teamForm.comment, { 'attr': {'class': 'materialize-textarea'} }) }}
+				{{ form_row(teamForm.comment, { 'attr': {'class': 'materialize-textarea'} }) }}
 			</div>
+			{{ form_row(teamForm.users) }}
 			{{ form_rest(teamForm) }}
 			{# Add checkbox #}
 			<input type="submit" class="btn btn-primary" /> 

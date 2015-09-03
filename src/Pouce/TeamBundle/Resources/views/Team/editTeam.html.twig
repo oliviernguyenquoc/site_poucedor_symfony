@@ -18,10 +18,10 @@
 		</p>
 
 		<div>
-			{{ form_widget(teamForm.teamName) }}
-			{{ form_widget(teamForm.targetDestination) }}
+			{{ form_row(teamForm.teamName) }}
+			{{ form_row(teamForm.targetDestination) }}
 			<div class="input-field">
-				{{ form_widget(teamForm.comment, { 'attr': {'class': 'materialize-textarea'} }) }}
+				{{ form_row(teamForm.comment, { 'attr': {'class': 'materialize-textarea'} }) }}
 			</div>
 			{{ form_rest(teamForm) }}
 			{# Add checkbox #}
