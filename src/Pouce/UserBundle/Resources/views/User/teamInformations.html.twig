@@ -1,19 +1,33 @@
-<h2>Votre équipe pour l'édition du Pouce d'Or {{team.edition.dateOfEvent|date('Y')}}  : {{team.teamName}}</h2>
+<h4>Votre équipe pour l'édition du Pouce d'Or {{team.edition.dateOfEvent|date('Y')}}</h4>
 
-<div class="col s12 center">
-    Votre objectif : {{ team.targetDestination }}<br/>
-    <i>{{ team.comment }}</i><br/>
+<div class="row">
+	<div class="col s12 center">
+		<h5>{{team.teamName}}</h5>
+	    Votre objectif : {{ team.targetDestination }}<br/>
+	    <i>{{ team.comment }}</i><br/>
 
+	</div>
 </div>
 
-<div class="col s12 m6">
-    Nom : {{ user1.firstName }} {{ user1.lastName }}<br/>
-    Sexe : {{ user1.sex }}<br/>
-    Promotion : {{ user1.promotion }}<br/>
+<div class="row">
+	Votre co-équipié :
 </div>
 
-<div class="col s12 m6">
-    Nom : {{ user2.firstName }} {{ user2.lastName }}<br/>
-    Sexe : {{ user2.sex }}<br/>
-    Promotion : {{ user2.promotion }}<br/>
+<div class="row">
+	<div class="col s12 m3 center-on-small-only">
+        <div class="image-container">
+			<img class="circle responsive-img" src="{{ asset('images/profil/' ~ user2.imageName ~ '') }}">
+		</div>
+    </div>
+    <div class="col s12 m9">
+	    Nom : {{ user2.firstName }} {{ user2.lastName }}<br/>
+	    Sexe : {{ user2.sex }}<br/>
+	    Promotion : {{ user2.promotion }}<br/>
+	</div>
+</div>
+
+<div class="row">
+	<a href="{{ path('pouce_team_edit', {'id' : team.id })}}">Editer votre équipe</a><br/>
+	{# TODO #}
+	<a>Supprimer votre équipe</a>
 </div>

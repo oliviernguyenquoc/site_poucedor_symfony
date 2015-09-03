@@ -6,7 +6,7 @@
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
 
-	<h3>Formulaire d'inscription (Edition du formulaire)</h3>
+	<h3>Edition de l'équipe</h3>
 
 	<form method="post" {{ form_enctype(teamForm) }} action="{{ path('pouce_team_edit', {'id' : id })}}">
 
@@ -18,10 +18,26 @@
 		</p>
 
 		<div>
+			{{ form_widget(teamForm.teamName) }}
+			{{ form_widget(teamForm.targetDestination) }}
+			<div class="input-field">
+				{{ form_widget(teamForm.comment, { 'attr': {'class': 'materialize-textarea'} }) }}
+			</div>
 			{{ form_rest(teamForm) }}
 			{# Add checkbox #}
 			<input type="submit" class="btn btn-primary" /> 
 		</div>
 	</form>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+	<script>
+		$(document).ready(function() {
+	    	$('select').material_select();
+		});
+	</script>
 
 {% endblock %}
