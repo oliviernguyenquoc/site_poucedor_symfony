@@ -51,10 +51,12 @@ $( document ).ready(function(){
  
         if (wi <= 800)
         {
-            $("#FAB").hide();        
+            $("#FAB").hide();
+            $("h5.header").addClass('text-darken-4').removeClass('text-darken-2');       
         } else
         {
-            $("#FAB").show();   
+            $("#FAB").show(); 
+            $("h5.header").addClass('text-darken-2').removeClass('text-darken-4');
         }
      });  
 });

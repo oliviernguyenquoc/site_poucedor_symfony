@@ -47,9 +47,9 @@ a.twitter-timeline{
 
 }
 
-iframe[id^='twitter-widget-']{ 
+iframe.twitter-timeline{ 
   width: 90% !important;
-  height: 55vh;
+  height: 50vh !important;
 }
 
 #navbar{

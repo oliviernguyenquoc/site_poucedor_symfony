@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /
+Disallow: /web/images/8869967957540.jpg
