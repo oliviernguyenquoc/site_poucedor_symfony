@@ -85,12 +85,17 @@ stof_doctrine_extensions:
 
 # FOSUser Configuration
 fos_user:
-    db_driver:     orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
-    firewall_name: main                      # Le nom du firewall derrière lequel on utilisera ces utilisateurs
-    user_class:    Pouce\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
+    db_driver:          orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
+    firewall_name:      main                      # Le nom du firewall derrière lequel on utilisera ces utilisateurs
+    user_class:         Pouce\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
     registration:
+        confirmation:
+            enabled:    true
         form:
-            type:  pouce_user_registration #Le custom form que l'on va utiliser
+            type:       pouce_user_registration #Le custom form que l'on va utiliser
+    from_email:
+        address:        noreply@poucedor.fr
+        sender_name:    Pouce d'Or
 
 # Uploader Bundle Configuration
 vich_uploader:

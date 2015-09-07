@@ -105,3 +105,9 @@ pouce_site_listeEditionEcole:
 pouce_site_checkParticipants:
     path:     /admin/allmyusers/{editionId}
     defaults: { _controller: PouceSiteBundle:Site:organisationPage }
+
+pouce_site_conditions_générales:
+    path:     /condition_generales
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:condition_generales.html.twig'

@@ -402,6 +402,7 @@ class User extends BaseUser
     public function setImageName($imageName)
     {
         $this->imageName = $imageName;
+        $this->updatedAt = new \DateTime('now');
     }
 
     /**

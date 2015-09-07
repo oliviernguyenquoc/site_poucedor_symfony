@@ -1,19 +1,36 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-	<h1>Inscription au Pouce d'Or {{ 'now'|date('Y') }}</h1>
+	<h2>Inscription au site du Pouce d'Or</h2>
 
 
 	<blockquote style="margin-left:100px;">
-		Remplis bien tous les champs pour pouvoir participer.
-		<br/>Les mails et numéros de téléphone n'apparaîtront nulle part sur ce site. 
+		Remplis bien tous les champs pour pouvoir t'inscire.
+        <p>
+            Cela ne t'engage à rien. L'inscription à la course se fait dans un second temps (lors de la formation du binôme).
+        </p>
+		Les mails et numéros de téléphone n'apparaîtront nulle part sur ce site. 
 	</blockquote>
 
     <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+
         {{ form_widget(form) }}
+
+        <p>
+            <input type="checkbox" required />
+            <label>J'ai lu et j'accepte les conditions générales du site disponible <a href={{path('pouce_site_conditions_générales')}}>ici</a></label>
+        </p>
         
         <button class="btn waves-effect waves-light" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />Enregistrer
             <i class="material-icons right">send</i>
         </button>
     </form>
+
+    <br/>
+    <br/>
+    <p>
+    <i>
+        Les informations recueillies font l’objet d’un traitement informatique destiné à améliorer votre expérience du Pouce d'Or. Les destinataires des données sont les organisateurs de l'évènement. Conformément à la loi « Informatique et Libertés », vous bénéficiez d’un droit d’accès et de rectification aux informations qui vousconcernent. Si vous souhaitez exercer ce droit et obtenir communication des informations vous concernant, veuillez vous adresser à staff@poucedor.fr.
+    </i>
+    </p>
 {% endblock fos_user_content %}

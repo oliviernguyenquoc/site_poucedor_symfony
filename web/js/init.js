@@ -10,10 +10,28 @@ $( document ).ready(function(){
 });
 
 (function($){
-  $(function(){
+    $(function(){
 
-    $('.button-collapse').sideNav();
-    $('.parallax').parallax();
+        $('.button-collapse').sideNav();
+        $('.parallax').parallax();
 
-  }); // end of document ready
+    }); // end of document ready
 })(jQuery); // end of jQuery name space
+
+
+$(function(){
+
+    var requiredCheckboxes = $(':checkbox[required]');
+
+    requiredCheckboxes.change(function(){
+
+        if(requiredCheckboxes.is(':checked')) {
+            requiredCheckboxes.removeAttr('required');
+        }
+
+        else {
+            requiredCheckboxes.attr('required', 'required');
+        }
+    });
+
+});

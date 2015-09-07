@@ -9,7 +9,7 @@
 <div class="row">
 	<h1 class="center-align">Connexion</h1>
 
-	<form class=" col s12 m6 offset-m3" action="{{ path("fos_user_security_check") }}" method="post">
+	<form class="col s12 m6 offset-m3" action="{{ path("fos_user_security_check") }}" method="post">
 	    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
 	    <div class="input-field">
@@ -21,17 +21,23 @@
 		    <label for="password">Mot de passe</label>
 		    <input type="password" id="password" name="_password" required="required" />
 		</div>
-		<br/>
 
-	    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-	    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-	    <br/>
+		<div class="right-align">
+		    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+		    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+		</div>
 	    <br/>
 
 	    <button class="btn waves-effect waves-light" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />Connexion 
 	    	<i class="material-icons right">send</i>
 	    </button>
 	</form>
+</div>
+
+<div class="row">
+	<div class="col s12 m6 offset-m3">
+		Mot de passe oublié ? <a href={{ path('fos_user_resetting_request') }}>Cliquer ici</a>
+	</div>
 </div>
 
 
