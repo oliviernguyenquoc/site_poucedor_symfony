@@ -13,12 +13,12 @@ use Symfony\Component\Validator\Constraints\DateTime;
  */
 class EditionRepository extends EntityRepository
 {
-	public function findNextEditionBySchool($user)
+	public function findNextEditionByUserSchool($user)
 	{
-        $now = new \DateTime();
 		$qb = $this	-> createQueryBuilder('e')
-                    -> andWhere('e.dateOfEvent > :today')
-                     ->setParameter('today', $now->format("Y-m-d"))
+                    -> where('e.status = :statusScheduled OR e.status = :statusRegistering')
+                     ->setParameter('statusScheduled'   , 'scheduled')
+                     ->setParameter('statusRegistering' , 'registering')
                     -> join('e.schools','s')
                     -> andWhere('s.name = :schoolName')
                      ->setParameter('schoolName', $user->getSchool()->getName())
@@ -29,12 +29,11 @@ class EditionRepository extends EntityRepository
 		return $qb->getQuery();
 	}
 
-	public function findPreviousEditionBySchool($user)
+	public function findPreviousEditionByUserSchool($user)
 	{
-        $now = new \DateTime();
 		$qb = $this	-> createQueryBuilder('e')
-                    -> andWhere('e.dateOfEvent <= :today')
-                     ->setParameter('today', $now->format("Y-m-d"))
+                    -> where('e.status = :statusFinished')
+                     ->setParameter('statusFinished', 'finished')
                     -> join('e.schools','s')
                     -> andWhere('s.name = :schoolName')
                      ->setParameter('schoolName', $user->getSchool()->getName())
@@ -45,19 +44,59 @@ class EditionRepository extends EntityRepository
 		return $qb->getQuery()->getSingleResult();
 	}
 
+    public function findNextEditionBySchool($schoolId)
+    {
+        $qb = $this -> createQueryBuilder('e')
+                    -> where('e.status = :statusScheduled OR e.status = :statusRegistering')
+                     ->setParameter('statusScheduled'   , 'scheduled')
+                     ->setParameter('statusRegistering' , 'registering')
+                    -> join('e.schools','s')
+                    -> andWhere('s.id = :schoolId')
+                     ->setParameter('schoolId', $schoolId)
+                    -> orderBy('e.dateOfEvent','ASC')
+                    ->setMaxResults(1);
+                    
+        // DO NOT put "->getSingleResult()" here (because NoResultExeption cached somewhere else)
+        return $qb->getQuery();
+    }
+
+    public function findPreviousEditionBySchool($schoolId)
+    {
+        $qb = $this -> createQueryBuilder('e')
+                    -> where('e.status = :statusFinished')
+                     ->setParameter('statusFinished', 'finished')
+                    -> join('e.schools','s')
+                    -> andWhere('s.id = :schoolId')
+                     ->setParameter('schoolId', $schoolId)
+                    -> orderBy('e.dateOfEvent','DESC')
+                    ->setMaxResults(1);
+
+        // DO NOT put "->getSingleResult()" here (because NoResultExeption cached somewhere else)
+        return $qb->getQuery()->getSingleResult();
+    }
+
     public function findCurrentEditionBySchool($schoolId)
     {
-        $now = new \DateTime();
         $qb = $this -> createQueryBuilder('e')
-                    -> where('e.dateOfEvent <= :today')
-                     ->setParameter('today', $now->format("Y-m-d"))
-                    -> andWhere('e.dateOfEvent >= :fourDaysAgo')
-                      ->setParameter('fourDaysAgo', $now->modify('-4 day')->format("Y-m-d"))
+                    -> where('e.status = :statusInProgress')
+                     ->setParameter('statusInProgress', 'inProgress')
                     -> join('e.schools','s')
                     -> andWhere('s.id = :schoolId')
                      ->setParameter('schoolId', $schoolId)
                     -> orderBy('e.dateOfEvent','DESC');
 
-        return $qb->getQuery()->getSingleResult();
+        // DO NOT put "->getSingleResult()" here (because NoResultExeption cached somewhere else)
+        return $qb->getQuery();
+    }
+
+    public function findAllEditionsBySchool($schoolId)
+    {
+        $qb = $this -> createQueryBuilder('e')
+                    -> join('e.schools','s')
+                    -> andWhere('s.id = :schoolId')
+                     ->setParameter('schoolId', $schoolId)
+                    -> orderBy('e.dateOfEvent','DESC');
+
+        return $qb->getQuery()->getResult();
     }
 }

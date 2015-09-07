@@ -73,50 +73,6 @@ class UserController extends Controller
   		}
   	}
 
-  	/**
-  	*	Gère la page d'administration des chefs pouceux (page récapitulative de leurs équipes ...)
-  	*/
-	public function organisationPageAction()
-    {
-        $user=$this->getUser();
-        $schoolId=$user->getSchool()->getId();
-
-        $repository = $this->getDoctrine()->getManager();
-			
-		$repositoryUser = $repository->getRepository('PouceUserBundle:User');
-		$repositoryEdition = $repository->getRepository('PouceSiteBundle:Edition');
-		$repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
-		$repositoryPosition = $repository->getRepository('PouceTeamBundle:Position');
-
-		$editionId=$repositoryEdition->findCurrentEditionBySchool($schoolId)->getId();
-
-		$userArray=$repositoryUser->findAllUsersBySchool($schoolId,$editionId);
-
-		foreach($userArray as $key=>$user)
-		{
-			$userIdArray[$key][0]=$userArray[$key];
-			$userIdArray[$key][1]=null;
-		}
-
-		$teamArray=$repositoryTeam->findAllTeamsByEditionByUsers($userArray,$editionId);
-
-		foreach($teamArray as $key=>$team)
-		{
-			try
-			{
-				$userIdArray[$key][1]=$repositoryPosition->findLastPosition($team->getId())->getSingleResult();
-			}
-			catch(NoResultException $e)
-			{
-				$userIdArray[$key][1]=null;
-			}
-		}
-
-        return $this->render('PouceUserBundle:Organisation:checkParticipants.html.twig', array(
-        		'teams'	=> $userIdArray
-        	));
-    }
-
     /**
 	*	Gère l'upload de l'image de profil d'user
     */

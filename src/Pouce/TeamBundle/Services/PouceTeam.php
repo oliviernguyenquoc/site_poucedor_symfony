@@ -35,7 +35,7 @@ class PouceTeam
 
 		try
 		{
-			$nextEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user)->getSingleResult();
+			$nextEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionByUserSchool($user)->getSingleResult();
 		}
 		catch (NoResultException $e) 
 		{
@@ -77,7 +77,7 @@ class PouceTeam
 				return false;
 			}
 
-			$previousEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findPreviousEditionBySchool($user);
+			$previousEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findPreviousEditionByUserSchool($user);
 
 			if($team->getEdition()->getId() == $previousEdition->getId())
 			{
@@ -100,7 +100,7 @@ class PouceTeam
 	*/
 	public function isThereNextRace(User $user)
 	{
-		$nextEditionQuery = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user);
+		$nextEditionQuery = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionByUserSchool($user);
 		try
 		{
 			$nextEdition=$nextEditionQuery->getSingleResult();

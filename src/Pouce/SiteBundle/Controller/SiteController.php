@@ -3,6 +3,8 @@
 namespace Pouce\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\NoResultException;
+use Pouce\UserBundle\Entity\User;
 
 class SiteController extends Controller
 {
@@ -33,8 +35,68 @@ class SiteController extends Controller
           'imageArray'    => $imageArray
         ));
     }
+
     public function classementAction($annee)
     {
         return $this->render('PouceSiteBundle:Site:classement'.$annee.'.html.twig');
+    }
+
+    /**
+    *   Gère la page d'administration des chefs pouceux (page récapitulative de leurs équipes ...)
+    */
+    public function organisationPageAction($editionId)
+    {
+        $user = $this->getUser();
+        $schoolId = $user->getSchool()->getId();
+
+        $repository = $this->getDoctrine()->getManager();
+            
+        $repositoryUser = $repository->getRepository('PouceUserBundle:User');
+        $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
+        $repositoryPosition = $repository->getRepository('PouceTeamBundle:Position');
+
+        $userArray = $repositoryUser->findAllUsersBySchool($schoolId,$editionId);
+
+        foreach($userArray as $key=>$user)
+        {
+            $userIdArray[$key][0]=$userArray[$key];
+            $userIdArray[$key][1]=null;
+        }
+
+        $teamArray = $repositoryTeam->findAllTeamsByEditionByUsers($userArray,$editionId);
+
+        foreach($teamArray as $key=>$team)
+        {
+            try
+            {
+                $userIdArray[$key][1] = $repositoryPosition->findLastPosition($team->getId())->getSingleResult();
+            }
+            catch(NoResultException $e)
+            {
+                $userIdArray[$key][1] = null;
+            }
+        }
+
+        return $this->render('PouceSiteBundle:Admin:checkParticipants.html.twig', array(
+                'teams' => $userIdArray
+            ));
+    }
+
+     /**
+    *   Gère la page d'administration des chefs pouceux (liste des éditions auxquelles leur école a participé ...)
+    */
+    public function participationEcoleAdminPageAction()
+    {
+        $user = $this->getUser();
+        $schoolId = $user->getSchool()->getId();
+
+        $repository = $this->getDoctrine()->getManager();
+        $repositoryEdition = $repository->getRepository('PouceSiteBundle:Edition');
+
+        $editionArray = $repositoryEdition->findAllEditionsBySchool($schoolId);
+
+        return $this->render('PouceSiteBundle:Admin:listeEditions.html.twig', array(
+                'editionArray' => $editionArray
+            ));
     }
 }

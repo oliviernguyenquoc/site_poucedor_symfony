@@ -4,9 +4,9 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_CHEFPOUCEUX:   [ROLE_USER, ROLE_GERANT]
+        ROLE_CHEFPOUCEUX:   ROLE_USER
         ROLE_ADMIN:         ROLE_USER
-        ROLE_SUPER_ADMIN:   ROLE_ADMIN
+        ROLE_SUPER_ADMIN:   [ROLE_ADMIN, ROLE_CHEFPOUCEUX]
 
     providers:
         fos_userbundle:
@@ -15,7 +15,7 @@ security:
     firewalls:
         # On crée un pare-feu uniquement pour le formulaire
         main_login:
-            # Cette expression régulière permet de prendre /login (mais pas /login_check !)
+            # Cette expression régulière permet de prendre /login (mais pas /login_check !)
             pattern: ^/login$
             anonymous: true # On autorise alors les anonymes sur ce pare-feu
         main:
@@ -37,3 +37,4 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/team, role: ROLE_USER }
         - { path: ^/user, role: ROLE_USER }
+        - { path: ^/allmyusers, role: ROLE_CHEFPOUCEUX }

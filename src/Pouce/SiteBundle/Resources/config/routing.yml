@@ -97,3 +97,11 @@ pouce_site_mot_prez_2009:
     defaults:
         _controller: FrameworkBundle:Template:template
         template: 'PouceSiteBundle:Site:motDuPrez2009.html.twig'
+
+pouce_site_listeEditionEcole:
+    path:   /admin/
+    defaults: {_controller: PouceSiteBundle:Site:participationEcoleAdminPage }
+
+pouce_site_checkParticipants:
+    path:     /admin/allmyusers/{editionId}
+    defaults: { _controller: PouceSiteBundle:Site:organisationPage }

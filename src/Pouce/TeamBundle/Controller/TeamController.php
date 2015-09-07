@@ -135,7 +135,7 @@ class TeamController extends Controller
 		{
 			// On cherche la prochaine edition
 			$em = $this->getDoctrine()->getEntityManager();
-			$edition = $em->getRepository('PouceSiteBundle:Edition')->findNextEditionBySchool($user)->getSingleResult();
+			$edition = $em->getRepository('PouceSiteBundle:Edition')->findNextEditionByUserSchool($user)->getSingleResult();
 
 			$raceStatus=$edition->getStatus();
 
@@ -175,7 +175,7 @@ class TeamController extends Controller
 		{
 			//On récupère le statut de la course (In progress, registering ...)
 			$em = $this->getDoctrine()->getEntityManager();
-			$edition = $em->getRepository('PouceSiteBundle:Edition')->findPreviousEditionBySchool($user);
+			$edition = $em->getRepository('PouceSiteBundle:Edition')->findPreviousEditionByUserSchool($user);
 
 			$raceStatus=$edition->getStatus();
 

@@ -8,10 +8,6 @@ pouce_user_mainpage:
         _controller: FrameworkBundle:Template:template
         template: 'PouceUserBundle:User:mainpage.html.twig'
 
-pouce_user_checkParticipants:
-    path:     /allmyusers
-    defaults: { _controller: PouceUserBundle:User:organisationPage }
-
 pouce_user_uploadImageProfil:
     path:     /uploadImageProfil
     defaults: { _controller: PouceUserBundle:User:uploadImageProfil}
