@@ -17,8 +17,8 @@
         {{ form_widget(form) }}
 
         <p>
-            <input type="checkbox" required />
-            <label>J'ai lu et j'accepte les conditions générales du site disponible <a href={{path('pouce_site_conditions_générales')}}>ici</a></label>
+            <input type="checkbox" id="CGU" required />
+            <label for="CGU">J'ai lu et j'accepte les conditions générales du site disponible <a href={{path('pouce_site_conditions_générales')}}>ici</a></label>
         </p>
         
         <button class="btn waves-effect waves-light" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />Enregistrer
