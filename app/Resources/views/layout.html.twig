@@ -56,7 +56,10 @@
 		    <div class="nav-wrapper container">
 		    	<a id="logo-container" href="{{ path('pouce_site_homepage') }}" class="brand-logo"><img src="{{ asset('images/poucelogosite.png')}}" width="172" height="50" style="margin-top : 4px"alt="logo"/></a>
 
-			    {{ knp_menu_render('PouceSiteBundle:MenuBuilder:mainMenu',{'template': 'PouceSiteBundle:Menu:knp_menu.html.twig'}) }}
+		    	{# Arret d'utilisation  de knp_menu : On preferera l'inclusion de template twig dû à la syntaxe de materializecss #}
+			    {# {{ knp_menu_render('PouceSiteBundle:MenuBuilder:mainMenu',{'template': 'PouceSiteBundle:Menu:knp_menu.html.twig'}) }} #}
+
+			    {{ include("::nav.html.twig")}}
 
 			    <div class="container">
 			    	<a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a>

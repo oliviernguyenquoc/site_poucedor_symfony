@@ -1,0 +1,39 @@
+<ul class="right hide-on-med-and-down">
+    <li class="first dropdown"> <a href="{{path('fos_user_registration_register')}}" data-activates="dropdown1" class="dropdown-button">Le Pouce d'Or <i class="material-icons right">arrow_drop_down</i></a>
+        <ul id="dropdown1" class="menu_level_1 dropdown-content">
+            <li class="first"> <a href="{{path('pouce_site_asso')}}">L'association</a>
+            </li>
+            <li> <a href="{{path('pouce_site_regles')}}">Règles</a>
+            </li>
+            <li> <a href="{{path('pouce_site_conseils')}}">Conseils et recommandations</a>
+            </li>
+            <li class="last"> <a href="{{path('pouce_site_liens')}}">Liens</a>
+            </li>
+        </ul>
+    </li>
+    <li class="dropdown"> <a href="{{path('fos_user_registration_register')}}" data-activates="dropdown2" class="dropdown-button">Edition 2015 <i class="material-icons right">arrow_drop_down</i></a>
+        <ul id="dropdown2" class="menu_level_1 dropdown-content">
+            <li class="first"> <a href="./Pouce d'Or _ Le site officiel !_files/Pouce d'Or _ Le site officiel !.html">S'incrire</a>
+            </li>
+            <li> <a href="{{path('pouce_site_inscription_ecole')}}">Inscrire son école</a>
+            </li>
+            <li> <a href="{{path('fos_user_registration_register')}}">Listes des inscrits</a>
+            </li>
+            <li class="last"> <a href="{{path('pouce_site_edition')}}">Edition 2015</a>
+            </li>
+        </ul>
+    </li>
+    <li> <a href="{{path('pouce_site_archives')}}">Archives</a>
+    </li>
+    <li> <a href="{{path('pouce_site_records')}}">Top 25</a>
+    </li>
+    {% if not app.user %}
+        <li class="last"><a href="{{path('fos_user_security_login')}}">Se connecter</a> </li>
+    {% else %}
+        <li class="last">
+            <a href="{{path('pouce_user_mainpage')}}"><i class="material-icons right">account_circle</i>
+                Mon profil
+            </a>
+        </li>
+    {% endif %}
+</ul>
