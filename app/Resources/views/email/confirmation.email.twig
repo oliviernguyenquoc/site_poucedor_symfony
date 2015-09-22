@@ -1,0 +1,22 @@
+{# app/Resources/views/email/confirmation.email.twig #}
+
+{% block subject %}Email de confirmation{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+Bonjour {{ user.firstName }} {{ user.lastName }} !
+
+Pour activer votre compte, veuillez cliquer sur ce lien : {{ confirmationUrl }}
+
+Cordialement,
+Le staff Pouce d'Or
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+{#
+    You can of course render the html directly here.
+    Including a template as done here allows keeping things DRY by using
+    the template inheritance in it
+#}
+{% endblock %}

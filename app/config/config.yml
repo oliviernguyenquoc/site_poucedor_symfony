@@ -92,8 +92,12 @@ fos_user:
             type:       pouce_user_registration #Le custom form que l'on va utiliser
         confirmation:
             enabled:    true
+            template:   email/confirmation.email.twig
     service:
-        mailer:  fos_user.mailer.default
+        mailer:  fos_user.mailer.twig_swift
+    resetting:
+        email:
+            template: email/password_resetting.email.twig
 
 # Uploader Bundle Configuration
 vich_uploader:

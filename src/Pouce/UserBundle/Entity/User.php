@@ -55,6 +55,8 @@ class User extends BaseUser
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\Regex("/\d+/")
+     * @Assert\Length(min=9, max=15, minMessage="Le numéro de téléphone doit avoir 10 chiffres minimum.", maxMessage="Le numéro de téléphone doit avoir 15 chiffres maximum")
      * @Assert\NotBlank(message="Entrez votre numéro de téléphone.", groups={"updateRegistration"})
      */
     protected $telephone;
