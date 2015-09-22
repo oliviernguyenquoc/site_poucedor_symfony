@@ -91,7 +91,7 @@ fos_user:
         form:
             type:       pouce_user_registration #Le custom form que l'on va utiliser
         confirmation:
-            enabled:    false
+            enabled:    true
     service:
         mailer:  fos_user.mailer.default
 
