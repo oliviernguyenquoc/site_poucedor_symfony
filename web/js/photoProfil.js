@@ -1,59 +1,3 @@
-{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
-
-{# On étend notre layout #}
-{% extends "PouceSiteBundle::layout.html.twig" %}
-
-{# Dans notre layout, il faut définir le block body #}
-{% block site_body %}
-
-	<h3>Editer ses informations</h3>
-
-<div class="row">
-    <div class="col s12 m3 center-on-small-only">
-        <img id="picBox" class="circle responsive-img" src="{{ asset('images/profil/' ~ photoFileName ~ '') }}">
-         <button id="uploadBtn" class="btn btn-large btn-primary">Changer</button>
-
-        <div id="progressOuter" class="progress progress-striped active" style="display:none;">
-            <div id="progressBar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-            </div>
-        </div>
-    </div>
-    <div class="col s12 m9">
-
-        <form method="post" {{ form_enctype(form) }} action="{{ path('pouce_user_edit', {'id' : id })}}">
-
-        {# Les erreurs générales du formulaire. #}
-        {{ form_errors(form) }}
-
-        <p>
-            Vérifiez bien vos informations.
-        </p>
-
-        <div>
-            {{ form_rest(form) }}
-            {# Add checkbox #}
-            <input type="submit" class="btn btn-primary" /> 
-        </div>
-    </form>
-
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-10">
-        <div id="msgBox">
-        </div>
-    </div>
-</div>
-
-
-{% endblock %}
-
-
-{% block javascript %}
-      {{ parent() }}
-
-<script src="{{ asset('js/SimpleAjaxUploader.min.js') }}"></script>
-<script>
 function escapeTags( str ) {
   return String( str )
            .replace( /&/g, '&amp;' )
@@ -109,6 +53,3 @@ window.onload = function() {
           }
     });
 };
-</script>
-
-{% endblock %}
