@@ -113,6 +113,19 @@ class TeamController extends Controller
 	}
 
 	/**
+	*	Pour supprimer une équipe
+	*
+	*/
+	public function deleteTeamAction($id, Request $request)
+	{
+		$em = $this->getDoctrine()->getEntityManager();
+		$team = $em ->getRepository('PouceTeamBundle:Team')->find($id);
+
+		$em->remove($team);
+		$em->flush();
+	}
+
+	/**
 	*	Le but de cette focntion est de proposer de s'inscrire à la prochaine course si il y a, 
 	*	d'afficher l'équipe dans lequel il est inscrit 
 	*	ou de proposer de rentrer une position si une édition est en cours dans laquelle le user est inscrit.

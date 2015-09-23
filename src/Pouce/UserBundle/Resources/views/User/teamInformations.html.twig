@@ -33,7 +33,20 @@
 		<div class="row right-align">
 			<a class="blue-text" href="{{ path('pouce_team_edit', {'id' : team.id })}}">Editer votre équipe</a><br/>
 			{# TODO #}
-			<a class="blue-text" >Supprimer votre équipe</a>
+			<a class="blue-text modal-trigger" href="#modal1">Supprimer votre équipe</a>
+		</div>
+		<!-- Modal Structure -->
+		<div id="modal1" class="modal">
+			<div class="modal-content">
+				<h4>Attention</h4>
+				<p>
+					La suppression est définitive.
+					Vous pourrez recréer une équipe ensuite.
+				</p>
+			</div>
+			<div class="modal-footer">
+				<a href="{{ path('pouce_team_delete', {'id' : team.id })}}" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+			</div>
 		</div>
 	</div>
 </div>
