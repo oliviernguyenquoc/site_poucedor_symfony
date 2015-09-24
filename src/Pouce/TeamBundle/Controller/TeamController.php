@@ -120,7 +120,7 @@ class TeamController extends Controller
 		$user = $this->getUser();
 
 		$teamService = $this->container->get('pouce_team.team');
-		$isUserInTeam = $teamService->isATeamOfUser($team,$user)
+		$isUserInTeam = $teamService->isATeamOfUser($team,$user);
 
 		if($isUserInTeam)
 		{
