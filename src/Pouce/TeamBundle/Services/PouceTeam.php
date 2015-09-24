@@ -24,14 +24,14 @@ class PouceTeam
 	*/
 	public function isATeamOfUser(Team $team, User $user)
     {
-        response = false;
-        users = $team->getUsers();
+        $response = false;
+        $users = $team->getUsers();
         if(in_array(user,users))
         {
-        	response = true;
+        	$response = true;
         }
 
-        return response;
+        return $response;
     }                        
 
 
