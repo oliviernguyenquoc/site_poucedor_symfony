@@ -33,7 +33,8 @@
             "knplabs/knp-menu-bundle": "dev-master",
             "coresphere/console-bundle": "dev-master",
 	        "pugx/autocompleter-bundle": "^1.2",
-	        "vich/uploader-bundle": "^0.14.0"
+	        "vich/uploader-bundle": "^0.14.0",
+        "liip/imagine-bundle": "^1.3"
             },
             "require-dev": {
                 "sensio/generator-bundle": "~2.3"

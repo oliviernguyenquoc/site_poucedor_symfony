@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col s12 m3 center-on-small-only">
-        <img id="picBox" class="circle responsive-img" src="{{ asset('images/profil/' ~ user.imageName ~ '') }}">
+        <img id="picBox" class="circle responsive-img" src="{{ ('/images/profil/' ~ user.imageName) | imagine_filter('my_thumb') }}">
          <button id="uploadBtn" class="btn btn-large btn-primary">Changer</button>
 
         <div id="progressOuter" class="progress progress-striped active" style="display:none;">

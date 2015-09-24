@@ -27,7 +27,7 @@
 			<div class="row">
 			    <div class="col s12 m3 center-on-small-only">
 			        <div class="image-container">
-						<img class="circle responsive-img" src="{{ asset('images/profil/' ~ user.imageName ~ '') }}">
+						<img class="circle responsive-img" src="{{ ('/images/profil/' ~ user.imageName) | imagine_filter('my_thumb') }}">
 					</div>
 			    </div>
 			    <div class="col s12 m9">

@@ -44,3 +44,6 @@ city_get:
 country_get:
     path:   /country_get/{cityName}
     defaults: { _controller: PouceTeamBundle:Result:getCountry }
+
+_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
