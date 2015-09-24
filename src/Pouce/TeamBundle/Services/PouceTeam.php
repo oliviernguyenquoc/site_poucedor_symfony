@@ -26,7 +26,7 @@ class PouceTeam
     {
         $response = false;
         $users = $team->getUsers();
-        if(in_array(user,users))
+        if(in_array($user,$users->toArray()))
         {
         	$response = true;
         }

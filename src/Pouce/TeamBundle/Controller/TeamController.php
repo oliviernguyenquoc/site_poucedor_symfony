@@ -51,6 +51,20 @@ class TeamController extends Controller
 				if ($request->getMethod() == 'POST') {
 					if ($form->handleRequest($request)->isValid()) {
 
+						//Vérifie qu'il n'y a pas 2 filles dans le mêm binome
+						$data = $form->get('users')->getData();
+
+						if($user->getSex()=='Femme' && $data->getSex()=='Femme')
+						{
+							$request->getSession()->getFlashBag()->add('updateInformations', 'Vous ne pouvez pas inscrire 2 filles dans le même binôme');
+							return $this->render('PouceTeamBundle:Team:addTeam.html.twig', array(
+							  'teamForm' => $form->createView(),
+							  'user' => $user,
+							));
+						}
+
+						dump($data = $form->getData());
+
 						$team->addUser($user);
 						$team->setFinishRegister(false);
 
@@ -69,8 +83,6 @@ class TeamController extends Controller
 						return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 					}
 				}
-
-				$user = $this->getUser();
 
 				// On passe la méthode createView() du formulaire à la vue
 				// afin qu'elle puisse afficher le formulaire toute seule
@@ -139,8 +151,7 @@ class TeamController extends Controller
 			$em->flush();
 		}
 
-		return $this->render('PouceUserBundle:User:messageAnouncementNextEdition.html.twig', array(
-					'edition' => $edition));
+		return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 	}
 
 	/**

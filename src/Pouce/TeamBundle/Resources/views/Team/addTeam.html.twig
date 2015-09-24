@@ -9,8 +9,15 @@
 	<h3>Formulaire d'inscription</h3>
 
 	<p>
-		Les inscriptions pour le Pouce d’Or 2015 auront lieu du 21 septembre au 1er octobre 2015.
+		Les inscriptions pour le Pouce d’Or 2015 auront lieu du 24 septembre au 1er octobre 2015.
+		<b>L'inscription ne sera qu'effective qu'après la signature de la décharge le jour de l'évènement.</b>
 	</p>
+
+	{% for flashMessage in app.session.flashbag.get('updateInformations') %}
+ 
+	{{ flashMessage }}
+	 
+	{% endfor %}
 
 	<form method="post" {{ form_enctype(teamForm) }} action="{{ path('pouce_team_add')}}">
 
@@ -54,7 +61,10 @@
 			</div>
 			{{ form_row(teamForm.users) }}
 			{{ form_rest(teamForm) }}
-			{# Add checkbox #}
+			<p>
+	            <input type="checkbox" id="CGU" required />
+	            <label for="CGU">J'ai lu et j'accepte le règlement de l'évènement disponible <a href={{asset('pdf/decharge_de_responsabilite.pdf')}}>ici</a>.</label>
+        	</p>
 			<input type="submit" class="btn btn-primary" /> 
 		</div>
 	</form>
