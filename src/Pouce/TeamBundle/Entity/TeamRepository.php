@@ -15,7 +15,7 @@ class TeamRepository extends EntityRepository
 	public function getLastTeam($idUser)    
 	{
         $qb = $this -> createQueryBuilder('t')
-                    -> leftJoin('t.users','u', 'WITH', 'u.id = :idUser')
+                    -> join('t.users','u', 'WITH', 'u.id = :idUser')
                     -> setParameter('idUser', $idUser)
                     -> orderBy('u.created','DESC')
                     ->setMaxResults(1)
@@ -30,7 +30,7 @@ class TeamRepository extends EntityRepository
     {
         $now = new \DateTime();
         $qb = $this -> createQueryBuilder('t')
-            -> leftJoin('t.users','u', 'WITH', 'u.id = :idUser')
+            -> join('t.users','u', 'WITH', 'u.id = :idUser')
              -> setParameter('idUser', $userId)
             -> join('t.edition','e','WITH','e.dateOfEvent > :today')
              ->setParameter('today', $now->format("Y-m-d"))

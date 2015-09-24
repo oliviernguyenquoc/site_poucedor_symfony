@@ -46,7 +46,7 @@ class RegistrationController extends BaseController
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
-            $user->setImageName('default.png');
+            $user->setImageName('default.jpg');
 
             $userManager->updateUser($user);
 

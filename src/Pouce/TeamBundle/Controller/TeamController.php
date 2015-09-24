@@ -85,7 +85,7 @@ class TeamController extends Controller
 	*/
 	public function editTeamAction($id, Request $request)
 	{
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$team = $em ->getRepository('PouceTeamBundle:Team')->find($id);
 
 		//Des variables pour le formType
@@ -115,7 +115,7 @@ class TeamController extends Controller
 	*/
 	public function deleteTeamAction($id, Request $request)
 	{
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$team = $em ->getRepository('PouceTeamBundle:Team')->find($id);
 		$user = $this->getUser();
 
@@ -154,7 +154,7 @@ class TeamController extends Controller
 		if($isThereNextRace)
 		{
 			// On cherche la prochaine edition
-			$em = $this->getDoctrine()->getEntityManager();
+			$em = $this->getDoctrine()->getManager();
 			$edition = $em->getRepository('PouceSiteBundle:Edition')->findNextEditionByUserSchool($user)->getSingleResult();
 
 			$raceStatus=$edition->getStatus();
@@ -194,7 +194,7 @@ class TeamController extends Controller
 		else
 		{
 			//On récupère le statut de la course (In progress, registering ...)
-			$em = $this->getDoctrine()->getEntityManager();
+			$em = $this->getDoctrine()->getManager();
 			$edition = $em->getRepository('PouceSiteBundle:Edition')->findPreviousEditionByUserSchool($user);
 
 			$raceStatus=$edition->getStatus();

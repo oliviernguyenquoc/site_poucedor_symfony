@@ -131,7 +131,7 @@ class UserController extends Controller
 	*/
     public function editUserAction($id, Request $request)
 	{
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 
 		$user=$team = $em ->getRepository('PouceUserBundle:User')->find($id);
 
