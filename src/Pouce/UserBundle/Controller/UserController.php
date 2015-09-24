@@ -42,7 +42,7 @@ class UserController extends Controller
 
 		        $request->getSession()->getFlashBag()->add('updateInformations', 'Utilisateur mis à jour');
 
-				return $this->redirect($this->generateUrl('pouce_site_homepage'));
+				return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 			}
 		}
 
@@ -146,7 +146,7 @@ class UserController extends Controller
 				$userManager = $this->container->get('fos_user.user_manager');
 				$userManager -> updateUser($user);
 
-				return $this->redirect($this->generateUrl('pouce_site_homepage'));
+				return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 			}
 		}
 		return $this->render('PouceUserBundle:User:editUser.html.twig', array(

@@ -44,7 +44,7 @@ class UserRepository extends EntityRepository
 
         $qb = $this -> createQueryBuilder('u1');
                     
-                    $qb -> select('u1')
+        $qb         -> select('u1')
                     -> where('YEAR(u1.lastLogin) = :userYear')
                      ->setParameter('userYear', $userYear)
                     -> join('u1.school','s')
@@ -77,15 +77,17 @@ class UserRepository extends EntityRepository
     /**
     * Retourne le coéquipier de la team du user
     */
-    public function findOtherUserInTeam($userId)
+    public function findOtherUserInTeam($user, $team)
     {
         $qb = $this -> createQueryBuilder('u')
                     -> where('u.id != :id')
-                     -> setParameter('id',$userId)
+                     -> setParameter('id',$user->getId())
                     -> Join('u.teams', 't')
+                    -> andWhere('t.id = :teamId')
+                     -> setParameter('teamId', $team->getId())
                     -> Join('t.users','user')
                     -> andWhere('user.id != :userId')
-                     -> setParameter('userId', $userId)
+                     -> setParameter('userId', $user->getId())
                     ->setMaxResults(1)
         ;
             return $qb->getQuery()->getSingleResult() ;  

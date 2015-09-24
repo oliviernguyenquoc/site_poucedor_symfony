@@ -16,11 +16,14 @@ class TeamController extends Controller
 {
 	public function addTeamAction(Request $request)
 	{
+		$user = $this->getUser();
+
 		// Check if the user have completed all his informations like first_name, last_name, telephone number ...
 		$isUserUpdated = (null !== $this->getUser()->getFirstName());
 
 		//Check if the user have already a team for one of the next edition
-		$hasATeam = false;
+		$teamService = $this->container->get('pouce_team.team');
+		$hasATeam = $teamService->isRegisterToNextRaceOfItsSchool($user);
 
 		//On vérifie si la personne a déjà une équipe
 		if(!$hasATeam)
@@ -50,7 +53,11 @@ class TeamController extends Controller
 
 						$team->addUser($user);
 						$team->setFinishRegister(false);
-						$team->setEdition($user->getEdition());
+
+						$em = $this->getDoctrine()->getManager();
+						$edition = $em -> getRepository('PouceSiteBundle:Edition')->findNextEditionByUserSchool($user)->getSingleResult();
+
+						$team->setEdition($edition);
 
 						$em = $this->getDoctrine()->getManager();
 						$em->persist($team);
@@ -59,7 +66,7 @@ class TeamController extends Controller
 
 						$request->getSession()->getFlashBag()->add('notice', 'Equipe bien enregistrée.');
 
-						return $this->redirect($this->generateUrl('pouce_site_homepage'));
+						return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 					}
 				}
 
@@ -103,10 +110,14 @@ class TeamController extends Controller
 				$em->persist($team);
 				$em->flush();
 
-				return $this->redirect($this->generateUrl('pouce_site_homepage'));
+				return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 			}
 		}
-		return $this->redirect('PouceUserBundle:User:mainpage.html.twig');
+		return $this->render('PouceTeamBundle:Team:editTeam.html.twig', array(
+				  'teamForm'=>$form->createView(),
+				  'user' 	=> $user,
+				  'id' 		=> $id
+				));
 	}
 
 	/**
@@ -167,7 +178,7 @@ class TeamController extends Controller
 				{					
 					$nextRaceTeam = $em->getRepository('PouceTeamBundle:Team')->findNextRaceTeam($user->getId());
 
-					$user2 = $em->getRepository('PouceUserBundle:User')->findOtherUserInTeam($user);
+					$user2 = $em->getRepository('PouceUserBundle:User')->findOtherUserInTeam($user,$nextRaceTeam);
 					
 					return $this->render('PouceUserBundle:User:teamInformations.html.twig', array(
 						'user1' => $user,
