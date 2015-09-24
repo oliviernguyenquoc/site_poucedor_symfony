@@ -16,6 +16,26 @@ class PouceTeam
 	}
 
 	/**
+	* Vérifie que le user est bien dans la team
+	*
+	* @param Team $team, User $user
+	* @return bool
+	*
+	*/
+	public function isATeamOfUser(Team $team, User $user)
+    {
+        response = false;
+        users = $team->getUsers();
+        if(in_array(user,users))
+        {
+        	response = true;
+        }
+
+        return response;
+    }                        
+
+
+	/**
 	* Vérifie si le user est inscrit à la prochaine édition du pouce d'or auquel son école est inscrite
 	*
 	* @param User $user

@@ -106,10 +106,7 @@ class TeamController extends Controller
 				return $this->redirect($this->generateUrl('pouce_site_homepage'));
 			}
 		}
-		return $this->render('PouceTeamBundle:Team:editTeam.html.twig', array(
-				  'teamForm' => $form->createView(),
-				  'id' => $id
-				));
+		return $this->redirect('PouceUserBundle:User:mainpage.html.twig');
 	}
 
 	/**
@@ -120,9 +117,19 @@ class TeamController extends Controller
 	{
 		$em = $this->getDoctrine()->getEntityManager();
 		$team = $em ->getRepository('PouceTeamBundle:Team')->find($id);
+		$user = $this->getUser();
 
-		$em->remove($team);
-		$em->flush();
+		$teamService = $this->container->get('pouce_team.team');
+		$isUserInTeam = $teamService->isATeamOfUser($team,$user)
+
+		if($isUserInTeam)
+		{
+			$em->remove($team);
+			$em->flush();
+		}
+
+		return $this->render('PouceUserBundle:User:messageAnouncementNextEdition.html.twig', array(
+					'edition' => $edition));
 	}
 
 	/**

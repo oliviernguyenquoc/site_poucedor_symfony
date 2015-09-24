@@ -49,6 +49,7 @@ class TeamType extends AbstractType
                 'class'=>'PouceUserBundle:User',
                 'label' => 'Co-équipié',
                 'property'=>'completeName',
+                //La liste des participants proposés sont toutes les personnes s'étant connecté ou inscrit cette année
                 'query_builder' => function(\Pouce\UserBundle\Entity\UserRepository $er) use($schoolId,$userYear) {
                     return $er-> getAllUsersInSchool($schoolId,$userYear);
                 },
