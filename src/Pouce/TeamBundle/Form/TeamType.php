@@ -17,9 +17,11 @@ class TeamType extends AbstractType
     {
         $userYear=$user->getLastLogin()->format('Y');
         $schoolId=$school->getId();
+        $userId=$user->getId();
 
         $this->schoolId = $schoolId;
         $this->userYear = $userYear;
+        $this->userId = $userId;
     }
 
 
@@ -31,6 +33,7 @@ class TeamType extends AbstractType
     {
         $schoolId = $this->schoolId;
         $userYear = $this->userYear;
+        $userId = $this->userId;
 
         $builder
             ->add('teamName', 'text', array(
@@ -49,9 +52,9 @@ class TeamType extends AbstractType
                 'class'=>'PouceUserBundle:User',
                 'label' => 'Co-équipié',
                 'property'=>'completeName',
-                //La liste des participants proposés sont toutes les personnes s'étant connecté ou inscrit cette année
-                'query_builder' => function(\Pouce\UserBundle\Entity\UserRepository $er) use($schoolId,$userYear) {
-                    return $er-> getAllUsersInSchool($schoolId,$userYear);
+                //La liste des participants proposés sont toutes les personnes s'étant connecté ou inscrit cette année, n'ayant pas d'équipe
+                'query_builder' => function(\Pouce\UserBundle\Entity\UserRepository $er) use($schoolId,$userYear,$userId) {
+                    return $er-> getAllFreeUsersInSchool($schoolId,$userYear,$userId);
                 },
                 'required'  => true,
                 "multiple" => false,

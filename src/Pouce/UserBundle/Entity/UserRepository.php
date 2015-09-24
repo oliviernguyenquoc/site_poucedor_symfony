@@ -12,8 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
-	// To get all the free, who do not have a team, contesters in the school (id)
-	// Warning : Not tested
+	// To get all users in a school (id)
 	public function getAllUSersInSchool($idSchool,$userYear)
 	{
 		$qb = $this	-> createQueryBuilder('u')
@@ -31,6 +30,34 @@ class UserRepository extends EntityRepository
                      ;
 		return $qb ;					
 	}
+
+     // To get all the free, who do not have a team, contesters in the school (id)
+    public function getAllFreeUSersInSchool($idSchool,$userYear,$userId)
+    {
+        $nots = $this   -> createQueryBuilder('u2')
+                        -> select('u2.id')
+                        -> join('u2.teams', 't')
+                        -> join('t.edition','e')
+                        -> where('YEAR(e.dateOfEvent) = :userYear')
+                         -> setParameter('userYear', $userYear)
+                        ->getDQL();
+
+        $qb = $this -> createQueryBuilder('u1');
+                    
+                    $qb -> select('u1')
+                    -> where('YEAR(u1.lastLogin) = :userYear')
+                     ->setParameter('userYear', $userYear)
+                    -> join('u1.school','s')
+                    -> andWhere('s.id = :idSchool')
+                     -> setParameter('idSchool', $idSchool)
+                    -> andWhere($qb->expr()->notIn('u1.id', $nots))
+                    -> andWhere('u1 != :userId')
+                     ->setParameter('userId', $userId)
+                    // Exclure le user courant
+                    // Exclure les users avec une équipe déja inscrite
+                     ;
+        return $qb ;                    
+    }
 
     //Get all users of a school who are register to edition
     public function findAllUsersBySchool($idSchool,$editionId)
