@@ -19,7 +19,10 @@ class SchoolRepository extends EntityRepository
                     -> join('s.editions','e')
                     -> addSelect('e')
                     -> where('YEAR(e.dateOfEvent) = :year')
-                     ->setParameter('year', $year);
+                     ->setParameter('year', $year)
+                    -> orderBy('s.name','ASC')
+                    ;
+
 
 		return $qb ;					
 	}
