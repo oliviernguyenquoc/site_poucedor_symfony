@@ -51,34 +51,31 @@ class SiteController extends Controller
 
         $repository = $this->getDoctrine()->getManager();
             
-        $repositoryUser = $repository->getRepository('PouceUserBundle:User');
         $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
         $repositoryPosition = $repository->getRepository('PouceTeamBundle:Position');
 
-        $userArray = $repositoryUser->findAllUsersBySchool($schoolId,$editionId);
+        $teamArray = $repositoryTeam->findAllTeamsBySchool($schoolId,$editionId);
 
-        foreach($userArray as $key=>$user)
+        foreach($teamArray as $key=>$team)
         {
-            $userIdArray[$key][0]=$userArray[$key];
-            $userIdArray[$key][1]=null;
+            $teamIdArray[$key][0] = $teamArray[$key];
+            $teamIdArray[$key][1] = null;
         }
-
-        $teamArray = $repositoryTeam->findAllTeamsByEditionByUsers($userArray,$editionId);
 
         foreach($teamArray as $key=>$team)
         {
             try
             {
-                $userIdArray[$key][1] = $repositoryPosition->findLastPosition($team->getId())->getSingleResult();
+                $teamIdArray[$key][1] = $repositoryPosition->findLastPosition($team->getId())->getSingleResult();
             }
             catch(NoResultException $e)
             {
-                $userIdArray[$key][1] = null;
+                $teamIdArray[$key][1] = null;
             }
         }
 
         return $this->render('PouceSiteBundle:Admin:checkParticipants.html.twig', array(
-                'teams' => $userIdArray
+                'teams' => $teamIdArray
             ));
     }
 

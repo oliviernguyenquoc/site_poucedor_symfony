@@ -7,33 +7,43 @@
 <h2>Le classement général</h2>
 
 <ul class="collapsible popout" data-collapsible="accordion">
-	{# if results  isset  #} {# // TO CHANGE #}
+	{# if results  isset  #} {# // TODO / TO CHANGE #}
 	{% for result in results  %}
 		<li>
 			<div class="collapsible-header">{{result.rank}} {{result.team.teamName}}</div>
 			<div class="collapsible-body">
-			<p>
-				<b> Composé de : </b>
-				{% for user in result.team.users %}
-					{{user.firstName}} {{user.lastName}} 
-					{% if loop.first %}
-						et
-					{% endif %}
-				{% endfor %}
-				<br/>
-				<b> Arrivé à : </b>
-				{{result.position.city.name}}, {{result.position.city.country.name}}</td>
+				<div class="row">
+					<br/>
+					<div class="col s12 m4 center-on-small-only">
+						{% for user in result.team.users %}
+							<div class="col s12 m6">
+				        		<img class="circle responsive-img" src="{{ ('/images/profil/' ~ user.imageName) | imagine_filter('my_thumb') }}">
+				        	</div>
+				        {% endfor %}
+				    </div>
+				    <div class="col s12 m8">
+						<b> Composé de : </b>
+						{% for user in result.team.users %}
+							{{user.firstName}} {{user.lastName}} 
+							{% if loop.first %}
+								et
+							{% endif %}
+						{% endfor %}
+						<br/>
+						<b> Arrivé à : </b>
+						{{result.position.city.name}}, {{result.position.city.country.name}}
 
-				<br/>
-				<b> Soit </b>
-				{{result.position.distance}} km
-				<b> depuis </b>
-				{% for user in result.team.users %}
-					{% if loop.first %}
-						{{user.school.town}}, {{user.school.country}}
-					{% endif %}
-				{% endfor %}
-			</p>
+						<br/>
+						<b> Soit </b>
+						{{result.position.distance}} km
+						<b> depuis </b>
+						{% for user in result.team.users %}
+							{% if loop.first %}
+								{{user.school.town}}, {{user.school.country}}
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
 			</div>
 		</li>
 	{% endfor %}
@@ -42,12 +52,18 @@
 
 <h2>Le classement par école </h2>
 
-<script>
-  $(document).ready(function(){
-    $('.collapsible').collapsible({
-      accordion : true
-    });
-  });
-</script>
-
 {% endblock %}
+
+
+{% block javascript %}
+    {{ parent() }}
+
+	<script>
+	  $(document).ready(function(){
+	    $('.collapsible').collapsible({
+	      accordion : true
+	    });
+	  });
+	</script>
+
+{% endblock %} 

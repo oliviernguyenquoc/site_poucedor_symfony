@@ -24,7 +24,7 @@ class TeamRepository extends EntityRepository
     	}
 
     /**
-	*	Retourne l'équipe du user qui concourra à la prochaine éidition
+	*	Retourne l'équipe du user qui concourra à la prochaine édition
     */
     public function findNextRaceTeam($userId)
     {
@@ -38,6 +38,25 @@ class TeamRepository extends EntityRepository
             ->setMaxResults(1)
             ;
         return $qb->getQuery()->getSingleResult() ;   
+    }
+
+    /**
+    *   Retourne toutes les équipes d'une école d'une édition
+    */
+    public function findAllTeamsBySchool($idSchool,$editionId)
+    {
+        $qb = $this -> createQueryBuilder('t')
+                    -> join('t.users','u')
+                    -> addSelect('u')
+                    -> join('u.school','s')
+                    -> where('s.id = :idSchool')
+                     -> setParameter('idSchool', $idSchool)
+                    -> join('s.editions','e')
+                    -> andWhere('e.id = :editionId')
+                     -> setParameter('editionId',$editionId)
+                     ;
+
+        return $qb->getQuery()->getResult() ;
     }
 
     public function findAllTeamsByEditionByUsers($userIdArray,$editionId)
