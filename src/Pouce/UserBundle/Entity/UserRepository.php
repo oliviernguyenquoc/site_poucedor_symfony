@@ -53,6 +53,7 @@ class UserRepository extends EntityRepository
                     -> andWhere($qb->expr()->notIn('u1.id', $nots))
                     -> andWhere('u1 != :userId')
                      ->setParameter('userId', $userId)
+                    -> orderBy('u1.first_name', 'ASC')
                     // Exclure le user courant
                     // Exclure les users avec une équipe déja inscrite
                      ;
