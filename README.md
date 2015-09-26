@@ -16,14 +16,14 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * City autocomplete in localisation form
 * Console Bundle for only dev mode
 * Add avatar photo
+* Give your story form (import and save images blocks)
+* Edit forms
+* User page (just debugging and add some minor features)
 * Deal with editions ...
 
 
 ## In progress
 
-* Give your story form (import and save images blocks)
-* Edit forms
-* User page (just debugging and add some minor features)
 * Admin pages
 
 
