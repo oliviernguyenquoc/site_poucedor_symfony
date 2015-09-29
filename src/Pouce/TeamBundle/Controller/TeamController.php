@@ -63,8 +63,6 @@ class TeamController extends Controller
 							));
 						}
 
-						dump($data = $form->getData());
-
 						$team->addUser($user);
 						$team->setFinishRegister(false);
 

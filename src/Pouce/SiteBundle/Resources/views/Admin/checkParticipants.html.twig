@@ -4,7 +4,7 @@
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
 
-	{{ dump(teams) }}
+	{# {{ dump(teams) }} #}
 
 <ul class="collection">
 	<li class="collection-item">
@@ -23,8 +23,7 @@
 				        {% endfor %}
 				    </div>
 				    <div class="row center-align">
-				    	{# TODO Change path and add position function #}
-				    	<a href="{{path('pouce_site_galery')}}" class="waves-effect waves-light btn-large">Ajouter leur position</a>
+				    	<a href="{{ path('pouce_site_positionaddofateam', { 'teamId': team.0.id }) }}" class="waves-effect waves-light btn-large">Ajouter leur position</a>
 				    </div>
 				</div>
         		{% for user in team.0.users %}

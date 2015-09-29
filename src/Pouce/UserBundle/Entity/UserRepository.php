@@ -91,6 +91,23 @@ class UserRepository extends EntityRepository
                      -> setParameter('userId', $user->getId())
                     ->setMaxResults(1)
         ;
-            return $qb->getQuery()->getSingleResult() ;  
+        
+        return $qb->getQuery()->getSingleResult() ;  
+    }
+
+    /**
+    *   Retourne l'un des user de l'équipe
+    */
+    public function findAUserOfTeam($team)
+    {
+        $qb = $this -> createQueryBuilder('u')
+                    -> Join('u.teams', 't')
+                    -> andWhere('t.id = :teamId')
+                     -> setParameter('teamId', $team->getId())
+                    ->setMaxResults(1)
+                    ;
+
+        return $qb->getQuery()->getSingleResult();
+
     }
 }
