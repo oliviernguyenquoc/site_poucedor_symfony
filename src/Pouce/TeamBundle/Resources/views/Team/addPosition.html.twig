@@ -20,7 +20,7 @@
 	<h3>Enregistre ta position actuelle</h3>
 
 
-	<form method="post" {{ form_enctype(form) }} action="{{ path('pouce_position_add')}}">
+	<form id="position" method="post" {{ form_enctype(form) }} action="{{ path('pouce_position_add')}}">
 
 		{# Les erreurs générales du formulaire. #}
 		{{ form_errors(form) }}
@@ -29,7 +29,7 @@
 			Vérifiez bien vos informations. Ils nous permetterons de vous suivre pendante toute la durée du concours
 		</p>
 
-		<div class="row">
+		<div class="input-field row">
 
 			<div class="col s12 m6">
 				<div class="dropdown-button" data-activates="ui-id-1">
@@ -38,9 +38,7 @@
 			</div>
 
 			<div class="col s12 m6">
-				<select disabled id="pays">
-				    <option value="1" disabled selected>Pays</option>
-			  	</select>
+			  	<input type="text" name="pays" id="pays" placeholder="Pays">
 			 </div>
 
 	  	</div>

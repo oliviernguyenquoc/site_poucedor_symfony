@@ -15,7 +15,7 @@ $( document ).ready(function(){
         $.ajax({
             url:     url_get_country + cityName,
             success: function (country) {
-                $('input.select-dropdown').attr('value',country);
+                $('input#pays').attr('value',country);
             }
         });
     });
