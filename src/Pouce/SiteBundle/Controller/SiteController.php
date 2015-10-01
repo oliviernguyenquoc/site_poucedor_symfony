@@ -113,7 +113,7 @@ class SiteController extends Controller
     }
 
     /**
-    *   Gère la page d'administration des chefs pouceux (page récapitulative de leurs équipes ...)
+    *   Gère la page d'administration des responsable du Pouce d'Or : Toutes les équipes (page récapitulative de leurs équipes ...)
     */
     public function superOrganisationPageAction($editionId)
     {
@@ -145,5 +145,13 @@ class SiteController extends Controller
         return $this->render('PouceSiteBundle:Admin:checkParticipants.html.twig', array(
                 'teams' => $teamIdArray
             ));
+    }
+
+    /**
+    * Gêre la page de configuration : ajout d'édition, démarage de la course ...
+    */
+    public function configAction()
+    {
+        return $this->render('PouceSiteBundle:Admin:config.html.twig');
     }
 }

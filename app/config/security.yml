@@ -38,3 +38,4 @@ security:
         - { path: ^/team, role: ROLE_USER }
         - { path: ^/user, role: ROLE_USER }
         - { path: ^/allmyusers, role: ROLE_CHEFPOUCEUX }
+        - { path: ^/superAdmin/, role: ROLE_SUPER_ADMIN }
