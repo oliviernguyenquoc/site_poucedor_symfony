@@ -16,6 +16,10 @@ class PositionRepository extends EntityRepository
     public function findLastPosition($teamId)
     {
         $qb = $this -> createQueryBuilder('p')
+                    -> Join('p.city','c')
+                    -> addSelect('c')
+                    -> Join('c.country','co')
+                    -> addSelect('co')
                     -> join('p.team','t')
                     -> where('t.id = :teamId')
                      -> setParameter('teamId', $teamId)
