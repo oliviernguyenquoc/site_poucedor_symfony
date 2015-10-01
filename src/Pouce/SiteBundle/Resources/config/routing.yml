@@ -110,6 +110,14 @@ pouce_site_checkParticipants:
     path:     /admin/allmyusers/{editionId}
     defaults: { _controller: PouceSiteBundle:Site:organisationPage }
 
+pouce_site_listeEdition:
+    path:   /superAdmin/
+    defaults: {_controller: PouceSiteBundle:Site:superAdmin }
+
+pouce_site_checkAllParcipants:
+    path:   /superAdmin/{editionId}
+    defaults: { _controller: PouceSiteBundle:Site:superOrganisationPage }
+
 pouce_site_conditions_générales:
     path:     /condition_generales
     defaults:

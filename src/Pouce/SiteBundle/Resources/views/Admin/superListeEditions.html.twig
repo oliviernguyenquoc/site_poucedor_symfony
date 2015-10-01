@@ -1,0 +1,24 @@
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	<h4>Liste des éditions de votre école</h4>
+
+	<div class="row">
+		{% for edition in editionArray %}
+	        <div class="col s12 m3">
+	          	<div class="card blue-grey darken-1">
+	            	<div class="card-content white-text">
+	              		<span class="card-title">Edition du {{ edition.dateOfEvent|date('d/m/Y') }}</span>
+	            	</div>
+	           		<div class="card-action">
+	              		<a href="{{ path('pouce_site_checkAllParcipants', {'editionId' : edition.id }) }}">Accèder à la liste des participants</a>
+	            	</div>
+	          	</div>
+	        </div>
+	    {% endfor %}
+    </div>
+
+{% endblock %}

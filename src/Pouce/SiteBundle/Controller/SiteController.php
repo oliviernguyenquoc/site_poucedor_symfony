@@ -96,4 +96,54 @@ class SiteController extends Controller
                 'editionArray' => $editionArray
             ));
     }
+
+    /**
+    * Gere la page super admin
+    */
+    public function superAdminAction()
+    {
+        $repository = $this->getDoctrine()->getManager();
+        $repositoryEdition = $repository->getRepository('PouceSiteBundle:Edition');
+        $editionArray = $repositoryEdition->findAll();
+
+        return $this->render('PouceSiteBundle:Admin:superListeEditions.html.twig', array(
+                'editionArray' => $editionArray
+            ));
+
+    }
+
+    /**
+    *   Gère la page d'administration des chefs pouceux (page récapitulative de leurs équipes ...)
+    */
+    public function superOrganisationPageAction($editionId)
+    {
+        $repository = $this->getDoctrine()->getManager();
+            
+        $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
+        $repositoryPosition = $repository->getRepository('PouceTeamBundle:Position');
+
+        $teamArray = $repositoryTeam->findByEdition($editionId);
+
+        foreach($teamArray as $key=>$team)
+        {
+            $teamIdArray[$key][0] = $teamArray[$key];
+            $teamIdArray[$key][1] = null;
+        }
+
+        foreach($teamArray as $key=>$team)
+        {
+            try
+            {
+                $teamIdArray[$key][1] = $repositoryPosition->findLastPosition($team->getId())->getSingleResult();
+            }
+            catch(NoResultException $e)
+            {
+                $teamIdArray[$key][1] = null;
+            }
+        }
+
+        return $this->render('PouceSiteBundle:Admin:checkParticipants.html.twig', array(
+                'teams' => $teamIdArray
+            ));
+    }
 }
