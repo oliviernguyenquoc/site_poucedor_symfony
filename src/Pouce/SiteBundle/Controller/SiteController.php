@@ -204,13 +204,16 @@ class SiteController extends Controller
         return $this->redirectToRoute('pouce_site_homepage');
     }
 
-    public function mapAction()
+    public function mapAction($editionId)
     {
         $repository = $this->getDoctrine()->getManager();   
         $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
         $repositoryResult = $repository->getRepository('PouceTeamBundle:Result');
 
-        $teamArray = $repositoryTeam->findByEditionWithResult($editionId);
+        $resultArray = $repositoryResult->getAllResultsInEdition($editionId);
 
+        return $this->render('PouceSiteBundle:Site:map.html.twig', array(
+                'results' => $resultArray
+            ));
     }
 }

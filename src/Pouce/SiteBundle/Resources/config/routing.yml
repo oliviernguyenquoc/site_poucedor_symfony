@@ -126,6 +126,10 @@ pouce_site_checkAllParcipants:
     path:   /superAdmin/{editionId}
     defaults: { _controller: PouceSiteBundle:Site:superOrganisationPage }
 
+pouce_site_map:
+    path:   /map/{editionId}
+    defaults: { _controller: PouceSiteBundle:Site:map }
+
 
 pouce_site_conditions_générales:
     path:     /condition_generales
