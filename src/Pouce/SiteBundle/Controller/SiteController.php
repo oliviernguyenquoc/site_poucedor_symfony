@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\NoResultException;
 use Pouce\UserBundle\Entity\User;
 use Pouce\TeamBundle\Entity\Position;
+use Pouce\TeamBundle\Entity\Result;
 
 class SiteController extends Controller
 {
@@ -184,12 +185,32 @@ class SiteController extends Controller
             $position->setLatitude($user->getSchool()->getLatitude());
             $position->setEdition($repositoryEdition->find($editionId));
 
+            $result = new Result();
+            $result->setEdition($repositoryEdition->find($editionId));
+            $result->setTeam($team);
+            $result->setPosition($position);
+            $result->setLateness(0);
+            $result->setIsValid(true);
+            $result->setRank(0);
+
+
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($position);
+            $em->persist($result);
         }
         $em->flush();
 
         return $this->redirectToRoute('pouce_site_homepage');
+    }
+
+    public function mapAction()
+    {
+        $repository = $this->getDoctrine()->getManager();   
+        $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
+        $repositoryResult = $repository->getRepository('PouceTeamBundle:Result');
+
+        $teamArray = $repositoryTeam->findByEditionWithResult($editionId);
+
     }
 }
