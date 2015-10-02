@@ -5,6 +5,7 @@ namespace Pouce\SiteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\NoResultException;
 use Pouce\UserBundle\Entity\User;
+use Pouce\TeamBundle\Entity\Position;
 
 class SiteController extends Controller
 {
@@ -161,5 +162,34 @@ class SiteController extends Controller
         return $this->render('PouceSiteBundle:Admin:config.html.twig', array(
                 'editions' => $editionArray
             ));
+    }
+
+    public function addPositionInitialAction($editionId)
+    {
+        $repository = $this->getDoctrine()->getManager();   
+        $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
+        $repositoryUser = $repository->getRepository('PouceUserBundle:User');
+        $repositoryEdition = $repository->getRepository('PouceSiteBundle:Edition');
+
+
+        $teamArray = $repositoryTeam->findByEdition($editionId);
+
+        foreach($teamArray as $key=>$team)
+        {
+            $position = new Position();
+            $user = $repositoryUser->findAUserOfTeam($team);
+            $position->setTeam($team);
+            $position->setDistance(0);
+            $position->setLongitude($user->getSchool()->getLongitude());
+            $position->setLatitude($user->getSchool()->getLatitude());
+            $position->setEdition($repositoryEdition->find($editionId));
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($position);
+        }
+        $em->flush();
+
+        return $this->redirectToRoute('pouce_site_homepage');
     }
 }

@@ -25,7 +25,7 @@ class Position
 
     /**
      * @ORM\ManyToOne(targetEntity="Pouce\SiteBundle\Entity\City")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
     */
     private $city;
 
