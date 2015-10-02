@@ -269,6 +269,8 @@ class ResultController extends Controller
 			//Calcule du trajet
 			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
 
+			$position->setDistance($distance);
+
 			$newResultFlag=0;
 
 			// On cherche le record de la team (pour l'instant) s'il existe
@@ -381,6 +383,8 @@ class ResultController extends Controller
 
 			//Calcule du trajet
 			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+
+			$position->setDistance($distance);
 
 			$newResultFlag=0;
 

@@ -19,6 +19,7 @@ class PouceTrajet
 	{
 		$url='http://router.project-osrm.org/viaroute?loc='.$latDepart.','.$longDepart.'&loc='.$latArrivee.','.$longArrivee;
 		$response = $this->addInfoURLandExecute($url);
+
 		return $response["route_summary"]["total_distance"];
 	}
 
