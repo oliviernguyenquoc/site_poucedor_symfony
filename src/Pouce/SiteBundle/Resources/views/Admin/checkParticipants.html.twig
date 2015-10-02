@@ -53,23 +53,35 @@
 
 	        	<h5>Dernière position connue</h5>
 
-        		<div class="col s12 m5">
-        			<b>Ville :</b>
-        			{{ team.1.city.name }}
-        			<br/>
-        			<b>Pays :</b>
-        			{{ team.1.city.country.name }}
-        		</div>
-        		<div class="col s12 m7">
-        			{% if date('-3hours') > date(team.1.updated.date) %}
-        				<div class="red lighten-4">
-        			{% else %}
-        				<div class="green lighten-4">
-        			{% endif %}
-	        			<b>Date de mise à jour :</b><br/>
-	        			{{ team.1.updated.date | date("H:i") }}, le {{ team.1.updated.date | date("d/m/Y") }}
-        			</div>
-	        	</div>
+	        	{% if team.1 is not null %}
+
+		    		<div class="col s12 m5">
+		    			<b>Ville :</b>
+		    			{{ team.1.city.name }}
+		    			<br/>
+		    			<b>Pays :</b>
+		    			{{ team.1.city.country.name }}
+		    		</div>
+		    		<div class="col s12 m7">
+		    			{% if date('-3hours') > date(team.1.updated.date) %}
+		    				<div class="red lighten-4">
+		    			{% else %}
+		    				<div class="green lighten-4">
+		    			{% endif %}
+		        			<b>Date de mise à jour :</b><br/>
+		        			{{ team.1.updated.date | date("H:i") }}, le {{ team.1.updated.date | date("d/m/Y") }}
+		    			</div>
+		        	</div>
+
+		        {% else %}
+
+		        	<div class="col s12">
+		        		<p>
+		        			Pas de position connnue
+		        		</p>
+		        	</div>
+
+		        {% endif %}
 
 	        </div>
 			</p>
