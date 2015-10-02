@@ -6,5 +6,32 @@
 
 	<h4>Page de configuration du Pouce d'Or</h4>
 
+	<h5>Configuration du status des éditions</h5>
+
+	<form>
+		{% for edition in editions %}
+			{{ edition.status }}
+			<label>Edition du {{ edition.dateOfEvent|date('d/m/Y') }} :</label>
+			<select>
+				<option value="scheduled">Programmé</option>
+				<option value="registering">Inscription</option>
+				<option value="inProgress">En cours</option>
+				<option value="finished">Fini</option>
+			</select>
+
+		{% endfor %}
+	</form>
+
+{% endblock %}
+
+
+{% block javascript %}
+    {{ parent() }}
+
+	<script>
+		$(document).ready(function() {
+	    	$('select').material_select();
+		});
+	</script>
 
 {% endblock %}

@@ -215,13 +215,12 @@ class TeamController extends Controller
 		{
 			//On récupère le statut de la course (In progress, registering ...)
 			$em = $this->getDoctrine()->getManager();
-			$edition = $em->getRepository('PouceSiteBundle:Edition')->findPreviousEditionByUserSchool($user);
+			$edition = $em->getRepository('PouceSiteBundle:Edition')->findPreviousOrCurrentEditionByUserSchool($user);
 
 			$raceStatus=$edition->getStatus();
 
-
 			// On regarde si le user a participer a au moins 1 édition et que cette édition est en train de se dérouller
-			if(($teamService->isRegisterToPreviousRace($user)) && $raceStatus=="in progress")
+			if(($teamService->isRegisterToPreviousRace($user)) && $raceStatus=="inProgress")
 			{
 				// Edition in progress. On propose d'entrer sa position
 

@@ -152,6 +152,14 @@ class SiteController extends Controller
     */
     public function configAction()
     {
-        return $this->render('PouceSiteBundle:Admin:config.html.twig');
+        $repository = $this->getDoctrine()->getManager();
+
+        $repositoryEdition = $repository->getRepository('PouceSiteBundle:Edition');
+        $editionArray = $repositoryEdition->findAll();
+
+
+        return $this->render('PouceSiteBundle:Admin:config.html.twig', array(
+                'editions' => $editionArray
+            ));
     }
 }

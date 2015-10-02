@@ -44,6 +44,22 @@ class EditionRepository extends EntityRepository
 		return $qb->getQuery()->getSingleResult();
 	}
 
+    public function findPreviousOrCurrentEditionByUserSchool($user)
+    {
+        $qb = $this -> createQueryBuilder('e')
+                    -> where('e.status = :statusFinished OR e.status = :statusInProgress')
+                     ->setParameter('statusFinished', 'finished')
+                     ->setParameter('statusInProgress', 'inProgress')
+                    -> join('e.schools','s')
+                    -> andWhere('s.name = :schoolName')
+                     ->setParameter('schoolName', $user->getSchool()->getName())
+                    -> orderBy('e.dateOfEvent','DESC')
+                    ->setMaxResults(1);
+
+        // DO NOT put "->getSingleResult()" here (because NoResultExeption cached somewhere else)
+        return $qb->getQuery()->getSingleResult();
+    }
+
     public function findNextEditionBySchool($schoolId)
     {
         $qb = $this -> createQueryBuilder('e')

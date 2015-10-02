@@ -97,7 +97,7 @@ class PouceTeam
 				return false;
 			}
 
-			$previousEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findPreviousEditionByUserSchool($user);
+			$previousEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findPreviousOrCurrentEditionByUserSchool($user);
 
 			if($team->getEdition()->getId() == $previousEdition->getId())
 			{
