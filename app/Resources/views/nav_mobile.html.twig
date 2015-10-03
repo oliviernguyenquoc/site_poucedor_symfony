@@ -35,4 +35,13 @@
     <li class="bold">
         <a href="{{path('pouce_site_records')}}" class="waves-effect waves-teal">Top 25</a>
     </li>
+    {% if not app.user %}
+        <li class="last"><a href="{{path('fos_user_security_login')}}">Se connecter</a> </li>
+    {% else %}
+        <li class="last">
+            <a href="{{path('pouce_user_mainpage')}}">
+                Mon profil
+            </a>
+        </li>
+    {% endif %}
 </ul>
