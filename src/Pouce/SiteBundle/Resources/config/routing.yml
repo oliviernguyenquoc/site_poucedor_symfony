@@ -118,6 +118,10 @@ pouce_site_config:
     path:   /superAdmin/config/
     defaults: { _controller: PouceSiteBundle:Site:config }
 
+pouce_site_recalcul:
+    path: /superAdmin/recalcul/{editionId}
+    defaults: { _controller: PouceTeamBundle:Result:recalcul }
+
 pouce_site_lancement:
     path: /superAdmin/launch/{editionId}
     defaults: { _controller: PouceSiteBundle:Site:addPositionInitial }

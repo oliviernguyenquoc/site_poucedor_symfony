@@ -503,4 +503,41 @@ class ResultController extends Controller
 		}
 	}
 
+	public function recalculAction($editionId)
+	{
+        $repository = $this->getDoctrine()->getManager();
+        $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
+        $repositoryResult = $repository->getRepository('PouceTeamBundle:Result');
+        $repositoryUser = $repository->getRepository('PouceUserBundle:User');
+        $trajet = $this->container->get('pouce_team.trajet');
+
+        $resultArray = $repositoryResult->getAllResultsInEdition($editionId);
+		
+		foreach($resultArray as $key=>$result)
+        {
+        	$team = $result->getTeam();
+        	$user = $repositoryUser->findAUserOfTeam($team);
+
+        	$position =  $result->getPosition();
+
+        	$longArrivee = $position->getLongitude();
+        	$latArrivee = $position->getLatitude();
+
+        	if($longArrivee IS NULL OR $latArrivee IS NULL)
+        	{
+        		$longArrivee = $position->getCity()->getLongitude();
+        		$latArrivee = $position->getCity()->getLatitude();
+        	}
+
+
+			//Calcule du trajet
+			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+			
+			$position->setDistance($distance);
+			$repository->flush();
+		}
+
+		return $this->redirectToRoute('pouce_site_homepage');
+	}
+
 }

@@ -1,5 +1,5 @@
 $( document ).ready(function(){
-	$('#city').autocompleter({url_list: '/web/app_dev.php/city_search', url_get: '/web/app_dev.php/city_get/' });
+	$('#city').autocompleter({url_list: '/city_search', url_get: '/city_get/' });
 	$('.ui-autocomplete').addClass('dropdown-content');
 	$('.dropdown-button').dropdown({
       inDuration: 300,
@@ -11,7 +11,7 @@ $( document ).ready(function(){
     });
     $('.ui-autocomplete').on("click", "li.ui-menu-item", function(){
     	var cityName = $(this).text();
-    	var url_get_country = '/web/app_dev.php/country_get/';
+    	var url_get_country = '/country_get/';
         $.ajax({
             url:     url_get_country + cityName,
             success: function (country) {
