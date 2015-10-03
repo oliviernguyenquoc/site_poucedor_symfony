@@ -10,7 +10,8 @@
 	{# if results  isset  #} {# // TODO / TO CHANGE #}
 	{% for result in results  %}
 		<li>
-			<div class="collapsible-header">{{result.rank}} {{result.team.teamName}}</div>
+			<div class="collapsible-header">{{result.rank}} - {{result.team.teamName}}<div class="secondary-content">{{result.position.distance / 1000 }} km - {{ result.team.users[1].school.name }}
+			</div></div>
 			<div class="collapsible-body">
 				<div class="row">
 					<br/>
@@ -31,11 +32,15 @@
 						{% endfor %}
 						<br/>
 						<b> Arrivé à : </b>
+						{% if result.position.city is not null %}
 						{{result.position.city.name}}, {{result.position.city.country.name}}
+						{% else %}
+							Pas partis
+						{% endif %}
 
 						<br/>
 						<b> Soit </b>
-						{{result.position.distance}} km
+						{{result.position.distance / 1000 }} km
 						<b> depuis </b>
 						{% for user in result.team.users %}
 							{% if loop.first %}
