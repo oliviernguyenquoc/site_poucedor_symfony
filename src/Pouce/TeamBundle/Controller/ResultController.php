@@ -523,7 +523,7 @@ class ResultController extends Controller
         	$longArrivee = $position->getLongitude();
         	$latArrivee = $position->getLatitude();
 
-        	if($longArrivee IS NULL OR $latArrivee IS NULL)
+        	if($longArrivee==NULL OR $latArrivee==NULL)
         	{
         		$longArrivee = $position->getCity()->getLongitude();
         		$latArrivee = $position->getCity()->getLatitude();
