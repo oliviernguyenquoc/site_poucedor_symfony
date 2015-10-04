@@ -11,7 +11,7 @@ pouce_result_edit:
     defaults: { _controller: PouceTeamBundle:Result:editResult }
 
 pouce_comment_create:
-    path:   /comment/create
+    path:   /comment/create/{editionId}
     defaults: { _controller: PouceTeamBundle:Result:createComment }
 
 pouce_comment_photo_upload:

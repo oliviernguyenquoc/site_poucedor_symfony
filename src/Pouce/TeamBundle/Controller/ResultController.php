@@ -115,7 +115,7 @@ class ResultController extends Controller
 	/*
 		Creer le formulaire de commentaire sans la partie sur la destination (car déj)à remplit)
 	*/
-	public function createCommentAction(Request $request)
+	public function createCommentAction($editionId, Request $request)
 	{
 		$comment = new Comment();
 
@@ -139,7 +139,8 @@ class ResultController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$user = $this->getUser();
 			$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-			$team = $repository->getLastTeam($user->getId())->getSingleResult();
+			$edition = $repositoryEdition->find($editionId);
+			$team = $repository->findOneByEdition($editionId);
 			$comment->setTeam($team);
 			$comment->setBlock($request->request->get("aventureForm"));
 
