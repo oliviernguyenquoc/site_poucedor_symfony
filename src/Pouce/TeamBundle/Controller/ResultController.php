@@ -8,6 +8,7 @@ use Pouce\UserBundle\Entity\User;
 use Pouce\TeamBundle\Entity\Position;
 use Pouce\TeamBundle\Entity\RecitImage;
 use Pouce\TeamBundle\Form\ResultType;
+use Pouce\TeamBundle\Form\ResultEditType;
 use Pouce\TeamBundle\Form\PositionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,52 +23,71 @@ class ResultController extends Controller
 	/**
 	*	Ajoute un résultat (Une position, une équipe, une édition, un rang...)
 	*/
-	public function addResultAction(Request $request)
+	public function addResultAction($editionId, Request $request)
 	{
+		$em = $this->getDoctrine()->getManager();
+		$repository = $em->getRepository('PouceTeamBundle:Team');
+		$user = $this->getUser();
 
-		$hasATeam = true; // TODO : Need to be replaced by a request
-		$haveAResult = false; // TODO : Need to be replaced by a request
-		$haveAComment = false; // TODO : Need to be replaced by a request
+		//Flag
+		$hasATeam = true;
 
+		try{
+			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult(); 
+		}
+		catch(NoResultException $e)
+		{
+			$hasATeam = false;
+		}
+		
 		//On vérifie si la personne a déjà une équipe
 		if($hasATeam)
 		{
 			/* ***************************************************
-				Creer le formulaire de destination
+					Ajout d'une position
 			*************************************************** */
 
-			$user=$this->getUser();
-			$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-			$team=$repository->getLastTeam($user->getId())->getSingleResult();
+		return $this->redirect($this->generateUrl('pouce_site_homepage'));
 
-			$result = new Result();
-			// On crée le FormBuilder grâce au service form factory
-			$form = $this->get('form.factory')->create(new ResultType(), $result);
+		}
+		else
+		{
+			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
+		}
+		
+	}
 
-			if ($form->handleRequest($request)->isValid()) {
+	public function editResultAction($editionId, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$repository = $em->getRepository('PouceTeamBundle:Team');
+		$user = $this->getUser();
 
-				$em = $this->getDoctrine()->getManager();
-				$result->setTeam($team);
-				$result->getPosition()->setTeam($team);
-				$result->getPosition()->setEdition($team->getEdition());
-				$result->setEdition($team->getEdition());
+		//Flag
+		$hasATeam = true;
 
-				// Ajout d'un point dans la base de données et liaison résultat <-> Point
-				$trajet = $this->container->get('pouce_team.trajet');
-				$town = $form->get('position')->get('city')->getData();
-				$repositoryCity = $this->getDoctrine()->getRepository('PouceSiteBundle:City');
-				$country = $repositoryCity->findOneByName($town)->getCountry()->getName();
+		try{
+			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
+		}
+		catch(NoResultException $e)
+		{
+			$hasATeam = false;
+		}
+		
+		//On vérifie si la personne a déjà une équipe
+		if($hasATeam)
+		{
+			/* ***************************************************
+					Creer le formulaire de destination
+			*************************************************** */
 
-				$arrivee = $trajet->location($town,$country);
-				$longArrivee = $arrivee[0]["lon"];
-				$latArrivee = $arrivee[0]["lat"];
+			$result = $em->getRepository('PouceTeamBundle:Result')->findOneByTeam($team);
 
-				//Calcule du trajet
-				$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
-				$result->getPosition()->setDistance($distance);
-				$result->getPosition()->setLongitude($longArrivee);
-				$result->getPosition()->setLatitude($latArrivee);
+			/// On crée le FormBuilder grâce au service form factory
+			$form = $this->get('form.factory')->create(new ResultEditType(), $result);
 
+			if ($form->handleRequest($request)->isValid())
+			{
 				//Enregistrement
 				$em->persist($result);
 				$em->flush();
@@ -80,16 +100,15 @@ class ResultController extends Controller
 
 			// On passe la méthode createView() du formulaire à la vue
 			// afin qu'elle puisse afficher le formulaire toute seule
-			return $this->render('PouceTeamBundle:Team:addResult.html.twig', array(
+			return $this->render('PouceTeamBundle:Team:editResult.html.twig', array(
 			  'resultForm' => $form->createView(),
+			  'result' => $result
 			));
 		}
 		else
 		{
-			$request->getSession()->getFlashBag()->add('updateInformations', 'Vous devez remplir votre profil pour vous inscrire');
-			return $this->redirect($this->generateUrl('pouce_user_addinformations'));
+			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 		}
-		
 	}
 
 
@@ -202,11 +221,22 @@ class ResultController extends Controller
 		));	
 	}
 
-	public function addPositionAction(Request $request)
+	public function addPositionAction($editionId, Request $request)
 	{ 
 		$user = $this->getUser();
 		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-		$team = $repository->getLastTeam($user->getId())->getSingleResult();
+		$repositoryEdition = $this->getDoctrine()->getRepository('PouceSiteBundle:Edition');
+
+		if($editionId==0)
+		{
+			$team = $repository->getLastTeam($user->getId())->getSingleResult();
+			$edition = $team->getEdition();
+		}
+		else
+		{
+			$edition = $repositoryEdition->find($editionId);
+			$team = $repository->findOneByEdition($editionId);
+		}
 
 		$position= new Position();
 
@@ -217,7 +247,7 @@ class ResultController extends Controller
 			$em = $this->getDoctrine()->getManager();
 
 			$position->setTeam($team);
-			$position->setEdition($team->getEdition());
+			$position->setEdition($edition);
 
 			// Ajout d'un point dans la base de données et liaison résultat <-> Point
 			$trajet = $this->container->get('pouce_team.trajet');
@@ -277,7 +307,7 @@ class ResultController extends Controller
 			$result = $repositoryResult->findOneBy(
 				array(
 					'team' => $team->getId(),
-					'edition' => $team->getEdition()
+					'edition' => $edition
 					)
 				);
 
@@ -285,7 +315,7 @@ class ResultController extends Controller
 			{
 				$result = new Result();
 				$result->setTeam($team);
-				$result->setEdition($team->getEdition());
+				$result->setEdition($edition);
 				$result->setPosition($position);
 				$result->setLateness(0);
 				$result->setIsValid(true);
@@ -316,7 +346,8 @@ class ResultController extends Controller
 			));
 	}
 
-	public function addPositionOfTeamAction($teamId, Request $request){
+	public function addPositionOfTeamAction($teamId, Request $request)
+	{
 		$em = $this->getDoctrine()->getManager();
 		$repository = $em->getRepository('PouceTeamBundle:Team');
 		$team = $repository->find($teamId);
@@ -327,7 +358,8 @@ class ResultController extends Controller
 		/// On crée le FormBuilder grâce au service form factory
 		$form = $this->get('form.factory')->create(new PositionType(), $position);
 
-		if ($request->isMethod('POST')) {
+		if ($request->isMethod('POST'))
+		{
 
 			$position->setTeam($team);
 			$position->setEdition($team->getEdition());

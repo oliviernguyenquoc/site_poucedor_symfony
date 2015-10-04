@@ -3,8 +3,12 @@ pouce_team_add:
     defaults: { _controller: PouceTeamBundle:Team:addTeam }
 
 pouce_result_add:
-    path:   /result/add
+    path:   /result/add/{editionId}
     defaults: { _controller: PouceTeamBundle:Result:addResult }
+
+pouce_result_edit:
+    path:   /result/edit/{editionId}
+    defaults: { _controller: PouceTeamBundle:Result:editResult }
 
 pouce_comment_create:
     path:   /comment/create
@@ -25,8 +29,9 @@ pouce_team_edit:
     defaults: { _controller: PouceTeamBundle:Team:editTeam }
 
 pouce_position_add:
-    path:   /position/add
-    defaults: { _controller: PouceTeamBundle:Result:addPosition }
+    path:   /position/add/{editionId}
+    defaults: { _controller: PouceTeamBundle:Result:addPosition, editionId: 0  }
+
 
 pouce_team_delete:
     path: /delete/{id}

@@ -248,7 +248,24 @@ class TeamController extends Controller
 
 	public function previousRaceAction()
 	{
-		return $this->render('PouceUserBundle:User:informationsRequest.html.twig');
+		$user = $this->getUser();
+		$teamArray = $user->getTeams();
+
+		$teams = [];
+
+		foreach( $teamArray as $key=>$team )
+		{
+			if($team->getEdition()->getStatus()=='finished')
+			{
+				$teams[] = $team;
+			}
+
+		}
+		
+
+		return $this->render('PouceTeamBundle:Team:previousRaces.html.twig', array(
+				'teams' => $teams
+			));
 	}
 
 }

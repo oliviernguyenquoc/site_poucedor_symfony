@@ -29,7 +29,7 @@ class Result
     private $edition;
 
     /**
-     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Team", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Team", inversedBy="result")
     */
     private $team;
 
@@ -178,6 +178,8 @@ class Result
     public function setTeam(\Pouce\TeamBundle\Entity\Team $team)
     {
         $this->team = $team;
+
+        $team->setResult($this);
 
         return $this;
     }

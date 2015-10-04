@@ -16,12 +16,25 @@ class TeamRepository extends EntityRepository
 	{
         $qb = $this -> createQueryBuilder('t')
                     -> join('t.users','u', 'WITH', 'u.id = :idUser')
-                    -> setParameter('idUser', $idUser)
+                     -> setParameter('idUser', $idUser)
                     -> orderBy('u.created','DESC')
                     ->setMaxResults(1)
                    ;
         return $qb->getQuery();    
-    	}
+    }
+
+    public function findOneTeamByEditionAndUsers($editionId, $userId)
+    {
+        $qb = $this -> createQueryBuilder('t')
+                    -> join('t.edition','e', 'WITH', 'e.id = :editionId')
+                     -> setParameter('editionId', $editionId)
+                    -> join('t.users','u', 'WITH', 'u.id = :userId')
+                     -> setParameter('userId', $userId)
+                    -> orderBy('u.created','DESC')
+                    ->setMaxResults(1)
+                   ;
+        return $qb->getQuery();            
+    }
 
     /**
 	*	Retourne l'équipe du user qui concourra à la prochaine édition

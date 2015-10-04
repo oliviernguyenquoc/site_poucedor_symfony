@@ -12,9 +12,15 @@
 		<script src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 
+
 	<script>
 		$(document).ready(function() {
 			$('select').material_select();
+			$('#lateness').hide();
+			$('#inTime').change(function(){
+			    var c = this.checked ? $('#lateness').show() : $('#lateness').hide();
+			});
+
 		});
 	</script>
 
@@ -32,47 +38,46 @@
 
 		<h4>Votre destination</h4>
 
-		<p>
-			Destination la plus loin atteinte : 		
-			<div class="row">
+		<div class="row">
+			Destination la plus loin atteinte :
+				{% if result.position.city is not null %}
+				{{result.position.city.name}}, {{result.position.city.country.name}}
+				{% else %}
+					Pas partis
+				{% endif %}
+			 (<a>Modifier</a>)
+		</div>
 
-				<div class="col s12 m6">
-					<div class="dropdown-button" data-activates="ui-id-1">
-						<div id='city'></div>
-					</div>
-				</div>
-
-				<div class="col s12 m6">
-					<select disabled id="pays">
-					    <option value="1" disabled selected>Pays</option>
-				  	</select>
-				  </div>
-
-		  	</div>
-
-			Avez-vous réussit à revenir en stop ? : 
-
+		<div class="row">
 			<div class="switch">
+				Avez-vous réussit à revenir en stop ? :   
 				<label>
 					Non {{ form_widget(resultForm.isValid) }}
 					<span class="lever"></span>
 					Oui
 				</label>
 			</div>
-			Êtes-vous arrivé à temps ? : 
+		</div>
+
+		<div class="row">
 			<div class="switch">
+				Êtes-vous arrivé à temps ? :    
 				<label>
-					Non <input type="checkbox"> {# {{ form_widget(resultForm.isValid) }} #}
+					Non <input id="inTime" type="checkbox"> {# {{ form_widget(resultForm.isValid) }} #}
 					<span class="lever"></span>
 					Oui
 				</label>
 			</div>
-			De combien de temps étiez-vous en retard ? : {{ form_row(resultForm.lateness) }}
-		</p>
+		</div>
+		<div id="lateness">
+			<div class="row">
+				De combien de temps étiez-vous en retard ? : {{ form_row(resultForm.lateness) }}
+			</div>
+		</div>
+		
 
 {# 		{{ form_rest(resultForm) }} #}
 
 		<input type="submit" class="btn btn-primary" /> 
 	</form>
-
 {% endblock %}

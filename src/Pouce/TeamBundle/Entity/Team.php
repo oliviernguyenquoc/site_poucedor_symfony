@@ -35,6 +35,11 @@ class Team
     private $edition;
 
     /**
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Result", mappedBy="team")
+    */
+    private $result;
+
+    /**
      * @var string
      * @Assert\NotBlank()
      * @Assert\NotNull()
@@ -98,6 +103,16 @@ class Team
     public function removeUser(\Pouce\UserBundle\Entity\User $user)
     {
         $this->categories->removeElement($user);
+    }
+
+    public function setResult(Result $result)
+    {
+        $this->result = $result;
+    }
+
+    public function getResult()
+    {
+        return $this->result;
     }
 
     /**

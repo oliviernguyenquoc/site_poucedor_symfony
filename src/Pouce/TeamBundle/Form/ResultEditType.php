@@ -20,6 +20,8 @@ class ResultEditType extends ResultType
     {
         // On fait appel à la méthode buildForm du parent, qui va ajouter tous les champs à $builder
         parent::buildForm($builder, $options);
+
+        $builder->remove('position');
     }
 
     /**
