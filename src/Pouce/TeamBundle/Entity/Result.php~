@@ -29,15 +29,12 @@ class Result
     private $edition;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Team")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Team", inversedBy="result")
     */
     private $team;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="comment", type="text", nullable=true)
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Comment", cascade={"persist"})
      */
     private $comment;
 
@@ -69,24 +66,6 @@ class Result
     private $rank;
 
     /**
-     * @var float
-     * @Assert\Range(min=-180)
-     * @Assert\Range(max=180)
-     *
-     * @ORM\Column(name="longitude", type="float", nullable=true)
-     */
-    private $longitude;
-
-    /**
-     * @var float
-     * @Assert\Range(min=-90)
-     * @Assert\Range(max=90)
-     *
-     * @ORM\Column(name="latitude", type="float", nullable=true)
-     */
-    private $latitude;
-
-    /**
      * Get id
      *
      * @return integer 
@@ -96,28 +75,6 @@ class Result
         return $this->id;
     }
 
-    /**
-     * Set comment
-     *
-     * @param string $comment
-     * @return Result
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Get comment
-     *
-     * @return string 
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
 
     /**
      * Set lateness
@@ -197,6 +154,8 @@ class Result
     public function setTeam(\Pouce\TeamBundle\Entity\Team $team)
     {
         $this->team = $team;
+
+        $team->setResult($this);
 
         return $this;
     }

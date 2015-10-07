@@ -14,8 +14,12 @@ pouce_comment_create:
     path:   /comment/create/{editionId}
     defaults: { _controller: PouceTeamBundle:Result:createComment }
 
+pouce_comment_edit:
+    path:   /comment/edit/{editionId}
+    defaults: { _controller: PouceTeamBundle:Result:editComment }
+
 pouce_comment_photo_upload:
-    path:   /comment/uploadPhoto
+    path:   /comment/uploadPhoto/{editionId}
     defaults: { _controller: PouceTeamBundle:Result:uploadPhoto }
     requirements:
         _method: POST

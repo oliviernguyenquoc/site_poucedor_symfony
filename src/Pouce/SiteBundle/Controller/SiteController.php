@@ -167,10 +167,11 @@ class SiteController extends Controller
 
     public function addPositionInitialAction($editionId)
     {
-        $repository = $this->getDoctrine()->getManager();   
-        $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
-        $repositoryUser = $repository->getRepository('PouceUserBundle:User');
-        $repositoryEdition = $repository->getRepository('PouceSiteBundle:Edition');
+        $em = $this->getDoctrine()->getManager(); 
+        $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
+        $repositoryUser = $em->getRepository('PouceUserBundle:User');
+        $repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
+        $repositoryResult = $em->getRepository('PouceTeamBundle:Result');
 
 
         $teamArray = $repositoryTeam->findByEdition($editionId);
@@ -185,19 +186,28 @@ class SiteController extends Controller
             $position->setLatitude($user->getSchool()->getLatitude());
             $position->setEdition($repositoryEdition->find($editionId));
 
-            $result = new Result();
-            $result->setEdition($repositoryEdition->find($editionId));
-            $result->setTeam($team);
-            $result->setPosition($position);
-            $result->setLateness(0);
-            $result->setIsValid(true);
-            $result->setRank(0);
+            // On cherche le record de la team (pour l'instant) s'il existe
+            $result = $repositoryResult->findOneBy(
+                array(
+                    'team' => $team->getId(),
+                    'edition' => $editionId
+                    )
+                );
 
-
-            $em = $this->getDoctrine()->getManager();
+            if($result==NULL)
+            {
+                $result = new Result();
+                $result->setEdition($repositoryEdition->find($editionId));
+                $result->setTeam($team);
+                $result->setPosition($position);
+                $result->setLateness(0);
+                $result->setIsValid(false);
+                $result->setRank(0);
+                $em->persist($result);
+            }            
 
             $em->persist($position);
-            $em->persist($result);
+            
         }
         $em->flush();
 

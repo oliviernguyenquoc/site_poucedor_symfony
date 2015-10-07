@@ -47,7 +47,7 @@ class ResultController extends Controller
 					Ajout d'une position
 			*************************************************** */
 
-		return $this->redirect($this->generateUrl('pouce_site_homepage'));
+			return $this->redirect($this->generateUrl('pouce_position_add', array('editionId' => $editionId)));
 
 		}
 		else
@@ -95,7 +95,7 @@ class ResultController extends Controller
 
 				$request->getSession()->getFlashBag()->add('notice', 'Résultat bien enregistrée.');
 
-				return $this->redirect($this->generateUrl('pouce_site_homepage'));
+				return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 			}
 
 			// On passe la méthode createView() du formulaire à la vue
@@ -137,32 +137,90 @@ class ResultController extends Controller
 
 		if($request->getMethod() == 'POST'){
 			$em = $this->getDoctrine()->getManager();
+			$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
 			$user = $this->getUser();
-			$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
+			$repository = $em->getRepository('PouceTeamBundle:Team');
 			$edition = $repositoryEdition->find($editionId);
-			$team = $repository->findOneByEdition($editionId);
+			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
 			$comment->setTeam($team);
 			$comment->setBlock($request->request->get("aventureForm"));
+			dump($request->request->get("aventureForm"));
+			dump($comment);
+			$result = $team->getResult();
+			$result->setComment($comment);
 
 			//Enregistrement
 			$em->persist($comment);
 			$em->flush();
 
+			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 
 		}
 		return $this->render('PouceTeamBundle:Team:createComment.html.twig', array(
-			'form'=>$form->createView(),
+			'form'		=> $form->createView(),
+			'editionId'	=> $editionId
+			));
+	}
+
+	public function editCommentAction($editionId, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
+		$user = $this->getUser();
+		$repository = $em->getRepository('PouceTeamBundle:Team');
+		$edition = $repositoryEdition->find($editionId);
+		$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
+		$result = $team->getResult();
+		$comment = $result->getComment();
+
+		// On crée le FormBuilder grâce au service form factory
+		$formBuilder = $this->get('form.factory')->createBuilder('form', $comment);
+
+		// On ajoute les champs de l'entité que l'on veut à notre formulaire
+		$formBuilder
+		  ->add('block',   'textarea', array(
+				'attr'=> 	array(	'class'=>'js-st-instance',
+									'name'=>'aventureForm'      			
+							)
+			))
+		;
+		// Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
+
+		// À partir du formBuilder, on génère le formulaire
+		$form = $formBuilder->getForm();
+
+		if($request->getMethod() == 'POST'){
+			$comment->setTeam($team);
+			$comment->setBlock($request->request->get("aventureForm"));
+
+			dump($request);
+
+			//Enregistrement
+			$em->flush();
+
+			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
+
+		}
+		dump($comment);
+		return $this->render('PouceTeamBundle:Team:editComment.html.twig', array(
+			'form'		=> $form->createView(),
+			'editionId'	=> $editionId,
+			'comment' => $comment
 			));
 	}
 
 	/*
 		Gere l'upload de photo en AJAX dans le formulaire de commentaire
 	*/
-	public function uploadPhotoAction(Request $request)
+	public function uploadPhotoAction($editionId, Request $request)
 	{
+		$em = $this->getDoctrine()->getManager();
+		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
 		$user = $this->getUser();
-		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-		$team = $repository->getLastTeam($user->getId())->getSingleResult();
+		$repository = $em->getRepository('PouceTeamBundle:Team');
+		$edition = $repositoryEdition->find($editionId);
+		$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
+
 
 		$em = $this->getDoctrine()->getManager();
 
@@ -185,9 +243,9 @@ class ResultController extends Controller
             	'url' => $path
             )
 	    ));
+	    
 
-
-    	return new JsonResponse($response);
+    	return new Response($response);
 
 		//return new Response(exit(\Doctrine\Common\Util\Debug::dump($response)));
 	}
@@ -209,12 +267,13 @@ class ResultController extends Controller
 		  ->getRepository('PouceTeamBundle:Result')
 		;
 
-		$comment = $repositoryComment->findOneByTeam($id);
 		$result = $repositoryResult->findOneByTeam($id);
+		$comment = $result->getComment();
 
 		// create a converter object and handle the input
 		$converter = new Converter();
 		$html = $converter->toHtml($comment->getBlock());
+		dump($html);
 
 		return $this->render('PouceTeamBundle:Team:showResult.html.twig', array(
 		  'html'	=> $html,
@@ -225,8 +284,9 @@ class ResultController extends Controller
 	public function addPositionAction($editionId, Request $request)
 	{ 
 		$user = $this->getUser();
-		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-		$repositoryEdition = $this->getDoctrine()->getRepository('PouceSiteBundle:Edition');
+		$em = $this->getDoctrine()->getManager();
+		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
+		$repository = $em->getRepository('PouceTeamBundle:Team');
 
 		if($editionId==0)
 		{
@@ -236,7 +296,8 @@ class ResultController extends Controller
 		else
 		{
 			$edition = $repositoryEdition->find($editionId);
-			$team = $repository->findOneByEdition($editionId);
+					$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
+
 		}
 
 		$position= new Position();
@@ -245,7 +306,6 @@ class ResultController extends Controller
 		$form = $this->get('form.factory')->create(new PositionType(), $position);
 
 		if ($request->isMethod('POST')) {
-			$em = $this->getDoctrine()->getManager();
 
 			$position->setTeam($team);
 			$position->setEdition($edition);
@@ -319,7 +379,7 @@ class ResultController extends Controller
 				$result->setEdition($edition);
 				$result->setPosition($position);
 				$result->setLateness(0);
-				$result->setIsValid(true);
+				$result->setIsValid(false);
 				$result->setRank(0);
 				$newResultFlag=1;
 			}
@@ -340,7 +400,7 @@ class ResultController extends Controller
 			$em->persist($result);
 			$em->flush();
 
-			return $this->redirect($this->generateUrl('pouce_site_homepage'));
+			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 		}
 		return $this->render('PouceTeamBundle:Team:addPosition.html.twig', array(
 			'form'=>$form->createView()
@@ -436,7 +496,7 @@ class ResultController extends Controller
 				$result->setEdition($team->getEdition());
 				$result->setPosition($position);
 				$result->setLateness(0);
-				$result->setIsValid(true);
+				$result->setIsValid(false);
 				$result->setRank(0);
 				$newResultFlag=1;
 			}
@@ -505,8 +565,9 @@ class ResultController extends Controller
 	public function mainPageResultsAction()
 	{
 		$user=$this->getUser();
-		$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-		$resultRepo = $this->getDoctrine()->getRepository('PouceTeamBundle:Result');
+		$em = $this->getDoctrine()->getManager();
+		$repository = $em->getRepository('PouceTeamBundle:Team');
+		$resultRepo = $em->getRepository('PouceTeamBundle:Result');
 		$team=$repository->getLastTeam($user->getId())->getSingleResult();
 		$result=$resultRepo->getResultTeam($team)->getSingleResult();
 

@@ -34,9 +34,7 @@ class Result
     private $team;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="comment", type="text", nullable=true)
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Comment", cascade={"persist"})
      */
     private $comment;
 
@@ -77,28 +75,6 @@ class Result
         return $this->id;
     }
 
-    /**
-     * Set comment
-     *
-     * @param string $comment
-     * @return Result
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Get comment
-     *
-     * @return string 
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
 
     /**
      * Set lateness
@@ -238,5 +214,28 @@ class Result
     public function getRank()
     {
         return $this->rank;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param \Pouce\TeamBundle\Entity\Comment $comment
+     * @return Result
+     */
+    public function setComment(\Pouce\TeamBundle\Entity\Comment $comment = null)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \Pouce\TeamBundle\Entity\Comment 
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

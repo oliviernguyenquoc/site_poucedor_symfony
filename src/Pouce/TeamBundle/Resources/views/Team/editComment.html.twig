@@ -23,8 +23,7 @@
 		<script src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 
-
-	{# TODO : Add Image upload and tweet blocks #}
+	{# TODO : tweet blocks #}
 	<script>
 	$(function() {
 		SirTrevor.DEBUG = true;
@@ -48,6 +47,7 @@
 	 
 		SirTrevor.setDefaults({
 			uploadUrl: "{{ path('pouce_comment_photo_upload',{'editionId':editionId}) }}"
+			
 		});
 	});
 	</script>
@@ -59,16 +59,9 @@
 
 	<h3>Raconte ton aventure</h3>
 
-	<form method="post" name="form" action="{{ path('pouce_comment_create',{'editionId':editionId})}}">
+	<form method="post" name="form" action="{{ path('pouce_comment_edit',{'editionId':editionId})}}">
 		<textarea name="aventureForm" id="form_name"class="js-st-instance">
-	  	{"data":[
-	  		{
-	  			"type":"heading","data":{"text":"Titre de l'aventure","isHtml":true}
-	  		},
-	  		{
-	  			"type":"text","data":{"text":"Bonjour, Ceci est **l'éditeur d'aventure du Pouce d'Or**.\n Ajoutez des nouveaux blocks pour mettre du texte, des titres, des photos (maximum 5)... \n"}
-	  		}
-	  	]}
+	  	{{ comment.block }}
 		</textarea>
 		<button class="btn waves-effect waves-light" type="submit">Valider
 	    	<i class="material-icons right">send</i>
