@@ -37,7 +37,7 @@ class ResultType extends AbstractType
                 'required'  => true
             ))
             ->add('avis', 'textarea', array(
-                'label'     => 'Donne nous ton ressentiment sur l\'évènement',
+                'label'     => 'Donne-nous ton ressentiment sur l\'évènement',
                 'required'  => true
             ))
             ->add('sponsort','checkbox', array(

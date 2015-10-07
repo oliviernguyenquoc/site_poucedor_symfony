@@ -36,7 +36,10 @@ pouce_position_add:
     path:   /position/add/{editionId}
     defaults: { _controller: PouceTeamBundle:Result:addPosition, editionId: 0  }
 
-
 pouce_team_delete:
     path: /delete/{id}
     defaults: { _controller: PouceTeamBundle:Team:deleteTeam }
+
+pouce_team_position_show:
+    path: /position/all/{editionId}
+    defaults: { _controller: PouceTeamBundle:Result:showPositions}

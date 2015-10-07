@@ -48,7 +48,7 @@
 						{% else %}
 							Pas partis
 						{% endif %}
-					 (<a>Modifier</a>)
+					(<a href="{{ path('pouce_result_edit',{'editionId': app.request.get('editionId') })}}">Modifier</a>)
 				</div>
 
 				<div class="row">
@@ -102,7 +102,7 @@
 						<div class="row">
 							<div class="input-field col s12">
 								<textarea id="pouce_teambundle_resultEdit_avis" class="materialize-textarea"></textarea>
-								<label for="pouce_teambundle_resultEdit_avis">Donne nous ton ressentiment sur l'évènement (Si tu as bien aimé ...)</label>
+								<label for="pouce_teambundle_resultEdit_avis">Donne-nous ton ressentiment sur l'évènement (Si tu as bien aimé ...)</label>
 							</div>
 						</div>
 					</form>

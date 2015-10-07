@@ -1,6 +1,11 @@
 {# On étend notre layout #}
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/mainpage.css') }}" media="screen,projection"/>
+{% endblock %}
+
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
 
