@@ -144,8 +144,6 @@ class ResultController extends Controller
 			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
 			$comment->setTeam($team);
 			$comment->setBlock($request->request->get("aventureForm"));
-			dump($request->request->get("aventureForm"));
-			dump($comment);
 			$result = $team->getResult();
 			$result->setComment($comment);
 
@@ -240,7 +238,7 @@ class ResultController extends Controller
 
         $response = json_encode(array(
             'file' => array(
-            	'url' => $path
+            	'url' => '/web'.$path
             )
 	    ));
 	    

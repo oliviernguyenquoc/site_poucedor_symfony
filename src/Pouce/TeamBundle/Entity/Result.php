@@ -53,6 +53,22 @@ class Result
     private $isValid;
 
     /**
+     * @ORM\Column(name="nbCar", type="integer")
+    */
+    private $nbCar;
+
+
+    /**
+     * @ORM\Column(name="avis", type="text")
+    */
+    private $avis;
+
+    /**
+     * @ORM\Column(name="sponsort", type="boolean")
+    */
+    private $sponsort;
+
+    /**
      * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Position", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
     */
@@ -237,5 +253,74 @@ class Result
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set nbCar
+     *
+     * @param integer $nbCar
+     * @return Result
+     */
+    public function setNbCar($nbCar)
+    {
+        $this->nbCar = $nbCar;
+
+        return $this;
+    }
+
+    /**
+     * Get nbCar
+     *
+     * @return integer 
+     */
+    public function getNbCar()
+    {
+        return $this->nbCar;
+    }
+
+    /**
+     * Set avis
+     *
+     * @param string $avis
+     * @return Result
+     */
+    public function setAvis($avis)
+    {
+        $this->avis = $avis;
+
+        return $this;
+    }
+
+    /**
+     * Get avis
+     *
+     * @return string 
+     */
+    public function getAvis()
+    {
+        return $this->avis;
+    }
+
+    /**
+     * Set sponsort
+     *
+     * @param boolean $sponsort
+     * @return Result
+     */
+    public function setSponsort($sponsort)
+    {
+        $this->sponsort = $sponsort;
+
+        return $this;
+    }
+
+    /**
+     * Get sponsort
+     *
+     * @return boolean 
+     */
+    public function getSponsort()
+    {
+        return $this->sponsort;
     }
 }

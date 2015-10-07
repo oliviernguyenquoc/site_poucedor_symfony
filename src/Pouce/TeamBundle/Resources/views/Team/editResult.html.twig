@@ -36,48 +36,97 @@
 		{# Les erreurs générales du formulaire. #}
 		{{ form_errors(resultForm) }}
 
-		<h4>Votre destination</h4>
-
 		<div class="row">
-			Destination la plus loin atteinte :
-				{% if result.position.city is not null %}
-				{{result.position.city.name}}, {{result.position.city.country.name}}
-				{% else %}
-					Pas partis
-				{% endif %}
-			 (<a>Modifier</a>)
-		</div>
+			<div class="col s12 m6">
 
-		<div class="row">
-			<div class="switch">
-				Avez-vous réussit à revenir en stop ? :   
-				<label>
-					Non {{ form_widget(resultForm.isValid) }}
-					<span class="lever"></span>
-					Oui
-				</label>
+				<h5>Donne ta destination</h5>
+
+				<div class="row">
+					Destination la plus loin atteinte :
+						{% if result.position.city is not null %}
+						{{result.position.city.name}}, {{result.position.city.country.name}}
+						{% else %}
+							Pas partis
+						{% endif %}
+					 (<a>Modifier</a>)
+				</div>
+
+				<div class="row">
+					<div class="col s12 m6">
+						{{ form_label(resultForm.nbCar) }}
+						{{ form_widget(resultForm.nbCar) }}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="switch">
+						Avez-vous réussit à revenir en stop ? :   
+						<label>
+							Non {{ form_widget(resultForm.isValid) }}
+							<span class="lever"></span>
+							Oui
+						</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="switch">
+						Êtes-vous arrivé à temps ? :    
+						<label>
+							Non <input id="inTime" type="checkbox"> {# {{ form_widget(resultForm.isValid) }} #}
+							<span class="lever"></span>
+							Oui
+						</label>
+					</div>
+				</div>
+				<div id="lateness">
+					<div class="row">
+						<div class="col s12 m6">
+							De combien de temps étiez-vous en retard ? : {{ form_row(resultForm.lateness) }}
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="switch">
-				Êtes-vous arrivé à temps ? :    
-				<label>
-					Non <input id="inTime" type="checkbox"> {# {{ form_widget(resultForm.isValid) }} #}
-					<span class="lever"></span>
-					Oui
-				</label>
+			<div class="col s12 m6">
+				<h5> Donne ton avis sur l'évènement </h5>
+
+				<p>
+					Cette partie est <b>obligatoire</b> et très importante pour nous. Merci de répondre sincèrement. N'hésite pas à être précis que ton avis soit positif ou négatif.
+					<br/>
+					Merci !
+				</p>
+
+				<div class="row">
+					<form class="col s12">
+						<div class="row">
+							<div class="input-field col s12">
+								<textarea id="pouce_teambundle_resultEdit_avis" class="materialize-textarea"></textarea>
+								<label for="pouce_teambundle_resultEdit_avis">Donne nous ton ressentiment sur l'évènement (Si tu as bien aimé ...)</label>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="row">
+					<p>
+						{{ form_label(resultForm.sponsort) }}
+					</p>
+					<div class="switch">				
+						<label>
+							Non {{ form_widget(resultForm.sponsort) }} <input type="checkbox">
+							<span class="lever"></span>
+							Oui
+						</label>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div id="lateness">
-			<div class="row">
-				De combien de temps étiez-vous en retard ? : {{ form_row(resultForm.lateness) }}
+			<div class="right-align">
+				<input type="submit" class="btn btn-primary" />
 			</div>
 		</div>
 		
 
 {# 		{{ form_rest(resultForm) }} #}
-
-		<input type="submit" class="btn btn-primary" /> 
 	</form>
 {% endblock %}

@@ -32,6 +32,18 @@ class ResultType extends AbstractType
                 'choices'=> $choix,
                 'label'         => false
             ))
+            ->add('nbCar', 'number', array(
+                'label'     => 'Combien de véhicule avez-vous pris ?',
+                'required'  => true
+            ))
+            ->add('avis', 'textarea', array(
+                'label'     => 'Donne nous ton ressentiment sur l\'évènement',
+                'required'  => true
+            ))
+            ->add('sponsort','checkbox', array(
+                'label'     => 'Aurais-tu été d\'accord de porter un gillet jaune, fourni gratuitement, avec un sponsort du Pouce d\'Or imprimé coté torse ou coté dos :  ',
+                'required'  => true
+            ))
             ;
     }
     
