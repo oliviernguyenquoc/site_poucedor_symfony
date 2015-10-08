@@ -29,4 +29,24 @@ class PositionRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    public function findAllPositionsByTeamAndEdition($teamId, $editionId)
+    {
+        $qb = $this -> createQueryBuilder('p')
+                    -> Join('p.city','c')
+                    -> addSelect('c')
+                    -> Join('c.country','co')
+                    -> addSelect('co')
+                    -> Join('p.team','t')
+                    -> Join('p.edition','e')
+                    -> where('t.id = :teamId')
+                     -> setParameter('teamId', $teamId)
+                    -> andWhere('e.id = :editionId')
+                     -> setParameter('editionId', $editionId)
+                    -> andWhere('p.longitude IS NOT NULL AND p.latitude IS NOT NULL')
+                    -> orderBy('p.created','ASC')
+                     ;
+
+        return $qb->getQuery()->getResult();;
+    }
 }

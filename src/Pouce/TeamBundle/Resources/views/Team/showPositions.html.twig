@@ -1,0 +1,33 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	<h3>Toutes vos positions durant la course</h3>
+
+	<p>
+		Merci d'être le plus précis possible. Cela nous sert pour effectuer des statistiques très importantes et à faire un rendu de tous les trajets effectués pendant le concours.
+	</p>
+
+	<h5>Départ</h5>
+	<b>{{ school.name }}</b> <br/>
+	<b>Ville :</b> {{ school.town }}, {{ school.country }}<br/>
+
+	{% for position in positions %}
+		<p>
+			<h5>Position n°{{ loop.index }}</h5>
+			<b>Ville :</b> {{ position.city.name }}, {{ position.city.country.name }}<br/>
+			<b>Date :</b> {{ position.created | date('H:i (d/m/Y)')}}<br/>
+			<b>Distance depuis le départ :</b> {{ position.distance / 1000 }} km <br/>
+			<a href="{{ path('pouce_team_position_edit',{'positionId': position.id })}}" class="waves-effect waves-light btn">Modifier</a>  <a href="{{ path('pouce_team_position_delete',{'positionId': position.id })}}" class="waves-effect waves-light btn">Supprimer</a>
+		</p>
+	{% endfor %}
+
+	<h5>Arrivée</h5>
+	<b>{{ school.name }}</b> <br/>
+	<b>Ville :</b> {{ school.town }}, {{ school.country }}<br/>
+
+{% endblock %}

@@ -40,7 +40,7 @@
 				</div>
 				<div class="row">
 						<div class="col s12 m12">
-							<a class="waves-effect white-text waves-light center-align btn" href="{{ path('pouce_result_show',{'id': team.id })}}">Voir/Modifier mes positions</a>
+							<a class="waves-effect white-text waves-light center-align btn" href="{{ path('pouce_team_position_show',{'editionId': team.edition.id })}}">Voir/Modifier mes positions</a>
 						</div>
 					</div>
 				{% if team.result.comment != NULL %}

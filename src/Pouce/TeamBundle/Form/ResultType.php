@@ -23,14 +23,14 @@ class ResultType extends AbstractType
         }
         $choix[] = '> 48 h';
         $builder
-            ->add('position',      new PositionType())
+            ->add('position',   new PositionType())
             ->add('isValid', 'checkbox', array(
                 'label'     => false,
                 'required'  => false
             ))
             ->add('lateness','choice', array(
-                'choices'=> $choix,
-                'label'         => false
+                'choices'   => $choix,
+                'label'     => false
             ))
             ->add('nbCar', 'number', array(
                 'label'     => 'Combien de véhicule avez-vous pris ?',
@@ -42,7 +42,7 @@ class ResultType extends AbstractType
             ))
             ->add('sponsort','checkbox', array(
                 'label'     => 'Aurais-tu été d\'accord de porter un gillet jaune, fourni gratuitement, avec un sponsort du Pouce d\'Or imprimé coté torse ou coté dos :  ',
-                'required'  => true
+                'required'  => false
             ))
             ;
     }
