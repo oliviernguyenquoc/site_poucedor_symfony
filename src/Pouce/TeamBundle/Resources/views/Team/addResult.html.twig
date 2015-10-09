@@ -15,9 +15,8 @@
 	<script>
 		$(document).ready(function() {
 			$('select').material_select();
-			$('#lateness').hide();
 			$('#inTime').change(function(){
-			    var c = this.checked ? $('#lateness').show() : $('#lateness').hide();
+			    var c = this.checked ? $('#lateness').hide() : $('#lateness').show();
 			});
 
 		});
@@ -40,10 +39,6 @@
 
 				<h5>Donne ta destination</h5>
 
-				<p>
-					La position indiquée par défault est la position la plus loin enregistré par l'équipe ou par les organisateurs. Vous pouvez modifier toutes vos positions via la page d'accueil de votre profil
-				</p>
-
 				<div class="row">
 					Destination la plus loin atteinte :
 						{% if result.position.city is not null %}
@@ -51,7 +46,7 @@
 						{% else %}
 							Pas partis
 						{% endif %}
-					(<a href="{{ path('pouce_position_add',{'editionId': app.request.get('editionId') })}}">Modifier</a>)
+					(<a href="{{ path('pouce_result_edit',{'editionId': app.request.get('editionId') })}}">Modifier</a>)
 				</div>
 
 				<div class="row">
@@ -104,7 +99,7 @@
 					<form class="col s12">
 						<div class="row">
 							<div class="input-field col s12">
-								<textarea id="pouce_teambundle_resultEdit_avis" class="materialize-textarea"></textarea>
+								{{ form_widget(resultForm.avis) }}
 								<label for="pouce_teambundle_resultEdit_avis">Donne-nous ton ressentiment sur l'évènement (Si tu as bien aimé ...)</label>
 							</div>
 						</div>
@@ -117,19 +112,17 @@
 					</p>
 					<div class="switch">				
 						<label>
-							Non {{ form_widget(resultForm.sponsort) }} <input type="checkbox">
+							Non {{ form_widget(resultForm.sponsort) }} 
 							<span class="lever"></span>
 							Oui
 						</label>
 					</div>
 				</div>
 			</div>
+			{{ form_rest(resultForm) }}
 			<div class="right-align">
 				<input type="submit" class="btn btn-primary" />
 			</div>
 		</div>
-		
-
-{# 		{{ form_rest(resultForm) }} #}
 	</form>
 {% endblock %}

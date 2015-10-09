@@ -17,7 +17,7 @@ class ResultType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        for($i=1;$i<=48;$i++)
+        for($i=0;$i<=48;$i++)
         { 
             $choix[] = $i . ' h'; 
         }
@@ -38,7 +38,8 @@ class ResultType extends AbstractType
             ))
             ->add('avis', 'textarea', array(
                 'label'     => 'Donne-nous ton ressentiment sur l\'évènement',
-                'required'  => true
+                'required'  => true,
+                'attr'=> array('class'=>'materialize-textarea')
             ))
             ->add('sponsort','checkbox', array(
                 'label'     => 'Aurais-tu été d\'accord de porter un gillet jaune, fourni gratuitement, avec un sponsort du Pouce d\'Or imprimé coté torse ou coté dos :  ',

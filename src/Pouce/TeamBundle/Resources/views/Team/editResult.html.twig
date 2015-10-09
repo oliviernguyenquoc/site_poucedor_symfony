@@ -16,9 +16,8 @@
 	<script>
 		$(document).ready(function() {
 			$('select').material_select();
-			$('#lateness').hide();
 			$('#inTime').change(function(){
-			    var c = this.checked ? $('#lateness').show() : $('#lateness').hide();
+			    var c = this.checked ? $('#lateness').hide() : $('#lateness').show();
 			});
 
 		});
@@ -31,7 +30,7 @@
 
 	<h3>Rentre le résultat de ta course</h3>
 
-	<form method="post" {{ form_enctype(resultForm) }} action="{{ path('pouce_result_add', { 'editionId': app.request.get('editionId') })}}">
+	<form method="post" {{ form_enctype(resultForm) }} action="{{ path('pouce_result_edit', { 'editionId': app.request.get('editionId') })}}">
 
 		{# Les erreurs générales du formulaire. #}
 		{{ form_errors(resultForm) }}
@@ -101,7 +100,7 @@
 					<form class="col s12">
 						<div class="row">
 							<div class="input-field col s12">
-								<textarea id="pouce_teambundle_resultEdit_avis" class="materialize-textarea"></textarea>
+								{{ form_widget(resultForm.avis) }}
 								<label for="pouce_teambundle_resultEdit_avis">Donne-nous ton ressentiment sur l'évènement (Si tu as bien aimé ...)</label>
 							</div>
 						</div>
@@ -114,19 +113,18 @@
 					</p>
 					<div class="switch">				
 						<label>
-							Non {{ form_widget(resultForm.sponsort) }} <input type="checkbox">
+							Non {{ form_widget(resultForm.sponsort) }} 
 							<span class="lever"></span>
 							Oui
 						</label>
 					</div>
 				</div>
 			</div>
+			{{ form_rest(resultForm) }}
 			<div class="right-align">
 				<input type="submit" class="btn btn-primary" />
 			</div>
 		</div>
-		
-
-{# 		{{ form_rest(resultForm) }} #}
+	
 	</form>
 {% endblock %}
