@@ -29,7 +29,7 @@ class Result
     private $edition;
 
     /**
-     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Team", inversedBy="result")
+     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Team", inversedBy="result")
     */
     private $team;
 
@@ -53,18 +53,18 @@ class Result
     private $isValid;
 
     /**
-     * @ORM\Column(name="nbCar", type="integer")
+     * @ORM\Column(name="nbCar", type="integer", nullable=true)
     */
     private $nbCar;
 
 
     /**
-     * @ORM\Column(name="avis", type="text")
+     * @ORM\Column(name="avis", type="text", nullable=true)
     */
     private $avis;
 
     /**
-     * @ORM\Column(name="sponsort", type="boolean")
+     * @ORM\Column(name="sponsort", type="boolean", nullable=true)
     */
     private $sponsort;
 

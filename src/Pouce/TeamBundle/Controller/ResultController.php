@@ -193,7 +193,7 @@ class ResultController extends Controller
 			$comment->setTeam($team);
 			$comment->setBlock($request->request->get("aventureForm"));
 
-			dump($request);
+			//dump($request);
 
 			//Enregistrement
 			$em->flush();
@@ -201,7 +201,7 @@ class ResultController extends Controller
 			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 
 		}
-		dump($comment);
+		//dump($comment);
 		return $this->render('PouceTeamBundle:Team:editComment.html.twig', array(
 			'form'		=> $form->createView(),
 			'editionId'	=> $editionId,
@@ -273,7 +273,7 @@ class ResultController extends Controller
 		// create a converter object and handle the input
 		$converter = new Converter();
 		$html = $converter->toHtml($comment->getBlock());
-		dump($html);
+		//dump($html);
 
 		return $this->render('PouceTeamBundle:Team:showResult.html.twig', array(
 		  'html'	=> $html,
@@ -428,8 +428,6 @@ class ResultController extends Controller
 		$form = $this->get('form.factory')->create(new PositionEditType(), $position);
 
 		if ($request->isMethod('POST')) {
-
-			dump($position);
 
 			$position->setTeam($team);
 			$position->setEdition($edition);

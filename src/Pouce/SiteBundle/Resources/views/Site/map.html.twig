@@ -38,7 +38,6 @@
 			{% endfor %};
 		var marker = L.marker([ {{ result.position.latitude }}, {{ result.position.longitude }}]).addTo(map)
     		.bindPopup(textPoint)
-    		marker.valueOf()._icon.style.backgroundColor = 'green';
     	{% endfor %}
     });
 	</script>
