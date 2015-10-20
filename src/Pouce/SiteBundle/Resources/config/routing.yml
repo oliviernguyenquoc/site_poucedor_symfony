@@ -70,6 +70,11 @@ pouce_site_ranking:
     defaults: { _controller: PouceSiteBundle:Ranking:ranking, idEdition: 1 }
     # requirements:
 
+pouce_site_ranking_year:
+    path:     /ranking/year/{year}
+    defaults: { _controller: PouceSiteBundle:Ranking:rankingByYear, year: 2015 }
+    # requirements:
+
 pouce_site_galery:
     path:     /galery/{idEdition}
     defaults: { _controller: PouceSiteBundle:Site:galery, idEdition: 1 }

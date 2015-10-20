@@ -1,0 +1,97 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{% form_theme form _self %}
+
+{% block javascript %}
+
+	{% javascripts filter='?yui_js'
+		'js/jquery-ui.js'
+		'js/autocompleter-jqueryui.js'
+		'js/position.js' %}
+		<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+
+{% endblock %} 
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	<h4>Enregistre ta position actuelle</h4>
+
+
+	<form id="position" method="post" {{ form_enctype(form) }} action="{{ path('pouce_position_add_with_hour')}}">
+
+		{# Les erreurs générales du formulaire. #}
+		{{ form_errors(form) }}
+
+		<p>
+			Rentre la ville dans laquelle tu es. Le site te proposera les villes qu'il connait. Le pays s'ajoutera automatiquement une fois la ville sélectionnée.
+			Attention : Les villes sont nommés dans leur langue d'origine (Ex : Aachen au lieu d'Aix-la-chapelle).
+		</p>
+
+		<p>
+			Les organisateurs sont informés (normalement) de l'ajout d'une position. Pas la peine de leur renvoyer un SMS à part si ca vous fait plaisir où s'ils vous le demande.
+		</p>
+
+		<div class="input-field row">
+
+			<div class="col s12 m6">
+				<div class="dropdown-button" data-activates="ui-id-1">
+					<div id='city'></div>
+				</div>
+			</div>
+
+			<div class="col s12 m6">
+			  	<input type="text" name="pays" id="pays" placeholder="Pays">
+			</div>
+
+	  	</div>
+	  		<div class="col s12 m12">
+			  	{{ form_widget(form.created) }}
+			</div>
+	  	<div class="input-field row">
+
+	  	</div>
+
+		<input type="submit" class="btn btn-primary" /> 
+	</form>
+
+{% endblock %}
+
+{% block datetime_widget %}
+    <div class="row datetime_widget">
+	{% spaceless %}
+	    {% if widget == 'single_text' %}
+	        {{ block('field_widget') }}
+	    {% else %}
+	        <div {{ block('widget_container_attributes') }}>
+	        	<div class="input-field col s12 m1">
+	        		{{ form_errors(form.time) }}
+	        		{{ form_widget(form.time.hour, { 'attr': { 'size': '1' } }) }}
+	        		<label>Heure</label>
+	        	</div>
+	        	<div class="input-field col s12 m1">
+	        		{{ form_widget(form.time.minute, { 'attr': { 'size': '1' } }) }}
+	        		<label>Minutes</label>
+	        	</div>
+	        	<div class="col s12 m1">
+	        		 
+	        	</div>
+	        	<div class="input-field col s12 m3">
+	        		{{ form_errors(form.date.day) }}
+	        		{{ form_widget(form.date.day) }}
+	        		<label>Jour</label>
+	        	</div>
+	        	<div class="input-field col s12 m3">
+	        		{{ form_errors(form.date.month) }}
+	        		{{ form_widget(form.date.month) }}
+	        		<label>Mois</label>
+	        	</div>
+	        </div>
+	    {% endif %}
+	{% endspaceless %}
+    </div>
+{% endblock %}

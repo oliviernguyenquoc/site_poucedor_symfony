@@ -30,6 +30,26 @@ class ResultRepository extends EntityRepository
 
 		return $qb->getQuery()->getResult();
 	}	
+
+	public function getAllResultsByYear($year)
+	{
+		$qb = $this	-> createQueryBuilder('r')
+					-> join('r.edition','e')
+					-> addSelect('e')
+					-> where('YEAR(e.dateOfEvent) = :year')
+                     ->setParameter('year', $year)
+                    -> join('r.team','t')
+                    -> addSelect('t')
+                    -> join('t.users','u') //Il faut assurer la jointure (voir s'il y a pas moyen de faire autrement qu'une relation bidirectionnel)
+                    -> addSelect('u')
+                    -> join('u.school','s')
+                    -> addSelect('s')
+                    -> join('r.position','p')
+                    -> addSelect('p')
+                    -> orderBy('p.distance','DESC');
+
+		return $qb->getQuery()->getResult();
+	}	
 	
 	// TODO : FINIR
 	public function getAllTeamsBySchool($idEdition, $idEcole)

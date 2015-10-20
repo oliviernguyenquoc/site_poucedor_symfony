@@ -11,6 +11,7 @@ use Pouce\TeamBundle\Form\ResultType;
 use Pouce\TeamBundle\Form\ResultEditType;
 use Pouce\TeamBundle\Form\PositionType;
 use Pouce\TeamBundle\Form\PositionEditType;
+use Pouce\TeamBundle\Form\PositionWithHourType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -149,11 +150,11 @@ class ResultController extends Controller
 			$result = $team->getResult();
 			$result->setComment($comment);
 
-			//Enregistrement
 			$em->persist($comment);
 			$em->flush();
 
 			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
+
 
 		}
 		return $this->render('PouceTeamBundle:Team:createComment.html.twig', array(
@@ -406,6 +407,131 @@ class ResultController extends Controller
 			));
 	}
 
+	public function addPositionWithHourAction($editionId, Request $request)
+	{ 
+		$user = $this->getUser();
+		$em = $this->getDoctrine()->getManager();
+		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
+		$repository = $em->getRepository('PouceTeamBundle:Team');
+
+		if($editionId==0)
+		{
+			$team = $repository->getLastTeam($user->getId())->getSingleResult();
+			$edition = $team->getEdition();
+		}
+		else
+		{
+			$edition = $repositoryEdition->find($editionId);
+			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
+		}
+
+		$position= new Position();
+
+		/// On crée le FormBuilder grâce au service form factory
+		$form = $this->get('form.factory')->create(new PositionWithHourType(), $position);
+
+		if ($request->isMethod('POST')) {
+
+			$position->setTeam($team);
+			$position->setEdition($edition);
+
+			// Ajout d'un point dans la base de données et liaison résultat <-> Point
+			$trajet = $this->container->get('pouce_team.trajet');
+			$town=$request->request->get('fakeundefined');
+			$country=$request->request->get('pays');
+
+			$repositoryCity = $this->getDoctrine()->getManager()
+			  ->getRepository('PouceSiteBundle:City');
+			$repositoryCountry = $this->getDoctrine()->getManager()
+			  ->getRepository('PouceSiteBundle:Country');
+			$repositoryResult = $this->getDoctrine()->getManager()
+			  ->getRepository('PouceTeamBundle:Result');
+
+			$pays = $repositoryCountry->findOneBy(
+				array('name' => $country)
+				);
+
+			if($pays!=NULL)
+			{
+				$paysId=$pays->getId();
+
+				$ville = $repositoryCity->findOneBy(
+					array(
+						'name' => $town,
+						'country' => $paysId
+						)
+					);
+				if($ville == NULL)
+				{
+					return $this->render('PouceTeamBundle:Team:addPositionWithHour.html.twig', array(
+						'form'=>$form->createView()
+						));
+				}
+			}
+			else
+			{
+				return $this->render('PouceTeamBundle:Team:addPositionWithHour.html.twig', array(
+					'form'=>$form->createView()
+					));
+			}
+
+			$position->setCity($ville);
+			$position->setLongitude($ville->getLongitude());
+			$position->setLatitude($ville->getLatitude());
+
+			$longArrivee = $ville->getLongitude();
+			$latArrivee = $ville->getLatitude();
+
+			//Calcule du trajet
+			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+
+			$position->setDistance($distance);
+
+			$newResultFlag=0;
+
+			// On cherche le record de la team (pour l'instant) s'il existe
+			$result = $repositoryResult->findOneBy(
+				array(
+					'team' => $team->getId(),
+					'edition' => $edition
+					)
+				);
+
+			if($result==NULL)
+			{
+				$result = new Result();
+				$result->setTeam($team);
+				$result->setEdition($edition);
+				$result->setPosition($position);
+				$result->setLateness(0);
+				$result->setIsValid(false);
+				$result->setRank(0);
+				$newResultFlag=1;
+			}
+			else
+			{
+				$previousDistance = $result->getPosition()->getDistance();
+
+				//On regarde si le record à été battu. Si oui, on enregistre le nouveau record
+				if($previousDistance < $distance)
+				{
+					//S'il est battu on le remplace
+					$result->setPosition($position);
+				}
+			}
+
+			//Enregistrement
+			$em->persist($position);
+			$em->persist($result);
+			$em->flush();
+
+			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
+		}
+		return $this->render('PouceTeamBundle:Team:addPositionWithHour.html.twig', array(
+			'form'=>$form->createView()
+			));
+	}
+
 	public function editPositionAction($positionId, Request $request)
 	{
 
@@ -532,6 +658,8 @@ class ResultController extends Controller
 			'position' 	=> $position
 			));
 	}
+
+
 
 	public function deletePositionAction($positionId)
 	{

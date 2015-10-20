@@ -25,6 +25,23 @@ class RankingController extends Controller
         ));
     }
 
+    public function rankingByYearAction($year)
+    {
+        $repository = $this ->getDoctrine() 
+                            ->getManager()
+                            ->getRepository('PouceTeamBundle:Result');
+
+        $results= $repository->getAllResultsByYear((int)$year);
+
+        self::rankingCalculus($results);
+
+        //exit(\Doctrine\Common\Util\Debug::dump($users));
+        
+        return $this->render('PouceSiteBundle:Site:ranking.html.twig', array(
+          'results' => $results,
+        ));
+    }
+
     //Recalcule toutes les rangs et stock les nouvelles valeurs dans la base de données 
     private function rankingCalculus($results){
         $rang=0;

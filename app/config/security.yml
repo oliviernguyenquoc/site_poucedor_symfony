@@ -40,4 +40,4 @@ security:
         - { path: ^/allmyusers, role: ROLE_CHEFPOUCEUX }
         - { path: ^/superAdmin/, role: ROLE_SUPER_ADMIN }
         - { path: ^/map/, role: ROLE_CHEFPOUCEUX }
-        - { path: ^/ranking/, role: ROLE_CHEFPOUCEUX }
+        # - { path: ^/ranking/, role: ROLE_CHEFPOUCEUX }
