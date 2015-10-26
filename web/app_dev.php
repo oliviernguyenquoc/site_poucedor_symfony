@@ -9,7 +9,7 @@ use Symfony\Component\Debug\Debug;
 
 // This check prevents access to debug front controllers that are deployed by accident to production servers.
 // Feel free to remove this, extend it, or make something more sophisticated.
-if (!in_array(@$_SERVER['REMOTE_ADDR'], array('212.73.197.225','138.195.34.176','89.86.245.49','109.23.253.38','212.73.197.226','130.66.208.59','89.3.152.177','2.0.103.64', '127.0.0.1', 'fe80::1', '::1'))
+if (!in_array(@$_SERVER['REMOTE_ADDR'], array('212.73.197.227','212.73.197.225','138.195.34.176','89.86.245.49','109.23.253.38','212.73.197.226','130.66.208.59','89.3.152.177','2.0.103.64', '127.0.0.1', 'fe80::1', '::1'))
 ) 
 {
     header('HTTP/1.0 403 Forbidden');

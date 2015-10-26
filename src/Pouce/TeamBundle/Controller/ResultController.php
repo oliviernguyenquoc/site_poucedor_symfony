@@ -427,6 +427,8 @@ class ResultController extends Controller
 
 		$position= new Position();
 
+		$position->setCreated($edition->getDateOfEvent());
+
 		/// On crée le FormBuilder grâce au service form factory
 		$form = $this->get('form.factory')->create(new PositionWithHourType(), $position);
 
@@ -475,9 +477,12 @@ class ResultController extends Controller
 					));
 			}
 
-			$position->setCity($ville);
-			$position->setLongitude($ville->getLongitude());
-			$position->setLatitude($ville->getLatitude());
+			$position -> setCity($ville);
+			$position -> setLongitude($ville->getLongitude());
+			$position -> setLatitude($ville->getLatitude());
+			$temp = $request->request->get('pouce_teambundle_position');
+			$date = new \DateTime($temp['created']['date']['day'].'-'.$temp['created']['date']['month'].'-'.date("Y").' '.$temp['created']['time']['hour'].':'.$temp['created']['time']['minute']);
+			$position->setCreated($date);	
 
 			$longArrivee = $ville->getLongitude();
 			$latArrivee = $ville->getLatitude();
@@ -492,8 +497,8 @@ class ResultController extends Controller
 			// On cherche le record de la team (pour l'instant) s'il existe
 			$result = $repositoryResult->findOneBy(
 				array(
-					'team' => $team->getId(),
-					'edition' => $edition
+					'team' 		=> $team->getId(),
+					'edition'	=> $edition
 					)
 				);
 
@@ -525,10 +530,11 @@ class ResultController extends Controller
 			$em->persist($result);
 			$em->flush();
 
-			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
+			return $this->redirect($this->generateUrl('pouce_team_position_show', array('editionId' => $editionId)));
 		}
 		return $this->render('PouceTeamBundle:Team:addPositionWithHour.html.twig', array(
-			'form'=>$form->createView()
+			'form'		=>	$form->createView(),
+			'editionId'	=>	$editionId
 			));
 	}
 
@@ -811,7 +817,8 @@ class ResultController extends Controller
 
 		return $this->render('PouceTeamBundle:Team:showPositions.html.twig', array(
 			'positions' => $positions,
-			'school' => $school
+			'school' => $school,
+			'edition' => $editionId
 			));
 	}
 
