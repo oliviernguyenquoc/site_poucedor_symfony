@@ -5,6 +5,7 @@ namespace Pouce\SiteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pouce\TeamBundle\Entity\TeamRepository;
 use Pouce\SiteBundle\Entity\EditionRepository;
+use Pouce\UserBundle\Entity\UserRepository;
 
 class RankingController extends Controller
 {
@@ -35,10 +36,13 @@ class RankingController extends Controller
 
         self::rankingCalculus($results);
 
+        $resultsSchool=self::rankingBySchool($results);
+
         //exit(\Doctrine\Common\Util\Debug::dump($users));
         
         return $this->render('PouceSiteBundle:Site:ranking.html.twig', array(
           'results' => $results,
+          'resultsSchool' => $resultsSchool
         ));
     }
 
@@ -69,5 +73,31 @@ class RankingController extends Controller
 
         $em->flush();
 
+    }
+
+    private function rankingBySchool($results)
+    {
+        $resultsSchool[0][0] = [];
+        $resultsSchool[0][1] = [];
+        $resultsSchool[1] = [];
+
+        $repository = $this ->getDoctrine() 
+                            ->getManager()
+                            ->getRepository('PouceUserBundle:User');
+
+        foreach($results as $result)
+        {
+            $team = $result->getTeam();
+            $school = $repository->findAUserOfTeam($team)->getSchool();
+            if(!in_array($school->getId(), $resultsSchool[0][0],TRUE))
+            {
+                $resultsSchool[0][0][] = $school->getId();
+                $resultsSchool[0][1][] = $school;
+            }
+            $i = array_search($school->getId(),$resultsSchool[0][0]);
+            $resultsSchool[1][$i][] = $result;
+        }
+
+        return $resultsSchool;
     }
 }

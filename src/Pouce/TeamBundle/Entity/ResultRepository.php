@@ -26,7 +26,8 @@ class ResultRepository extends EntityRepository
                     -> addSelect('s')
                     -> join('r.position','p')
                     -> addSelect('p')
-                    -> orderBy('p.distance','DESC');
+                    -> addOrderBy('r.isValid', 'DESC')
+                    -> orderBy('(p.distance / 1000) - (r.lateness * 100)','DESC');
 
 		return $qb->getQuery()->getResult();
 	}	
@@ -46,12 +47,14 @@ class ResultRepository extends EntityRepository
                     -> addSelect('s')
                     -> join('r.position','p')
                     -> addSelect('p')
-                    -> orderBy('(p.distance / 1000) - (r.lateness * 100)','DESC');
+                    -> addOrderBy('r.isValid', 'DESC')
+                    -> addOrderBy('(p.distance / 1000) - (r.lateness * 100)','DESC');
 
 
 
 		return $qb->getQuery()->getResult();
-	}	
+	}
+
 	
 	// TODO : FINIR
 	public function getAllTeamsBySchool($idEdition, $idEcole)
@@ -59,6 +62,8 @@ class ResultRepository extends EntityRepository
 		$qb = $this -> getAllResultsInEdition($idEdition)
 					-> where('s.id = :idEcole')
 					 ->setParameter('idEcole', $idEcole);
+
+		return $qb->getQuery()->getResult();
 	}
 
 	/*

@@ -12,8 +12,17 @@
 	{# if results  isset  #} {# // TODO / TO CHANGE #}
 	{% for result in results  %}
 		<li>
-			<div class="collapsible-header">{{result.rank}} - {{result.team.teamName}}<div class="secondary-content">{{result.position.distance / 1000 }} km - {{ result.team.users[1].school.name }}
-			</div></div>
+			<div class="collapsible-header">
+				{% if result.isValid == 1 %}
+					{{result.rank}} 
+				{% else %}
+					NC
+				{% endif %}
+				- {{result.team.teamName|capitalize}}
+				<div class="secondary-content">
+					{{result.position.distance / 1000 }} km - {{ result.team.users[1].school.name|capitalize }}
+				</div>
+			</div>
 			<div class="collapsible-body">
 				<div class="row">
 					<br/>
@@ -27,7 +36,7 @@
 				    <div class="col s12 m8">
 						<b> Composé de : </b>
 						{% for user in result.team.users %}
-							{{user.firstName}} {{user.lastName}} 
+							{{user.firstName|capitalize}} {{user.lastName|capitalize}} 
 							{% if loop.first %}
 								et
 							{% endif %}
@@ -35,7 +44,7 @@
 						<br/>
 						<b> Arrivé à : </b>
 						{% if result.position.city is not null %}
-						{{result.position.city.name}}, {{result.position.city.country.name}}
+						{{result.position.city.name|capitalize}}, {{result.position.city.country.name|capitalize}}
 						{% else %}
 							Pas partis
 						{% endif %}
@@ -46,14 +55,14 @@
 						depuis
 						{% for user in result.team.users %}
 							{% if loop.first %}
-								{{user.school.town}}, {{user.school.country}}
+								<b>{{user.school.town|capitalize}}, {{user.school.country|capitalize}}</b>
 							{% endif %}
 						{% endfor %}
 						<br/>
 						{% if result.lateness != 0 %}
 							L'équipe a eu <b>{{ result.lateness }} h</b> de retard.
 						{% else %}
-							L'équipe n'a pas eu de retards.
+							L'équipe n'a pas eu de retard.
 						{% endif %}
 						<br/>
 						Donc l'équipe comptabilise <b> {{(result.position.distance / 1000) - (result.lateness * 100) }} km</b>.
@@ -66,6 +75,73 @@
 </ul>
 
 <h2>Le classement par école </h2>
+
+<ul class="collapsible popout" data-collapsible="accordion">
+
+	{% for school in resultsSchool.1 %}
+		<h4>{{ resultsSchool.0.1.1[loop.index-1].name }}</h4>
+		{% for result in school  %}
+			<li>
+				<div class="collapsible-header">
+					{% if result.isValid == 1 %}
+						{{loop.index}} 
+					{% else %}
+						NC
+					{% endif %}
+					- {{result.team.teamName|capitalize}}
+					<div class="secondary-content">
+						{{result.position.distance / 1000 }} km - {{ result.team.users[1].school.name|capitalize }}
+					</div>
+				</div>
+				<div class="collapsible-body">
+					<div class="row">
+						<br/>
+						<div class="col s12 m4 center-on-small-only">
+							{% for user in result.team.users %}
+								<div class="col s12 m6">
+					        		<img class="circle responsive-img" src="{{ ('/images/profil/' ~ user.imageName) | imagine_filter('my_thumb') }}">
+					        	</div>
+					        {% endfor %}
+					    </div>
+					    <div class="col s12 m8">
+							<b> Composé de : </b>
+							{% for user in result.team.users %}
+								{{user.firstName|capitalize}} {{user.lastName|capitalize}} 
+								{% if loop.first %}
+									et
+								{% endif %}
+							{% endfor %}
+							<br/>
+							<b> Arrivé à : </b>
+							{% if result.position.city is not null %}
+							{{result.position.city.name|capitalize}}, {{result.position.city.country.name|capitalize}}
+							{% else %}
+								Pas partis
+							{% endif %}
+
+							<br/>
+							Soit
+							<b>{{result.position.distance / 1000 }} km</b>
+							depuis
+							{% for user in result.team.users %}
+								{% if loop.first %}
+									<b>{{user.school.town|capitalize}}, {{user.school.country|capitalize}}</b>
+								{% endif %}
+							{% endfor %}
+							<br/>
+							{% if result.lateness != 0 %}
+								L'équipe a eu <b>{{ result.lateness }} h</b> de retard.
+							{% else %}
+								L'équipe n'a pas eu de retard.
+							{% endif %}
+							<br/>
+							Donc l'équipe comptabilise <b> {{(result.position.distance / 1000) - (result.lateness * 100) }} km</b>.
+						</div>
+					</div>
+				</div>
+			</li>
+		{% endfor %}
+	{% endfor %} 
 
 {% endblock %}
 
