@@ -6,6 +6,8 @@
 
 <h2>Le classement général</h2>
 
+{# {{ dump(results) }} #}
+
 <ul class="collapsible popout" data-collapsible="accordion">
 	{# if results  isset  #} {# // TODO / TO CHANGE #}
 	{% for result in results  %}
@@ -39,14 +41,22 @@
 						{% endif %}
 
 						<br/>
-						<b> Soit </b>
-						{{result.position.distance / 1000 }} km
-						<b> depuis </b>
+						Soit
+						<b>{{result.position.distance / 1000 }} km</b>
+						depuis
 						{% for user in result.team.users %}
 							{% if loop.first %}
 								{{user.school.town}}, {{user.school.country}}
 							{% endif %}
 						{% endfor %}
+						<br/>
+						{% if result.lateness != 0 %}
+							L'équipe a eu <b>{{ result.lateness }} h</b> de retard.
+						{% else %}
+							L'équipe n'a pas eu de retards.
+						{% endif %}
+						<br/>
+						Donc l'équipe comptabilise <b> {{(result.position.distance / 1000) - (result.lateness * 100) }} km</b>.
 					</div>
 				</div>
 			</div>

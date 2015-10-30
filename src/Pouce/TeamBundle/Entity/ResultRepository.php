@@ -46,7 +46,9 @@ class ResultRepository extends EntityRepository
                     -> addSelect('s')
                     -> join('r.position','p')
                     -> addSelect('p')
-                    -> orderBy('p.distance','DESC');
+                    -> orderBy('(p.distance / 1000) - (r.lateness * 100)','DESC');
+
+
 
 		return $qb->getQuery()->getResult();
 	}	
