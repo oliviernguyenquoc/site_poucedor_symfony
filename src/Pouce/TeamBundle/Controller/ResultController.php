@@ -308,7 +308,6 @@ class ResultController extends Controller
 		if ($request->isMethod('POST')) {
 
 			$position->setTeam($team);
-			$position->setEdition($edition);
 
 			// Ajout d'un point dans la base de données et liaison résultat <-> Point
 			$trajet = $this->container->get('pouce_team.trajet');
@@ -351,14 +350,12 @@ class ResultController extends Controller
 			}
 
 			$position->setCity($ville);
-			$position->setLongitude($ville->getLongitude());
-			$position->setLatitude($ville->getLatitude());
 
 			$longArrivee = $ville->getLongitude();
 			$latArrivee = $ville->getLatitude();
 
 			//Calcule du trajet
-			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+			$distance=$trajet->calculDistance($user->getSchool()->getCity()->getLongitude(),$user->getSchool()->getCity()->getLatitude(),$longArrivee,$latArrivee);
 
 			$position->setDistance($distance);
 
@@ -376,7 +373,6 @@ class ResultController extends Controller
 			{
 				$result = new Result();
 				$result->setTeam($team);
-				$result->setEdition($edition);
 				$result->setPosition($position);
 				$result->setLateness(0);
 				$result->setIsValid(false);
@@ -435,7 +431,6 @@ class ResultController extends Controller
 		if ($request->isMethod('POST')) {
 
 			$position->setTeam($team);
-			$position->setEdition($edition);
 
 			// Ajout d'un point dans la base de données et liaison résultat <-> Point
 			$trajet = $this->container->get('pouce_team.trajet');
@@ -478,8 +473,7 @@ class ResultController extends Controller
 			}
 
 			$position -> setCity($ville);
-			$position -> setLongitude($ville->getLongitude());
-			$position -> setLatitude($ville->getLatitude());
+
 			$temp = $request->request->get('pouce_teambundle_position');
 			$date = new \DateTime($temp['created']['date']['day'].'-'.$temp['created']['date']['month'].'-'.date("Y").' '.$temp['created']['time']['hour'].':'.$temp['created']['time']['minute']);
 			$position->setCreated($date);	
@@ -488,7 +482,7 @@ class ResultController extends Controller
 			$latArrivee = $ville->getLatitude();
 
 			//Calcule du trajet
-			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+			$distance=$trajet->calculDistance($user->getSchool()->getCity()->getLongitude(),$user->getSchool()->getCity()->getLatitude(),$longArrivee,$latArrivee);
 
 			$position->setDistance($distance);
 
@@ -506,7 +500,6 @@ class ResultController extends Controller
 			{
 				$result = new Result();
 				$result->setTeam($team);
-				$result->setEdition($edition);
 				$result->setPosition($position);
 				$result->setLateness(0);
 				$result->setIsValid(false);
@@ -550,7 +543,7 @@ class ResultController extends Controller
 
 		$position = $repositoryPosition->find($positionId);
 
-		$edition = $position->getEdition();
+		$edition = $position->getTeam()->getEdition();
 		$editionId = $edition->getId();
 		$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
 
@@ -562,7 +555,6 @@ class ResultController extends Controller
 		if ($request->isMethod('POST')) {
 
 			$position->setTeam($team);
-			$position->setEdition($edition);
 
 			// Ajout d'un point dans la base de données et liaison résultat <-> Point
 			$trajet = $this->container->get('pouce_team.trajet');
@@ -605,8 +597,7 @@ class ResultController extends Controller
 			}
 
 			$position->setCity($ville);
-			$position->setLongitude($ville->getLongitude());
-			$position->setLatitude($ville->getLatitude());
+
 			$temp = $request->request->get('pouce_teambundle_positionEdit');
 			$date = new \DateTime($temp['created']['date']['day'].'-'.$temp['created']['date']['month'].'-'.date("Y").' '.$temp['created']['time']['hour'].':'.$temp['created']['time']['minute']);
 			$position->setCreated($date);			
@@ -615,7 +606,7 @@ class ResultController extends Controller
 			$latArrivee = $ville->getLatitude();
 
 			//Calcule du trajet
-			$distance = $trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+			$distance = $trajet->calculDistance($user->getSchool()->getCity()->getLongitude(),$user->getSchool()->getCity()->getLatitude(),$longArrivee,$latArrivee);
 
 			$position->setDistance($distance);
 
@@ -633,7 +624,6 @@ class ResultController extends Controller
 			{
 				$result = new Result();
 				$result->setTeam($team);
-				$result->setEdition($edition);
 				$result->setPosition($position);
 				$result->setLateness(0);
 				$result->setIsValid(false);
@@ -674,7 +664,7 @@ class ResultController extends Controller
 
 		$position = $repositoryPosition->find($positionId);
 
-		$editionId = $position->getEdition()->getId();
+		$editionId = $position->getTeam()->getEdition()->getId();
 
 		$em->remove($position);
 		$em->flush();
@@ -699,7 +689,6 @@ class ResultController extends Controller
 		{
 
 			$position->setTeam($team);
-			$position->setEdition($team->getEdition());
 
 			// Ajout d'un point dans la base de données et liaison résultat <-> Point
 			$trajet = $this->container->get('pouce_team.trajet');
@@ -744,14 +733,12 @@ class ResultController extends Controller
 			}
 
 			$position->setCity($ville);
-			$position->setLongitude($ville->getLongitude());
-			$position->setLatitude($ville->getLatitude());
 
 			$longArrivee = $ville->getLongitude();
 			$latArrivee = $ville->getLatitude();
 
 			//Calcule du trajet
-			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+			$distance=$trajet->calculDistance($user->getSchool()->getCity()->getLongitude(),$user->getSchool()->getCity()->getLatitude(),$longArrivee,$latArrivee);
 
 			$position->setDistance($distance);
 
@@ -769,7 +756,6 @@ class ResultController extends Controller
 			{
 				$result = new Result();
 				$result->setTeam($team);
-				$result->setEdition($team->getEdition());
 				$result->setPosition($position);
 				$result->setLateness(0);
 				$result->setIsValid(false);
@@ -911,18 +897,11 @@ class ResultController extends Controller
 
         	$position =  $result->getPosition();
 
-        	$longArrivee = $position->getLongitude();
-        	$latArrivee = $position->getLatitude();
-
-        	if($longArrivee==NULL OR $latArrivee==NULL)
-        	{
-        		$longArrivee = $position->getCity()->getLongitude();
-        		$latArrivee = $position->getCity()->getLatitude();
-        	}
-
+        	$longArrivee = $position->getCity()->getLongitude();
+        	$latArrivee = $position->getCity()->getLatitude();
 
 			//Calcule du trajet
-			$distance=$trajet->calculDistance($user->getSchool()->getLongitude(),$user->getSchool()->getLatitude(),$longArrivee,$latArrivee);
+			$distance=$trajet->calculDistance($user->getCity()->getSchool()->getLongitude(),$user->getSchool()->getCity()->getLatitude(),$longArrivee,$latArrivee);
 			
 			$position->setDistance($distance);
 			$repository->flush();

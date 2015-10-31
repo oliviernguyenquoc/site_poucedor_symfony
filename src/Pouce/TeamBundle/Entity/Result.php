@@ -23,12 +23,6 @@ class Result
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Pouce\SiteBundle\Entity\Edition")
-     * @ORM\JoinColumn(nullable=false)
-    */
-    private $edition;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Team", inversedBy="result")
     */
     private $team;
@@ -136,29 +130,6 @@ class Result
     public function getIsValid()
     {
         return $this->isValid;
-    }
-
-    /**
-     * Set edition
-     *
-     * @param \Pouce\SiteBundle\Entity\Edition $edition
-     * @return Result
-     */
-    public function setEdition(\Pouce\SiteBundle\Entity\Edition $edition)
-    {
-        $this->edition = $edition;
-
-        return $this;
-    }
-
-    /**
-     * Get edition
-     *
-     * @return \Pouce\SiteBundle\Entity\Edition 
-     */
-    public function getEdition()
-    {
-        return $this->edition;
     }
 
     /**

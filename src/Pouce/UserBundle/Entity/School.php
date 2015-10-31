@@ -44,58 +44,15 @@ class School
     /**
      * @var string
      *
-     * @ORM\Column(name="town", type="string", length=255, nullable=true)
-     */
-    private $town;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255)
-     */
-    private $country;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="region", type="string", length=255)
-     */
-    private $region;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adress", type="string", length=255, nullable=true)
-     */
-    private $adress;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="postalCode", type="integer", nullable=true)
-     */
-    private $postalCode;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="telephone", type="string", length=20, nullable=true)
      */
     private $telephone;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="longitude", type="float", nullable=true)
-     */
-    private $longitude;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="latitude", type="float", nullable=true)
-     */
-    private $latitude;
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\City", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $city;
 
     /**
      * @ORM\ManyToMany(targetEntity="Pouce\SiteBundle\Entity\Edition", inversedBy="schools")
@@ -250,98 +207,6 @@ class School
     public function getEditions()
     {
         return $this->editions;
-    }
-
-    /**
-     * Set town
-     *
-     * @param string $town
-     * @return School
-     */
-    public function setTown($town)
-    {
-        $this->town = $town;
-
-        return $this;
-    }
-
-    /**
-     * Get town
-     *
-     * @return string 
-     */
-    public function getTown()
-    {
-        return $this->town;
-    }
-
-    /**
-     * Set country
-     *
-     * @param string $country
-     * @return School
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return string 
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * Set longitude
-     *
-     * @param float $longitude
-     * @return School
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    /**
-     * Get longitude
-     *
-     * @return float 
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    /**
-     * Set latitude
-     *
-     * @param float $latitude
-     * @return School
-     */
-    public function setLatitude($latitude)
-    {
-        $this->latitude = $latitude;
-
-        return $this;
-    }
-
-    /**
-     * Get latitude
-     *
-     * @return float 
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
     }
 
     /**

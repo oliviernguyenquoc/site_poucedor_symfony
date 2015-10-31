@@ -182,9 +182,7 @@ class SiteController extends Controller
             $user = $repositoryUser->findAUserOfTeam($team);
             $position->setTeam($team);
             $position->setDistance(0);
-            $position->setLongitude($user->getSchool()->getLongitude());
-            $position->setLatitude($user->getSchool()->getLatitude());
-            $position->setEdition($repositoryEdition->find($editionId));
+            $position->setCity($user->getSchool()->getCity());
 
             // On cherche le record de la team (pour l'instant) s'il existe
             $result = $repositoryResult->findOneBy(
@@ -197,7 +195,6 @@ class SiteController extends Controller
             if($result==NULL)
             {
                 $result = new Result();
-                $result->setEdition($repositoryEdition->find($editionId));
                 $result->setTeam($team);
                 $result->setPosition($position);
                 $result->setLateness(0);

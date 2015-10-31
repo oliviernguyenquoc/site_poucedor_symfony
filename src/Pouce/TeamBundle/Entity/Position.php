@@ -43,12 +43,6 @@ class Position
     private $team;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Pouce\SiteBundle\Entity\Edition")
-     * @ORM\JoinColumn(nullable=false)
-    */
-    private $edition;
-
-    /**
      * @var float
      * @Assert\Range(min=-180)
      * @Assert\Range(max=180)
@@ -141,30 +135,6 @@ class Position
     }
 
     /**
-     * Set edition
-     *
-     * @param \Pouce\SiteBundle\Entity\Edition $edition
-     * @return Position
-     */
-    public function setEdition(\Pouce\SiteBundle\Entity\Edition $edition)
-    {
-        $this->edition = $edition;
-
-        return $this;
-    }
-
-    /**
-     * Get edition
-     *
-     * @return \Pouce\SiteBundle\Entity\Edition 
-     */
-    public function getEdition()
-    {
-        return $this->edition;
-    }
-
-
-    /**
      * Set city
      *
      * @param string $city
@@ -185,52 +155,6 @@ class Position
     public function getCity()
     {
         return $this->city;
-    }
-
-    /**
-     * Set longitude
-     *
-     * @param float $longitude
-     * @return Position
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    /**
-     * Get longitude
-     *
-     * @return float 
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    /**
-     * Set latitude
-     *
-     * @param float $latitude
-     * @return Position
-     */
-    public function setLatitude($latitude)
-    {
-        $this->latitude = $latitude;
-
-        return $this;
-    }
-
-    /**
-     * Get latitude
-     *
-     * @return float 
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
     }
 
     /**
