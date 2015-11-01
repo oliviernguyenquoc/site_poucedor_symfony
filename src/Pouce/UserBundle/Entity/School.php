@@ -56,7 +56,7 @@ class School
     private $telephone;
 
     /**
-     * @ORM\OneToOne(targetEntity="Pouce\SiteBundle\Entity\City", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Pouce\SiteBundle\Entity\City", cascade={"persist"})
     */
     private $city;
 
@@ -268,7 +268,7 @@ class School
      * @param \Pouce\SiteBundle\Entity\City $city
      * @return School
      */
-    public function setCity(\Pouce\SiteBundle\Entity\City $city)
+    public function setCity(\Pouce\SiteBundle\Entity\City $city = null)
     {
         $this->city = $city;
 
@@ -284,6 +284,4 @@ class School
     {
         return $this->city;
     }
-
-
 }

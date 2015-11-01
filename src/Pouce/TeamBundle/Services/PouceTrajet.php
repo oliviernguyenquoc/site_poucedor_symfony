@@ -18,6 +18,7 @@ class PouceTrajet
 	public function calculDistance($longDepart,$latDepart,$longArrivee,$latArrivee)
 	{
 		$url='http://router.project-osrm.org/viaroute?loc='.$latDepart.','.$longDepart.'&loc='.$latArrivee.','.$longArrivee;
+		dump($url);
 		$response = $this->addInfoURLandExecute($url);
 		return $response["route_summary"]["total_distance"];
 	}
@@ -34,6 +35,8 @@ class PouceTrajet
 		// grab URL and pass it to the browser
 		$content = curl_exec($ch);
 		curl_close($ch);
+		dump($content);
+		exit();
 
 		return json_decode($content, TRUE);
 	}

@@ -55,7 +55,7 @@
 						depuis
 						{% for user in result.team.users %}
 							{% if loop.first %}
-								<b>{{user.school.town|capitalize}}, {{user.school.country|capitalize}}</b>
+								<b>{{user.school.city.name|capitalize}}, {{user.school.city.country.name|capitalize}}</b>
 							{% endif %}
 						{% endfor %}
 						<br/>
@@ -125,7 +125,7 @@
 							depuis
 							{% for user in result.team.users %}
 								{% if loop.first %}
-									<b>{{user.school.town|capitalize}}, {{user.school.country|capitalize}}</b>
+									<b>{{user.school.city.name|capitalize}}, {{user.school.city.country.name|capitalize}}</b>
 								{% endif %}
 							{% endfor %}
 							<br/>

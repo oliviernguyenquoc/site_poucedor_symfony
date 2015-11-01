@@ -38,7 +38,7 @@ class PositionRepository extends EntityRepository
                     -> Join('c.country','co')
                     -> addSelect('co')
                     -> Join('p.team','t')
-                    -> Join('p.edition','e')
+                    -> Join('t.edition','e')
                     -> where('t.id = :teamId')
                      -> setParameter('teamId', $teamId)
                     -> andWhere('e.id = :editionId')

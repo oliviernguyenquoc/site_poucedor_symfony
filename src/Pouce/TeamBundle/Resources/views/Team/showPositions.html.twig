@@ -18,7 +18,7 @@
 
 		<h5>Départ</h5>
 		<b>{{ school.name }}</b> <br/>
-		<b>Ville :</b> {{ school.town }}, {{ school.country }}<br/>
+		<b>Ville :</b> {{ school.city.name }}, {{ school.country }}<br/>
 
 		{% for position in positions %}
 			<p>
@@ -33,7 +33,7 @@
 
 		<h5>Arrivée</h5>
 		<b>{{ school.name }}</b> <br/>
-		<b>Ville :</b> {{ school.town }}, {{ school.country }}<br/>
+		<b>Ville :</b> {{ school.city.name }}, {{ school.country }}<br/>
 
 	</div>
 	
