@@ -44,13 +44,19 @@ class School
     /**
      * @var string
      *
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="telephone", type="string", length=20, nullable=true)
      */
     private $telephone;
 
     /**
-     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\City", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="Pouce\SiteBundle\Entity\City", cascade={"persist"})
     */
     private $city;
 
@@ -210,73 +216,28 @@ class School
     }
 
     /**
-     * Set region
+     * Set address
      *
-     * @param string $region
+     * @param string $address
      * @return School
      */
-    public function setRegion($region)
+    public function setAddress($address)
     {
-        $this->region = $region;
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * Get region
+     * Get address
      *
      * @return string 
      */
-    public function getRegion()
+    public function getAddress()
     {
-        return $this->region;
+        return $this->address;
     }
 
-    /**
-     * Set adress
-     *
-     * @param string $adress
-     * @return School
-     */
-    public function setAdress($adress)
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    /**
-     * Get adress
-     *
-     * @return string 
-     */
-    public function getAdress()
-    {
-        return $this->adress;
-    }
-
-    /**
-     * Set postalCode
-     *
-     * @param integer $postalCode
-     * @return School
-     */
-    public function setPostalCode($postalCode)
-    {
-        $this->postalCode = $postalCode;
-
-        return $this;
-    }
-
-    /**
-     * Get postalCode
-     *
-     * @return integer 
-     */
-    public function getPostalCode()
-    {
-        return $this->postalCode;
-    }
 
     /**
      * Set telephone
@@ -300,4 +261,29 @@ class School
     {
         return $this->telephone;
     }
+
+    /**
+     * Set city
+     *
+     * @param \Pouce\SiteBundle\Entity\City $city
+     * @return School
+     */
+    public function setCity(\Pouce\SiteBundle\Entity\City $city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return \Pouce\SiteBundle\Entity\City 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+
 }

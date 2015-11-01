@@ -43,24 +43,6 @@ class Position
     private $team;
 
     /**
-     * @var float
-     * @Assert\Range(min=-180)
-     * @Assert\Range(max=180)
-     *
-     * @ORM\Column(name="longitude", type="float", nullable=true)
-     */
-    private $longitude;
-
-    /**
-     * @var float
-     * @Assert\Range(min=-90)
-     * @Assert\Range(max=90)
-     *
-     * @ORM\Column(name="latitude", type="float", nullable=true)
-     */
-    private $latitude;
-
-    /**
      * @var datetime $created
      *
      * @Gedmo\Timestampable(on="create")

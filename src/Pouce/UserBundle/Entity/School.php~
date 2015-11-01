@@ -37,68 +37,25 @@ class School
      * @var string
      * @Assert\NotBlank()
      *
-     * @ORM\Column(name="sigle", type="string", length=10)
+     * @ORM\Column(name="sigle", type="string", length=10, nullable=true)
      */
     private $sigle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="town", type="string", length=255)
-     */
-    private $town;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255)
-     */
-    private $country;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="region", type="string", length=255)
-     */
-    private $region;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adress", type="string", length=255)
-     */
-    private $adress;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="postalCode", type="integer")
-     */
-    private $postalCode;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="telephone", type="string", length=255)
+     * @ORM\Column(name="telephone", type="string", length=20, nullable=true)
      */
     private $telephone;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="longitude", type="float")
-     */
-    private $longitude;
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\City", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+    */
+    private $city;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="latitude", type="float")
-     */
-    private $latitude;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Pouce\SiteBundle\Entity\Edition", inversedBy="editions")
+     * @ORM\ManyToMany(targetEntity="Pouce\SiteBundle\Entity\Edition", inversedBy="schools")
      */
     private $editions;
 
@@ -253,94 +210,94 @@ class School
     }
 
     /**
-     * Set town
+     * Set region
      *
-     * @param string $town
+     * @param string $region
      * @return School
      */
-    public function setTown($town)
+    public function setRegion($region)
     {
-        $this->town = $town;
+        $this->region = $region;
 
         return $this;
     }
 
     /**
-     * Get town
+     * Get region
      *
      * @return string 
      */
-    public function getTown()
+    public function getRegion()
     {
-        return $this->town;
+        return $this->region;
     }
 
     /**
-     * Set country
+     * Set adress
      *
-     * @param string $country
+     * @param string $adress
      * @return School
      */
-    public function setCountry($country)
+    public function setAdress($adress)
     {
-        $this->country = $country;
+        $this->adress = $adress;
 
         return $this;
     }
 
     /**
-     * Get country
+     * Get adress
      *
      * @return string 
      */
-    public function getCountry()
+    public function getAdress()
     {
-        return $this->country;
+        return $this->adress;
     }
 
     /**
-     * Set longitude
+     * Set postalCode
      *
-     * @param float $longitude
+     * @param integer $postalCode
      * @return School
      */
-    public function setLongitude($longitude)
+    public function setPostalCode($postalCode)
     {
-        $this->longitude = $longitude;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
 
     /**
-     * Get longitude
+     * Get postalCode
      *
-     * @return float 
+     * @return integer 
      */
-    public function getLongitude()
+    public function getPostalCode()
     {
-        return $this->longitude;
+        return $this->postalCode;
     }
 
     /**
-     * Set latitude
+     * Set telephone
      *
-     * @param float $latitude
+     * @param string $telephone
      * @return School
      */
-    public function setLatitude($latitude)
+    public function setTelephone($telephone)
     {
-        $this->latitude = $latitude;
+        $this->telephone = $telephone;
 
         return $this;
     }
 
     /**
-     * Get latitude
+     * Get telephone
      *
-     * @return float 
+     * @return string 
      */
-    public function getLatitude()
+    public function getTelephone()
     {
-        return $this->latitude;
+        return $this->telephone;
     }
 }
