@@ -902,6 +902,8 @@ class ResultController extends Controller
 
 			//Calcule du trajet
 			$distance=$trajet->calculDistance($user->getSchool()->getCity()->getLongitude(),$user->getSchool()->getCity()->getLatitude(),$longArrivee,$latArrivee);
+			dump($distance);
+			exit();
 
 			$position->setDistance($distance);
 			$repository->flush();

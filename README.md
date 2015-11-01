@@ -20,23 +20,23 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Edit forms
 * User page (just debugging and add some minor features)
 * Deal with editions ...
+* Admin pages
 
 
 ## In progress
 
-* Admin pages
+* Process Improvements
 
 
 ## To Do
 
-* Process Improvements
+* Maps
 
 
 ## The project
 
 It's a personnal project done after work hours for the Pouce d'Or contest.
-Began with no knowledge in Symfony but a previous experience in PHP.
-The goal is to put it Online for all users and with all functionnalities 7th of september.
+Began with no knowledge in Symfony.
 
 
 ## License
