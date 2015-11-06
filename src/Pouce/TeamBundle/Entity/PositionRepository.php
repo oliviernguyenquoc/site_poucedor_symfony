@@ -43,7 +43,6 @@ class PositionRepository extends EntityRepository
                      -> setParameter('teamId', $teamId)
                     -> andWhere('e.id = :editionId')
                      -> setParameter('editionId', $editionId)
-                    -> andWhere('p.longitude IS NOT NULL AND p.latitude IS NOT NULL')
                     -> orderBy('p.created','ASC')
                      ;
 

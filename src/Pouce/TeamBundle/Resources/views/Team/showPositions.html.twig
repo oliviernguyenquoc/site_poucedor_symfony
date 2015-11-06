@@ -3,6 +3,46 @@
 {# On étend notre layout #}
 {% extends "PouceSiteBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+	{{ parent() }}
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+	<link rel="stylesheet" href="{{ asset('css/leaflet-routing-machine.css') }}" />
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src="{{ asset('js/leaflet-routing-machine.js') }}"></script>
+	<script>
+		$(document).ready(function() {
+			var map = L.map('map').setView([48.8534, 2.3486], 4);
+			// L.Routing.control({
+			//     waypoints: [
+			//         L.latLng(40.74119, -73.9925),
+			//         L.latLng(40.73573, -73.99302)
+			//     ]
+			// }).addTo(map);
+			var school = L.latLng({{ school.city.latitude }},{{ school.city.longitude }});
+			L.marker([{{ school.city.latitude }},{{ school.city.longitude }}]).addTo(map);
+			
+			var Waypoints = [school];
+
+			{% for position in positions %}
+				var point = L.latLng({{ position.city.latitude }},{{ position.city.longitude }});
+				Waypoints.push(point);
+				L.marker([{{ position.city.latitude }},{{ position.city.longitude }}]).addTo(map);
+			{% endfor %}
+			Waypoints.push(school);
+			L.Routing.line({
+				waypoints: Waypoints
+			}).addTo(map);
+	    });
+	</script>
+
+{% endblock %}
+
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
 
@@ -16,24 +56,30 @@
 
 	<div class="row">
 
-		<h5>Départ</h5>
-		<b>{{ school.name }}</b> <br/>
-		<b>Ville :</b> {{ school.city.name }}, {{ school.country }}<br/>
+		<div class="col s12 m8">
+			<div id="map"></div>
+		</div>
 
-		{% for position in positions %}
-			<p>
-				<h5>Position n°{{ loop.index }}</h5>
-				<b>Ville :</b> {{ position.city.name }}, {{ position.city.country.name }}<br/>
-				<b>Date :</b> {{ position.created | date('H:i (d/m/Y)')}}<br/>
-				<b>Distance depuis le départ :</b> {{ position.distance / 1000 }} km <br/>
-				<a href="{{ path('pouce_team_position_edit',{'positionId': position.id })}}" class="waves-effect waves-light btn">Modifier</a>  <a href="{{ path('pouce_team_position_delete',{'positionId': position.id })}}" class="waves-effect waves-light btn">Supprimer</a>
-			</p>
-		{% endfor %}
+		<div class="col s12 m4">
+			<h5>Départ</h5>
+			<b>{{ school.name }}</b> <br/>
+			<b>Ville :</b> {{ school.city.name }}, {{ school.city.country.name }}<br/>
+
+			{% for position in positions %}
+				<p>
+					<h5>Position n°{{ loop.index }}</h5>
+					<b>Ville :</b> {{ position.city.name }}, {{ position.city.country.name }}<br/>
+					<b>Date :</b> {{ position.created | date('H:i (d/m/Y)')}}<br/>
+					<b>Distance depuis le départ :</b> {{ position.distance / 1000 }} km <br/>
+					<a href="{{ path('pouce_team_position_edit',{'positionId': position.id })}}" class="waves-effect waves-light btn">Modifier</a>  <a href="{{ path('pouce_team_position_delete',{'positionId': position.id })}}" class="waves-effect waves-light btn">Supprimer</a>
+				</p>
+			{% endfor %}
 
 
-		<h5>Arrivée</h5>
-		<b>{{ school.name }}</b> <br/>
-		<b>Ville :</b> {{ school.city.name }}, {{ school.country }}<br/>
+			<h5>Arrivée</h5>
+			<b>{{ school.name }}</b> <br/>
+			<b>Ville :</b> {{ school.city.name }}, {{ school.city.country.name }}<br/>
+		</div>
 
 	</div>
 	

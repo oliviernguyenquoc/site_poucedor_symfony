@@ -297,7 +297,7 @@ class ResultController extends Controller
 			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
 		}
 
-		$position= new Position();
+		$position = new Position();
 
 		/// On crée le FormBuilder grâce au service form factory
 		$form = $this->get('form.factory')->create(new PositionType(), $position);
@@ -361,8 +361,7 @@ class ResultController extends Controller
 			// On cherche le record de la team (pour l'instant) s'il existe
 			$result = $repositoryResult->findOneBy(
 				array(
-					'team' => $team->getId(),
-					'edition' => $edition
+					'team' => $team->getId()
 					)
 				);
 
@@ -488,8 +487,7 @@ class ResultController extends Controller
 			// On cherche le record de la team (pour l'instant) s'il existe
 			$result = $repositoryResult->findOneBy(
 				array(
-					'team' 		=> $team->getId(),
-					'edition'	=> $edition
+					'team' 		=> $team->getId()
 					)
 				);
 
@@ -612,8 +610,7 @@ class ResultController extends Controller
 			// On cherche le record de la team (pour l'instant) s'il existe
 			$result = $repositoryResult->findOneBy(
 				array(
-					'team' => $team->getId(),
-					'edition' => $edition
+					'team' => $team->getId()
 					)
 				);
 
@@ -744,8 +741,7 @@ class ResultController extends Controller
 			// On cherche le record de la team (pour l'instant) s'il existe
 			$result = $repositoryResult->findOneBy(
 				array(
-					'team' => $team->getId(),
-					'edition' => $team->getEdition()
+					'team' => $team->getId()
 					)
 				);
 
