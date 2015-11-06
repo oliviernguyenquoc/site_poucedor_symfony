@@ -57,14 +57,6 @@ class Team
     private $targetDestination;
 
     /**
-     * @var string
-     * @Assert\NotBlank()
-     *
-     * @ORM\Column(name="comment", type="text")
-     */
-    private $comment;
-
-    /**
      * @var boolean
      * 
      * @ORM\Column(name="finishRegister", type="boolean")
@@ -193,29 +185,6 @@ class Team
     public function getTargetDestination()
     {
         return $this->targetDestination;
-    }
-
-    /**
-     * Set comment
-     *
-     * @param string $comment
-     * @return Team
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Get comment
-     *
-     * @return string 
-     */
-    public function getComment()
-    {
-        return $this->comment;
     }
 
     /**

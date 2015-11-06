@@ -18,8 +18,6 @@ class RankingController extends Controller
         $results= $repository->getAllResultsInEdition((int)$idEdition);
 
         self::rankingCalculus($results);
-
-        //exit(\Doctrine\Common\Util\Debug::dump($users));
         
         return $this->render('PouceSiteBundle:Site:ranking.html.twig', array(
           'results' => $results,

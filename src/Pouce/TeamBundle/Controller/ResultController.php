@@ -145,7 +145,6 @@ class ResultController extends Controller
 			$repository = $em->getRepository('PouceTeamBundle:Team');
 			$edition = $repositoryEdition->find($editionId);
 			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
-			$comment->setTeam($team);
 			$comment->setBlock($request->request->get("aventureForm"));
 			$result = $team->getResult();
 			$result->setComment($comment);
@@ -191,10 +190,9 @@ class ResultController extends Controller
 		$form = $formBuilder->getForm();
 
 		if($request->getMethod() == 'POST'){
-			$comment->setTeam($team);
 			$comment->setBlock($request->request->get("aventureForm"));
+			$result->setComment($comment);
 
-			//dump($request);
 
 			//Enregistrement
 			$em->flush();
@@ -202,7 +200,6 @@ class ResultController extends Controller
 			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 
 		}
-		//dump($comment);
 		return $this->render('PouceTeamBundle:Team:editComment.html.twig', array(
 			'form'		=> $form->createView(),
 			'editionId'	=> $editionId,
@@ -253,6 +250,7 @@ class ResultController extends Controller
 
 	/*
 		Affiche juste la partie destination et commentaires (car déjà tout deux remplit)
+		id : id of team
 	*/
 	public function showResultAction($id)
 	{
@@ -274,7 +272,6 @@ class ResultController extends Controller
 		// create a converter object and handle the input
 		$converter = new Converter();
 		$html = $converter->toHtml($comment->getBlock());
-		//dump($html);
 
 		return $this->render('PouceTeamBundle:Team:showResult.html.twig', array(
 		  'html'	=> $html,
@@ -902,8 +899,6 @@ class ResultController extends Controller
 
 			//Calcule du trajet
 			$distance=$trajet->calculDistance($user->getSchool()->getCity()->getLongitude(),$user->getSchool()->getCity()->getLatitude(),$longArrivee,$latArrivee);
-			dump($distance);
-			exit();
 
 			$position->setDistance($distance);
 			$repository->flush();

@@ -25,7 +25,7 @@ pouce_comment_photo_upload:
         _method: POST
 
 pouce_result_show:
-    path:   /result/{id}
+    path:   /result/show/{id}
     defaults: { _controller: PouceTeamBundle:Result:showResult }
 
 pouce_team_edit:

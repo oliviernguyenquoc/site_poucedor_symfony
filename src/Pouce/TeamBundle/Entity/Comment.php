@@ -24,12 +24,6 @@ class Comment
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Team")
-     * @ORM\JoinColumn(nullable=false)
-    */
-    private $team;
-
-    /**
      * @var json_array
      *
      * @ORM\Column(name="block", type="json_array")
@@ -107,29 +101,6 @@ class Comment
     public function getUpdated()
     {
         return $this->updated;
-    }
-
-    /**
-     * Set team
-     *
-     * @param \Pouce\TeamBundle\Entity\Team $team
-     * @return Comment
-     */
-    public function setTeam(\Pouce\TeamBundle\Entity\Team $team)
-    {
-        $this->team = $team;
-
-        return $this;
-    }
-
-    /**
-     * Get team
-     *
-     * @return \Pouce\TeamBundle\Entity\Team 
-     */
-    public function getTeam()
-    {
-        return $this->team;
     }
 
     /**

@@ -35,6 +35,7 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_CHEFPOUCEUX }
+        - { path: ^/team/result/show, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/team, role: ROLE_USER }
         - { path: ^/user, role: ROLE_USER }
         - { path: ^/allmyusers, role: ROLE_CHEFPOUCEUX }

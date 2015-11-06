@@ -27,6 +27,8 @@ class ResultRepository extends EntityRepository
                     -> addSelect('s')
                     -> join('r.position','p')
                     -> addSelect('p')
+                    -> leftjoin('r.comment','c')
+                    -> addSelect('c')
                     -> addOrderBy('r.isValid', 'DESC')
                     -> orderBy('(p.distance / 1000) - (r.lateness * 100)','DESC');
 
@@ -48,6 +50,8 @@ class ResultRepository extends EntityRepository
                     -> addSelect('s')
                     -> join('r.position','p')
                     -> addSelect('p')
+                    -> leftjoin('r.comment','c')
+                    -> addSelect('c')
                     -> addOrderBy('r.isValid', 'DESC')
                     -> addOrderBy('(p.distance / 1000) - (r.lateness * 100)','DESC');
 

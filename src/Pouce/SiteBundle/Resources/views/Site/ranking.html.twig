@@ -7,9 +7,11 @@
 <h2>Le classement général</h2>
 
 {# {{ dump(results) }} #}
+<i class="material-icons">description</i> : Récit de leurs aventures.
+<br/>
+<br/>
 
 <ul class="collapsible popout" data-collapsible="accordion">
-	{# if results  isset  #} {# // TODO / TO CHANGE #}
 	{% for result in results  %}
 		<li>
 			<div class="collapsible-header">
@@ -19,6 +21,9 @@
 					NC
 				{% endif %}
 				- {{result.team.teamName|capitalize}}
+				{% if result.comment != NULL %}
+					<a href="{{ path('pouce_result_show',{'id': result.team.id}) }}"><i class="material-icons">description</i></a>
+				{% endif %}
 				<div class="secondary-content">
 					{{result.position.distance / 1000 }} km - {{ result.team.users[1].school.name|capitalize }}
 				</div>
@@ -66,6 +71,11 @@
 						{% endif %}
 						<br/>
 						Donc l'équipe comptabilise <b> {{(result.position.distance / 1000) - (result.lateness * 100) }} km</b>.
+						<br/> <br/>
+{# 						<a href="{{ path('fos_user_registration_register') }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur parcours</a> #}
+						{% if result.comment != NULL %}
+							<a href="{{ path('pouce_result_show',{'id': result.team.id}) }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur récit</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>
@@ -89,6 +99,9 @@
 						NC
 					{% endif %}
 					- {{result.team.teamName|capitalize}}
+					{% if result.comment != NULL %}
+						<a href="{{ path('pouce_result_show',{'id': result.team.id}) }}"><i class="material-icons">description</i></a>
+					{% endif %}
 					<div class="secondary-content">
 						{{result.position.distance / 1000 }} km - {{ result.team.users[1].school.name|capitalize }}
 					</div>
@@ -136,6 +149,11 @@
 							{% endif %}
 							<br/>
 							Donc l'équipe comptabilise <b> {{(result.position.distance / 1000) - (result.lateness * 100) }} km</b>.
+							<br/> <br/>
+{# 							<a href="{{ path('fos_user_registration_register') }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur parcours</a> #}
+							{% if result.comment != NULL %}
+								<a href="{{ path('pouce_result_show',{'id': result.team.id}) }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur récit</a>
+							{% endif %}
 						</div>
 					</div>
 				</div>
