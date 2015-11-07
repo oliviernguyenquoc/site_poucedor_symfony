@@ -208,7 +208,7 @@ class TeamController extends Controller
 			}
 			else
 			{
-				throw new Exception("Error : Race status not handled", 1);
+				throw new Symfony\Component\HttpKernel\Exception\HttpException(500, "Error : Race status not handled");
 			}
 		}
 		else

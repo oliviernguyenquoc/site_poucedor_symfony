@@ -253,16 +253,46 @@ class ResultController extends Controller
 			));
 	}
 
-
 	/*
 		Gere l'upload de photo en AJAX dans le formulaire de commentaire
+	*/
+	public function uploadPhotoAction($editionId, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
+		$user = $this->getUser();
+		$repository = $em->getRepository('PouceTeamBundle:Team');
+		$edition = $repositoryEdition->find($editionId);
+		$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
+		$em = $this->getDoctrine()->getManager();
+		$image = new RecitImage();
+		//exit(\Doctrine\Common\Util\Debug::dump($request->files->get("attachment")["file"]));
+		$image->setImageFile($request->files->get("attachment")["file"]);
+		$em->persist($image);
+		$em->flush();
+		//$imageSaved = $this->getDoctrine()->getRepository('PouceTeamBundle:RecitImage')->findOneByImageName($request->get("attachment")['uid']);
+		$helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+		$path = $helper->asset($image, 'imageFile');
+        $response = json_encode(array(
+            'file' => array(
+            	'url' => '/web'.$path
+            )
+	    ));
+	    
+    	return new Response($response);
+		//return new Response(exit(\Doctrine\Common\Util\Debug::dump($response)));
+	}
+
+
+	/*
+		Gere l'upload de photo en AJAX dans le formulaire de commentaire de la part des admins
 	*/
 	public function uploadPhotoAdminAction($teamId, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 
 		$repository = $em->getRepository('PouceTeamBundle:Team');
-		
+
 		$team = $repository->find($teamId);
 
 		$image = new RecitImage();

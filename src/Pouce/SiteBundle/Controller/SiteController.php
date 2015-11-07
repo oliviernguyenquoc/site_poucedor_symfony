@@ -23,7 +23,7 @@ class SiteController extends Controller
                 $directory2 = scandir($dir . '/' . $directory1);
                 foreach ($directory2 as $key => $imageName) 
                 {
-                    if(is_file($dir . '/' . $directory1 . '/' . $imageName) and $imageName[0] != '.')
+                    if(is_file($dir . '/' . $directory1 . '/' . $imageName) && $imageName[0] != '.')
                     {
                         $imageArray[] = array(
                         "url" => 'photos/' . $idEdition . '/' . $directory1 . '/' . $imageName
