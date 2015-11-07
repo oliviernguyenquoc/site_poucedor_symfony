@@ -15,7 +15,7 @@ class RankingController extends Controller
                             ->getManager()
                             ->getRepository('PouceTeamBundle:Result');
 
-        $results= $repository->getAllResultsInEdition((int)$idEdition);
+        $results = $repository->getAllResultsInEdition((int)$idEdition);
 
         self::rankingCalculus($results);
         
@@ -30,7 +30,7 @@ class RankingController extends Controller
                             ->getManager()
                             ->getRepository('PouceTeamBundle:Result');
 
-        $results= $repository->getAllResultsByYear((int)$year);
+        $results = $repository->getAllResultsByYear((int)$year);
 
         self::rankingCalculus($results);
 
@@ -97,5 +97,31 @@ class RankingController extends Controller
         }
 
         return $resultsSchool;
+    }
+
+    public function mapAction($editionId)
+    {
+        $em = $this->getDoctrine()->getManager();   
+        $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
+        $repositoryResult = $em->getRepository('PouceTeamBundle:Result');
+
+        $resultArray = $repositoryResult->getAllResultsInEdition($editionId);
+
+        return $this->render('PouceSiteBundle:Map:map.html.twig', array(
+                'results' => $resultArray
+            ));
+    }
+
+    public function mapRecapByYearAction($year)
+    {
+        $em = $this->getDoctrine()->getManager();   
+        $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
+        $repositoryResult = $em->getRepository('PouceTeamBundle:Result');
+
+        $resultArray = $repositoryResult->getAllResultsByYear($year);
+
+        return $this->render('PouceSiteBundle:Map:mapWithTraces.html.twig', array(
+                'results' => $resultArray
+            ));
     }
 }

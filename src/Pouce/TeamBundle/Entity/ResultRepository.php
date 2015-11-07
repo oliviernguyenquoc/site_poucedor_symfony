@@ -55,8 +55,6 @@ class ResultRepository extends EntityRepository
                     -> addOrderBy('r.isValid', 'DESC')
                     -> addOrderBy('(p.distance / 1000) - (r.lateness * 100)','DESC');
 
-
-
 		return $qb->getQuery()->getResult();
 	}
 

@@ -137,8 +137,11 @@ pouce_site_checkAllParcipants:
 
 pouce_site_map:
     path:   /map/{editionId}
-    defaults: { _controller: PouceSiteBundle:Site:map }
+    defaults: { _controller: PouceSiteBundle:Ranking:map }
 
+pouce_site_map_with_trace:
+    path: /map_recap/{year}
+    defaults: { _controller: PouceSiteBundle:Ranking:mapRecapByYear }
 
 pouce_site_conditions_générales:
     path:     /condition_generales
