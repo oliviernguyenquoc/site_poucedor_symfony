@@ -11,6 +11,7 @@ use Pouce\TeamBundle\Form\TeamEditType;
 use Pouce\UserBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class TeamController extends Controller
 {
@@ -208,7 +209,7 @@ class TeamController extends Controller
 			}
 			else
 			{
-				throw new Symfony\Component\HttpKernel\Exception\HttpException(500, "Error : Race status not handled");
+				throw new \Exception(500, "Error : Race status not handled");
 			}
 		}
 		else
