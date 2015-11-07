@@ -254,28 +254,40 @@ class ResultController extends Controller
 	*/
 	public function showResultAction($id)
 	{
-		$repositoryComment = $this
-		  ->getDoctrine()
-		  ->getManager()
-		  ->getRepository('PouceTeamBundle:Comment')
-		;
+		$em = $this->getDoctrine()->getManager();
 
-		$repositoryResult = $this
-		  ->getDoctrine()
-		  ->getManager()
-		  ->getRepository('PouceTeamBundle:Result')
-		;
+		$repositoryPosition = $em->getRepository('PouceTeamBundle:Position');
+		$repositoryComment = $em->getRepository('PouceTeamBundle:Comment');
+		$repositoryResult = $em->getRepository('PouceTeamBundle:Result');
+		$repositoryUser = $em->getRepository('PouceUserBundle:User');
+		$repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
+
+
+		$team = $repositoryTeam->find($id);
+		$edition = $team->getEdition();
+
+		$positions = $repositoryPosition->findAllPositionsByTeamAndEdition($id, $edition->getId());
+		$school = $repositoryUser->findAUserOfTeam($team)->getSchool();
 
 		$result = $repositoryResult->findOneByTeam($id);
 		$comment = $result->getComment();
 
 		// create a converter object and handle the input
 		$converter = new Converter();
-		$html = $converter->toHtml($comment->getBlock());
+		if($comment!=NULL){
+			$html = $converter->toHtml($comment->getBlock());			
+		}
+		else{
+			$html = NULL;
+		}
 
 		return $this->render('PouceTeamBundle:Team:showResult.html.twig', array(
 		  'html'	=> $html,
-		  'result' 	=> $result
+		  'result' 	=> $result,
+		  'edition' => $edition,
+		  'positions' => $positions,
+		  'school' => $school,
+		  'team' => $team
 		));	
 	}
 

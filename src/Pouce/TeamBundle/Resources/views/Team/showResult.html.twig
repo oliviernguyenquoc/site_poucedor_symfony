@@ -6,14 +6,75 @@
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
 
-	<h3>Résultat</h3>
+	<h3>Résultat final : {{ team.teamName|capitalize }}</h3>
 
 	<div class="row">
 		<div class="col s12 m12">
-
-			{{ html | raw }}
-
+			<div id="map"></div>
 		</div>
 	</div>
 
+	{% if html != NULL %}
+		<div class="row">
+			<div class="col s12 m12">
+
+					{{ html | raw }}
+
+			</div>
+		</div>
+	{% endif %}
+
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+
+	<link rel="stylesheet" href="{{ asset('css/leaflet.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/leaflet-routing-machine.css') }}" />
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+
+	<script src="{{ asset('js/leaflet.js') }}"></script>
+	<script src="{{ asset('js/leaflet-routing-machine.js') }}"></script>
+	<script src="{{ asset('js/L.Polyline.SnakeAnim.js') }}"></script>
+	<script>
+	$(document).ready(function() {
+		var map = L.map('map');
+
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+		var school = L.latLng({{ school.city.latitude }},{{ school.city.longitude }});
+		L.marker([{{ school.city.latitude }},{{ school.city.longitude }}]).addTo(map);
+		
+		var Waypoints = [school];
+
+		{% for position in positions %}
+			var point = L.latLng({{ position.city.latitude }},{{ position.city.longitude }});
+			Waypoints.push(point);
+			L.marker([{{ position.city.latitude }},{{ position.city.longitude }}]).addTo(map);
+		{% endfor %}
+		Waypoints.push(school);
+		var route = L.Routing.control({
+			waypoints: Waypoints
+		}).addTo(map);
+
+		// Trajet calculé en réalité
+
+		var positionFinal = L.latLng({{ result.position.city.latitude }},{{ result.position.city.longitude }});
+		var Waypoints2 = [school];
+
+		Waypoints2.push(positionFinal);
+
+		L.Routing.control({
+			waypoints: Waypoints2
+		}).addTo(map);
+
+		var line = L.Routing.line(route);
+		var bounds = line.getBounds();
+		map.fitBounds(bounds);
+	});
+	</script>
 {% endblock %}

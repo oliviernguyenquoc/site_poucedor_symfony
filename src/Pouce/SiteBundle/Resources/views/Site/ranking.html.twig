@@ -72,9 +72,10 @@
 						<br/>
 						Donc l'équipe comptabilise <b> {{(result.position.distance / 1000) - (result.lateness * 100) }} km</b>.
 						<br/> <br/>
-{# 						<a href="{{ path('fos_user_registration_register') }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur parcours</a> #}
 						{% if result.comment != NULL %}
-							<a href="{{ path('pouce_result_show',{'id': result.team.id}) }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur récit</a>
+							<a href="{{ path('pouce_result_show',{'id': result.team.id}) }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur parcours/récit</a>
+						{% else %}
+							<a href="{{ path('pouce_result_show',{'id': result.team.id}) }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur parcours</a>
 						{% endif %}
 					</div>
 				</div>
@@ -150,9 +151,10 @@
 							<br/>
 							Donc l'équipe comptabilise <b> {{(result.position.distance / 1000) - (result.lateness * 100) }} km</b>.
 							<br/> <br/>
-{# 							<a href="{{ path('fos_user_registration_register') }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur parcours</a> #}
 							{% if result.comment != NULL %}
-								<a href="{{ path('pouce_result_show',{'id': result.team.id}) }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur récit</a>
+								<a href="{{ path('pouce_result_show',{'id': result.team.id}) }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur parcours/récit</a>
+							{% else %}
+								<a href="{{ path('pouce_result_show',{'id': result.team.id}) }}" class="btn waves-effect waves-light teal darken-1" alt="Je m'inscrit au Pouce d'Or 2014">Voir leur parcours</a>
 							{% endif %}
 						</div>
 					</div>
