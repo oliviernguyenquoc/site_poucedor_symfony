@@ -23,7 +23,7 @@ class Result
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Pouce\TeamBundle\Entity\Team", inversedBy="result")
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Team", inversedBy="result")
     */
     private $team;
 

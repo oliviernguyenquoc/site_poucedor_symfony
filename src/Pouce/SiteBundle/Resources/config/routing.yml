@@ -135,6 +135,16 @@ pouce_site_checkAllParcipants:
     path:   /superAdmin/{editionId}
     defaults: { _controller: PouceSiteBundle:Site:superOrganisationPage }
 
+pouce_site_admin_comment_edit:
+    path:   /superAdmin/comment/edit/{teamId}
+    defaults: { _controller: PouceTeamBundle:Result:editCommentAdmin }
+
+pouce_site_admin_comment_photo_upload:
+    path:   /superAdmin/comment/uploadPhoto/{teamId}
+    defaults: { _controller: PouceTeamBundle:Result:uploadPhotoAdmin }
+    requirements:
+        _method: POST
+
 pouce_site_map:
     path:   /map/{editionId}
     defaults: { _controller: PouceSiteBundle:Ranking:map }

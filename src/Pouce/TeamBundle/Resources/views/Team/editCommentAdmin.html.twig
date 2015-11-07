@@ -1,0 +1,73 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+
+	{% stylesheets filter='cssrewrite, ?yui_css'
+  		'css/sir-trevor.css'
+  		'css/sir-trevor-icons.css' %}
+  		  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+	{% endstylesheets %}
+
+{% endblock %}
+	
+
+{% block javascript %}
+
+	{% javascripts filter='?yui_js'
+		'js/underscore.js'
+		'js/eventable.js'
+		'js/sir-trevor.min.js' %}
+		<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+
+	{# TODO : tweet blocks #}
+	<script>
+	$(function() {
+		SirTrevor.DEBUG = true;
+		var form = $('#post-form');
+	 
+		new SirTrevor.Editor({
+			el: $('.js-st-instance'),
+			blockTypes: [
+				"Heading",
+				"Text",
+				"List",
+				"Quote",
+				"Image"
+				//"Video"
+			],
+			blockTypeLimits: {
+				"Image": 5
+			},
+			required: ["Text"],
+		});
+	 
+		SirTrevor.setDefaults({
+			uploadUrl: "{{ path('pouce_site_admin_comment_photo_upload',{'teamId':teamId}) }}"
+			
+		});
+	});
+	</script>
+
+{% endblock %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	<h3>Raconte ton aventure</h3>
+
+	<form method="post" name="form" action="{{ path('pouce_site_admin_comment_edit',{'teamId':teamId})}}">
+		<textarea name="aventureForm" id="form_name"class="js-st-instance">
+	  	{{ comment.block }}
+		</textarea>
+		<button class="btn waves-effect waves-light" type="submit">Valider
+	    	<i class="material-icons right">send</i>
+		</button>
+	</form>
+
+	{# {{form(form)}} #}
+
+{% endblock %}

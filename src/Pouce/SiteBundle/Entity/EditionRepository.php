@@ -56,7 +56,6 @@ class EditionRepository extends EntityRepository
                     -> orderBy('e.dateOfEvent','DESC')
                     ->setMaxResults(1);
 
-        // DO NOT put "->getSingleResult()" here (because NoResultExeption cached somewhere else)
         return $qb->getQuery()->getSingleResult();
     }
 
@@ -87,7 +86,6 @@ class EditionRepository extends EntityRepository
                     -> orderBy('e.dateOfEvent','DESC')
                     ->setMaxResults(1);
 
-        // DO NOT put "->getSingleResult()" here (because NoResultExeption cached somewhere else)
         return $qb->getQuery()->getSingleResult();
     }
 

@@ -166,8 +166,9 @@ class ResultController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
-		$user = $this->getUser();
 		$repository = $em->getRepository('PouceTeamBundle:Team');
+
+		$user = $this->getUser();
 		$edition = $repositoryEdition->find($editionId);
 		$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
 		$result = $team->getResult();
@@ -207,24 +208,64 @@ class ResultController extends Controller
 			));
 	}
 
-	/*
-		Gere l'upload de photo en AJAX dans le formulaire de commentaire
-	*/
-	public function uploadPhotoAction($editionId, Request $request)
+	public function editCommentAdminAction($teamId, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
-		$user = $this->getUser();
 		$repository = $em->getRepository('PouceTeamBundle:Team');
-		$edition = $repositoryEdition->find($editionId);
-		$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
+
+		$team = $repository->find($teamId);
+		$editionId = $team->getEdition()->getId();
+		$result = $team->getResult();
+		$comment = $result->getComment();
+
+		// On crée le FormBuilder grâce au service form factory
+		$formBuilder = $this->get('form.factory')->createBuilder('form', $comment);
+
+		// On ajoute les champs de l'entité que l'on veut à notre formulaire
+		$formBuilder
+		  ->add('block',   'textarea', array(
+				'attr'=> 	array(	'class'=>'js-st-instance',
+									'name'=>'aventureForm'      			
+							)
+			))
+		;
+		// Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
+
+		// À partir du formBuilder, on génère le formulaire
+		$form = $formBuilder->getForm();
+
+		if($request->getMethod() == 'POST'){
+			$comment->setBlock($request->request->get("aventureForm"));
+			$result->setComment($comment);
 
 
+			//Enregistrement
+			$em->flush();
+
+			return $this->redirect($this->generateUrl('pouce_site_homepage'));
+
+		}
+		return $this->render('PouceTeamBundle:Team:editCommentAdmin.html.twig', array(
+			'form'		=> $form->createView(),
+			'teamId'	=> $teamId,
+			'comment' => $comment
+			));
+	}
+
+
+	/*
+		Gere l'upload de photo en AJAX dans le formulaire de commentaire
+	*/
+	public function uploadPhotoAdminAction($teamId, Request $request)
+	{
 		$em = $this->getDoctrine()->getManager();
 
-		$image = new RecitImage();
+		$repository = $em->getRepository('PouceTeamBundle:Team');
+		
+		$team = $repository->find($teamId);
 
-		//exit(\Doctrine\Common\Util\Debug::dump($request->files->get("attachment")["file"]));
+		$image = new RecitImage();
 
 		$image->setImageFile($request->files->get("attachment")["file"]);
 
