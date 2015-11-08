@@ -2,13 +2,12 @@
 
 namespace Pouce\UserBundle\Controller;
 
-use Pouce\UserBundle\Entity\User;
-use Pouce\UserBundle\Form\UserType;
-use Pouce\UserBundle\Form\UserEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\NoResultException;
 use Symfony\Component\HttpFoundation\Response;
+
+use Pouce\UserBundle\Form\UserType;
+use Pouce\UserBundle\Form\UserEditType;
 
 class UserController extends Controller
 {

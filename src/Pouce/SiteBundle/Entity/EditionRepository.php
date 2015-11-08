@@ -3,7 +3,6 @@
 namespace Pouce\SiteBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * EditionRepository

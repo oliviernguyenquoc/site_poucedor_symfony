@@ -4,10 +4,8 @@ namespace Pouce\TeamBundle\Controller;
 
 use Pouce\TeamBundle\Entity\Comment;
 use Pouce\TeamBundle\Entity\Result;
-use Pouce\UserBundle\Entity\User;
 use Pouce\TeamBundle\Entity\Position;
 use Pouce\TeamBundle\Entity\RecitImage;
-use Pouce\TeamBundle\Form\ResultType;
 use Pouce\TeamBundle\Form\ResultEditType;
 use Pouce\TeamBundle\Form\PositionType;
 use Pouce\TeamBundle\Form\PositionEditType;
@@ -18,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Validator\Constraints\DateTime;
+
 // Add a use statement to be able to use the class
 use Sioen\Converter;
 

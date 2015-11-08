@@ -3,9 +3,6 @@
 namespace Pouce\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Pouce\TeamBundle\Entity\TeamRepository;
-use Pouce\SiteBundle\Entity\EditionRepository;
-use Pouce\UserBundle\Entity\UserRepository;
 
 class RankingController extends Controller
 {

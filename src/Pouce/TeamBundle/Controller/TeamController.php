@@ -2,16 +2,15 @@
 
 namespace Pouce\TeamBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 use Pouce\TeamBundle\Entity\Team;
-use Pouce\UserBundle\Entity\User;
 use Pouce\TeamBundle\Entity\Position;
 use Pouce\TeamBundle\Form\PositionType;
 use Pouce\TeamBundle\Form\TeamType;
 use Pouce\TeamBundle\Form\TeamEditType;
-use Pouce\UserBundle\Form\UserType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class TeamController extends Controller
 {
