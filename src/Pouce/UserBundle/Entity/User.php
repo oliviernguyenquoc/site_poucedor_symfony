@@ -249,16 +249,6 @@ class User extends BaseUser
         return $this->telephone;
     }
 
-    // A peut être utiliser en cas de bug
-    // public function setEmail($email)
-    // {
-    //     if (is_null($this->getUsername())) {
-    //         $this->setUsername(uniqid());
-    //     }
-
-    //     return parent::setEmail($email);
-    // }
-
     /**
      * Set created
      *
