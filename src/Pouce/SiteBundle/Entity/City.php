@@ -36,8 +36,6 @@ class City
      */
     private $country;
 
-    private $code;
-
     /**
      * @var string
      * @Assert\NotBlank()

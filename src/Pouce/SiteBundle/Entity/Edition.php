@@ -65,6 +65,40 @@ class Edition
         $this->schools = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
+    /**
+     * Add schools
+     *
+     * @param \Pouce\UserBundle\Entity\School $schools
+     * @return Edition
+     */
+    public function addSchool(\Pouce\UserBundle\Entity\School $schools)
+    {
+        $this->schools[] = $schools;
+        $schools->setEdition($this); //Ajout de la génération pour ne pas boucler à l'infinie (SdZ p.215)
+        return $this;
+    }
+    /**
+     * Remove schools
+     *
+     * @param \Pouce\UserBundle\Entity\School $schools
+     */
+    public function removeSchool(\Pouce\UserBundle\Entity\School $schools)
+    {
+        $this->schools->removeElement($schools);
+        $school->setEdition(null);
+    }
+    
+    /**
+     * Get schools
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSchools()
+    {
+        return $this->schools;
+    }
+
     /**
      * Set status
      *

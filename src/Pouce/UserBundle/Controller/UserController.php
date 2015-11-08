@@ -16,17 +16,17 @@ class UserController extends Controller
 	*	Page qui demande à l'utilisateur de complèter son profil
 	*/
 	public function addInformationsAction()
-  	{
-  		$request = $this->getRequest();
+	{
+		$request = $this->getRequest();
 
-    	//On récupère le User en cours
-  		$user = $this->getUser();
+		//On récupère le User en cours
+		$user = $this->getUser();
 
-	    // On crée le FormBuilder grâce au service form factory
-	    $form = $this->get('form.factory')->create(new UserType());
+		// On crée le FormBuilder grâce au service form factory
+		$form = $this->get('form.factory')->create(new UserType());
 
-	    if ($request->getMethod() == 'POST') {
-		    if ($form->handleRequest($request)->isValid()) {
+		if ($request->getMethod() == 'POST') {
+			if ($form->handleRequest($request)->isValid()) {
 				$informations = $form->getData();
 
 				//On récupère les informations du form et on update le User
@@ -40,59 +40,59 @@ class UserController extends Controller
 				$userManager = $this->container->get('fos_user.user_manager');
 				$userManager->updateUser($user);
 
-		        $request->getSession()->getFlashBag()->add('updateInformations', 'Utilisateur mis à jour');
+				$request->getSession()->getFlashBag()->add('updateInformations', 'Utilisateur mis à jour');
 
 				return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 			}
 		}
 
-	    // On passe la méthode createView() du formulaire à la vue
-	    // afin qu'elle puisse afficher le formulaire toute seule
-	    return $this->render('PouceUserBundle:Registration:updateInformations.html.twig', array(
-			      'updateForm' => $form->createView(),
-			    ));
+		// On passe la méthode createView() du formulaire à la vue
+		// afin qu'elle puisse afficher le formulaire toute seule
+		return $this->render('PouceUserBundle:Registration:updateInformations.html.twig', array(
+				  'updateForm' => $form->createView(),
+				));
 	 }
 
 	public function informationsAction()
-  	{
-  		$user=$this->getUser();
-  		$userService = $this->container->get('pouce_user.user');
+	{
+		$user=$this->getUser();
+		$userService = $this->container->get('pouce_user.user');
 		$isUserUpdated = $userService->checkUserAdditionnalInformations($user);
 
-  		if($isUserUpdated)
-  		{
-  			return $this->render('PouceUserBundle:User:informationsUser.html.twig', array(
-		    	'user' 	=> $user
-		    ));
-  		}
-  		else
-  		{
-  			return $this->render('PouceUserBundle:User:informationsRequest.html.twig', array(
-		    	'user' 	=> $user
-		    ));
-  		}
-  	}
+		if($isUserUpdated)
+		{
+			return $this->render('PouceUserBundle:User:informationsUser.html.twig', array(
+				'user' 	=> $user
+			));
+		}
+		else
+		{
+			return $this->render('PouceUserBundle:User:informationsRequest.html.twig', array(
+				'user' 	=> $user
+			));
+		}
+	}
 
-    /**
+	/**
 	*	Gère l'upload de l'image de profil d'user
-    */
-    public function uploadImageProfilAction(Request $request)
-    {
-    	$user = $this->getUser();
-    	$id = $user->getId();
-    	$data = $request->files->get("uploadfile");
+	*/
+	public function uploadImageProfilAction(Request $request)
+	{
+		$user = $this->getUser();
+		$data = $request->files->get("uploadfile");
 
-    	$user->setImageFile($data);
+		$user->setImageFile($data);
 
-    	$userManager = $this->container->get('fos_user.user_manager');
+		$userManager = $this->container->get('fos_user.user_manager');
 		$userManager -> updateUser($user);
 
-    	return new Response(json_encode(array('success' => true, 'file' => $user->getImageName())));
+		return new Response(json_encode(array('success' => true, 'file' => $user->getImageName())));
 
-    }
+	}
 
-    // Crop to have a sqare image (not working : problem with type)
-   	private function crop($img)
+	// Crop to have a sqare image (not working : problem with type)
+	// Not used
+	private function crop($img)
 	{
 		$cx = $img->getWidth();
 		$cy = $img->getHeight();
@@ -117,14 +117,14 @@ class UserController extends Controller
 		return $img;
 	}
 
-   	/**
+	/**
 	*	Pour modifier les informations d'un user
 	*/
-    public function editUserAction($id, Request $request)
+	public function editUserAction($id, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$user=$team = $em ->getRepository('PouceUserBundle:User')->find($id);
+		$user = $em ->getRepository('PouceUserBundle:User')->find($id);
 
 
 		$form = $this->get('form.factory')->create(new UserEditType(), $user);

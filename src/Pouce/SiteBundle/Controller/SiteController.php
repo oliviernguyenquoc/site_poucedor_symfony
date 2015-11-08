@@ -170,7 +170,6 @@ class SiteController extends Controller
         $em = $this->getDoctrine()->getManager(); 
         $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
         $repositoryUser = $em->getRepository('PouceUserBundle:User');
-        $repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
         $repositoryResult = $em->getRepository('PouceTeamBundle:Result');
 
 

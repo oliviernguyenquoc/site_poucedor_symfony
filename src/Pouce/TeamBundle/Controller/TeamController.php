@@ -169,7 +169,6 @@ class TeamController extends Controller
 		//Import User Controller logic
 		// On récupère le service
     	$userService = $this->container->get('pouce_user.user');
-		$isUserUpdated = $userService->checkUserAdditionnalInformations($user);
 
 		// On regarde s'il existe une prochaine édition en cours d'inscrition ou juste prévu
 		if($isThereNextRace)
@@ -227,9 +226,10 @@ class TeamController extends Controller
 
 				$user = $this->getUser();
 				$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
+				// TODO : Seems to be not tested -> $team not used
 				$team = $repository->getLastTeam($user->getId())->getSingleResult();
 
-				$position= new Position();
+				$position = new Position();
 
 				// On crée le FormBuilder grâce au service form factory
 				$form = $this->get('form.factory')->create(new PositionType(), $position);

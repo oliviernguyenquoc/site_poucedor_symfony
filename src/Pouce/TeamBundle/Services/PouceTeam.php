@@ -55,7 +55,7 @@ class PouceTeam
 
 		try
 		{
-			$nextEdition = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionByUserSchool($user)->getSingleResult();
+			$this->em->getRepository('PouceSiteBundle:Edition')->findNextEditionByUserSchool($user)->getSingleResult();
 		}
 		catch (NoResultException $e) 
 		{

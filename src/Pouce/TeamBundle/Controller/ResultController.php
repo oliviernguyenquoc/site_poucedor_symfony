@@ -143,7 +143,6 @@ class ResultController extends Controller
 			$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
 			$user = $this->getUser();
 			$repository = $em->getRepository('PouceTeamBundle:Team');
-			$edition = $repositoryEdition->find($editionId);
 			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
 			$comment->setBlock($request->request->get("aventureForm"));
 			$result = $team->getResult();
@@ -169,7 +168,6 @@ class ResultController extends Controller
 		$repository = $em->getRepository('PouceTeamBundle:Team');
 
 		$user = $this->getUser();
-		$edition = $repositoryEdition->find($editionId);
 		$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
 		$result = $team->getResult();
 		$comment = $result->getComment();
@@ -211,11 +209,9 @@ class ResultController extends Controller
 	public function editCommentAdminAction($teamId, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
 		$repository = $em->getRepository('PouceTeamBundle:Team');
 
 		$team = $repository->find($teamId);
-		$editionId = $team->getEdition()->getId();
 		$result = $team->getResult();
 		$comment = $result->getComment();
 
@@ -263,12 +259,13 @@ class ResultController extends Controller
 		$repository = $em->getRepository('PouceTeamBundle:Team');
 
 		$user = $this->getUser();
-		$edition = $repositoryEdition->find($editionId);
 		$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
-		
+		$comment = $team->getResult()->getComment();
+	
 		$image = new RecitImage();
 		$image->setImageFile($request->files->get("attachment")["file"]);
-		
+		$image->setComment($comment);
+
 		$em->persist($image);
 		$em->flush();
 
@@ -294,10 +291,11 @@ class ResultController extends Controller
 		$repository = $em->getRepository('PouceTeamBundle:Team');
 
 		$team = $repository->find($teamId);
+		$comment = $team->getResult()->getComment();		
 
 		$image = new RecitImage();
-
 		$image->setImageFile($request->files->get("attachment")["file"]);
+		$image->setComment($comment);
 
 		$em->persist($image);
 		$em->flush();
@@ -323,7 +321,6 @@ class ResultController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 		$repositoryPosition = $em->getRepository('PouceTeamBundle:Position');
-		$repositoryComment = $em->getRepository('PouceTeamBundle:Comment');
 		$repositoryResult = $em->getRepository('PouceTeamBundle:Result');
 		$repositoryUser = $em->getRepository('PouceUserBundle:User');
 		$repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
@@ -367,11 +364,9 @@ class ResultController extends Controller
 		if($editionId==0)
 		{
 			$team = $repository->getLastTeam($user->getId())->getSingleResult();
-			$edition = $team->getEdition();
 		}
 		else
 		{
-			$edition = $repositoryEdition->find($editionId);
 			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
 		}
 
@@ -434,8 +429,6 @@ class ResultController extends Controller
 
 			$position->setDistance($distance);
 
-			$newResultFlag=0;
-
 			// On cherche le record de la team (pour l'instant) s'il existe
 			$result = $repositoryResult->findOneBy(
 				array(
@@ -451,7 +444,6 @@ class ResultController extends Controller
 				$result->setLateness(0);
 				$result->setIsValid(false);
 				$result->setRank(0);
-				$newResultFlag=1;
 			}
 			else
 			{
@@ -609,7 +601,6 @@ class ResultController extends Controller
 
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
-		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
 		$repository = $em->getRepository('PouceTeamBundle:Team');
 
 		$repositoryPosition = $em->getRepository('PouceTeamBundle:Position');
@@ -700,7 +691,6 @@ class ResultController extends Controller
 				$result->setLateness(0);
 				$result->setIsValid(false);
 				$result->setRank(0);
-				$newResultFlag=1;
 
 				$em->persist($result);
 			}
@@ -831,7 +821,6 @@ class ResultController extends Controller
 				$result->setLateness(0);
 				$result->setIsValid(false);
 				$result->setRank(0);
-				$newResultFlag=1;
 			}
 			else
 			{
@@ -918,12 +907,12 @@ class ResultController extends Controller
 	*/
 	public function mainPageResultsAction()
 	{
-		$user=$this->getUser();
+		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
 		$repository = $em->getRepository('PouceTeamBundle:Team');
 		$resultRepo = $em->getRepository('PouceTeamBundle:Result');
-		$team=$repository->getLastTeam($user->getId())->getSingleResult();
-		$result=$resultRepo->getResultTeam($team)->getSingleResult();
+		$team = $repository->getLastTeam($user->getId())->getSingleResult();
+		$result = $resultRepo->getResultTeam($team)->getSingleResult();
 
 		// On récupère le service
 		$resultService = $this->container->get('pouce_team.team');
@@ -954,7 +943,6 @@ class ResultController extends Controller
 	public function recalculAction($editionId)
 	{
         $repository = $this->getDoctrine()->getManager();
-        $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
         $repositoryResult = $repository->getRepository('PouceTeamBundle:Result');
         $repositoryUser = $repository->getRepository('PouceUserBundle:User');
         $trajet = $this->container->get('pouce_team.trajet');
