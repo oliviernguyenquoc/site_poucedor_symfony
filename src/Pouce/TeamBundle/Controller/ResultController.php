@@ -374,7 +374,7 @@ class ResultController extends Controller
 
 		if ($request->isMethod('POST'))
 		{
-			$this->position($position, $team, $request, 'PouceTeamBundle:Team:addPosition.html.twig');
+			$this->position($position, $user, $team, $request, 'PouceTeamBundle:Team:addPosition.html.twig');
 
 			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
 		}
@@ -411,7 +411,7 @@ class ResultController extends Controller
 
 		if ($request->isMethod('POST'))
 		{
-			$this->position($position, $team, $request, 'PouceTeamBundle:Team:addPositionWithHour.html.twig', 'pouce_teambundle_position');
+			$this->position($position, $user, $team, $request, 'PouceTeamBundle:Team:addPositionWithHour.html.twig', 'pouce_teambundle_position');
 
 			return $this->redirect($this->generateUrl('pouce_team_position_show', array('editionId' => $editionId)));
 		}
@@ -441,7 +441,7 @@ class ResultController extends Controller
 
 		if ($request->isMethod('POST')) 
 		{
-			$this->position($position, $team, $request, 'PouceTeamBundle:Team:editPosition.html.twig', 'pouce_teambundle_positionEdit');
+			$this->position($position, $user, $team, $request, 'PouceTeamBundle:Team:editPosition.html.twig', 'pouce_teambundle_positionEdit');
 
 			return $this->redirect($this->generateUrl('pouce_team_position_show', array('editionId' => $editionId)));
 		}
@@ -451,10 +451,33 @@ class ResultController extends Controller
 			));
 	}
 
-	private function position($position, $team, $request, $adressForm, $adressRequest = NULL)
+	public function addPositionOfTeamAction($teamId, Request $request)
 	{
-		$user = $this->getUser();
+		$user = $em->getRepository('PouceUserBundle:User')->findAUserOfTeam($team);
 
+		$em = $this->getDoctrine()->getManager();
+		$repository = $em->getRepository('PouceTeamBundle:Team');
+		$team = $repository->find($teamId);
+
+		$position= new Position();
+
+		/// On crée le FormBuilder grâce au service form factory
+		$form = $this->get('form.factory')->create(new PositionType(), $position);
+
+		if ($request->isMethod('POST'))
+		{
+			position($position, $user, $team, $request, 'PouceTeamBundle:Team:addPositionSpecificTeam.html.twig');
+
+			return $this->redirect($this->generateUrl('pouce_site_checkParticipants', array('editionId' => $team->getEdition()->getId() )));
+		}
+		return $this->render('PouceTeamBundle:Team:addPositionSpecificTeam.html.twig', array(
+			'form'=>$form->createView(),
+			'team' => $team
+			));
+	}
+
+	private function position($position, $user, $team, $request, $adressForm, $adressRequest = NULL)
+	{
 		$position->setTeam($team);
 
 		// Ajout d'un point dans la base de données et liaison résultat <-> Point
@@ -563,116 +586,6 @@ class ResultController extends Controller
 
 		return $this->redirect($this->generateUrl('pouce_team_position_show', array('editionId' => $editionId)));
 	
-	}
-
-	public function addPositionOfTeamAction($teamId, Request $request)
-	{
-		$em = $this->getDoctrine()->getManager();
-		$repository = $em->getRepository('PouceTeamBundle:Team');
-		$team = $repository->find($teamId);
-		$user = $em->getRepository('PouceUserBundle:User')->findAUserOfTeam($team);
-
-		$position= new Position();
-
-		/// On crée le FormBuilder grâce au service form factory
-		$form = $this->get('form.factory')->create(new PositionType(), $position);
-
-		if ($request->isMethod('POST'))
-		{
-
-			$position->setTeam($team);
-
-			// Ajout d'un point dans la base de données et liaison résultat <-> Point
-			$trajet = $this->container->get('pouce_team.trajet');
-			$town=$request->request->get('fakeundefined');
-			$country=$request->request->get('pays');
-
-			$repositoryCity = $this->getDoctrine()->getManager()
-			  ->getRepository('PouceSiteBundle:City');
-			$repositoryCountry = $this->getDoctrine()->getManager()
-			  ->getRepository('PouceSiteBundle:Country');
-			$repositoryResult = $this->getDoctrine()->getManager()
-			  ->getRepository('PouceTeamBundle:Result');
-
-			$pays = $repositoryCountry->findOneBy(
-				array('name' => $country)
-				);
-
-			if($pays!=NULL)
-			{
-				$paysId=$pays->getId();
-
-				$ville = $repositoryCity->findOneBy(
-					array(
-						'name' => $town,
-						'country' => $paysId
-						)
-					);
-				if($ville == NULL)
-				{
-					return $this->render('PouceTeamBundle:Team:addPositionSpecificTeam.html.twig', array(
-						'form'=>$form->createView(),
-						'team' => $team
-						));
-				}
-			}
-			else
-			{
-				return $this->render('PouceTeamBundle:Team:addPositionSpecificTeam.html.twig', array(
-					'form'=>$form->createView(),
-					'team' => $team
-					));
-			}
-
-			$position->setCity($ville);
-
-			$longArrivee = $ville->getLongitude();
-			$latArrivee = $ville->getLatitude();
-
-			//Calcule du trajet
-			$distance=$trajet->calculDistance($user->getSchool()->getCity()->getLongitude(),$user->getSchool()->getCity()->getLatitude(),$longArrivee,$latArrivee);
-
-			$position->setDistance($distance);
-
-			// On cherche le record de la team (pour l'instant) s'il existe
-			$result = $repositoryResult->findOneBy(
-				array(
-					'team' => $team->getId()
-					)
-				);
-
-			if($result==NULL)
-			{
-				$result = new Result();
-				$result->setTeam($team);
-				$result->setPosition($position);
-				$result->setLateness(0);
-				$result->setIsValid(false);
-				$result->setRank(0);
-			}
-			else
-			{
-				$previousDistance = $result->getPosition()->getDistance();
-
-				//On regarde si le record à été battu. Si oui, on enregistre le nouveau record
-				if($previousDistance < $distance)
-				{
-					//S'il est battu on le remplace
-					$result->setPosition($position);
-				}
-			}
-
-			//Enregistrement
-			$em->persist($position);
-			$em->persist($result);
-			$em->flush();
-
-			return $this->redirect($this->generateUrl('pouce_site_checkParticipants', array('editionId' => $team->getEdition()->getId() )));
-		}
-		return $this->render('PouceTeamBundle:Team:addPositionSpecificTeam.html.twig', array(
-			'form'=>$form->createView(),
-			'team' => $team
-			));
 	}
 
 	public function showPositionsAction($editionId)
