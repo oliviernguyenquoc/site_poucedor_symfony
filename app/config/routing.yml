@@ -35,15 +35,15 @@ pouce_user:
 
 city_search:
     path:   /city_search
-    defaults: { _controller: PouceTeamBundle:Result:searchCity}
+    defaults: { _controller: PouceTeamBundle:Position:searchCity}
 
 city_get:
     path:   /city_get/{id}
-    defaults: { _controller: PouceTeamBundle:Result:getCity }
+    defaults: { _controller: PouceTeamBundle:Position:getCity }
 
 country_get:
     path:   /country_get/{cityName}
-    defaults: { _controller: PouceTeamBundle:Result:getCountry }
+    defaults: { _controller: PouceTeamBundle:Position:getCountry }
 
 _imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"

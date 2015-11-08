@@ -12,15 +12,15 @@ pouce_result_edit:
 
 pouce_comment_create:
     path:   /comment/create/{editionId}
-    defaults: { _controller: PouceTeamBundle:Result:createComment }
+    defaults: { _controller: PouceTeamBundle:Comment:createComment }
 
 pouce_comment_edit:
     path:   /comment/edit/{editionId}
-    defaults: { _controller: PouceTeamBundle:Result:editComment }
+    defaults: { _controller: PouceTeamBundle:Comment:editComment }
 
 pouce_comment_photo_upload:
     path:   /comment/uploadPhoto/{editionId}
-    defaults: { _controller: PouceTeamBundle:Result:uploadPhoto }
+    defaults: { _controller: PouceTeamBundle:Comment:uploadPhoto }
     requirements:
         _method: POST
 
@@ -34,23 +34,23 @@ pouce_team_edit:
 
 pouce_team_position_show:
     path: /position/all/{editionId}
-    defaults: { _controller: PouceTeamBundle:Result:showPositions}
+    defaults: { _controller: PouceTeamBundle:Position:showPositions}
 
 pouce_team_position_edit:
     path: /position/edit/{positionId}
-    defaults: { _controller: PouceTeamBundle:Result:editPosition}
+    defaults: { _controller: PouceTeamBundle:Position:editPosition}
 
 pouce_team_position_delete:
     path: /position/delete/{positionId}
-    defaults: { _controller: PouceTeamBundle:Result:deletePosition}
+    defaults: { _controller: PouceTeamBundle:Position:deletePosition}
 
 pouce_position_add:
     path:   /position/add/{editionId}
-    defaults: { _controller: PouceTeamBundle:Result:addPosition, editionId: 0  }
+    defaults: { _controller: PouceTeamBundle:Position:addPosition, editionId: 0  }
 
 pouce_position_add_with_hour:
     path:   /position/add_post_edition/{editionId}
-    defaults: { _controller: PouceTeamBundle:Result:addPositionWithHour, editionId: 0  }
+    defaults: { _controller: PouceTeamBundle:Position:addPositionWithHour, editionId: 0  }
 
 pouce_team_delete:
     path: /delete/{id}

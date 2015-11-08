@@ -109,7 +109,7 @@ pouce_site_listeEditionEcole:
 
 pouce_site_positionaddofateam:
     path:     /admin/addposition/{teamId}
-    defaults: { _controller: PouceTeamBundle:Result:addPositionOfTeam }
+    defaults: { _controller: PouceTeamBundle:Position:addPositionOfTeam }
 
 pouce_site_checkParticipants:
     path:     /admin/allmyusers/{editionId}
@@ -137,11 +137,11 @@ pouce_site_checkAllParcipants:
 
 pouce_site_admin_comment_edit:
     path:   /superAdmin/comment/edit/{teamId}
-    defaults: { _controller: PouceTeamBundle:Result:editCommentAdmin }
+    defaults: { _controller: PouceTeamBundle:Comment:editCommentAdmin }
 
 pouce_site_admin_comment_photo_upload:
     path:   /superAdmin/comment/uploadPhoto/{teamId}
-    defaults: { _controller: PouceTeamBundle:Result:uploadPhotoAdmin }
+    defaults: { _controller: PouceTeamBundle:Comment:uploadPhotoAdmin }
     requirements:
         _method: POST
 
