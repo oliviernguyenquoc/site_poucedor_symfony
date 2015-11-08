@@ -121,9 +121,10 @@ class PouceTeam
 	public function isThereNextRace(User $user)
 	{
 		$nextEditionQuery = $this->em -> getRepository('PouceSiteBundle:Edition')->findNextEditionByUserSchool($user);
+		
 		try
 		{
-			$nextEdition=$nextEditionQuery->getSingleResult();
+			$nextEditionQuery->getSingleResult();
 		}
 		catch(NoResultException $e) 
 		{

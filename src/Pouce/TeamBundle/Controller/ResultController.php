@@ -35,7 +35,7 @@ class ResultController extends Controller
 		$hasATeam = true;
 
 		try{
-			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult(); 
+			$repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult(); 
 		}
 		catch(NoResultException $e)
 		{
@@ -139,9 +139,9 @@ class ResultController extends Controller
 
 		if($request->getMethod() == 'POST'){
 			$em = $this->getDoctrine()->getManager();
-			$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
-			$user = $this->getUser();
 			$repository = $em->getRepository('PouceTeamBundle:Team');
+
+			$user = $this->getUser();
 			$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
 			$comment->setBlock($request->request->get("aventureForm"));
 			$result = $team->getResult();
@@ -163,7 +163,6 @@ class ResultController extends Controller
 	public function editCommentAction($editionId, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
 		$repository = $em->getRepository('PouceTeamBundle:Team');
 
 		$user = $this->getUser();
@@ -254,7 +253,6 @@ class ResultController extends Controller
 	public function uploadPhotoAction($editionId, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
 		$repository = $em->getRepository('PouceTeamBundle:Team');
 
 		$user = $this->getUser();
@@ -356,8 +354,8 @@ class ResultController extends Controller
 	public function addPositionAction($editionId, Request $request)
 	{ 
 		$user = $this->getUser();
+
 		$em = $this->getDoctrine()->getManager();
-		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
 		$repository = $em->getRepository('PouceTeamBundle:Team');
 
 		if($editionId==0)
@@ -568,7 +566,6 @@ class ResultController extends Controller
 				$result->setLateness(0);
 				$result->setIsValid(false);
 				$result->setRank(0);
-				$newResultFlag=1;
 			}
 			else
 			{
@@ -672,8 +669,6 @@ class ResultController extends Controller
 			$distance = $trajet->calculDistance($user->getSchool()->getCity()->getLongitude(),$user->getSchool()->getCity()->getLatitude(),$longArrivee,$latArrivee);
 
 			$position->setDistance($distance);
-
-			$newResultFlag=0;
 
 			// On cherche le record de la team (pour l'instant) s'il existe
 			$result = $repositoryResult->findOneBy(
@@ -802,8 +797,6 @@ class ResultController extends Controller
 			$distance=$trajet->calculDistance($user->getSchool()->getCity()->getLongitude(),$user->getSchool()->getCity()->getLatitude(),$longArrivee,$latArrivee);
 
 			$position->setDistance($distance);
-
-			$newResultFlag=0;
 
 			// On cherche le record de la team (pour l'instant) s'il existe
 			$result = $repositoryResult->findOneBy(
