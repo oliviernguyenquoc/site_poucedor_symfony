@@ -2,6 +2,8 @@
 
 namespace Pouce\TeamBundle\Services;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class PouceTrajet
 {
 	/*
@@ -30,7 +32,9 @@ class PouceTrajet
 		curl_setopt($ch, CURLOPT_HEADER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		// OSRM need a valid user-agent
-		curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']); //"php/OsrmRouting (X11; U; Linux ppc; en-US; rv:1.7.6) Gecko/20050328 Firefox/1.0.2"      
+		$request = Request::createFromGlobals();
+		$userAgent=$request->headers->get('User-Agent');
+		curl_setopt($ch, CURLOPT_USERAGENT, $userAgent); //"php/OsrmRouting (X11; U; Linux ppc; en-US; rv:1.7.6) Gecko/20050328 Firefox/1.0.2"      
 		// grab URL and pass it to the browser
 		$content = curl_exec($ch);
 		curl_close($ch);

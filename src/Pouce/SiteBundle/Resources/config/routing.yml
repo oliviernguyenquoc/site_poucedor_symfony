@@ -142,8 +142,6 @@ pouce_site_admin_comment_edit:
 pouce_site_admin_comment_photo_upload:
     path:   /superAdmin/comment/uploadPhoto/{teamId}
     defaults: { _controller: PouceTeamBundle:Comment:uploadPhotoAdmin }
-    requirements:
-        _method: POST
 
 pouce_site_map:
     path:   /map/{editionId}
