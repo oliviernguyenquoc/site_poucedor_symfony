@@ -21,8 +21,6 @@ pouce_comment_edit:
 pouce_comment_photo_upload:
     path:   /comment/uploadPhoto/{editionId}
     defaults: { _controller: PouceTeamBundle:Comment:uploadPhoto }
-    requirements:
-        _method: POST
 
 pouce_result_show:
     path:   /result/show/{id}
