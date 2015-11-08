@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bed3ae4b8197926116e36811cd972586",
-    "content-hash": "e740e4feeabbf28fcb7bb4932e4c055e",
+    "hash": "4a25827f7bec7c72187ab9ed1fdf9ac7",
+    "content-hash": "85713f26896d1789e7b97d7daf14c467",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
-            "version": "dev-master",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "7d3caed1f666260a6d9046a0bee4366e7eede35b"
+                "reference": "2d1b8bd7087ada868408f14a38d9cd88e126bec8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/7d3caed1f666260a6d9046a0bee4366e7eede35b",
-                "reference": "7d3caed1f666260a6d9046a0bee4366e7eede35b",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/2d1b8bd7087ada868408f14a38d9cd88e126bec8",
+                "reference": "2d1b8bd7087ada868408f14a38d9cd88e126bec8",
                 "shasum": ""
             },
             "require": {
@@ -67,7 +67,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2015-09-01 10:30:33"
+            "time": "2015-08-06 13:16:43"
         },
         {
             "name": "behat/transliterator",
@@ -111,7 +111,7 @@
         },
         {
             "name": "coresphere/console-bundle",
-            "version": "dev-master",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CoreSphere/ConsoleBundle.git",
@@ -726,7 +726,7 @@
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
-            "version": "dev-master",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
@@ -1333,7 +1333,7 @@
         },
         {
             "name": "knplabs/knp-menu",
-            "version": "dev-master",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenu.git",
@@ -1398,16 +1398,16 @@
         },
         {
             "name": "knplabs/knp-menu-bundle",
-            "version": "dev-master",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "a07920b10a3b888abe7c47c7aecf56f69553f707"
+                "reference": "2246a70109bdd313a105d2a7ef464a763aacf0cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/a07920b10a3b888abe7c47c7aecf56f69553f707",
-                "reference": "a07920b10a3b888abe7c47c7aecf56f69553f707",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/2246a70109bdd313a105d2a7ef464a763aacf0cd",
+                "reference": "2246a70109bdd313a105d2a7ef464a763aacf0cd",
                 "shasum": ""
             },
             "require": {
@@ -1451,7 +1451,7 @@
             "keywords": [
                 "menu"
             ],
-            "time": "2015-10-22 10:06:42"
+            "time": "2015-09-28 15:23:54"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2025,7 +2025,7 @@
         },
         {
             "name": "stof/doctrine-extensions-bundle",
-            "version": "dev-master",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
@@ -2446,7 +2446,7 @@
         },
         {
             "name": "twig/extensions",
-            "version": "dev-master",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig-extensions.git",
@@ -2630,16 +2630,16 @@
         },
         {
             "name": "woutersioen/sir-trevor-php",
-            "version": "dev-master",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WouterSioen/sir-trevor-php.git",
-                "reference": "7cbd1d3ccd2fcd29f91839ce7902cf42c8767a6f"
+                "reference": "0cce5963aaf92075e8958150bd81c42620e89a49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WouterSioen/sir-trevor-php/zipball/7cbd1d3ccd2fcd29f91839ce7902cf42c8767a6f",
-                "reference": "7cbd1d3ccd2fcd29f91839ce7902cf42c8767a6f",
+                "url": "https://api.github.com/repos/WouterSioen/sir-trevor-php/zipball/0cce5963aaf92075e8958150bd81c42620e89a49",
+                "reference": "0cce5963aaf92075e8958150bd81c42620e89a49",
                 "shasum": ""
             },
             "require": {
@@ -2670,7 +2670,7 @@
                 "Sir Trevor",
                 "html"
             ],
-            "time": "2015-07-09 10:20:38"
+            "time": "2015-03-11 12:28:26"
         }
     ],
     "packages-dev": [
@@ -2726,16 +2726,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "twig/extensions": 20,
         "doctrine/data-fixtures": 20,
-        "doctrine/doctrine-fixtures-bundle": 20,
-        "friendsofsymfony/user-bundle": 20,
-        "stof/doctrine-extensions-bundle": 20,
-        "beberlei/doctrineextensions": 20,
-        "woutersioen/sir-trevor-php": 20,
-        "knplabs/knp-menu": 20,
-        "knplabs/knp-menu-bundle": 20,
-        "coresphere/console-bundle": 20
+        "friendsofsymfony/user-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
