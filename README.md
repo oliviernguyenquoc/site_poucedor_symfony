@@ -37,6 +37,8 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Update Organisateurs page
 * Add Tweet or/and video block
 * Possible to delete furthest position
+* Ranking filters
+* Add tweet blocks to Sir Trevor forms
 
 
 ## The project

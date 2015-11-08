@@ -58,25 +58,6 @@ class ResultRepository extends EntityRepository
 		return $qb->getQuery()->getResult();
 	}
 
-	
-	// TODO : FINIR
-	public function getAllTeamsBySchool($idEdition, $idEcole)
-	{
-		$qb = $this -> getAllResultsInEdition($idEdition)
-					-> where('s.id = :idEcole')
-					 ->setParameter('idEcole', $idEcole);
-
-		return $qb->getQuery()->getResult();
-	}
-
-	/*
-		TODO : Dans la vue, il faut afficher chaque résultat de la requette
-		team par team. Puis appliquer un filtre, si l'on veut faire des classements
-		différents par type d'équipe (H-H, F-M, F-F)
-
-		Puis il faut gerer les redondances de classement 
-	*/
-
 	// Récupère le résult d'une team
 	public function getResultTeam($team)
 	{
