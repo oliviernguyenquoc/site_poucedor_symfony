@@ -38,5 +38,4 @@ class PouceTrajet
 		return json_decode($content, TRUE);
 	}
 
-
 }

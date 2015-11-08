@@ -6,80 +6,80 @@
 
 	<blockquote style="margin-left:100px;">
 		Remplis bien tous les champs pour pouvoir t'inscire.
-        <p>
-            Cela ne t'engage à rien. L'inscription à la course se fait dans un second temps (lors de la formation du binôme).
-        </p>
+		<p>
+			Cela ne t'engage à rien. L'inscription à la course se fait dans un second temps (lors de la formation du binôme).
+		</p>
 		Les mails et numéros de téléphone n'apparaîtront nulle part sur ce site. 
 	</blockquote>
-    
+	
 
-    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+	<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
 
-        {{ form_errors(form) }}
+		{{ form_errors(form) }}
 
-        <div class="row">
+		<div class="row">
 
-            <div class="col s12 m12">
-                {{ form_row(form.email) }}
-            </div>
+			<div class="col s12 m12">
+				{{ form_row(form.email) }}
+			</div>
 
-            <div class="col s12 m6">
-                {{ form_row(form.plainPassword.first) }}
-            </div>
+			<div class="col s12 m6">
+				{{ form_row(form.plainPassword.first) }}
+			</div>
 
-            <div class="col s12 m6">
-                {{ form_row(form.plainPassword.second) }}
-            </div>
+			<div class="col s12 m6">
+				{{ form_row(form.plainPassword.second) }}
+			</div>
 
-        </div>
+		</div>
 
-        <div class="row">
+		<div class="row">
 
-            <div class="input-field col s12 m4">
-                {{ form_row(form.first_name) }}
-            </div>
+			<div class="input-field col s12 m4">
+				{{ form_row(form.first_name) }}
+			</div>
 
-            <div class="input-field col s12 m4">
-                {{ form_row(form.last_name) }}
-            </div>
+			<div class="input-field col s12 m4">
+				{{ form_row(form.last_name) }}
+			</div>
 
-            <div class="input-field col s12 m4">
-                {{ form_widget(form.sex) }}
-            </div>
+			<div class="input-field col s12 m4">
+				{{ form_widget(form.sex) }}
+			</div>
 
-            <div class="input-field col s12 m12">
-                {{ form_row(form.telephone) }}
-            </div>
+			<div class="input-field col s12 m12">
+				{{ form_row(form.telephone) }}
+			</div>
 
-        </div>
+		</div>
 
-        <div class="row">
+		<div class="row">
 
-            <div class="input-field col s12 m6">
-                {{ form_widget(form.school) }}
-            </div>
+			<div class="input-field col s12 m6">
+				{{ form_widget(form.school) }}
+			</div>
 
-            <div class="input-field col s12 m6">
-                {{ form_widget(form.promotion) }}
-            </div>
+			<div class="input-field col s12 m6">
+				{{ form_widget(form.promotion) }}
+			</div>
 
-        </div>
+		</div>
 
-        {{ form_rest(form) }}
+		{{ form_rest(form) }}
 
-        <p>
-            <input type="checkbox" id="CGU" required />
-            <label for="CGU">J'ai lu et j'accepte les conditions générales du site disponible <a href={{path('pouce_site_conditions_générales')}}>ici</a>. Je déclare l'exactitude des informations rentrées ci-dessus.</label>
-        </p>
-        
-        <button class="btn waves-effect waves-light" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />Enregistrer
-            <i class="material-icons right">send</i>
-        </button>
-    </form>
+		<p>
+			<input type="checkbox" id="CGU" required />
+			<label for="CGU">J'ai lu et j'accepte les conditions générales du site disponible <a href={{path('pouce_site_conditions_générales')}}>ici</a>. Je déclare l'exactitude des informations rentrées ci-dessus.</label>
+		</p>
+		
+		<button class="btn waves-effect waves-light" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />Enregistrer
+			<i class="material-icons right">send</i>
+		</button>
+	</form>
 
-    <p>
-    <i>
-        Les informations recueillies font l’objet d’un traitement informatique destiné à améliorer votre expérience du Pouce d'Or. Les destinataires des données sont les organisateurs de l'évènement. Conformément à la loi « Informatique et Libertés », vous bénéficiez d’un droit d’accès et de rectification aux informations qui vousconcernent. Si vous souhaitez exercer ce droit et obtenir communication des informations vous concernant, veuillez vous adresser à staff@poucedor.fr.
-    </i>
-    </p>
+	<p>
+		<i>
+			Les informations recueillies font l’objet d’un traitement informatique destiné à améliorer votre expérience du Pouce d'Or. Les destinataires des données sont les organisateurs de l'évènement. Conformément à la loi « Informatique et Libertés », vous bénéficiez d’un droit d’accès et de rectification aux informations qui vousconcernent. Si vous souhaitez exercer ce droit et obtenir communication des informations vous concernant, veuillez vous adresser à staff@poucedor.fr.
+		</i>
+	</p>
 {% endblock fos_user_content %}

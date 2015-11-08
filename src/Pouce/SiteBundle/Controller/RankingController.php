@@ -35,8 +35,6 @@ class RankingController extends Controller
         self::rankingCalculus($results);
 
         $resultsSchool=self::rankingBySchool($results);
-
-        //exit(\Doctrine\Common\Util\Debug::dump($users));
         
         return $this->render('PouceSiteBundle:Site:ranking.html.twig', array(
           'results' => $results,

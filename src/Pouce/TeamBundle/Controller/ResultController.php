@@ -260,17 +260,18 @@ class ResultController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$repositoryEdition = $em->getRepository('PouceSiteBundle:Edition');
-		$user = $this->getUser();
 		$repository = $em->getRepository('PouceTeamBundle:Team');
+
+		$user = $this->getUser();
 		$edition = $repositoryEdition->find($editionId);
 		$team = $repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
-		$em = $this->getDoctrine()->getManager();
+		
 		$image = new RecitImage();
-		//exit(\Doctrine\Common\Util\Debug::dump($request->files->get("attachment")["file"]));
 		$image->setImageFile($request->files->get("attachment")["file"]);
+		
 		$em->persist($image);
 		$em->flush();
-		//$imageSaved = $this->getDoctrine()->getRepository('PouceTeamBundle:RecitImage')->findOneByImageName($request->get("attachment")['uid']);
+
 		$helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
 		$path = $helper->asset($image, 'imageFile');
         $response = json_encode(array(
@@ -280,7 +281,6 @@ class ResultController extends Controller
 	    ));
 	    
     	return new Response($response);
-		//return new Response(exit(\Doctrine\Common\Util\Debug::dump($response)));
 	}
 
 
@@ -302,8 +302,6 @@ class ResultController extends Controller
 		$em->persist($image);
 		$em->flush();
 
-		//$imageSaved = $this->getDoctrine()->getRepository('PouceTeamBundle:RecitImage')->findOneByImageName($request->get("attachment")['uid']);
-
 		$helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
 		$path = $helper->asset($image, 'imageFile');
 
@@ -313,10 +311,7 @@ class ResultController extends Controller
             )
 	    ));
 	    
-
     	return new Response($response);
-
-		//return new Response(exit(\Doctrine\Common\Util\Debug::dump($response)));
 	}
 
 	/*

@@ -26,11 +26,16 @@ Repository for the symfony version of Pouce d'Or Website</p>
 ## In progress
 
 * Process Improvements
-
+* Maps
 
 ## To Do
 
-* Maps
+* Delete KNP Menu
+* Add schools in edition page
+* Update Galery page and video page (including link between archive/video)
+* Add press page
+* Update Organisateurs page
+* Add Tweet or/and video block
 
 
 ## The project

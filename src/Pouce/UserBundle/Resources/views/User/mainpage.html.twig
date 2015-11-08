@@ -3,7 +3,7 @@
 
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/mainpage.css') }}" media="screen,projection"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/mainpage.css') }}" media="screen,projection"/>
 {% endblock %}
 
 {# Dans notre layout, il faut définir le block body #}
@@ -11,110 +11,110 @@
 
 	<h1>Page personnelle</h1>
 
-    <div class="row">
+	<div class="row">
 
-        {% for flashMessage in app.session.flashbag.get('updateInformations') %}
-            {{ flashMessage }}
-        {% endfor %}
+		{% for flashMessage in app.session.flashbag.get('updateInformations') %}
+			{{ flashMessage }}
+		{% endfor %}
 
-        {# Affiche les informations de l'utilisateur #}
-        {{ render(controller("PouceUserBundle:User:informations")) }}
+		{# Affiche les informations de l'utilisateur #}
+		{{ render(controller("PouceUserBundle:User:informations")) }}
 
-    </div>
+	</div>
 
-    <div class="row">
-        <div class="col s12 m6">
+	<div class="row">
+		<div class="col s12 m6">
 
-            {# Affiche la nouvelle course ou les résultats ou un message pour attendre la prochaine course #}
-            {{ render(controller("PouceTeamBundle:Team:adaptativeView")) }}
+			{# Affiche la nouvelle course ou les résultats ou un message pour attendre la prochaine course #}
+			{{ render(controller("PouceTeamBundle:Team:adaptativeView")) }}
 
-        </div>
-        
-        <div class="col s12 m6">
+		</div>
+		
+		<div class="col s12 m6">
 
-            <h4>Résultats des courses précédentes</h4>
+			<h4>Résultats des courses précédentes</h4>
 
-            {{ render(controller("PouceTeamBundle:Team:previousRace")) }}
+			{{ render(controller("PouceTeamBundle:Team:previousRace")) }}
 
-        </div>
-    </div>
+		</div>
+	</div>
 
-    <div class="row">
-        <div class="center-align col s12 m12">
-        	<a class="waves-effect waves-light btn-large" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-        </div>
-    </div>
+	<div class="row">
+		<div class="center-align col s12 m12">
+			<a class="waves-effect waves-light btn-large" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+		</div>
+	</div>
 
 {% endblock %}
 
 {% block javascript %}
-    {{ parent() }}
+	{{ parent() }}
 
-    {% javascripts filter='?yui_js'
-        'js/jquery-ui.js'
-        'js/autocompleter-jqueryui.js'
-        'js/position.js' 
-        'js/SimpleAjaxUploader.min.js'
-        'js/mainpage.js'
-    %}
-    <script>
-        function escapeTags( str ) {
-          return String( str )
-                   .replace( /&/g, '&amp;' )
-                   .replace( /"/g, '&quot;' )
-                   .replace( /'/g, '&#39;' )
-                   .replace( /</g, '&lt;' )
-                   .replace( />/g, '&gt;' );
-        }
-        window.onload = function() {
-          var btn = document.getElementById('uploadBtn'),
-              progressBar = document.getElementById('progressBar'),
-              progressOuter = document.getElementById('progressOuter'),
-              msgBox = document.getElementById('msgBox');
-          var uploader = new ss.SimpleUpload({
-                button: btn,
-                url: '{{ path("pouce_user_uploadImageProfil") }}',
-                name: 'uploadfile',
-                hoverClass: 'hover',
-                focusClass: 'focus',
-                responseType: 'json',
-                multipart: true,
-                startXHR: function() {
-                    progressOuter.style.display = 'block'; // make progress bar visible
-                    this.setProgressBar( progressBar );
-                },
-                onSubmit: function() {
-                    msgBox.innerHTML = ''; // empty the message box
-                    btn.innerHTML = 'Téléchargement...'; // change button text to "Uploading..."
-                  },
-                onComplete: function( filename, response ) {
-                    btn.innerHTML = 'Changer';
-                    progressOuter.style.display = 'none'; // hide progress bar when upload is completed
-                    if ( !response ) {
-                        msgBox.innerHTML = 'Impossible de télécharger le fichier';
-                        return;
-                    }
-                    if ( response.success === true ) {
-                        msgBox.innerHTML = '<strong>' + escapeTags( filename ) + '</strong>' + ' Téléchargement réussie';
-                        var urlImage = '{{ asset("images/profil/file")}}';
-                        urlImage = urlImage.replace("file", response.file);
-                        $( "#picBox" ).attr('src',urlImage);
-                    } else {
-                        if ( response.msg )  {
-                            msgBox.innerHTML = escapeTags( response.msg );
-                        } else {
-                            msgBox.innerHTML = 'Une erreur s\'est produite et le téléchargement a échoué';
-                        }
-                    }
-                  },
-                onError: function() {
-                    progressOuter.style.display = 'none';
-                    msgBox.innerHTML = 'Impossible de télécharger le fichier';
-                  }
-            });
-        };
-    </script>
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+	{% javascripts filter='?yui_js'
+		'js/jquery-ui.js'
+		'js/autocompleter-jqueryui.js'
+		'js/position.js' 
+		'js/SimpleAjaxUploader.min.js'
+		'js/mainpage.js'
+	%}
+		<script>
+			function escapeTags( str ) {
+			  return String( str )
+					   .replace( /&/g, '&amp;' )
+					   .replace( /"/g, '&quot;' )
+					   .replace( /'/g, '&#39;' )
+					   .replace( /</g, '&lt;' )
+					   .replace( />/g, '&gt;' );
+			}
+			window.onload = function() {
+			  var btn = document.getElementById('uploadBtn'),
+				  progressBar = document.getElementById('progressBar'),
+				  progressOuter = document.getElementById('progressOuter'),
+				  msgBox = document.getElementById('msgBox');
+			  var uploader = new ss.SimpleUpload({
+					button: btn,
+					url: '{{ path("pouce_user_uploadImageProfil") }}',
+					name: 'uploadfile',
+					hoverClass: 'hover',
+					focusClass: 'focus',
+					responseType: 'json',
+					multipart: true,
+					startXHR: function() {
+						progressOuter.style.display = 'block'; // make progress bar visible
+						this.setProgressBar( progressBar );
+					},
+					onSubmit: function() {
+						msgBox.innerHTML = ''; // empty the message box
+						btn.innerHTML = 'Téléchargement...'; // change button text to "Uploading..."
+					  },
+					onComplete: function( filename, response ) {
+						btn.innerHTML = 'Changer';
+						progressOuter.style.display = 'none'; // hide progress bar when upload is completed
+						if ( !response ) {
+							msgBox.innerHTML = 'Impossible de télécharger le fichier';
+							return;
+						}
+						if ( response.success === true ) {
+							msgBox.innerHTML = '<strong>' + escapeTags( filename ) + '</strong>' + ' Téléchargement réussie';
+							var urlImage = '{{ asset("images/profil/file")}}';
+							urlImage = urlImage.replace("file", response.file);
+							$( "#picBox" ).attr('src',urlImage);
+						} else {
+							if ( response.msg )  {
+								msgBox.innerHTML = escapeTags( response.msg );
+							} else {
+								msgBox.innerHTML = 'Une erreur s\'est produite et le téléchargement a échoué';
+							}
+						}
+					  },
+					onError: function() {
+						progressOuter.style.display = 'none';
+						msgBox.innerHTML = 'Impossible de télécharger le fichier';
+					  }
+				});
+			};
+		</script>
+		<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
 
 {% endblock %}

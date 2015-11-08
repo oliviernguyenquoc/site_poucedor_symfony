@@ -87,15 +87,6 @@ class UserController extends Controller
     	$userManager = $this->container->get('fos_user.user_manager');
 		$userManager -> updateUser($user);
 
-		// $data = $user->getImageFile();
-
-		// $img = $this->crop($data);
-		// exit(\Doctrine\Common\Util\Debug::dump($img));
-
-		// $user->setImageFile($img);
-
-		// $userManager -> updateUser($user);
-
     	return new Response(json_encode(array('success' => true, 'file' => $user->getImageName())));
 
     }
