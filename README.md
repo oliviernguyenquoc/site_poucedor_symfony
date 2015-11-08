@@ -36,6 +36,7 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Add press page
 * Update Organisateurs page
 * Add Tweet or/and video block
+* Possible to delete furthest position
 
 
 ## The project
