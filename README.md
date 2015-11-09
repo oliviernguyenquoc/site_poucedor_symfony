@@ -21,12 +21,14 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * User page (just debugging and add some minor features)
 * Deal with editions ...
 * Admin pages
+* Process Improvements
+* Maps
 
 
 ## In progress
 
-* Process Improvements
-* Maps
+* Administration system
+* Update Organisateurs page
 
 ## To Do
 
@@ -34,11 +36,12 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Add schools in edition page
 * Update Galery page and video page (including link between archive/video)
 * Add press page
-* Update Organisateurs page
 * Add Tweet or/and video block
 * Possible to delete furthest position
 * Ranking filters
 * Add tweet blocks to Sir Trevor forms
+* Correct ranking (ranking by school : add same position)
+* Update Front-End framework and add new features related
 
 
 ## The project

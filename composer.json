@@ -29,8 +29,6 @@
             "stof/doctrine-extensions-bundle": "^1.2.1",
             "beberlei/DoctrineExtensions": "^1.0.5",
             "woutersioen/sir-trevor-php": "^1.0",
-            "knplabs/knp-menu": "^2.1.0",
-            "knplabs/knp-menu-bundle": "^2.1.0",
             "coresphere/console-bundle": "^0.3.1",
 	        "pugx/autocompleter-bundle": "^1.2",
 	        "vich/uploader-bundle": "^0.14.0",
