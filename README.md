@@ -42,6 +42,7 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Correct ranking (ranking by school : add same position)
 * Update Front-End framework and add new features related
 * Update global ranking
+* Add press section (with press folder)
 
 
 ## The project
