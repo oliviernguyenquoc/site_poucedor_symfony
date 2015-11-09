@@ -25,6 +25,7 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Maps
 * Delete KNP Menu
 * Add press page
+* Update Video Page
 
 ## In progress
 
@@ -34,7 +35,7 @@ Repository for the symfony version of Pouce d'Or Website</p>
 ## To Do
 
 * Add schools in edition page
-* Update Galery page and video page (including link between archive/video)
+* Update Galery page
 * Add Tweet or/and video block
 * Possible to delete furthest position
 * Ranking filters
