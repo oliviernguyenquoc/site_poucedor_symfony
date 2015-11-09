@@ -23,7 +23,7 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Admin pages
 * Process Improvements
 * Maps
-
+* Delete KNP Menu
 
 ## In progress
 
@@ -32,7 +32,6 @@ Repository for the symfony version of Pouce d'Or Website</p>
 
 ## To Do
 
-* Delete KNP Menu
 * Add schools in edition page
 * Update Galery page and video page (including link between archive/video)
 * Add press page
