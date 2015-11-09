@@ -59,6 +59,12 @@ pouce_site_videos:
         _controller: FrameworkBundle:Template:template
         template: 'PouceSiteBundle:Site:videos.html.twig'
 
+pouce_site_presse:
+    path:     /presse
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:presse.html.twig'
+
 pouce_site_records:
     path:     /records
     defaults:

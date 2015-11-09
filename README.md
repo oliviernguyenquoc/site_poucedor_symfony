@@ -24,6 +24,7 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Process Improvements
 * Maps
 * Delete KNP Menu
+* Add press page
 
 ## In progress
 
@@ -34,13 +35,13 @@ Repository for the symfony version of Pouce d'Or Website</p>
 
 * Add schools in edition page
 * Update Galery page and video page (including link between archive/video)
-* Add press page
 * Add Tweet or/and video block
 * Possible to delete furthest position
 * Ranking filters
 * Add tweet blocks to Sir Trevor forms
 * Correct ranking (ranking by school : add same position)
 * Update Front-End framework and add new features related
+* Update global ranking
 
 
 ## The project
