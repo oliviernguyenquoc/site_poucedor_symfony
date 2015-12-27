@@ -17,6 +17,8 @@ pouce_superAdmin_lancement:
 pouce_superAdmin_checkAllParcipants:
     path:   /{editionId}
     defaults: { _controller: PouceSuperAdminBundle:SuperAdmin:superOrganisationPage }
+    requirements:
+        editionId:  \d+
 
 pouce_superAdmin_admin_comment_edit:
     path:   /comment/edit/{teamId}
@@ -28,4 +30,12 @@ pouce_superAdmin_comment_photo_upload:
 
 pouce_superAdmin_add_edition:
     path:   /addEdition/
-    defaults: { _controller: PouceSuperAdminBundle:SuperAdmin:addEdition }
+    defaults: { _controller: PouceSiteBundle:Edition:addEdition }
+
+pouce_superAdmin_add_school:
+    path:   /addSchool/
+    defaults: { _controller: PouceUserBundle:School:addSchool }
+
+pouce_superAdmin_edit_edition:
+    path:   /editEdition/{id}
+    defaults: { _controller: PouceSiteBundle:Edition:editEdition }

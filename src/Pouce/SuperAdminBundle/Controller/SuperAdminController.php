@@ -104,6 +104,8 @@ class SuperAdminController extends Controller
 
         $teamArray = $repositoryTeam->findByEdition($editionId);
 
+        $teamIdArray=[];
+
         foreach($teamArray as $key=>$team)
         {
             $teamIdArray[$key][0] = $teamArray[$key];
@@ -122,36 +124,9 @@ class SuperAdminController extends Controller
             }
         }
 
-        return $this->render('PouceSiteBundle:Admin:checkParticipants.html.twig', array(
+        return $this->render('PouceAdminBundle:Admin:checkParticipants.html.twig', array(
                 'teams' => $teamIdArray
             ));
     }
 
-    public function addEditionAction(Request $request)
-    {
-    	$edition = new Edition();
-
-        // On crée le FormBuilder grâce au service form factory
-        $form = $this->get('form.factory')->create(new EditionType());
-
-        if ($request->getMethod() == 'POST') {
-			if ($form->handleRequest($request)->isValid()) {
-
-				$em = $this->getDoctrine()->getManager();
-
-				$edition->setStatus("scheduled");
-				
-				$em->persist($edition);
-				$em->flush();
-				
-				return $this->redirect($this->generateUrl('pouce_user_mainpage'));
-			}
-		}
-
-        // On passe la méthode createView() du formulaire à la vue
-		// afin qu'elle puisse afficher le formulaire toute seule
-		return $this->render('PouceSuperAdminBundle:Admin:addEdition.html.twig', array(
-		  'form' => $form->createView()
-		));
-    }
 }

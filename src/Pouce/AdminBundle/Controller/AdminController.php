@@ -21,6 +21,8 @@ class AdminController extends Controller
 
         $teamArray = $repositoryTeam->findAllTeamsBySchool($schoolId,$editionId);
 
+        $teamIdArray=[];
+
         foreach($teamArray as $key=>$team)
         {
             $teamIdArray[$key][0] = $teamArray[$key];

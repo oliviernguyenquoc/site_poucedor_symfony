@@ -86,6 +86,8 @@
 			<a class="waves-effect waves-light btn" href=#>Gérer les participants de l'édition</a>
 		</div>
 
+		Pour modifier la date de l'édition <a href={{ path('pouce_superAdmin_edit_edition',{'id':edition.id}) }}>cliquez ici</a>
+
 	{% endfor %}
 
 	<h4>Créer une édition</h4>
@@ -94,16 +96,19 @@
 
 	<h4>Liste des écoles par ordre alphabétique</h4>
 
-		<ul>
-			{% for school in schools %}
-				<li>{% if school.sigle is not empty %} {{school.sigle}} - {% endif %}{{ school.name }}</li>
-			{% endfor %}
-		</ul>
+		{% for school in schools %}
+			<div class="row">
+				<div class="col s12 m8">
+					{% if school.sigle is not empty %} {{school.sigle}} - {% endif %}{{ school.name }}
+				</div>
+				<div class="col s12 m4">
+					<a class="waves-effect waves-light btn" href=#>Modifier</a>
+				</div>
+			</div>
+		{% endfor %}
 
 	<h4>Ajouter une école</h4>
 
 		<a class="waves-effect waves-light btn" href=#>Ajouter une école</a>
-
-
 
 {% endblock %}

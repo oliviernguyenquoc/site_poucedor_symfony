@@ -15,22 +15,29 @@
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
 
-	<h4>Enregistre la position actuelle de l'équipe : {{ team.teamName }}</h4>
+	<h4>Création d'une nouvelle édition</h4>
 
-
-	<form id="position" method="post" {{ form_enctype(form) }} action="{{ path('pouce_admin_positionaddofateam', { 'teamId': team.id })}}">
+	<form method="post" {{ form_enctype(form) }} action="{{ path('pouce_superAdmin_add_school')}}">
 
 		{# Les erreurs générales du formulaire. #}
 		{{ form_errors(form) }}
 
-		<p>
-			Rentre la ville dans laquelle tu es. Le site te proposera les villes qu'il connait. Le pays s'ajoutera automatiquement une fois la ville sélectionnée.
-			Attention : Les villes sont nommés dans leur langue d'origine (Ex : Aachen au lieu d'Aix-la-chapelle).
-		</p>
+		<div class="row">
+			<div class="col s12 m6">
+				{{ form_row(form.name) }}
+			</div>
+			<div class="col s12 m6">
+				{{ form_row(form.sigle) }}
+			</div>
+		</div>
 
-		<p>
-			Les organisateurs sont informés (normalement) de l'ajout d'une position. Pas la peine de leur renvoyer un SMS à part si ca vous fait plaisir où s'ils vous le demande.
-		</p>
+		<div class="row">
+			{{ form_row(form.telephone) }}
+		</div>
+
+		<div class="row">
+			{{ form_row(form.address) }}
+		</div>
 
 		<div class="input-field row">
 

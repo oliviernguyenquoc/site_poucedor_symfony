@@ -78,7 +78,7 @@ pouce_site_ranking:
 
 pouce_site_ranking_year:
     path:     /ranking/year/{year}
-    defaults: { _controller: PouceSiteBundle:Ranking:rankingByYear, year: 2015 }
+    defaults: { _controller: PouceSiteBundle:Ranking:rankingByYear }
     # requirements:
 
 pouce_site_galery:
