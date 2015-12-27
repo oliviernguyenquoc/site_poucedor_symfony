@@ -1,3 +1,11 @@
+pouce_super_admin:
+    resource: "@PouceSuperAdminBundle/Resources/config/routing.yml"
+    prefix:   /superAdmin
+
+pouce_admin:
+    resource: "@PouceAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 pouce_team:
     resource: "@PouceTeamBundle/Resources/config/routing.yml"
     prefix:   /team

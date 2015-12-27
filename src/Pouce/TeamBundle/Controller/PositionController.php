@@ -133,7 +133,7 @@ class PositionController extends Controller
 		{
 			position($position, $user, $team, $request, 'PouceTeamBundle:Team:addPositionSpecificTeam.html.twig');
 
-			return $this->redirect($this->generateUrl('pouce_site_checkParticipants', array('editionId' => $team->getEdition()->getId() )));
+			return $this->redirect($this->generateUrl('pouce_admin_checkParticipants', array('editionId' => $team->getEdition()->getId() )));
 		}
 		return $this->render('PouceTeamBundle:Team:addPositionSpecificTeam.html.twig', array(
 			'form'=>$form->createView(),

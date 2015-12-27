@@ -43,7 +43,7 @@
 		});
 	 
 		SirTrevor.setDefaults({
-			uploadUrl: "{{ path('pouce_site_admin_comment_photo_upload',{'teamId':teamId}) }}"
+			uploadUrl: "{{ path('pouce_superAdmin_comment_photo_upload',{'teamId':teamId}) }}"
 			
 		});
 	});
@@ -56,7 +56,7 @@
 
 	<h3>Raconte ton aventure</h3>
 
-	<form method="post" name="form" action="{{ path('pouce_site_admin_comment_edit',{'teamId':teamId})}}">
+	<form method="post" name="form" action="{{ path('pouce_superAdmin_admin_comment_edit',{'teamId':teamId})}}">
 		<textarea name="aventureForm" id="form_name"class="js-st-instance">
 	  	{{ comment.block }}
 		</textarea>

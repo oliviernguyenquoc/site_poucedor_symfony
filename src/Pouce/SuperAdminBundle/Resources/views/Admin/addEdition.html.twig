@@ -1,0 +1,64 @@
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{% form_theme form _self %}
+
+{% block javascript %}
+
+	{% javascripts filter='?yui_js'
+		'js/jquery-ui.js'
+		'js/autocompleter-jqueryui.js'
+		'js/position.js' %}
+		<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+
+{% endblock %} 
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	<h4>Création d'une nouvelle édition</h4>
+
+	<form id="edition" method="post" {{ form_enctype(form) }} action="{{ path('pouce_superAdmin_add_edition')}}">
+
+		{# Les erreurs générales du formulaire. #}
+		{{ form_errors(form) }}
+
+		<div class="input-field row">
+	  		<div class="col s12 m12">
+			  	{{ form_widget(form.dateOfEvent) }}
+			</div>
+	  	</div>
+
+		<input type="submit" class="btn btn-primary" /> 
+	</form>
+
+{% endblock %}
+
+{% block date_widget %}
+    <div class="row date_widget">
+	{% spaceless %}
+	    {% if widget == 'single_text' %}
+	        {{ block('field_widget') }}
+	    {% else %}
+	        <div {{ block('widget_container_attributes') }}>
+	        	<div class="input-field col s12 m3">
+	        		{{ form_errors(form.day) }}
+	        		{{ form_widget(form.day) }}
+	        		<label>Jour</label>
+	        	</div>
+	        	<div class="input-field col s12 m3">
+	        		{{ form_errors(form.month) }}
+	        		{{ form_widget(form.month) }}
+	        		<label>Mois</label>
+	        	</div>
+	        	<div class="input-field col s12 m3">
+	        		{{ form_errors(form.year) }}
+	        		{{ form_widget(form.year) }}
+	        		<label>Mois</label>
+	        	</div>
+	        </div>
+	    {% endif %}
+	{% endspaceless %}
+    </div>
+{% endblock %}

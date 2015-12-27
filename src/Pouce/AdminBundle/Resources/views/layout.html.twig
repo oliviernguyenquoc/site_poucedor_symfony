@@ -1,0 +1,12 @@
+{% extends "::layout.html.twig" %}
+
+{% block body %}
+	{# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+	{# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+	
+	<div class="container" id="content">
+		{% block site_body %} 
+		{% endblock %}
+	</div>
+	
+{% endblock %}

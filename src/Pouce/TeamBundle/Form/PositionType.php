@@ -21,7 +21,6 @@ class PositionType extends AbstractType
                 'class' => 'PouceSiteBundle:City',
                 'required'  => true
             ))
-            
             ;
     }
     

@@ -38,11 +38,11 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Update Galery page
 * Add Tweet or/and video block
 * Possible to delete furthest position
-* Ranking filters
 * Add tweet blocks to Sir Trevor forms
+* Ranking filters
 * Correct ranking (ranking by school : add same position)
-* Update Front-End framework and add new features related
 * Update global ranking
+* Update Front-End framework and add new features related
 * Add press section (with press folder)
 
 

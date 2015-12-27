@@ -109,46 +109,6 @@ pouce_site_mot_prez_2009:
         _controller: FrameworkBundle:Template:template
         template: 'PouceSiteBundle:Site:motDuPrez2009.html.twig'
 
-pouce_site_listeEditionEcole:
-    path:   /admin/
-    defaults: {_controller: PouceSiteBundle:Site:participationEcoleAdminPage }
-
-pouce_site_positionaddofateam:
-    path:     /admin/addposition/{teamId}
-    defaults: { _controller: PouceTeamBundle:Position:addPositionOfTeam }
-
-pouce_site_checkParticipants:
-    path:     /admin/allmyusers/{editionId}
-    defaults: { _controller: PouceSiteBundle:Site:organisationPage }
-
-pouce_site_listeEdition:
-    path:   /superAdmin/
-    defaults: {_controller: PouceSiteBundle:Site:superAdmin }
-
-pouce_site_config:
-    path:   /superAdmin/config/
-    defaults: { _controller: PouceSiteBundle:Site:config }
-
-pouce_site_recalcul:
-    path: /superAdmin/recalcul/{editionId}
-    defaults: { _controller: PouceTeamBundle:Result:recalcul }
-
-pouce_site_lancement:
-    path: /superAdmin/launch/{editionId}
-    defaults: { _controller: PouceSiteBundle:Site:addPositionInitial }
-
-pouce_site_checkAllParcipants:
-    path:   /superAdmin/{editionId}
-    defaults: { _controller: PouceSiteBundle:Site:superOrganisationPage }
-
-pouce_site_admin_comment_edit:
-    path:   /superAdmin/comment/edit/{teamId}
-    defaults: { _controller: PouceTeamBundle:Comment:editCommentAdmin }
-
-pouce_site_admin_comment_photo_upload:
-    path:   /superAdmin/comment/uploadPhoto/{teamId}
-    defaults: { _controller: PouceTeamBundle:Comment:uploadPhotoAdmin }
-
 pouce_site_map:
     path:   /map/{editionId}
     defaults: { _controller: PouceSiteBundle:Ranking:map }

@@ -1,0 +1,31 @@
+pouce_site_listeEdition:
+    path:   /
+    defaults: {_controller: PouceSuperAdminBundle:SuperAdmin:superAdmin }
+
+pouce_site_config:
+    path:   /config/
+    defaults: { _controller: PouceSuperAdminBundle:SuperAdmin:config }
+
+pouce_superAdmin_recalcul:
+    path: /recalcul/{editionId}
+    defaults: { _controller: PouceTeamBundle:Result:recalcul }
+
+pouce_superAdmin_lancement:
+    path: /launch/{editionId}
+    defaults: { _controller: PouceSuperAdminBundle:SuperAdmin:addPositionInitial }
+
+pouce_superAdmin_checkAllParcipants:
+    path:   /{editionId}
+    defaults: { _controller: PouceSuperAdminBundle:SuperAdmin:superOrganisationPage }
+
+pouce_superAdmin_admin_comment_edit:
+    path:   /comment/edit/{teamId}
+    defaults: { _controller: PouceTeamBundle:Comment:editCommentAdmin }
+
+pouce_superAdmin_comment_photo_upload:
+    path:   /comment/uploadPhoto/{teamId}
+    defaults: { _controller: PouceTeamBundle:Comment:uploadPhotoAdmin }
+
+pouce_superAdmin_add_edition:
+    path:   /addEdition/
+    defaults: { _controller: PouceSuperAdminBundle:SuperAdmin:addEdition }

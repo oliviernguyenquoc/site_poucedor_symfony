@@ -1,0 +1,11 @@
+pouce_admin_listeEditionEcole:
+    path:   /
+    defaults: {_controller: PouceAdminBundle:Admin:participationEcoleAdminPage }
+
+pouce_admin_positionaddofateam:
+    path:     /addposition/{teamId}
+    defaults: { _controller: PouceTeamBundle:Position:addPositionOfTeam }
+
+pouce_admin_checkParticipants:
+    path:     /allmyusers/{editionId}
+    defaults: { _controller: PouceAdminBundle:Admin:organisationPage }

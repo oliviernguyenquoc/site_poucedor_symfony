@@ -1,5 +1,5 @@
 {# On étend notre layout #}
-{% extends "PouceSiteBundle::layout.html.twig" %}
+{% extends "PouceAdminBundle::layout.html.twig" %}
 
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
@@ -21,7 +21,7 @@
 				        {% endfor %}
 				    </div>
 				    <div class="row center-align">
-				    	<a href="{{ path('pouce_site_positionaddofateam', { 'teamId': team.0.id }) }}" class="waves-effect waves-light btn-large">Ajouter leur position</a>
+				    	<a href="{{ path('pouce_admin_positionaddofateam', { 'teamId': team.0.id }) }}" class="waves-effect waves-light btn-large">Ajouter leur position</a>
 				    </div>
 				</div>
         		{% for user in team.0.users %}

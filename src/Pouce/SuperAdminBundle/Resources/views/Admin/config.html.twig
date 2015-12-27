@@ -1,0 +1,109 @@
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	<h3>Page de configuration du Pouce d'Or</h3>
+
+	<h4>Configuration du status des éditions</h4>
+
+	{% for edition in editions %}
+		
+		<h5>Edition du {{ edition.dateOfEvent|date('d/m/Y') }} :</h5>
+
+		{% if edition.status == "scheduled" %}
+
+			<div class="row">
+				L'édition est au status : "<b>Programmé - Pas d'inscription</b>"
+			</div>
+				
+			<div class="row">
+				<div class="col s12 m4">
+					<u>Changer le status de l'édition :</u>
+				</div>
+
+				<div class="col s12 m8">
+					<a class="waves-effect waves-light btn" href=#><i class="material-icons right"><i class="material-icons">keyboard_arrow_right</i></i>Lancer l'inscription</a>
+				</div>
+			</div>
+
+		{% elseif edition.status == "registering" %}
+
+			<div class="row">
+				L'édition est au status : "<b>Inscription en cours</b>"
+			</div>
+
+			<div class="row">
+				<div class="col s12 m4">
+					<u>Changer le status de l'édition :</u>
+				</div>
+				<div class="col s12 m8">
+					<a class="waves-effect waves-light btn" href=#><i class="material-icons left"><i class="material-icons">keyboard_arrow_left</i></i>Retourner à programmé</a>
+
+					<a class="waves-effect waves-light btn" href=#><i class="material-icons right"><i class="material-icons">keyboard_arrow_right</i></i>Lancer la course</a>
+				</div>
+			</div>
+
+		{% elseif edition.status == "inProgress" %}
+
+			<div class="row">
+				L'édition est au status : "<b>Edition en cours - Les participants sont sur la route</b>"
+			</div>
+
+			<div class="row">
+				<div class="col s12 m4">
+					<u>Changer le status de l'édition :</u>
+				</div>
+				<div class="col s12 m8">
+					<a class="waves-effect waves-light btn" href=#><i class="material-icons left"><i class="material-icons">keyboard_arrow_left</i></i>Retourner à l'inscription</a>
+
+					<a class="waves-effect waves-light btn" href=#><i class="material-icons right"><i class="material-icons">keyboard_arrow_right</i></i>Finir la course</a>
+				</div>
+			</div>
+
+		{% else %}
+
+			<div class="row">
+				L'édition est au status : "<b>L'édition est fini !</b>"
+			</div>
+
+			<div class="row">
+				<div class="col s12 m4">
+					<u>Changer le status de l'édition :</u>
+				</div>
+				<div class="col s12 m8">
+					<a class="waves-effect waves-light btn" href=#><i class="material-icons left"><i class="material-icons">keyboard_arrow_left</i></i>Retourner à la course en cours</a>
+				</div>
+			</div>
+
+		{% endif %}
+
+		<div class="row">
+			<a class="waves-effect waves-light btn" href=#>Gérer les écoles participantes à l'édition</a>
+		</div>
+		<div class="row">
+			<a class="waves-effect waves-light btn" href=#>Gérer les participants de l'édition</a>
+		</div>
+
+	{% endfor %}
+
+	<h4>Créer une édition</h4>
+
+		<a class="waves-effect waves-light btn" href={{ path('pouce_superAdmin_add_edition') }}>Ajouter une édition</a>
+
+	<h4>Liste des écoles par ordre alphabétique</h4>
+
+		<ul>
+			{% for school in schools %}
+				<li>{% if school.sigle is not empty %} {{school.sigle}} - {% endif %}{{ school.name }}</li>
+			{% endfor %}
+		</ul>
+
+	<h4>Ajouter une école</h4>
+
+		<a class="waves-effect waves-light btn" href=#>Ajouter une école</a>
+
+
+
+{% endblock %}

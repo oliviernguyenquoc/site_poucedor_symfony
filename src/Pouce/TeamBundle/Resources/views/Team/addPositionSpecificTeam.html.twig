@@ -18,7 +18,7 @@
 	<h4>Enregistre la position actuelle de l'équipe : {{ team.teamName }}</h4>
 
 
-	<form id="position" method="post" {{ form_enctype(form) }} action="{{ path('pouce_site_positionaddofateam', { 'teamId': team.id })}}">
+	<form id="position" method="post" {{ form_enctype(form) }} action="{{ path('pouce_admin_positionaddofateam', { 'teamId': team.id })}}">
 
 		{# Les erreurs générales du formulaire. #}
 		{{ form_errors(form) }}

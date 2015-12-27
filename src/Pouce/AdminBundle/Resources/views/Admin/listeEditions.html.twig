@@ -1,5 +1,5 @@
 {# On étend notre layout #}
-{% extends "PouceSiteBundle::layout.html.twig" %}
+{% extends "PouceAdminBundle::layout.html.twig" %}
 
 {# Dans notre layout, il faut définir le block body #}
 {% block site_body %}
@@ -14,7 +14,7 @@
 	              		<span class="card-title">Edition du {{ edition.dateOfEvent|date('d/m/Y') }}</span>
 	            	</div>
 	           		<div class="card-action">
-	              		<a href="{{ path('pouce_site_checkParticipants', {'editionId' : edition.id }) }}">Accèder à la liste des participants</a>
+	              		<a href="{{ path('pouce_admin_checkParticipants', {'editionId' : edition.id }) }}">Accèder à la liste des participants</a>
 	            	</div>
 	          	</div>
 	        </div>

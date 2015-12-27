@@ -28,6 +28,8 @@ class AppKernel extends Kernel
             new PUGX\AutocompleterBundle\PUGXAutocompleterBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Pouce\AdminBundle\PouceAdminBundle(),
+            new Pouce\SuperAdminBundle\PouceSuperAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
