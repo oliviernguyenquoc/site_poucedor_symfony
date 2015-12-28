@@ -20,6 +20,13 @@ pouce_superAdmin_checkAllParcipants:
     requirements:
         editionId:  \d+
 
+pouce_superAdmin_checkParcipantsEdition:
+    path:   /{editionId}/{schoolId}
+    defaults: { _controller: PouceSuperAdminBundle:SuperAdmin:checkParcipantsEdition }
+    requirements:
+        editionId:  \d+
+        schoolId:  \d+
+
 pouce_superAdmin_admin_comment_edit:
     path:   /comment/edit/{teamId}
     defaults: { _controller: PouceTeamBundle:Comment:editCommentAdmin }

@@ -97,14 +97,38 @@ class SuperAdminController extends Controller
     */
     public function superOrganisationPageAction($editionId)
     {
-        $repository = $this->getDoctrine()->getManager();
-            
-        $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
-        $repositoryPosition = $repository->getRepository('PouceTeamBundle:Position');
+        $em = $this->getDoctrine()->getManager();      
+        $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
 
         $teamArray = $repositoryTeam->findByEdition($editionId);
 
-        $teamIdArray=[];
+        $teamIdArray = $this->createTeamIdArray($teamArray);
+
+        return $this->render('PouceAdminBundle:Admin:checkParticipants.html.twig', array(
+                'teams' => $teamIdArray
+            ));
+    }
+
+	public function checkParcipantsEditionAction($editionId,$schoolId)
+    {
+        $em = $this->getDoctrine()->getManager();            
+        $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
+
+        $teamArray = $repositoryTeam->findAllTeamsBySchool($schoolId,$editionId);
+
+        $teamIdArray = $this->createTeamIdArray($teamArray);
+
+        return $this->render('PouceAdminBundle:Admin:checkParticipants.html.twig', array(
+                'teams' => $teamIdArray
+            ));
+    }
+
+    private function createTeamIdArray($teamArray)
+    {
+    	$em = $this->getDoctrine()->getManager();
+    	$repositoryPosition = $em->getRepository('PouceTeamBundle:Position');
+
+    	$teamIdArray=[];
 
         foreach($teamArray as $key=>$team)
         {
@@ -124,9 +148,6 @@ class SuperAdminController extends Controller
             }
         }
 
-        return $this->render('PouceAdminBundle:Admin:checkParticipants.html.twig', array(
-                'teams' => $teamIdArray
-            ));
+        return $teamIdArray;
     }
-
 }
