@@ -2,12 +2,7 @@
 
 namespace Pouce\TeamBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-use Pouce\UserBundle\Entity\User;
-use Pouce\UserBundle\Entity\School;
 
 class TeamEditType extends TeamType
 {

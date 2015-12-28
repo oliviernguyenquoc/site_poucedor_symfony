@@ -26,7 +26,7 @@ class ResultController extends Controller
 		$hasATeam = true;
 
 		try{
-			$repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult(); 
+			$repository->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult();
 		}
 		catch(NoResultException $e)
 		{
@@ -50,11 +50,14 @@ class ResultController extends Controller
 		
 	}
 
+	// TODO : Need to be retested
 	public function editResultAction($editionId, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$repository = $em->getRepository('PouceTeamBundle:Team');
+		$repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
+		
 		$user = $this->getUser();
+		$team = $repositoryTeam->findOneTeamByEditionAndUsers($editionId, $user->getId())->getSingleResult(); 
 
 		/* ***************************************************
 				Creer le formulaire de destination

@@ -3,13 +3,11 @@
 namespace Pouce\SuperAdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
-use Pouce\SiteBundle\Entity\Edition;
+use Doctrine\ORM\NoResultException;
 
-use Pouce\SuperAdminBundle\Form\Type\EditionType;
-use Pouce\SuperAdminBundle\Form\Type\EditionEditType;
+use Pouce\TeamBundle\Entity\Position;
+use Pouce\TeamBundle\Entity\Result;
 
 class SuperAdminController extends Controller
 {
@@ -112,7 +110,7 @@ class SuperAdminController extends Controller
     public function organisationPageAction($schoolId, $editionId)
     {
         $em = $this->getDoctrine()->getManager();      
-        $repositorySchool = $em->getRepository('PouceUserBundle:School');
+        $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
 
         $teamArray = $repositoryTeam->findAllTeamsBySchool($schoolId,$editionId);
 

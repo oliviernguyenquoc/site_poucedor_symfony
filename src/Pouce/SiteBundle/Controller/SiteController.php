@@ -3,10 +3,6 @@
 namespace Pouce\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Doctrine\ORM\NoResultException;
-
-use Pouce\TeamBundle\Entity\Position;
-use Pouce\TeamBundle\Entity\Result;
 
 class SiteController extends Controller
 {

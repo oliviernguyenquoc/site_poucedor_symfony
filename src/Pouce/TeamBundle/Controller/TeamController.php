@@ -4,7 +4,6 @@ namespace Pouce\TeamBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 use Pouce\TeamBundle\Entity\Team;
 use Pouce\TeamBundle\Entity\Position;
@@ -164,10 +163,6 @@ class TeamController extends Controller
 		// On récupère le service
     	$teamService = $this->container->get('pouce_team.team');
     	$isThereNextRace = $teamService->isThereNextRace($user);
-		
-		//Import User Controller logic
-		// On récupère le service
-    	$userService = $this->container->get('pouce_user.user');
 
 		// On regarde s'il existe une prochaine édition en cours d'inscrition ou juste prévu
 		if($isThereNextRace)
@@ -222,11 +217,6 @@ class TeamController extends Controller
 			if(($teamService->isRegisterToPreviousRace($user)) && $raceStatus=="inProgress")
 			{
 				// Edition in progress. On propose d'entrer sa position
-
-				$user = $this->getUser();
-				$repository = $this->getDoctrine()->getRepository('PouceTeamBundle:Team');
-				// TODO : Seems to be not tested -> $team not used
-				$team = $repository->getLastTeam($user->getId())->getSingleResult();
 
 				$position = new Position();
 

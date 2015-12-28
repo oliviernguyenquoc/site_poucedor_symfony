@@ -24,7 +24,6 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Pouce\TeamBundle\PouceTeamBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new PUGX\AutocompleterBundle\PUGXAutocompleterBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),

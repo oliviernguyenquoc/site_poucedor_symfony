@@ -5,6 +5,8 @@ namespace Pouce\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+use Doctrine\ORM\NoResultException;
+
 class AdminController extends Controller
 {
 	/**

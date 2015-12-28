@@ -4,10 +4,6 @@ namespace Pouce\SuperAdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
-
-use Pouce\SiteBundle\Entity\Edition;
 
 class EditionType extends AbstractType
 {

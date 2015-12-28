@@ -5,9 +5,6 @@ namespace Pouce\TeamBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\Extension\Core\DataTransformer\IntegerToLocalizedStringTransformer;
-
-use Pouce\TeamBundle\Entity\Result;
 
 class ResultType extends AbstractType
 {

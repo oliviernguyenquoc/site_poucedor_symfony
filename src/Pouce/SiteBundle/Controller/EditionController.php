@@ -4,14 +4,11 @@ namespace Pouce\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\NoResultException;
 
 use Pouce\SuperAdminBundle\Form\Type\EditionType;
 use Pouce\SuperAdminBundle\Form\Type\EditionEditType;
 
 use Pouce\SiteBundle\Entity\Edition;
-use Pouce\TeamBundle\Entity\Position;
-use Pouce\TeamBundle\Entity\Result;
 
 class EditionController extends Controller
 {
@@ -67,7 +64,7 @@ class EditionController extends Controller
         ));
     }
 
-    public function fowardStepEdition($editionId, Request $request)
+    public function fowardStepEditionAction($editionId, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $edition = $em ->getRepository('PouceSiteBundle:Edition')->find($editionId);
@@ -90,7 +87,7 @@ class EditionController extends Controller
         return $this->redirect($this->generateUrl('pouce_site_config'));
     }
 
-    public function backwardStepEdition($editionId, Request $request)
+    public function backwardStepEditionAction($editionId, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $edition = $em ->getRepository('PouceSiteBundle:Edition')->find($editionId);

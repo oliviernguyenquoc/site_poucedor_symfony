@@ -89,33 +89,6 @@ class UserController extends Controller
 
 	}
 
-	// Crop to have a sqare image (not working : problem with type)
-	// Not used
-	private function crop($img)
-	{
-		$cx = $img->getWidth();
-		$cy = $img->getHeight();
-		if($cx>$cy)
-		{
-			$widthImage = $cy;
-			$heightImage = $cy;
-			$x = ($cx - $cy)/2;
-			$y = 0;
-		}
-		else if($cx<$cy)
-		{
-			$widthImage = $cx;
-			$heightImage = $cx;
-			$x = 0;
-			$y = ($cy - $cx)/2;
-		}
-		if($cx != $cy)
-		{
-			$img=imagecrop($img, array($x, $y, $widthImage, $heightImage));
-		}
-		return $img;
-	}
-
 	/**
 	*	Pour modifier les informations d'un user
 	*/
