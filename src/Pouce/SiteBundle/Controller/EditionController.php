@@ -67,4 +67,49 @@ class EditionController extends Controller
         ));
     }
 
+    public function fowardStepEdition($editionId, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $edition = $em ->getRepository('PouceSiteBundle:Edition')->find($editionId);
+        $status = $edition->getStatus();
+
+        if($status=="scheduled")
+        {
+            $edition->setStatus("registering");
+        }
+        elseif($status=="registering") {
+            $edition->setStatus("inProgress");
+        }
+        elseif($status=="inProgress"){
+            $edition->setStatus("finished");
+        }
+
+        $em->persist($edition);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('pouce_site_config'));
+    }
+
+    public function backwardStepEdition($editionId, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $edition = $em ->getRepository('PouceSiteBundle:Edition')->find($editionId);
+        $status = $edition->getStatus();
+
+        if($status=="finished")
+        {
+            $edition->setStatus("inProgress");
+        }
+        elseif($status=="inProgress") {
+            $edition->setStatus("registering");
+        }
+        elseif($status=="registering"){
+            $edition->setStatus("scheduled");
+        }
+
+        $em->persist($edition);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('pouce_site_config'));
+    }
 }

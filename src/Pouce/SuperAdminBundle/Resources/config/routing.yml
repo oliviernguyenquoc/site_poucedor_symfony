@@ -55,3 +55,11 @@ pouce_superAdmin_add_school_in_edition:
 pouce_superAdmin_delete_school_in_edition:
     path:   /deleteSchoolsInEdition/{schoolId}/{editionId}
     defaults: { _controller: PouceUserBundle:School:deleteSchoolsInEdition }
+
+pouce_superAdmin_foward_step_edition:
+    path:   /fowardStepEdition/{editionId}
+    defaults: { _controller: PouceSiteBundle:Edition:fowardStepEdition }
+
+pouce_superAdmin_backward_step_edition:
+    path:   /backwardStepEdition/{editionId}
+    defaults: { _controller: PouceSiteBundle:Edition:backwardStepEdition }
