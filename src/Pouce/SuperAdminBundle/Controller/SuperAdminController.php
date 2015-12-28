@@ -106,21 +106,10 @@ class SuperAdminController extends Controller
             ));
     }
 
-    //Possibly not used
-    public function organisationPageAction($schoolId, $editionId)
-    {
-        $em = $this->getDoctrine()->getManager();      
-        $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
-
-        $teamArray = $repositoryTeam->findAllTeamsBySchool($schoolId,$editionId);
-
-        $teamIdArray = $this->createTeamIdArray($teamArray);
-
-        return $this->render('checkParticipantsBlock.html.twig', array(
-                'teams' => $teamIdArray
-            ));
-    }
-
+    /**
+    *   Gère la page d'administration des responsable du Pouce d'Or : Toutes les équipes (page récapitulative de leurs équipes ...)
+    *   Gère école par école pour constituer la page globale des superadmins
+    */
 	public function checkParcipantsEditionAction($editionId,$schoolId)
     {
         $em = $this->getDoctrine()->getManager();            
@@ -139,6 +128,25 @@ class SuperAdminController extends Controller
             ));
     }
 
+    /**
+    *   Récupère tous les utilisateurs pour afficher la page de gestions de droits
+    */
+    public function manageRoleAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repositoryUser = $em->getRepository('PouceUserBundle:User');
+
+        $users = $repositoryUser->findBy(array(), array('id' => 'DESC'));
+
+        return $this->render('PouceSuperAdminBundle:Admin:manageRoles.html.twig', array(
+                'users' => $users
+            ));
+    }
+
+    /**
+    *   Fonction permettant de creer le vecteur des teams avec leurs positions
+    *   afin d'avoir un bon format pour l'afficher dans la vue
+    */
     private function createTeamIdArray($teamArray)
     {
     	$em = $this->getDoctrine()->getManager();

@@ -119,4 +119,38 @@ class UserController extends Controller
 				));
 	}
 
+	/**
+	*	Mettre le role de chef pouceux à quelqu'un
+	*/
+	public function setRoleChefPouceuxAction($userId)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$user = $em->getRepository('PouceUserBundle:User')->find($userId);
+
+		//Set the admin role
+		$user->addRole("ROLE_CHEFPOUCEUX");
+		//Save it to the database
+		$em->persist($user);
+		$em->flush();
+
+		return $this->redirect($this->generateUrl('pouce_site_config'));
+	}
+
+	/**
+	*	Enlever le role de chef pouceux à quelqu'un
+	*/
+	public function removeRoleChefPouceuxAction($userId)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$user = $em->getRepository('PouceUserBundle:User')->find($userId);
+
+		//Set the admin role
+		 $user->removeRole('ROLE_CHEFPOUCEUX');
+		//Save it to the database
+		$em->persist($user);
+		$em->flush();
+
+		return $this->redirect($this->generateUrl('pouce_site_config'));
+	}
+
 }

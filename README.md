@@ -26,15 +26,15 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Delete KNP Menu
 * Add press page
 * Update Video Page
+* Add schools in edition page
+* Add press section (with press folder)
+* Administration system
 
 ## In progress
 
-* Administration system
-* Update Organisateurs page
 
 ## To Do
 
-* Add schools in edition page
 * Update Galery page
 * Add Tweet or/and video block
 * Possible to delete furthest position
@@ -43,7 +43,6 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Correct ranking (ranking by school : add same position)
 * Update global ranking
 * Update Front-End framework and add new features related
-* Add press section (with press folder)
 
 
 ## The project

@@ -70,3 +70,15 @@ pouce_superAdmin_foward_step_edition:
 pouce_superAdmin_backward_step_edition:
     path:   /backwardStepEdition/{editionId}
     defaults: { _controller: PouceSiteBundle:Edition:backwardStepEdition }
+
+pouce_superAdmin_set_role:
+    path:   /setRole/{userId}
+    defaults: { _controller: PouceUserBundle:User:setRoleChefPouceux }
+
+pouce_superAdmin_remove_role:
+    path:   /removeRole/{userId}
+    defaults: { _controller: PouceUserBundle:User:removeRoleChefPouceux }
+
+pouce_superAdmin_manage_roles:
+    path:   /manageRole
+    defaults: { _controller: PouceSuperAdminBundle:SuperAdmin:manageRole }
