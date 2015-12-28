@@ -98,13 +98,27 @@ class SuperAdminController extends Controller
     public function superOrganisationPageAction($editionId)
     {
         $em = $this->getDoctrine()->getManager();      
-        $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
+        $repositorySchool = $em->getRepository('PouceUserBundle:School');
 
-        $teamArray = $repositoryTeam->findByEdition($editionId);
+        $schools = $repositorySchool->findAllSchoolParticipateByEdition($editionId);
+
+        return $this->render('PouceSuperAdminBundle:Admin:checkAllParticipants.html.twig', array(
+                'schools'   => $schools,
+                'editionId' => $editionId
+            ));
+    }
+
+    //Possibly not used
+    public function organisationPageAction($schoolId, $editionId)
+    {
+        $em = $this->getDoctrine()->getManager();      
+        $repositorySchool = $em->getRepository('PouceUserBundle:School');
+
+        $teamArray = $repositoryTeam->findAllTeamsBySchool($schoolId,$editionId);
 
         $teamIdArray = $this->createTeamIdArray($teamArray);
 
-        return $this->render('PouceAdminBundle:Admin:checkParticipants.html.twig', array(
+        return $this->render('checkParticipantsBlock.html.twig', array(
                 'teams' => $teamIdArray
             ));
     }
@@ -113,13 +127,17 @@ class SuperAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();            
         $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
+        $repositorySchool = $em->getRepository('PouceUserBundle:School');
+
+        $school = $repositorySchool->find($schoolId);
 
         $teamArray = $repositoryTeam->findAllTeamsBySchool($schoolId,$editionId);
 
         $teamIdArray = $this->createTeamIdArray($teamArray);
 
-        return $this->render('PouceAdminBundle:Admin:checkParticipants.html.twig', array(
-                'teams' => $teamIdArray
+        return $this->render('PouceAdminBundle:Admin:checkParticipantsBlock.html.twig', array(
+                'teams' => $teamIdArray,
+                'school'    => $school
             ));
     }
 

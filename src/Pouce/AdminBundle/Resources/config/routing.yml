@@ -7,5 +7,5 @@ pouce_admin_positionaddofateam:
     defaults: { _controller: PouceTeamBundle:Position:addPositionOfTeam }
 
 pouce_admin_checkParticipants:
-    path:     /allmyusers/{editionId}
+    path:     /allmyusers/{schoolId}/{editionId}
     defaults: { _controller: PouceAdminBundle:Admin:organisationPage }

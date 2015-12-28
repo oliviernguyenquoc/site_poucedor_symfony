@@ -1,11 +1,3 @@
-{# On étend notre layout #}
-{% extends "PouceAdminBundle::layout.html.twig" %}
-
-{# Dans notre layout, il faut définir le block body #}
-{% block site_body %}
-
-<h4>Page de surveillance des équipes participantes</h4>
-
 <h5>{{ school.name }}</h5>
 
 Il y a <b>{{ teams|length }}</b> équipes.
@@ -112,26 +104,3 @@ Il y a <b>{{ teams|length }}</b> équipes.
 		</li>
 	{% endfor %}
 </ul>
-
-{% endblock %}
-
-{% block javascript %}
-	{{ parent() }}
-
-	<script>
-	  $(document).ready(function(){
-		$('.collapsible').collapsible({
-		  accordion : true
-		});
-	  });
-	</script>
-
-{% endblock %}
-
-{% block stylesheets %}
-
-	<style>
-		.collapsible-body {padding:20px;}
-	</style>
-
-{% endblock %}

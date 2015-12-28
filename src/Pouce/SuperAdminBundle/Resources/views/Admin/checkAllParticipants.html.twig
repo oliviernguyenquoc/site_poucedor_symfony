@@ -1,0 +1,37 @@
+{# On étend notre layout #}
+{% extends "PouceAdminBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	<h4>Page de surveillance des équipes participantes</h4>
+
+	{% for school in schools %}
+	    {{ render(controller('PouceSuperAdminBundle:SuperAdmin:checkParcipantsEdition', {
+	        'editionId': editionId,
+	        'schoolId': school.id
+	    })) }}
+	{% endfor %}
+
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+
+	<script>
+	  $(document).ready(function(){
+		$('.collapsible').collapsible({
+		  accordion : true
+		});
+	  });
+	</script>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+	<style>
+		.collapsible-body {padding:20px;}
+	</style>
+
+{% endblock %}

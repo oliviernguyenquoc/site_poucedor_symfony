@@ -67,6 +67,7 @@ class TeamRepository extends EntityRepository
                     -> join('s.editions','e')
                     -> andWhere('e.id = :editionId')
                      -> setParameter('editionId',$editionId)
+                    ->orderBy('t.teamName', 'ASC')
                      ;
 
         return $qb->getQuery()->getResult() ;

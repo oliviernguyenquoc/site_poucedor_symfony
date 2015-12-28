@@ -26,4 +26,18 @@ class SchoolRepository extends EntityRepository
 
 		return $qb ;					
 	}
+
+	// To get all schools that participate to the competition in a specific edition
+	public function findAllSchoolParticipateByEdition($editionId)
+	{
+		$qb = $this	-> createQueryBuilder('s')
+                    -> join('s.editions','e', 'WITH', 'e.id = :editionId')
+                     ->setParameter('editionId', $editionId)
+                    -> addSelect('e')
+                    -> orderBy('s.name','ASC')
+                    ;
+
+
+		return $qb->getQuery()->getResult() ;					
+	}
 }

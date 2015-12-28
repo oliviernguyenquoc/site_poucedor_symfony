@@ -3,21 +3,30 @@
 namespace Pouce\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class AdminController extends Controller
 {
 	/**
     *   Gère la page d'administration des chefs pouceux (page récapitulative de leurs équipes ...)
     */
-    public function organisationPageAction($editionId)
+    public function organisationPageAction($schoolId, $editionId)
     {
         $user = $this->getUser();
-        $schoolId = $user->getSchool()->getId();
+        $schoolUserId = $user->getSchool()->getId();
 
-        $repository = $this->getDoctrine()->getManager();
+        if(!(($user->hasRole('ROLE_CHEFPOUCEUX') && $schoolUserId==$schoolId ) || $user->isGranted('ROLE_SUPER_ADMIN')))
+        {
+            throw new AccessDeniedException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
             
-        $repositoryTeam = $repository->getRepository('PouceTeamBundle:Team');
-        $repositoryPosition = $repository->getRepository('PouceTeamBundle:Position');
+        $repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
+        $repositoryPosition = $em->getRepository('PouceTeamBundle:Position');
+        $repositorySchool = $em->getRepository('PouceUserBundle:School');
+
+        $school = $repositorySchool->find($schoolId);
 
         $teamArray = $repositoryTeam->findAllTeamsBySchool($schoolId,$editionId);
 
@@ -42,7 +51,8 @@ class AdminController extends Controller
         }
 
         return $this->render('PouceAdminBundle:Admin:checkParticipants.html.twig', array(
-                'teams' => $teamIdArray
+                'teams'     => $teamIdArray,
+                'school'    => $school
             ));
     }
 
