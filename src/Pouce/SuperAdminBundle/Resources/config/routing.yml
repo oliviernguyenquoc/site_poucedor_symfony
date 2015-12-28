@@ -43,3 +43,15 @@ pouce_superAdmin_add_school:
 pouce_superAdmin_edit_school:
     path:   /editSchool/{id}
     defaults: { _controller: PouceUserBundle:School:editSchool }
+
+pouce_superAdmin_school_in_edition:
+    path:   /schoolsInEdition/{id}
+    defaults: { _controller: PouceUserBundle:School:schoolsInEdition }
+
+pouce_superAdmin_add_school_in_edition:
+    path:   /addSchoolsInEdition/{schoolId}/{editionId}
+    defaults: { _controller: PouceUserBundle:School:addSchoolsInEdition }
+
+pouce_superAdmin_delete_school_in_edition:
+    path:   /deleteSchoolsInEdition/{schoolId}/{editionId}
+    defaults: { _controller: PouceUserBundle:School:deleteSchoolsInEdition }

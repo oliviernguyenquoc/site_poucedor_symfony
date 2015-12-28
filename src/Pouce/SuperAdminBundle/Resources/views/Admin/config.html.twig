@@ -80,7 +80,7 @@
 		{% endif %}
 
 		<div class="row">
-			<a class="waves-effect waves-light btn" href=#>Gérer les écoles participantes à l'édition</a>
+			<a class="waves-effect waves-light btn" href={{ path('pouce_superAdmin_school_in_edition',{'id':edition.id}) }}>Gérer les écoles participantes à l'édition</a>
 		</div>
 		<div class="row">
 			<a class="waves-effect waves-light btn" href=#>Gérer les participants de l'édition</a>
@@ -109,6 +109,6 @@
 
 	<h4>Ajouter une école</h4>
 
-		<a class="waves-effect waves-light btn" href=#>Ajouter une école</a>
+		<a class="waves-effect waves-light btn" href={{ path('pouce_superAdmin_add_school') }}>Ajouter une école</a>
 
 {% endblock %}

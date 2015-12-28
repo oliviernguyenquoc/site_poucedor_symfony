@@ -63,4 +63,45 @@ class SchoolController extends Controller
         ));
     }
 
+    public function schoolsInEditionAction($id, Request $request)
+    {
+    	$em = $this->getDoctrine()->getManager();
+        $edition = $em ->getRepository('PouceSiteBundle:Edition')->find($id);
+    
+    	$repositorySchool = $em->getRepository('PouceUserBundle:School');
+        $schools = $repositorySchool->findBy([], ['name' => 'ASC']);
+        $schoolsEdition = $edition->getSchools();
+
+    	return $this->render('PouceSuperAdminBundle:Admin:schoolsInEdition.html.twig', array(
+          'schools'			=> $schools,
+          'schoolsEdition' 	=> $schoolsEdition,
+          'edition'			=> $edition
+        ));
+	}
+
+	public function addSchoolsInEditionAction($schoolId, $editionId)
+    {
+    	$em 		= $this->getDoctrine()->getManager();
+        $edition 	= $em->getRepository('PouceSiteBundle:Edition')->find($editionId);
+		$school 	= $em->getRepository('PouceUserBundle:School')->find($schoolId); 
+
+  		$edition->addSchool($school);
+  		$em->persist($edition);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('pouce_superAdmin_school_in_edition', array('id' => $schoolId)), 301);
+    }
+
+    public function deleteSchoolsInEditionAction($schoolId, $editionId)
+    {
+    	$em 		= $this->getDoctrine()->getManager();
+        $edition 	= $em->getRepository('PouceSiteBundle:Edition')->find($editionId);
+		$school 	= $em->getRepository('PouceUserBundle:School')->find($schoolId); 
+
+  		$edition->removeSchool($school);
+  		$em->persist($edition);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('pouce_superAdmin_school_in_edition', array('id' => $schoolId)), 301);
+    }
 }

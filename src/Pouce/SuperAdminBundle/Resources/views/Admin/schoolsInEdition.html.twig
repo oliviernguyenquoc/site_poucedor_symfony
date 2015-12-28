@@ -1,0 +1,31 @@
+{# On étend notre layout #}
+{% extends "PouceSiteBundle::layout.html.twig" %}
+
+{# Dans notre layout, il faut définir le block body #}
+{% block site_body %}
+
+	<h4>Ecoles participant à l'édition {{ edition.dateOfEvent|date('d/m/Y') }}</h4>
+
+	{% for school in schools %}
+		<div class="row">
+			<div class="col s12 m8">
+				{% if school.sigle is not empty %} {{school.sigle}} - {% endif %}{{ school.name }}
+			</div>		
+			{% if school not in edition.schools %}
+				<div class="col s12 m2">
+					<a class="waves-effect waves-light btn" href={{ path('pouce_superAdmin_add_school_in_edition',{'schoolId': school.id,'editionId': edition.id}) }}><i class="material-icons">add</i></a>
+				</div>
+			{% else %}
+				<div class="col s12 m2 center-align">
+					<b>OK</b>
+				</div>
+				<div class="col s12 m2">
+					<a class="waves-effect waves-light btn" href={{ path('pouce_superAdmin_delete_school_in_edition',{'schoolId': school.id,'editionId': edition.id}) }}><i class="material-icons">remove</i></a>
+				</div>
+			{% endif %}
+		</div>
+	{% endfor %}
+
+	<a class="waves-effect waves-light btn" href={{ path('pouce_site_config') }}>Retour au paneau d'administration</a>
+
+{% endblock %}
