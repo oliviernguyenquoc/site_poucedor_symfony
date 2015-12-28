@@ -32,10 +32,14 @@ pouce_superAdmin_add_edition:
     path:   /addEdition/
     defaults: { _controller: PouceSiteBundle:Edition:addEdition }
 
+pouce_superAdmin_edit_edition:
+    path:   /editEdition/{id}
+    defaults: { _controller: PouceSiteBundle:Edition:editEdition }
+
 pouce_superAdmin_add_school:
     path:   /addSchool/
     defaults: { _controller: PouceUserBundle:School:addSchool }
 
-pouce_superAdmin_edit_edition:
-    path:   /editEdition/{id}
-    defaults: { _controller: PouceSiteBundle:Edition:editEdition }
+pouce_superAdmin_edit_school:
+    path:   /editSchool/{id}
+    defaults: { _controller: PouceUserBundle:School:editSchool }

@@ -102,7 +102,7 @@
 					{% if school.sigle is not empty %} {{school.sigle}} - {% endif %}{{ school.name }}
 				</div>
 				<div class="col s12 m4">
-					<a class="waves-effect waves-light btn" href=#>Modifier</a>
+					<a class="waves-effect waves-light btn" href={{ path('pouce_superAdmin_edit_school',{'id':school.id}) }}>Modifier</a>
 				</div>
 			</div>
 		{% endfor %}
