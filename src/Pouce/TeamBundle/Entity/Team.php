@@ -35,7 +35,7 @@ class Team
     private $edition;
 
     /**
-     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Result", mappedBy="team")
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Result", mappedBy="team", cascade={"remove"})
     */
     private $result;
 

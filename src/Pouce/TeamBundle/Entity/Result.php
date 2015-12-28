@@ -27,7 +27,7 @@ class Result
     private $team;
 
     /**
-     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Comment", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Pouce\TeamBundle\Entity\Comment", cascade={"remove", "persist"})
      */
     private $comment;
 
