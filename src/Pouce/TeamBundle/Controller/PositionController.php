@@ -133,6 +133,13 @@ class PositionController extends Controller
 		{
 			position($position, $user, $team, $request, 'PouceTeamBundle:Team:addPositionSpecificTeam.html.twig');
 
+			$currentUser = $this->getUser();
+
+			if($currentUser->hasRole( 'ROLE_SUPER_ADMIN' ) )
+			{
+				return $this->redirect($this->generateUrl('pouce_superAdmin_checkAllParcipants', array('editionId' => $team->getEdition()->getId() )));
+			}
+
 			return $this->redirect($this->generateUrl('pouce_admin_checkParticipants', array('editionId' => $team->getEdition()->getId() )));
 		}
 		return $this->render('PouceTeamBundle:Team:addPositionSpecificTeam.html.twig', array(
