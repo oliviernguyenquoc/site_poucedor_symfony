@@ -1,0 +1,20 @@
+{% extends "PouceSiteBundle::layout.html.twig" %} 
+
+{% block site_body %}
+
+    <h1>Liste des inscrits par édition</h1>
+
+    {% for edition in editionArray %}
+        <h4>Edition du {{ edition.0.0.0.dateOfEvent  | date('d/m/y') }}</h4>
+
+        {% for school in edition %}
+
+	        <h5>{{ school.1.name }}</h5>
+
+	        Il y a <b>{{ school.2 }}</b> personnes inscrites à cette édition.<br/>
+	        Soit <b>{{ school.2 / 2 }}</b> binômes inscrits.
+
+	    {% endfor %}
+    {% endfor %}
+
+{% endblock %}

@@ -110,4 +110,23 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getSingleResult();
 
     }
+
+    /**
+    *   Retourne le nombre de personne inscrit en équipe dans une édition
+    */
+    public function getNbOfUserInTeam($editionId,$schoolId)
+    {
+        $qb = $this -> createQueryBuilder('u')
+                    ->select('COUNT(u)')
+                    -> Join('u.school','s')
+                    -> andWhere('s.id = :schoolId')
+                     -> setParameter('schoolId', $schoolId)
+                    -> Join('u.teams', 't')
+                    -> Join('t.edition', 'e')
+                    -> andWhere('e.id = :editionId')
+                     -> setParameter('editionId', $editionId)
+                    ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

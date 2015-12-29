@@ -122,3 +122,7 @@ pouce_site_conditions_générales:
     defaults:
         _controller: FrameworkBundle:Template:template
         template: 'PouceSiteBundle:Site:condition_generales.html.twig'
+
+pouce_site_inscrits:
+    path:   /inscrits
+    defaults:  { _controller: PouceSiteBundle:Site:listeInscrits }

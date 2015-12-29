@@ -204,7 +204,6 @@ class ResultController extends Controller
 	public function editResultAdminAction($teamId, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
 		$repositoryResult = $em->getRepository('PouceTeamBundle:Result');
 
 		$result = $repositoryResult->findOneByTeam($teamId);

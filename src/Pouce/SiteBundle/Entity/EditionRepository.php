@@ -112,4 +112,23 @@ class EditionRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findEditionsThisYear()
+    {
+        if(new \Datetime() < new \Datetime(date('Y').'-04-01')){
+            $year = date('Y');
+        }
+        else
+        {
+            $year = date('Y')+1;
+        }
+
+        $qb = $this -> createQueryBuilder('e')
+                    -> Where('e.dateOfEvent BETWEEN :start AND :end')
+                     ->setParameter('start', new \Datetime(($year-1).'-04-01'))
+                     ->setParameter('end', new \Datetime(($year).'-04-01'))
+                    ;
+
+        return $qb->getQuery()->getResult();
+    }
 }
