@@ -3,6 +3,7 @@
 namespace Pouce\TeamBundle\Controller;
 
 use Pouce\TeamBundle\Form\ResultEditType;
+use Pouce\TeamBundle\Form\Type\ResultAdminType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -168,6 +169,9 @@ class ResultController extends Controller
 		}
 	}
 
+	/**
+	*	Recalcul toute les distance par rapport aux résultats entrées
+	*/
 	public function recalculAction($editionId)
 	{
 		$repository = $this->getDoctrine()->getManager();
@@ -195,6 +199,39 @@ class ResultController extends Controller
 		}
 
 		return $this->redirectToRoute('pouce_site_homepage');
+	}
+
+	public function editResultAdminAction($teamId, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
+		$repositoryResult = $em->getRepository('PouceTeamBundle:Result');
+		
+		$team = $repositoryTeam->find($teamId);
+
+		$result = $repositoryResult->findOneByTeam($teamId);
+
+		// On crée le FormBuilder grâce au service form factory
+		$form = $this->get('form.factory')->create(new ResultAdminType(), $result);
+
+		if ($form->handleRequest($request)->isValid())
+		{
+			//Enregistrement
+			$em->persist($result);
+			$em->flush();
+
+			$request->getSession()->getFlashBag()->add('notice', 'Résultat bien enregistrée.');
+
+			return $this->redirect($this->generateUrl('pouce_user_mainpage'));
+		}
+
+		// On passe la méthode createView() du formulaire à la vue
+		// afin qu'elle puisse afficher le formulaire toute seule
+		return $this->render('PouceSuperAdminBundle:Admin:editResultAdmin.html.twig', array(
+		  'resultForm' 	=> $form->createView(),
+		  'result' 		=> $result,
+		  'teamId'		=> $teamId
+		));
 	}
 
 }

@@ -82,3 +82,7 @@ pouce_superAdmin_remove_role:
 pouce_superAdmin_manage_roles:
     path:   /manageRole
     defaults: { _controller: PouceSuperAdminBundle:SuperAdmin:manageRole }
+
+pouce_superAdmin_edit_result:
+    path:   /editResult/{teamId}
+    defaults: { _controller: PouceTeamBundle:Result:editResultAdmin }

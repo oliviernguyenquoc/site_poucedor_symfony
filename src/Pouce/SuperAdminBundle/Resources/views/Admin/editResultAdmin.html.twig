@@ -28,7 +28,7 @@
 
 	<h3>Rentre le résultat de ta course</h3>
 
-	<form method="post" {{ form_enctype(resultForm) }} action="{{ path('pouce_result_edit', { 'editionId': app.request.get('editionId') })}}">
+	<form method="post" {{ form_enctype(resultForm) }} action="{{ path('pouce_superAdmin_edit_result', { 'teamId': teamId })}}">
 
 		{# Les erreurs générales du formulaire. #}
 		{{ form_errors(resultForm) }}
@@ -45,19 +45,12 @@
 						{% else %}
 							Pas partis
 						{% endif %}
-					(<a href="{{ path('pouce_position_add',{'editionId': app.request.get('editionId') })}}">Modifier</a>)
-				</div>
-
-				<div class="row">
-					<div class="col s12 m6">
-						{{ form_label(resultForm.nbCar) }}
-						{{ form_widget(resultForm.nbCar) }}
-					</div>
+					(<a href="{{ path('pouce_admin_positionaddofateam',{'teamId': teamId })}}">Modifier</a>)
 				</div>
 
 				<div class="row">
 					<div class="switch">
-						Avez-vous réussit à revenir en stop ? :   
+						Ont-ils réussit à revenir en stop ? :   
 						<label>
 							Non {{ form_widget(resultForm.isValid) }}
 							<span class="lever"></span>
@@ -84,40 +77,9 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="col s12 m6">
-				<h5> Donne ton avis sur l'évènement </h5>
-
-				<p>
-					Cette partie est <b>obligatoire</b> et très importante pour nous. Merci de répondre sincèrement. N'hésite pas à être précis que ton avis soit positif ou négatif.
-					<br/>
-					Merci !
-				</p>
-
-				<div class="row">
-					<form class="col s12">
-						<div class="row">
-							<div class="input-field col s12">
-								{{ form_widget(resultForm.avis) }}
-								<label for="pouce_teambundle_resultEdit_avis">Donne-nous ton ressentiment sur l'évènement (Si tu as bien aimé ...)</label>
-							</div>
-						</div>
-					</form>
-				</div>
-
-				<div class="row">
-					<p>
-						{{ form_label(resultForm.sponsort) }}
-					</p>
-					<div class="switch">				
-						<label>
-							Non {{ form_widget(resultForm.sponsort) }} 
-							<span class="lever"></span>
-							Oui
-						</label>
-					</div>
-				</div>
-			</div>
+		</div>
+		
+		<div class="row">
 			{{ form_rest(resultForm) }}
 			<div class="right-align">
 				<input type="submit" class="btn btn-primary" />
