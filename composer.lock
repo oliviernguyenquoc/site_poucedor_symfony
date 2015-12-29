@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8e8a40931449c11014ec922267a20185",
-    "content-hash": "cc31bda60d9ac8c5b8ecd5b73824d08c",
+    "hash": "fee3630293d6ec60b1153670a89d2915",
+    "content-hash": "e75b7ccbafeef75946a68cac6273dfe7",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -2213,23 +2213,23 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.6",
+            "version": "v2.7.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "66b2e9662c44d478b69e48278aa54079a006eb42"
+                "reference": "ad264021e44a5aaa132f16aef69f92e56795683e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/66b2e9662c44d478b69e48278aa54079a006eb42",
-                "reference": "66b2e9662c44d478b69e48278aa54079a006eb42",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/ad264021e44a5aaa132f16aef69f92e56795683e",
+                "reference": "ad264021e44a5aaa132f16aef69f92e56795683e",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.4",
                 "php": ">=5.3.9",
                 "psr/log": "~1.0",
-                "twig/twig": "~1.20|~2.0"
+                "twig/twig": "~1.23|~2.0"
             },
             "replace": {
                 "symfony/asset": "self.version",
@@ -2309,6 +2309,9 @@
                 ],
                 "files": [
                     "src/Symfony/Component/Intl/Resources/stubs/functions.php"
+                ],
+                "exclude-from-classmap": [
+                    "**/Tests/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2330,7 +2333,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-10-27 19:07:24"
+            "time": "2015-12-26 15:02:06"
         },
         {
             "name": "twig/extensions",

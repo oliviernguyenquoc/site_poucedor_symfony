@@ -206,8 +206,6 @@ class ResultController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$repositoryTeam = $em->getRepository('PouceTeamBundle:Team');
 		$repositoryResult = $em->getRepository('PouceTeamBundle:Result');
-		
-		$team = $repositoryTeam->find($teamId);
 
 		$result = $repositoryResult->findOneByTeam($teamId);
 
