@@ -72,7 +72,8 @@ class AdminController extends Controller
         $editionArray = $repositoryEdition->findAllEditionsBySchool($schoolId);
 
         return $this->render('PouceAdminBundle:Admin:listeEditions.html.twig', array(
-                'editionArray' => $editionArray
+                'editionArray'  => $editionArray,
+                'schoolId'      => $schoolId
             ));
     }
 }

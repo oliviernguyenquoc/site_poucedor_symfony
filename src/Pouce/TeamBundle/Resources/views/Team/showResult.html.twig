@@ -34,12 +34,14 @@
 {% block javascript %}
 	{{ parent() }}
 
-	<script src="{{ asset('js/leaflet.js') }}"></script>
+	<script src="{{ asset('js/leaflet-src.js') }}"></script>
 	<script src="{{ asset('js/leaflet-routing-machine.js') }}"></script>
-	<script src="{{ asset('js/L.Polyline.SnakeAnim.js') }}"></script>
 	<script>
-	$(document).ready(function() {
-		var map = L.map('map');
+	// TODO : Problem with draw lines
+	function initmap() {
+		var positionFinal = L.latLng({{ result.position.city.latitude }},{{ result.position.city.longitude }});
+
+		var map = L.map('map').setView(positionFinal,9);
 
 		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -54,25 +56,55 @@
 			Waypoints.push(point);
 			L.marker([{{ position.city.latitude }},{{ position.city.longitude }}]).addTo(map);
 		{% endfor %}
+
 		Waypoints.push(school);
+
+		// var route2 = L.Routing.control({
+		// 	waypoints: [
+		// 		L.latLng(40.74119, -73.9925),
+		// 		L.latLng(40.73573, -73.99302)
+		// 	]
+		// }).addTo(map);
+
 		var route = L.Routing.control({
-			waypoints: Waypoints
-		}).addTo(map);
+			waypoints: Waypoints,
+			lineOptions: {
+				styles: [
+					{color: '#19afc3', opacity: 0.8, weight: 9},
+					{color: '#00ffb4', opacity: 0.8, weight: 6},
+					{color: '#00fdf6', opacity: 1, weight: 2}
+				],
+				missingRouteStyles: [
+	                {color: 'black', opacity: 0.15, weight: 7},
+	                {color: 'white', opacity: 0.6, weight: 4},
+	                {color: 'gray', opacity: 0.8, weight: 2, dashArray: '7,12'}
+            	],
+				addWaypoints: false
+			}
+		});
+
+		route.addTo(map);
 
 		// Trajet calculé en réalité
 
-		var positionFinal = L.latLng({{ result.position.city.latitude }},{{ result.position.city.longitude }});
-		var Waypoints2 = [school];
+		// var Waypoints2 = [school];
 
-		Waypoints2.push(positionFinal);
+		// Waypoints2.push(positionFinal);
 
-		L.Routing.control({
-			waypoints: Waypoints2
-		}).addTo(map);
+		// L.Routing.control({
+		// 	waypoints: Waypoints2
+		// }).addTo(map);
+
+		console.log(route);
 
 		var line = L.Routing.line(route);
 		var bounds = line.getBounds();
 		map.fitBounds(bounds);
-	});
+
+		//L.Routing.errorControl(control).addTo(map);
+
+	    // start the map in South-East England
+	}
+	window.onload = initmap;
 	</script>
 {% endblock %}

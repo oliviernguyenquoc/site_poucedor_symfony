@@ -1,0 +1,164 @@
+pouce_site_homepage:
+    path:     /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:index.html.twig'
+
+pouce_site_regles:
+    path:     /regles
+    defaults:
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:regles.html.twig'
+
+pouce_site_archives:
+    path:     /archives
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:archives.html.twig'
+
+pouce_site_asso:
+    path:     /association
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:asso.html.twig'
+
+pouce_site_conseils:
+    path:     /conseils
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:conseils.html.twig'
+
+pouce_site_edition:
+    path:     /edition
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:edition.html.twig'
+
+pouce_site_editions_precedente:
+    path:     /editions_precedentes
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:editions_precedentes.html.twig'
+
+pouce_site_liens:
+    path:     /liens
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:liens.html.twig'
+
+pouce_site_organisateurs:
+    path:     /organisateurs
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:organisateurs.html.twig'
+
+pouce_site_videos:
+    path:     /videos
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:videos.html.twig'
+
+pouce_site_presse:
+    path:     /presse
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:presse.html.twig'
+
+pouce_site_records:
+    path:     /records
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:records.html.twig'
+
+pouce_site_ranking:
+    path:     /ranking/{idEdition}
+    defaults: { _controller: PouceSiteBundle:Ranking:ranking, idEdition: 1 }
+    # requirements:
+
+pouce_site_ranking_year:
+    path:     /ranking/year/{year}
+    defaults: { _controller: PouceSiteBundle:Ranking:rankingByYear, year: 2015 }
+    # requirements:
+
+pouce_site_galery:
+    path:     /galery/{idEdition}
+    defaults: { _controller: PouceSiteBundle:Site:galery, idEdition: 1 }
+    # requirements:
+
+pouce_site_licence:
+    path:     /licence
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:licence.html.twig'
+
+pouce_site_inscription_ecole:
+    path:     /inscriptionEcole
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:inscriptionEcole.html.twig'
+
+pouce_site_classement:
+    path:     /classement/{annee}
+    defaults: { _controller: PouceSiteBundle:Site:classement}
+    # requirements:
+
+pouce_site_mot_prez_2009:
+    path:     /motDuPrez2009
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:motDuPrez2009.html.twig'
+
+pouce_site_listeEditionEcole:
+    path:   /admin/
+    defaults: {_controller: PouceSiteBundle:Site:participationEcoleAdminPage }
+
+pouce_site_positionaddofateam:
+    path:     /admin/addposition/{teamId}
+    defaults: { _controller: PouceTeamBundle:Position:addPositionOfTeam }
+
+pouce_site_checkParticipants:
+    path:     /admin/allmyusers/{editionId}
+    defaults: { _controller: PouceSiteBundle:Site:organisationPage }
+
+pouce_site_listeEdition:
+    path:   /superAdmin/
+    defaults: {_controller: PouceSiteBundle:Site:superAdmin }
+
+pouce_site_config:
+    path:   /superAdmin/config/
+    defaults: { _controller: PouceSiteBundle:Site:config }
+
+pouce_site_recalcul:
+    path: /superAdmin/recalcul/{editionId}
+    defaults: { _controller: PouceTeamBundle:Result:recalcul }
+
+pouce_site_lancement:
+    path: /superAdmin/launch/{editionId}
+    defaults: { _controller: PouceSiteBundle:Site:addPositionInitial }
+
+pouce_site_checkAllParcipants:
+    path:   /superAdmin/{editionId}
+    defaults: { _controller: PouceSiteBundle:Site:superOrganisationPage }
+
+pouce_site_admin_comment_edit:
+    path:   /superAdmin/comment/edit/{teamId}
+    defaults: { _controller: PouceTeamBundle:Comment:editCommentAdmin }
+
+pouce_site_admin_comment_photo_upload:
+    path:   /superAdmin/comment/uploadPhoto/{teamId}
+    defaults: { _controller: PouceTeamBundle:Comment:uploadPhotoAdmin }
+
+pouce_site_map:
+    path:   /map/{editionId}
+    defaults: { _controller: PouceSiteBundle:Ranking:map }
+
+pouce_site_map_with_trace:
+    path: /map_recap/{year}
+    defaults: { _controller: PouceSiteBundle:Ranking:mapRecapByYear }
+
+pouce_site_conditions_générales:
+    path:     /condition_generales
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PouceSiteBundle:Site:condition_generales.html.twig'
