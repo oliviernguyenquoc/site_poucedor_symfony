@@ -29,6 +29,7 @@ Repository for the symfony version of Pouce d'Or Website</p>
 * Add schools in edition page
 * Add press section (with press folder)
 * Administration system
+* Automatic deployment
 
 ## In progress
 
