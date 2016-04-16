@@ -9,6 +9,7 @@
 /composer.phar
 /vendor/
 /web/bundles/
+/web/other/
 /web/photos/
 /web/media/cache/
 /web/images/recits/
