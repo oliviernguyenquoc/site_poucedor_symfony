@@ -29,7 +29,7 @@ set :use_composer, true
 # set :composer_bin, "/homez.2216/poucedorxl/composer.phar"
 set :update_vendors, false # Il est conseillé de laisser a false et de ne pas faire de ‘composer update’ directement sur la prod
 #set :composer_options, "--verbose --prefer-dist" # Permet de spécifier des paramètres supplémentaires à composer, inutile dans notre cas
-set :writable_dirs, ["app/cache", "app/logs"] # Application des droits nécessaires en écriture sur les dossiers
+set :writable_dirs, ["app/cache", "app/logs", "web/images", "web/other"] # Application des droits nécessaires en écriture sur les dossiers
 set :webserver_user, "www-data" # L’utilisateur de votre serveur web (Apache, nginx, etc.)
 set :permission_method, :chmod_alt # Dans le cas où vous n’avez pas les ACLs, ne pas oublier de mettre :use_sudo à true
 #set :use_sudo, true

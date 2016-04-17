@@ -24,7 +24,7 @@ set :php_bin,     "/usr/local/php5.6/bin/php"
 
 ## Symfony2
 set :shared_files, ["app/config/parameters.yml"] # Les fichiers à conserver entre chaque déploiement
-set :shared_children, [app_path + "/logs", "vendor"] # Idem, mais pour les dossiers
+set :shared_children, [app_path + "/logs", "vendor", "web/images", "web/other"] # Idem, mais pour les dossiers
 set :use_composer, true
 # set :composer_bin, "/homez.2216/poucedorxl/composer.phar"
 set :update_vendors, false # Il est conseillé de laisser a false et de ne pas faire de ‘composer update’ directement sur la prod
