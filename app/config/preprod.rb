@@ -51,6 +51,11 @@ before "deploy" do
     run "alias php='/usr/local/php5.6/bin/php'"
 end
 
+# update database schema
+# you can use migrate or anything else
+before "symfony:cache:warmup", "symfony:doctrine:schema:update"
+
+
 namespace :deploy do
   task :dump_assetic_locally, :roles => :web do
     run_locally "php app/console assetic:dump --env=prod"
