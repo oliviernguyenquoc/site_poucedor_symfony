@@ -13,5 +13,7 @@
 /web/photos/
 /web/media/cache/
 /web/images/recits/
+/web/images/
+/web/other/
 importMySQL.sql
 importCity.sql
