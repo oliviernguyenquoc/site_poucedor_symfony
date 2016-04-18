@@ -65,6 +65,8 @@ namespace :deploy do
     finder_options = {:except => { :no_release => true }}
     find_servers(finder_options).each {|s| run_locally "rsync -az --delete --rsh='ssh -p #{ssh_port(s)}' #{local_web_path}/js/ #{rsync_host(s)}:#{release_path}/web/js/" }
     find_servers(finder_options).each {|s| run_locally "rsync -az --delete --rsh='ssh -p #{ssh_port(s)}' #{local_web_path}/css/ #{rsync_host(s)}:#{release_path}/web/css/" }
+  	run "chmod -R 775 #{latest_release}/web/js"
+  	run "chmod -R 775 #{latest_release}/web/css"
   end
 
   def local_web_path
