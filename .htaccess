@@ -3,9 +3,3 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ web/$1 [QSA,L]
 </IfModule>
-
-AuthUserFile /home/poucedorxl/www/poucedor/dev/.htpasswd
-AuthGroupFile /dev/null
-AuthName "Accès restreint"
-AuthType Basic
-require valid-user

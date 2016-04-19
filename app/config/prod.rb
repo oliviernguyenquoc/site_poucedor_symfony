@@ -23,7 +23,7 @@ set :php_bin,     "/usr/local/php5.6/bin/php"
 # set :php_bin,      "php.TEST.5"
 
 ## Symfony2
-set :shared_files, ["app/config/parameters.yml", ".htaccess"] # Les fichiers à conserver entre chaque déploiement
+set :shared_files, ["app/config/parameters.yml", "web/.htaccess"] # Les fichiers à conserver entre chaque déploiement
 set :shared_children, [app_path + "/logs", "vendor", "web/images", "web/other"] # Idem, mais pour les dossiers
 set :use_composer, true
 # set :composer_bin, "/homez.2216/poucedorxl/composer.phar"

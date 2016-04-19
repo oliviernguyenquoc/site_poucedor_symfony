@@ -60,3 +60,10 @@ DirectoryIndex app.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
+
+AuthUserFile /home/poucedorxl/www/poucedor/dev/.htpasswd
+AuthGroupFile /dev/null
+AuthName "Accès restreint"
+AuthType Basic
+require valid-user
+
