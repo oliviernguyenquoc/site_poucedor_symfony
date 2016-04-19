@@ -31,6 +31,25 @@ security:
             anonymous:      true
             remember_me:
                 key:        %secret% # %secret% est un paramètre de paramètre.yml
+        
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
+
+        oauth_authorize:
+            pattern:    ^/oauth/v2/auth
+            form_login:
+                provider: fos_userbundle
+                check_path: /oauth/v2/auth_login_check
+                login_path: /oauth/v2/auth_login
+            anonymous: true
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
+        api_doc:
+            pattern:      ^/api/doc
+            security:     false
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -43,4 +62,5 @@ security:
         - { path: ^/allmyusers, role: ROLE_CHEFPOUCEUX }
         - { path: ^/superAdmin/, role: ROLE_SUPER_ADMIN }
         - { path: ^/map/, role: ROLE_CHEFPOUCEUX }
+        - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }
         # - { path: ^/ranking/, role: ROLE_CHEFPOUCEUX }

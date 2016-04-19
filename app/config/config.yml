@@ -64,11 +64,28 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
-        dql:
-            string_functions:
-                MONTH: DoctrineExtensions\Query\Mysql\Month
-                YEAR: DoctrineExtensions\Query\Mysql\Year
+        entity_managers:
+            default:
+                connection: default
+                auto_mapping: true
+                # mappings:
+                #     FOSOAuthServerBundle: ~
+                #     PouceSiteBundle: ~
+                #     PouceUserBundle: ~
+                #     PouceAdminBundle: ~
+                #     PouceSuperAdminBundle: ~
+                #     PouceTeamBundle: ~
+                #     PouceOAuthServerBundle: ~
+                #     FOSUserBundle: ~
+                #     StofDoctrineExtensionsBundle: ~
+                #     PUGXAutocompleterBundle: ~
+                #     VichUploaderBundle: ~
+                #     LiipImagineBundle: ~
+                #     FOSOAuthServerBundle: ~ 
+                dql:
+                    string_functions:
+                        MONTH: DoctrineExtensions\Query\Mysql\Month
+                        YEAR: DoctrineExtensions\Query\Mysql\Year
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -124,3 +141,12 @@ liip_imagine:
             quality: 75
             filters:
                 thumbnail: { size: [120, 120], mode: outbound }
+
+fos_oauth_server:
+    db_driver: orm
+    client_class:        Pouce\OAuthServerBundle\Entity\Client
+    access_token_class:  Pouce\OAuthServerBundle\Entity\AccessToken
+    refresh_token_class: Pouce\OAuthServerBundle\Entity\RefreshToken
+    auth_code_class:     Pouce\OAuthServerBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username_email
