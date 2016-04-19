@@ -30,7 +30,7 @@ class AppKernel extends Kernel
             new Pouce\AdminBundle\PouceAdminBundle(),
             new Pouce\SuperAdminBundle\PouceSuperAdminBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-            new Pouce\OAuthServerBundle\PouceOAuthServerBundle(),
+            new Pouce\OAuthServerBundle\PouceOAuthServerBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
