@@ -1,0 +1,4 @@
+users : 
+  type: rest
+  resource:     "PouceUserBundle:UserRest"
+  name_prefix:  api_
