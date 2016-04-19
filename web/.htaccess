@@ -1,3 +1,8 @@
+AuthUserFile /home/poucedorxl/www/poucedor/.htpasswd
+AuthName "Accès restreint"
+AuthType Basic
+require valid-user
+
 # Use the front controller as index file. It serves as a fallback solution when
 # every other rewrite/redirect fails (e.g. in an aliased environment without
 # mod_rewrite). Additionally, this reduces the matching process for the
@@ -60,10 +65,3 @@ DirectoryIndex app.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
-
-AuthUserFile /home/poucedorxl/www/poucedor/dev/.htpasswd
-AuthGroupFile /dev/null
-AuthName "Accès restreint"
-AuthType Basic
-require valid-user
-
