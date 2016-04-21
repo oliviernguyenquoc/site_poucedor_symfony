@@ -1,0 +1,4 @@
+team : 
+  type: rest
+  resource:     "Pouce\TeamBundle\Controller\TeamRestController"
+  name_prefix:  api_

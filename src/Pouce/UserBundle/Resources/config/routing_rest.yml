@@ -1,4 +1,4 @@
 users : 
   type: rest
-  resource:     "PouceUserBundle:UserRest"
+  resource:     "Pouce\UserBundle\Controller\UserRestController"
   name_prefix:  api_
