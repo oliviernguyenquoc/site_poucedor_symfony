@@ -21,16 +21,19 @@ class WsseProvider implements AuthenticationProviderInterface
         $this->cacheDir     = $cacheDir;
     }
 
-  public function authenticate(TokenInterface $token){
-    $user = $this->userProvider->loadUserByUsername($token->getUsername());
-    if(!$user){
-      throw new AuthenticationException("Bad credentials... Did you forgot your username ?");
+    public function authenticate(TokenInterface $token){
+        $user = $this->userProvider->loadUserByUsername($token->getUsername());
+        if(!$user){
+            throw new AuthenticationException("Bad credentials... Did you forgot your username ?");
+        }
+        if ($user && $this->validateDigest($token->digest, $token->nonce, $token->created, $user->getPassword())) {
+            $authenticatedToken = new WsseUserToken($user->getRoles());
+            $authenticatedToken->setUser($user);
+
+            return $authenticatedToken;
+        }
+        throw new AuthenticationException('The WSSE authentication failed.');
     }
-    if ($user && 
-    $this->validateDigest($token->digest, $token->nonce, $token->created, $user->getPassword())) {
-      // ...
-    }
-  }
 
   protected function validateDigest($digest, $nonce, $created, $secret){
         
@@ -58,6 +61,10 @@ class WsseProvider implements AuthenticationProviderInterface
 
     // Validate Secret
     $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
+    dump($nonce);
+    dump($secret);
+    dump($expected);
+    dump($digest);
 
     if($digest !== $expected){
       throw new AuthenticationException("Bad credentials ! Digest is not as expected.");
