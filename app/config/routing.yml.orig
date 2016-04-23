@@ -60,18 +60,20 @@ country_get:
 _imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
+<<<<<<< HEAD
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
 
 fos_oauth_server_authorize:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
-    
+=======
 rest : 
   type : rest 
   resource : "routing_rest.yml"
   prefix : /api
-
+  
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
     
+>>>>>>> REST

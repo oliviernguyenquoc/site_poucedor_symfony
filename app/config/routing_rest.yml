@@ -1,0 +1,7 @@
+Rest_User : 
+  type : rest
+  resource: "@PouceUserBundle/Resources/config/routing_rest.yml"
+
+Rest_Team : 
+  type : rest
+  resource: "@PouceTeamBundle/Resources/config/routing_rest.yml"

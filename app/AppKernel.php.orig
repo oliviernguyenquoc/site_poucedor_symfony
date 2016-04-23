@@ -29,11 +29,14 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Pouce\AdminBundle\PouceAdminBundle(),
             new Pouce\SuperAdminBundle\PouceSuperAdminBundle(),
+<<<<<<< HEAD
+            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new Pouce\OAuthServerBundle\PouceOAuthServerBundle()
+=======
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-            new Pouce\OAuthServerBundle\PouceOAuthServerBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+>>>>>>> REST
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -143,6 +143,7 @@ liip_imagine:
             filters:
                 thumbnail: { size: [120, 120], mode: outbound }
 
+<<<<<<< HEAD
 fos_oauth_server:
     db_driver: orm
     client_class:        Pouce\OAuthServerBundle\Entity\Client
@@ -151,6 +152,7 @@ fos_oauth_server:
     auth_code_class:     Pouce\OAuthServerBundle\Entity\AuthCode
     service:
         user_provider: fos_user.user_provider.username_email
+=======
 fos_rest:
     param_fetcher_listener: true
     body_listener: true
@@ -177,3 +179,4 @@ jms_serializer:
                 path: "%kernel.root_dir%/serializer/FOSUserBundle"
 
 nelmio_api_doc: ~
+>>>>>>> REST
