@@ -9,6 +9,11 @@ services:
             - { name: kernel.event_subscriber }
     pouce_user.user:
         class: Pouce\UserBundle\Services\PouceUser
+    wsse.security.authentication.listener:
+        class:  Pouce\UserBundle\Security\Firewall\WsseListener
+        arguments: ["@security.context", "@security.authentication.manager","@logger"]
+        tags:
+            - { name: monolog.logger, channel: wsse }
 #    pouce_user.example:
 #        class: Pouce\UserBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]

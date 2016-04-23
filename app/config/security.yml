@@ -31,6 +31,11 @@ security:
             anonymous:      true
             remember_me:
                 key:        %secret% # %secret% est un paramètre de paramètre.yml
+        wsse_secured:
+            pattern:   ^/api/.*
+            stateless:    true
+            wsse: true
+            anonymous : false
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
